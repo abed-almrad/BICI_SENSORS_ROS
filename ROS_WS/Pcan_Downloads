@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#Peak linux driver download
+#wget http://www.peak-system.com/fileadmin/media/linux/files/peak-linux-driver-8.14.0.tar.gz
+
+#PCAN Basic download
+#wget https://www.peak-system.com/produktcd/Develop/PC%20interfaces/Linux/PCAN-Basic_API_for_Linux/PCAN-Basic_Linux-4.5.2.tar.gz
+
+# libBHAND library download
+echo "Enter the desired system bits for the libBHAND grasping library (e.g. 32 or 64)"
+read sys_bits
+if [[ $sys_bits == "32" ]]
+then
+    wget http://wiki.wonikrobotics.com/AllegroHandWiki/images/9/9a/LibBHand_32.zip
+fi
+
+if [[ $sys_bits == "64" ]]
+then
+    wget http://wiki.wonikrobotics.com/AllegroHandWiki/images/0/0e/LibBHand_64.zip
+fi

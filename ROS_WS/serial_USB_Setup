@@ -1,0 +1,5 @@
+#!/bin/bash
+
+USB_name=$(dmesg | grep -oP "now attached to\s+\K\w+" | tail -1)
+sudo chmod 777 /dev/$USB_name
+#stty -F /dev/$USB_name 115200 cs8 -cstopb -parenb

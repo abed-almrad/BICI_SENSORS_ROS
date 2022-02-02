@@ -1,0 +1,43 @@
+#!/bin/bash
+
+#Downloading some prerequisite tools
+sudo apt-get install cmake gcc g++ libpopt-dev
+sudo apt install ros-noetic-libpcan 
+#Downloading and setting up PCAN Driver package
+echo "I'm here now: "
+pwd
+echo "Enter Peak Linux Driver version (e.g. 8.14.0)"
+read peak_linux_driver_version
+tar -xzvf peak-linux-driver-$peak_linux_driver_version.tar.gz
+cd ./peak-linux-driver-$peak_linux_driver_version
+echo "I'm here now: "
+pwd
+make NET=NO
+sudo make install
+sudo modprobe pcan
+cd ../
+echo "I'm here now: "
+pwd
+#Downloading and setting up PCAN_BASIC API
+echo "Enter PCAN BASIC Linux version (e.g. 4.5.4)"
+read pcan_basic_linux_version
+echo "I'm here now"
+pwd
+tar -xzvf PCAN-Basic_Linux-$pcan_basic_linux_version.tar.gz
+cd ./PCAN-Basic_Linux-$pcan_basic_linux_version/libpcanbasic/pcanbasic
+echo "I'm here now: "
+pwd
+make
+sudo make install
+cd ../../../
+echo "I'm here now: "
+pwd
+#Downloading and setting up the grasping library for linux
+echo "Enter the system bits libBHAND grasping library (e.g. 32 or 64)"
+read sys_bits
+unzip LibBHand_$sys_bits.zip
+cd libBHand_$sys_bits
+echo "I'm here now: "
+pwd
+sudo make install
+sudo ldconfig
