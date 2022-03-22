@@ -5,6 +5,7 @@ ROS_WS/peak-linux-driver-8.14.0
 ROS_WS/libBHand_64
 ROS_WS/PCAN-Basic_Linux-4.5.4
 ROS_WS/Pt_Cloud_Scripts/points_coordinates.csv
+Gazebo_Simulation/Contact_Sensor/build
 .vscode
 *.zip
 

@@ -1,0 +1,3 @@
+1- Create a plugin that subscribes to the tactile sensors data that was set to be published via ros topics. Insert the plugin in the robotic hand model for gazebo
+2- A code inside this plugin should be written to process the tactile data and register the contact points positions.
+
