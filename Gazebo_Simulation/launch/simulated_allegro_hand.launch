@@ -1,0 +1,61 @@
+<launch>
+
+  <param name="robot_description"
+         textfile="/home/abed/Documents/BICI_Project/BICI_SENSORS_ROS/Gazebo_Simulation/World/Allegro_Hand/allegro_hand_description_right.urdf"/>
+
+
+
+  <!-- NOTE: The joint_state_publisher is actually commanding *desired* joint
+       angles. You can use the 'sim' controller to have a non-existent hand. -->
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen"/>
+
+  <!-- Joint States (angles) to Joint Transforms -->
+  <node name="robot_state_publisher"
+        pkg="robot_state_publisher"
+        output="screen" 
+        type="robot_state_publisher"/>
+
+
+  <!-- Gazebo support is very experimental at the moment. -->
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="/home/abed/Documents/BICI_Project/BICI_SENSORS_ROS/Gazebo_Simulation/World/contact.world"/>
+    <arg name="debug" value="false" />
+    <arg name="paused" value="true"/>
+    <arg name="verbose" value="true" />
+  </include>
+
+  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+<!--
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+	args="-urdf -model rrbot -param robot_description"/>
+-->
+  <!-- Comment: Node that monitors the taxels positions in space and saves them upon contact -->
+  
+  <!--
+  <node name="coordinates_listener_node"
+        pkg="allegro_hand_taxels"
+        type="coordinates_listener">
+  </node> 
+  -->
+  
+   <!-- Comment: Node that emulates the taxels -->
+<!--
+  <node name="sensor_emulator_node"
+        pkg="allegro_hand_taxels"
+        type="sensor_emulator">
+  </node> 
+-->
+   <!-- Comment: Node that reads the taxels data -->
+   <!--
+  <node name="sensor_parser_node"
+        pkg="bici_ros_sensor_reader"
+        type="sensor_parser">
+  </node> 
+   -->
+
+
+
+</launch>

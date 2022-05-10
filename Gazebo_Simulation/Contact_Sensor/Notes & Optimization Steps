@@ -1,0 +1,30 @@
+
+Joints and links coordinates conventions:
+
+1- For URDFs: After defining the parent and the child links, define the joint that connects them while setting its origin to the desired location for the child link's frame. In other words, the child link's frame as defined by the mate connector that holds its name in on shape is located wrt the parent link's frame as dictated by the joint's origin.
+2- For SDF: After defining the parent link, define the joint while specifying its pose relative to that parent link then define the child link while specifying its pose relative to this joint. (Usually, the joint's pose will be set to the desired pose of the child link's frame (as defined by the mate connector in onshape) wrt the parent link's frame, and the child link's pose will be set to zeroes so that it coincides with the joint's location. 
+
+tf transforms:
+
+1- When looking for a particular transformation between two frames using tf, you need to specify for the "canTransform()" and "lookupTransform()" methods the parent frame first and the target frame that you wish to transform second.
+
+roslaunch notes:
+
+1- The current directory is set to ~/.ros while using roslaunch, therefore the plugins' shared object libraries should be specified using full paths.
+
+Room for Improvement:
+
+1- Probably because of the fine meshing and the limited precision of the reported floating point values, the same contact point is reported several times by the contact sensors (but in fact mighpoint_cloud_vis.pyt be different really close points). Investigate this at the end if you need to improve the processing time of the algorithm 
+
+Optimization:
+
+1- Investigate how to add plugins to path so that gazebo_ros can recognize them only by their shared library names.
+2- Investigate why ros is not shutting down after the contact points saving node gets launched
+3- Right now, the math behind applying the homogeneous transformations to a certain point to express it in terms of another frame is done manually, therefore investigate how to properly implement tfbuffer.transform() function to apply it instead of manual math.
+
+IMPORTANT General Notes:
+
+0- YOU NEED TO CHANGE THE NAMES OF THE BRACKETS IN THE URDF FILE OF THE ALLGERO_HAND.
+1- Investigate how the publisher timer works in the joint_states_publisher plugin
+2- Regenerate the URDF file of the allegro_hand and reproduce the SDF file from it (so that you can gurantee that they are the same)
+3- Investigat how the fixed joints are getting filtered out in the joint_states_publisher plugin

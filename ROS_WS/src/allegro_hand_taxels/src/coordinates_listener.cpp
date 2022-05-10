@@ -181,7 +181,7 @@ void callback(const bici_ros_sensor_reader::TactileData msg){
             markers_array.markers.push_back(marker);
              
         }
-       
+    
        if ((Sensors_Array[msg.sensor_num-8].data[taxel]<= Sensors_Array[msg.sensor_num-8].threshold) && tfBuffer.canTransform("palm_link", Sensors_Array[msg.sensor_num-8].sensor_name+"_sub_taxel_"+std::to_string(taxel), ros::Time(0))) 
        {
            //cout<< tfBuffer.canTransform(Sensors_Array[msg.sensor_num-8].sensor_name+"_taxel_"+std::to_string(taxel),"palm_link", ros::Time(0))<<endl;

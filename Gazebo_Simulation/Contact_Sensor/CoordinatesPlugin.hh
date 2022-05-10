@@ -16,14 +16,25 @@
 #include <map>
 #include <filesystem>
 #include <fstream>
-#include <iostream>
 #include <stdio.h>
 #include <ros/ros.h>
 #include <ros/callback_queue.h>
 #include <ros/subscribe_options.h>
 #include <std_msgs/String.h>
+#include <utility>
+#include <vector>
+#include <algorithm>
+#include <math.h>
+#include <tf2_ros/transform_listener.h>
+#include <geometry_msgs/TransformStamped.h>
+#include <geometry_msgs/Vector3Stamped.h>
+
 #define contact_pts_nb 1300
+#define dist_threshold 0.1 // threshold distance between the contact point and the taxel in m
 typedef const boost::shared_ptr< const gazebo::msgs::Contacts> ContactPtr;
+tf2_ros::Buffer tfBuffer;
+tf2_ros::TransformListener *tfListener;
+
 namespace gazebo
 {
   /// \brief An example plugin for a contact sensor.
@@ -34,6 +45,16 @@ namespace gazebo
 
     /// \brief Destructor.
     public: ~CoordinatesPlugin();
+    //Method for extracting the homogeneous matrix from the tf2 transformation
+    public: virtual std::vector<std::vector<float>> homo_matrix(geometry_msgs::TransformStamped transformStamped);
+    //Method for converting a 3D vector into its homogeneous representation
+    public: virtual std::vector<float> homo_v(geometry_msgs::Vector3Stamped v3Stamped);
+    //Method for matrix multiplication
+    public: virtual std::vector<float> homotrans(geometry_msgs::TransformStamped transformStamped,geometry_msgs::Vector3Stamped v3Stamped);
+    //Method to get the name of the sensor from the correspondent collission name
+    public: virtual std::string getName(std::string str);
+    //Method to calculate the Eucledian distance between two points in the 3D space
+    public: virtual float dist(std::vector<float> P1, std::vector<float> P2);
 
     /// \brief Load the sensor plugin.
     /// \param[in] _sensor Pointer to the sensor that loaded this plugin.
@@ -50,6 +71,12 @@ namespace gazebo
     public: virtual void contact_callback(ContactPtr &_msg);
     public: virtual void saving_callback(const std_msgs::StringConstPtr &_msg);
 
+    //Contact info
+    private: std::map <std::string, std::vector<std::vector<float>>> raw_contacts_map;
+    private: std::map <std::string, std::vector<std::vector<float>>> filtered_contacts_map;
+    private: std::vector<std::vector<float>> contact_positions_v;
+    private: std::vector<std::vector<float>> filtered_contact_positions_v;
+    private: std::string target_sensor;
     private: void QueueThread();
     //Pointer to the model
     private: physics::ModelPtr model;
@@ -67,6 +94,7 @@ namespace gazebo
     private: gazebo::sensors::SensorManager *sensorManager;
     private: std::map <std::string, ignition::math::Pose3d> contacts_map;
     private: FILE *fp;
+    private: FILE *fp_filtered;
     private: std::string act_cmd = "false";
 
     //ROS subscriber
@@ -82,6 +110,60 @@ namespace gazebo
 
     /// \brief A thread the keeps running the rosQueue
     private: std::thread rosQueueThread;
+
+    // This part defines the datastructure for the sensors taxels. This will be useful to define
+    // the taxels locations w.r.t the correspondent sensor's centroid
+
+    //Method to build the tree of taxels locations
+    public: virtual void taxelsTreeBld();
+    // Map to store the taxels locations wrt the brackets to which they are attached
+    private: std::map <std::string, std::vector<geometry_msgs::Vector3Stamped>> taxels_map;
+    // Map to store the taxels locations wrt gazebo world frame
+    private: std::map <std::string, std::vector<std::vector<float>>> transformed_taxels_map;
+    // Taxels positions, grouped per sensor
+    private: std::vector<geometry_msgs::Vector3Stamped> boh_taxels;
+    private: std::vector<geometry_msgs::Vector3Stamped> palm_taxels;
+    private: std::vector<geometry_msgs::Vector3Stamped> ipb_taxels;
+    private: std::vector<geometry_msgs::Vector3Stamped> mpb_taxels;
+    private: std::vector<geometry_msgs::Vector3Stamped> ppb_taxels;
+    private: std::vector<geometry_msgs::Vector3Stamped> ipf_taxels;
+    private: std::vector<geometry_msgs::Vector3Stamped> mpf_taxels;
+    private: std::vector<geometry_msgs::Vector3Stamped> ppf_taxels;
+    private: std::vector<geometry_msgs::Vector3Stamped> tmb_taxels;
+    private: std::vector<geometry_msgs::Vector3Stamped> imb_taxels;
+    private: std::vector<geometry_msgs::Vector3Stamped> mmb_taxels;
+    private: std::vector<geometry_msgs::Vector3Stamped> pmb_taxels;
+    private: std::vector<geometry_msgs::Vector3Stamped> tmf_taxels;
+    private: std::vector<geometry_msgs::Vector3Stamped> imf_taxels;
+    private: std::vector<geometry_msgs::Vector3Stamped> mmf_taxels;
+    private: std::vector<geometry_msgs::Vector3Stamped> pmf_taxels;
+    private: std::vector<geometry_msgs::Vector3Stamped> tft_taxels;
+    private: std::vector<geometry_msgs::Vector3Stamped> ift_taxels;
+    private: std::vector<geometry_msgs::Vector3Stamped> mft_taxels;
+    private: std::vector<geometry_msgs::Vector3Stamped> pft_taxels;
+    // Transformed taxels positions, grouped per sensor
+    private: std::vector<std::vector<float>> trans_boh_taxels;
+    private: std::vector<std::vector<float>> trans_palm_taxels;
+    private: std::vector<std::vector<float>> trans_ipb_taxels;
+    private: std::vector<std::vector<float>> trans_mpb_taxels;
+    private: std::vector<std::vector<float>> trans_ppb_taxels;
+    private: std::vector<std::vector<float>> trans_ipf_taxels;
+    private: std::vector<std::vector<float>> trans_mpf_taxels;
+    private: std::vector<std::vector<float>> trans_ppf_taxels;
+    private: std::vector<std::vector<float>> trans_tmb_taxels;
+    private: std::vector<std::vector<float>> trans_imb_taxels;
+    private: std::vector<std::vector<float>> trans_mmb_taxels;
+    private: std::vector<std::vector<float>> trans_pmb_taxels;
+    private: std::vector<std::vector<float>> trans_tmf_taxels;
+    private: std::vector<std::vector<float>> trans_imf_taxels;
+    private: std::vector<std::vector<float>> trans_mmf_taxels;
+    private: std::vector<std::vector<float>> trans_pmf_taxels;
+    private: std::vector<std::vector<float>> trans_tft_taxels;
+    private: std::vector<std::vector<float>> trans_ift_taxels;
+    private: std::vector<std::vector<float>> trans_mft_taxels;
+    private: std::vector<std::vector<float>> trans_pft_taxels;
+    // A variable to store the tf transformation messages for each bracket on the allegro hand
+    private: geometry_msgs::TransformStamped transformStamped;
   };
 
 }
