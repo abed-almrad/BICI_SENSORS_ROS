@@ -28,3 +28,21 @@ IMPORTANT General Notes:
 1- Investigate how the publisher timer works in the joint_states_publisher plugin
 2- Regenerate the URDF file of the allegro_hand and reproduce the SDF file from it (so that you can gurantee that they are the same)
 3- Investigat how the fixed joints are getting filtered out in the joint_states_publisher plugin
+4- Remapping of topic names when calling the "robot_state_publisher" node, forces this node to listen to topic names of your choosing
+
+Control Improvement:
+
+1- Add friction to the joints
+2- Investigate the self-collision of the allgero hands: self-collision was eliminated from the whole hand by adding "<self_collide>true</self_collide>" for each link (directly before </link> to be specific)
+
+Control General Notes:
+
+1- In my current control architecture, the parameters specified in the sdf must be the same as in the urdf in order to get the desired simulation behavior in gazebo.
+
+
+
+
+
+
+
+

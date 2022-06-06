@@ -4,12 +4,18 @@ import open3d as o3d
 xyz = np.genfromtxt('/home/abed/.ros/contacts_coordinates.csv',dtype= float, delimiter=',')
 xyz = xyz[:,0:3]
 
+xyz_filtered = np.genfromtxt('/home/abed/.ros/filtered_contacts_coordinates.csv',dtype= float, delimiter=',')
+xyz_filtered = xyz_filtered[:,0:3]
+
 #Creating a point cloud using the stored 3D points
 pcd = o3d.geometry.PointCloud()
 pcd.points = o3d.utility.Vector3dVector(xyz)
 
+pcd_filtered = o3d.geometry.PointCloud()
+pcd_filtered.points = o3d.utility.Vector3dVector(xyz_filtered)
+
 #Point cloud visualization
-o3d.visualization.draw_geometries([pcd])
+o3d.visualization.draw_geometries([pcd,pcd_filtered])
 
 #Creating a point cloud using the stored 3D points
 #o3d.io.write_point_cloud("./data.ply", pcd)

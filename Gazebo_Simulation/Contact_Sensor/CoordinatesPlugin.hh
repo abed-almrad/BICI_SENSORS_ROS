@@ -30,7 +30,7 @@
 #include <geometry_msgs/Vector3Stamped.h>
 
 #define contact_pts_nb 1300
-#define dist_threshold 0.1 // threshold distance between the contact point and the taxel in m
+#define dist_threshold 0.00212 // threshold distance between the contact point and the taxel in m
 typedef const boost::shared_ptr< const gazebo::msgs::Contacts> ContactPtr;
 tf2_ros::Buffer tfBuffer;
 tf2_ros::TransformListener *tfListener;

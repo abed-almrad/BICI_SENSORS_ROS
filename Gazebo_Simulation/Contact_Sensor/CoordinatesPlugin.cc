@@ -46,7 +46,7 @@ std::vector<float> CoordinatesPlugin::homotrans(geometry_msgs::TransformStamped 
 //Method for extracting the homogeneous matrix from the tf2 transformation
 std::vector<std::vector<float>> CoordinatesPlugin::homo_matrix(geometry_msgs::TransformStamped transformStamped)
 {
-    float q0,q1,q2,q3,dx,dy,dz;
+    float q0,q1,q2,q3,dx,dy,dz,norm;
     std::vector<std::vector<float>> homo_matrix;
     //Matrix resizing
     homo_matrix.resize(4,std::vector<float>(4,0));
@@ -57,17 +57,19 @@ std::vector<std::vector<float>> CoordinatesPlugin::homo_matrix(geometry_msgs::Tr
     dx = transformStamped.transform.translation.x;
     dy = transformStamped.transform.translation.y;
     dz = transformStamped.transform.translation.z;
-    homo_matrix[0][0] = 2*(pow(q0,2)+pow(q1,2))-1;
-    homo_matrix[0][1] = 2*(q1*q2-q0*q3);
-    homo_matrix[0][2] = 2*(q1*q3+q0*q2);
+    norm = pow(q0,2)+pow(q1,2)+pow(q2,2)+pow(q3,2);
+//Wikipedia Method
+    homo_matrix[0][0] = 1-2*norm*(pow(q1,2)+pow(q2,2));
+    homo_matrix[0][1] = 2*norm*(q0*q1-q2*q3);
+    homo_matrix[0][2] = 2*norm*(q0*q2+q1*q3);
     homo_matrix[0][3] = dx;
-    homo_matrix[1][0] = 2*(q1*q2+q0*q3);
-    homo_matrix[1][1] = 2*(pow(q0,2)+pow(q2,2))-1;
-    homo_matrix[1][2] = 2*(q2*q3-q0*q1);
+    homo_matrix[1][0] = 2*norm*(q0*q1+q2*q3);
+    homo_matrix[1][1] = 1-2*norm*(pow(q0,2)+pow(q2,2));
+    homo_matrix[1][2] = 2*norm*(q1*q2-q0*q3);
     homo_matrix[1][3] = dy;
-    homo_matrix[2][0] = 2*(q1*q3-q0*q2);
-    homo_matrix[2][1] = 2*(q2*q3+q0*q1);
-    homo_matrix[2][2] = 2*(pow(q0,2)+pow(q3,2))-1;
+    homo_matrix[2][0] = 2*norm*(q0*q2-q1*q3);
+    homo_matrix[2][1] = 2*norm*(q1*q2+q0*q3);
+    homo_matrix[2][2] = 1-2*norm*(pow(q0,2)+pow(q1,2));
     homo_matrix[2][3] = dz;
     homo_matrix[3][0] = 0;
     homo_matrix[3][1] = 0;
@@ -127,7 +129,7 @@ float CoordinatesPlugin::dist(std::vector<float> P1,std::vector<float> P2)
 void CoordinatesPlugin::taxelsTreeBld()
 {
     // Vectors resizing
-    this->boh_taxels.resize(109); //This size needs to be changed later on!!!!!!!!!!!!!!!!!!!!!!!!!!
+    this->boh_taxels.resize(118);
     this->palm_taxels.resize(121);
     this->ipb_taxels.resize(78);
     this->mpb_taxels.resize(78);
@@ -148,7 +150,7 @@ void CoordinatesPlugin::taxelsTreeBld()
     this->mft_taxels.resize(66);
     this->pft_taxels.resize(66);
     // Vectors resizing
-    this->trans_boh_taxels.resize(109,std::vector<float>(3,0));
+    this->trans_boh_taxels.resize(118,std::vector<float>(3,0));
     this->trans_palm_taxels.resize(121,std::vector<float>(3,0));
     this->trans_ipb_taxels.resize(78,std::vector<float>(3,0));
     this->trans_mpb_taxels.resize(78,std::vector<float>(3,0));
@@ -168,453 +170,493 @@ void CoordinatesPlugin::taxelsTreeBld()
     this->trans_ift_taxels.resize(66,std::vector<float>(3,0));
     this->trans_mft_taxels.resize(66,std::vector<float>(3,0));
     this->trans_pft_taxels.resize(66,std::vector<float>(3,0));
-    // Specifying the taxels positions w.r.t. to the sensors centroids (P.S. Reconsider using push_back instead)
+    // Specifying the taxels positions w.r.t. to the correspondent brackets frames (i.e. the frames associated with " link_"bracket_name" " in onshape (P.S. Reconsider using push_back instead)
     //*******************************************************************
-    //P.S. These coordinates are just approximations for now to debug the algorithm. They need to be adjusted later on!!!!
     //****************************************************************
     //BOH
     //Row1
-    this->boh_taxels[0].vector.x = 0.047;
-    this->boh_taxels[0].vector.y = -0.019;
-    this->boh_taxels[0].vector.z = -0.009;
+    this->boh_taxels[0].vector.x = -0.026741;
+    this->boh_taxels[0].vector.y = -0.000447;
+    this->boh_taxels[0].vector.z = -0.0098;
     this->boh_taxels[0].header.frame_id = "boh_bracket";
-    this->boh_taxels[1].vector.x = 0.038;
-    this->boh_taxels[1].vector.y = -0.019;
-    this->boh_taxels[1].vector.z = -0.009;
+    this->boh_taxels[1].vector.x = -0.018232;
+    this->boh_taxels[1].vector.y = -0.000447;
+    this->boh_taxels[1].vector.z = -0.0098;
     this->boh_taxels[1].header.frame_id = "boh_bracket";
-    this->boh_taxels[2].vector.x = 0.03;
-    this->boh_taxels[2].vector.y = -0.019;
-    this->boh_taxels[2].vector.z = -0.009;
+    this->boh_taxels[2].vector.x = -0.009723;
+    this->boh_taxels[2].vector.y = -0.000447;
+    this->boh_taxels[2].vector.z = -0.0098;
     this->boh_taxels[2].header.frame_id = "boh_bracket";
-    this->boh_taxels[3].vector.x = 0.021;
-    this->boh_taxels[3].vector.y = -0.019;
-    this->boh_taxels[3].vector.z = -0.009;
+    this->boh_taxels[3].vector.x = -0.001214;
+    this->boh_taxels[3].vector.y = -0.000447;
+    this->boh_taxels[3].vector.z = -0.0098;
     this->boh_taxels[3].header.frame_id = "boh_bracket";
-    this->boh_taxels[4].vector.x = 0.013;
-    this->boh_taxels[4].vector.y = -0.019;
-    this->boh_taxels[4].vector.z = -0.009;
+    this->boh_taxels[4].vector.x = 0.007295;
+    this->boh_taxels[4].vector.y = -0.000447;
+    this->boh_taxels[4].vector.z = -0.0098;
     this->boh_taxels[4].header.frame_id = "boh_bracket";
-    this->boh_taxels[5].vector.x = 0.004;
-    this->boh_taxels[5].vector.y = -0.019;
-    this->boh_taxels[5].vector.z = -0.009;
+    this->boh_taxels[5].vector.x = 0.015804;
+    this->boh_taxels[5].vector.y = -0.000447;
+    this->boh_taxels[5].vector.z = -0.0098;
     this->boh_taxels[5].header.frame_id = "boh_bracket";
-    this->boh_taxels[6].vector.x = -0.005;
-    this->boh_taxels[6].vector.y = -0.019;
-    this->boh_taxels[6].vector.z = -0.009;
+    this->boh_taxels[6].vector.x = 0.024313;
+    this->boh_taxels[6].vector.y = -0.000447;
+    this->boh_taxels[6].vector.z = -0.0098;
     this->boh_taxels[6].header.frame_id = "boh_bracket";
-    this->boh_taxels[7].vector.x = -0.014;
-    this->boh_taxels[7].vector.y = -0.019;
-    this->boh_taxels[7].vector.z = -0.009;
+    this->boh_taxels[7].vector.x = 0.032822;
+    this->boh_taxels[7].vector.y = -0.000447;
+    this->boh_taxels[7].vector.z = -0.0098;
     this->boh_taxels[7].header.frame_id = "boh_bracket";
-    this->boh_taxels[8].vector.x = -0.023;
-    this->boh_taxels[8].vector.y = -0.019;
-    this->boh_taxels[8].vector.z = -0.009;
+    this->boh_taxels[8].vector.x = 0.041331;
+    this->boh_taxels[8].vector.y = -0.000447;
+    this->boh_taxels[8].vector.z = -0.0098;
     this->boh_taxels[8].header.frame_id = "boh_bracket";
-    this->boh_taxels[9].vector.x = -0.032;
-    this->boh_taxels[9].vector.y = -0.019;
-    this->boh_taxels[9].vector.z = -0.009;
+    this->boh_taxels[9].vector.x = 0.049840;
+    this->boh_taxels[9].vector.y = -0.000447;
+    this->boh_taxels[9].vector.z = -0.0098;
     this->boh_taxels[9].header.frame_id = "boh_bracket";
-    this->boh_taxels[10].vector.x = -0.041;
-    this->boh_taxels[10].vector.y = -0.019;
-    this->boh_taxels[10].vector.z = -0.009;
+    this->boh_taxels[10].vector.x = 0.058349;
+    this->boh_taxels[10].vector.y = -0.000447;
+    this->boh_taxels[10].vector.z = -0.0098;
     this->boh_taxels[10].header.frame_id = "boh_bracket";
-    this->boh_taxels[11].vector.x = -0.05;
-    this->boh_taxels[11].vector.y = -0.019;
-    this->boh_taxels[11].vector.z = -0.009;
+    this->boh_taxels[11].vector.x = 0.066858;
+    this->boh_taxels[11].vector.y = -0.000447;
+    this->boh_taxels[11].vector.z = -0.0098;
     this->boh_taxels[11].header.frame_id = "boh_bracket";
     //Row2
-    this->boh_taxels[12].vector.x = 0.047;
-    this->boh_taxels[12].vector.y = -0.019;
-    this->boh_taxels[12].vector.z = -0.016;
+    this->boh_taxels[12].vector.x = -0.026741;
+    this->boh_taxels[12].vector.y = -0.007149;
+    this->boh_taxels[12].vector.z = -0.0098;
     this->boh_taxels[12].header.frame_id = "boh_bracket";
-    this->boh_taxels[13].vector.x = 0.038;
-    this->boh_taxels[13].vector.y = -0.019;
-    this->boh_taxels[13].vector.z = -0.016;
+    this->boh_taxels[13].vector.x = -0.018232;
+    this->boh_taxels[13].vector.y = -0.007149;
+    this->boh_taxels[13].vector.z = -0.0098;
     this->boh_taxels[13].header.frame_id = "boh_bracket";
-    this->boh_taxels[14].vector.x = 0.03;
-    this->boh_taxels[14].vector.y = -0.019;
-    this->boh_taxels[14].vector.z = -0.016;
+    this->boh_taxels[14].vector.x = -0.009723;
+    this->boh_taxels[14].vector.y = -0.007149;
+    this->boh_taxels[14].vector.z = -0.0098;
     this->boh_taxels[14].header.frame_id = "boh_bracket";
-    this->boh_taxels[15].vector.x = 0.021;
-    this->boh_taxels[15].vector.y = -0.019;
-    this->boh_taxels[15].vector.z = -0.016;
+    this->boh_taxels[15].vector.x = -0.001214;
+    this->boh_taxels[15].vector.y = -0.007149;
+    this->boh_taxels[15].vector.z = -0.0098;
     this->boh_taxels[15].header.frame_id = "boh_bracket";
-    this->boh_taxels[16].vector.x = 0.013;
-    this->boh_taxels[16].vector.y = -0.019;
-    this->boh_taxels[16].vector.z = -0.016;
+    this->boh_taxels[16].vector.x = 0.007295;
+    this->boh_taxels[16].vector.y = -0.007149;
+    this->boh_taxels[16].vector.z = -0.0098;
     this->boh_taxels[16].header.frame_id = "boh_bracket";
-    this->boh_taxels[17].vector.x = 0.004;
-    this->boh_taxels[17].vector.y = -0.019;
-    this->boh_taxels[17].vector.z = -0.016;
+    this->boh_taxels[17].vector.x = 0.015804;
+    this->boh_taxels[17].vector.y = -0.007149;
+    this->boh_taxels[17].vector.z = -0.0098;
     this->boh_taxels[17].header.frame_id = "boh_bracket";
-    this->boh_taxels[18].vector.x = -0.005;
-    this->boh_taxels[18].vector.y = -0.019;
-    this->boh_taxels[18].vector.z = -0.016;
+    this->boh_taxels[18].vector.x = 0.024313;
+    this->boh_taxels[18].vector.y = -0.007149;
+    this->boh_taxels[18].vector.z = -0.0098;
     this->boh_taxels[18].header.frame_id = "boh_bracket";
-    this->boh_taxels[19].vector.x = -0.014;
-    this->boh_taxels[19].vector.y = -0.019;
-    this->boh_taxels[19].vector.z = -0.016;
+    this->boh_taxels[19].vector.x = 0.032822;
+    this->boh_taxels[19].vector.y = -0.007149;
+    this->boh_taxels[19].vector.z = -0.0098;
     this->boh_taxels[19].header.frame_id = "boh_bracket";
-    this->boh_taxels[20].vector.x = -0.023;
-    this->boh_taxels[20].vector.y = -0.019;
-    this->boh_taxels[20].vector.z = -0.016;
+    this->boh_taxels[20].vector.x = 0.041331;
+    this->boh_taxels[20].vector.y = -0.007149;
+    this->boh_taxels[20].vector.z = -0.0098;
     this->boh_taxels[20].header.frame_id = "boh_bracket";
-    this->boh_taxels[21].vector.x = -0.032;
-    this->boh_taxels[21].vector.y = -0.019;
-    this->boh_taxels[21].vector.z = -0.016;
+    this->boh_taxels[21].vector.x = 0.04984;
+    this->boh_taxels[21].vector.y = -0.007149;
+    this->boh_taxels[21].vector.z = -0.0098;
     this->boh_taxels[21].header.frame_id = "boh_bracket";
-    this->boh_taxels[22].vector.x = -0.041;
-    this->boh_taxels[22].vector.y = -0.019;
-    this->boh_taxels[22].vector.z = -0.016;
+    this->boh_taxels[22].vector.x = 0.058349;
+    this->boh_taxels[22].vector.y = -0.007149;
+    this->boh_taxels[22].vector.z = -0.0098;
     this->boh_taxels[22].header.frame_id = "boh_bracket";
-    this->boh_taxels[23].vector.x = -0.05;
-    this->boh_taxels[23].vector.y = -0.019;
-    this->boh_taxels[23].vector.z = -0.016;
+    this->boh_taxels[23].vector.x = 0.066858;
+    this->boh_taxels[23].vector.y = -0.007149;
+    this->boh_taxels[23].vector.z = -0.0098;
     this->boh_taxels[23].header.frame_id = "boh_bracket";
     //Row3
-    this->boh_taxels[25].vector.x = 0.047;
-    this->boh_taxels[25].vector.y = -0.019;
-    this->boh_taxels[25].vector.z = -0.023;
+    this->boh_taxels[24].vector.x = -0.026741;
+    this->boh_taxels[24].vector.y = -0.01385;
+    this->boh_taxels[24].vector.z = -0.0098;
+    this->boh_taxels[24].header.frame_id = "boh_bracket";
+    this->boh_taxels[25].vector.x = -0.018232;
+    this->boh_taxels[25].vector.y = -0.01385;
+    this->boh_taxels[25].vector.z = -0.0098;
     this->boh_taxels[25].header.frame_id = "boh_bracket";
-    this->boh_taxels[26].vector.x = 0.038;
-    this->boh_taxels[26].vector.y = -0.019;
-    this->boh_taxels[26].vector.z = -0.023;
+    this->boh_taxels[26].vector.x = -0.009723;
+    this->boh_taxels[26].vector.y = -0.01385;
+    this->boh_taxels[26].vector.z = -0.0098;
     this->boh_taxels[26].header.frame_id = "boh_bracket";
-    this->boh_taxels[27].vector.x = 0.03;
-    this->boh_taxels[27].vector.y = -0.019;
-    this->boh_taxels[27].vector.z = -0.023;
+    this->boh_taxels[27].vector.x = -0.001214;
+    this->boh_taxels[27].vector.y = -0.01385;
+    this->boh_taxels[27].vector.z = -0.0098;
     this->boh_taxels[27].header.frame_id = "boh_bracket";
-    this->boh_taxels[28].vector.x = 0.021;
-    this->boh_taxels[28].vector.y = -0.019;
-    this->boh_taxels[28].vector.z = -0.023;
+    this->boh_taxels[28].vector.x = 0.007295;
+    this->boh_taxels[28].vector.y = -0.01385;
+    this->boh_taxels[28].vector.z = -0.0098;
     this->boh_taxels[28].header.frame_id = "boh_bracket";
-    this->boh_taxels[29].vector.x = 0.013;
-    this->boh_taxels[29].vector.y = -0.019;
-    this->boh_taxels[29].vector.z = -0.023;
+    this->boh_taxels[29].vector.x = 0.015804;
+    this->boh_taxels[29].vector.y = -0.01385;
+    this->boh_taxels[29].vector.z = -0.0098;
     this->boh_taxels[29].header.frame_id = "boh_bracket";
-    this->boh_taxels[30].vector.x = 0.004;
-    this->boh_taxels[30].vector.y = -0.019;
-    this->boh_taxels[30].vector.z = -0.023;
+    this->boh_taxels[30].vector.x = 0.024313;
+    this->boh_taxels[30].vector.y = -0.01385;
+    this->boh_taxels[30].vector.z = -0.0098;
     this->boh_taxels[30].header.frame_id = "boh_bracket";
-    this->boh_taxels[31].vector.x = -0.005;
-    this->boh_taxels[31].vector.y = -0.019;
-    this->boh_taxels[31].vector.z = -0.023;
+    this->boh_taxels[31].vector.x = 0.032822;
+    this->boh_taxels[31].vector.y = -0.01385;
+    this->boh_taxels[31].vector.z = -0.0098;
     this->boh_taxels[31].header.frame_id = "boh_bracket";
-    this->boh_taxels[32].vector.x = -0.014;
-    this->boh_taxels[32].vector.y = -0.019;
-    this->boh_taxels[32].vector.z = -0.023;
+    this->boh_taxels[32].vector.x = 0.041331;
+    this->boh_taxels[32].vector.y = -0.01385;
+    this->boh_taxels[32].vector.z = -0.0098;
     this->boh_taxels[32].header.frame_id = "boh_bracket";
-    this->boh_taxels[33].vector.x = -0.023;
-    this->boh_taxels[33].vector.y = -0.019;
-    this->boh_taxels[33].vector.z = -0.023;
+    this->boh_taxels[33].vector.x = 0.04984;
+    this->boh_taxels[33].vector.y = -0.01385;
+    this->boh_taxels[33].vector.z = -0.0098;
     this->boh_taxels[33].header.frame_id = "boh_bracket";
-    this->boh_taxels[34].vector.x = -0.032;
-    this->boh_taxels[34].vector.y = -0.019;
-    this->boh_taxels[34].vector.z = -0.023;
+    this->boh_taxels[34].vector.x = 0.058349;
+    this->boh_taxels[34].vector.y = -0.01385;
+    this->boh_taxels[34].vector.z = -0.0098;
     this->boh_taxels[34].header.frame_id = "boh_bracket";
-    this->boh_taxels[35].vector.x = -0.041;
-    this->boh_taxels[35].vector.y = -0.019;
-    this->boh_taxels[35].vector.z = -0.023;
+    this->boh_taxels[35].vector.x = 0.066858;
+    this->boh_taxels[35].vector.y = -0.01385;
+    this->boh_taxels[35].vector.z = -0.0098;
     this->boh_taxels[35].header.frame_id = "boh_bracket";
-    this->boh_taxels[36].vector.x = -0.05;
-    this->boh_taxels[36].vector.y = -0.019;
-    this->boh_taxels[36].vector.z = -0.023;
-    this->boh_taxels[36].header.frame_id = "boh_bracket";
     //Row4
-    this->boh_taxels[37].vector.x = 0.047;
-    this->boh_taxels[37].vector.y = -0.019;
-    this->boh_taxels[37].vector.z = -0.03;
+    this->boh_taxels[36].vector.x = -0.026741;
+    this->boh_taxels[36].vector.y = -0.020551;
+    this->boh_taxels[36].vector.z = -0.0098;
+    this->boh_taxels[36].header.frame_id = "boh_bracket";
+    this->boh_taxels[37].vector.x = -0.018232;
+    this->boh_taxels[37].vector.y = -0.020551;
+    this->boh_taxels[37].vector.z = -0.0098;
     this->boh_taxels[37].header.frame_id = "boh_bracket";
-    this->boh_taxels[38].vector.x = 0.038;
-    this->boh_taxels[38].vector.y = -0.019;
-    this->boh_taxels[38].vector.z = -0.03;
+    this->boh_taxels[38].vector.x = -0.009723;
+    this->boh_taxels[38].vector.y = -0.020551;
+    this->boh_taxels[38].vector.z = -0.0098;
     this->boh_taxels[38].header.frame_id = "boh_bracket";
-    this->boh_taxels[39].vector.x = 0.03;
-    this->boh_taxels[39].vector.y = -0.019;
-    this->boh_taxels[39].vector.z = -0.03;
+    this->boh_taxels[39].vector.x = -0.001214;
+    this->boh_taxels[39].vector.y = -0.020551;
+    this->boh_taxels[39].vector.z = -0.0098;
     this->boh_taxels[39].header.frame_id = "boh_bracket";
-    this->boh_taxels[40].vector.x = 0.021;
-    this->boh_taxels[40].vector.y = -0.019;
-    this->boh_taxels[40].vector.z = -0.03;
+    this->boh_taxels[40].vector.x = 0.007295;
+    this->boh_taxels[40].vector.y = -0.020551;
+    this->boh_taxels[40].vector.z = -0.0098;
     this->boh_taxels[40].header.frame_id = "boh_bracket";
-    this->boh_taxels[41].vector.x = 0.013;
-    this->boh_taxels[41].vector.y = -0.019;
-    this->boh_taxels[41].vector.z = -0.03;
+    this->boh_taxels[41].vector.x = 0.015804;
+    this->boh_taxels[41].vector.y = -0.020551;
+    this->boh_taxels[41].vector.z = -0.0098;
     this->boh_taxels[41].header.frame_id = "boh_bracket";
-    this->boh_taxels[42].vector.x = 0.004;
-    this->boh_taxels[42].vector.y = -0.019;
-    this->boh_taxels[42].vector.z = -0.03;
+    this->boh_taxels[42].vector.x = 0.024313;
+    this->boh_taxels[42].vector.y = -0.020551;
+    this->boh_taxels[42].vector.z = -0.0098;
     this->boh_taxels[42].header.frame_id = "boh_bracket";
-    this->boh_taxels[43].vector.x = -0.005;
-    this->boh_taxels[43].vector.y = -0.019;
-    this->boh_taxels[43].vector.z = -0.03;
+    this->boh_taxels[43].vector.x = 0.032822;
+    this->boh_taxels[43].vector.y = -0.020551;
+    this->boh_taxels[43].vector.z = -0.0098;
     this->boh_taxels[43].header.frame_id = "boh_bracket";
-    this->boh_taxels[44].vector.x = -0.014;
-    this->boh_taxels[44].vector.y = -0.019;
-    this->boh_taxels[44].vector.z = -0.03;
+    this->boh_taxels[44].vector.x = 0.041331;
+    this->boh_taxels[44].vector.y = -0.020551;
+    this->boh_taxels[44].vector.z = -0.0098;
     this->boh_taxels[44].header.frame_id = "boh_bracket";
-    this->boh_taxels[45].vector.x = -0.023;
-    this->boh_taxels[45].vector.y = -0.019;
-    this->boh_taxels[45].vector.z = -0.03;
+    this->boh_taxels[45].vector.x = 0.04984;
+    this->boh_taxels[45].vector.y = -0.020551;
+    this->boh_taxels[45].vector.z = -0.0098;
     this->boh_taxels[45].header.frame_id = "boh_bracket";
-    this->boh_taxels[46].vector.x = -0.032;
-    this->boh_taxels[46].vector.y = -0.019;
-    this->boh_taxels[46].vector.z = -0.03;
+    this->boh_taxels[46].vector.x = 0.058349;
+    this->boh_taxels[46].vector.y = -0.020551;
+    this->boh_taxels[46].vector.z = -0.0098;
     this->boh_taxels[46].header.frame_id = "boh_bracket";
-    this->boh_taxels[47].vector.x = -0.041;
-    this->boh_taxels[47].vector.y = -0.019;
-    this->boh_taxels[47].vector.z = -0.03;
+    this->boh_taxels[47].vector.x = 0.066858;
+    this->boh_taxels[47].vector.y = -0.020551;
+    this->boh_taxels[47].vector.z = -0.0098;
     this->boh_taxels[47].header.frame_id = "boh_bracket";
-    this->boh_taxels[48].vector.x = -0.05;
-    this->boh_taxels[48].vector.y = -0.019;
-    this->boh_taxels[48].vector.z = -0.03;
-    this->boh_taxels[48].header.frame_id = "boh_bracket";
     //Row5
-    this->boh_taxels[49].vector.x = 0.047;
-    this->boh_taxels[49].vector.y = -0.019;
-    this->boh_taxels[49].vector.z = -0.037;
+    this->boh_taxels[48].vector.x = -0.026741;
+    this->boh_taxels[48].vector.y = -0.027252;
+    this->boh_taxels[48].vector.z = -0.0098;
+    this->boh_taxels[48].header.frame_id = "boh_bracket";
+    this->boh_taxels[49].vector.x = -0.018232;
+    this->boh_taxels[49].vector.y = -0.027252;
+    this->boh_taxels[49].vector.z = -0.0098;
     this->boh_taxels[49].header.frame_id = "boh_bracket";
-    this->boh_taxels[50].vector.x = 0.038;
-    this->boh_taxels[50].vector.y = -0.019;
-    this->boh_taxels[50].vector.z = -0.037;
+    this->boh_taxels[50].vector.x = -0.009723;
+    this->boh_taxels[50].vector.y = -0.027252;
+    this->boh_taxels[50].vector.z = -0.0098;
     this->boh_taxels[50].header.frame_id = "boh_bracket";
-    this->boh_taxels[51].vector.x = 0.03;
-    this->boh_taxels[51].vector.y = -0.019;
-    this->boh_taxels[51].vector.z = -0.037;
+    this->boh_taxels[51].vector.x = -0.001214;
+    this->boh_taxels[51].vector.y = -0.027252;
+    this->boh_taxels[51].vector.z = -0.0098;
     this->boh_taxels[51].header.frame_id = "boh_bracket";
-    this->boh_taxels[52].vector.x = 0.021;
-    this->boh_taxels[52].vector.y = -0.019;
-    this->boh_taxels[52].vector.z = -0.037;
+    this->boh_taxels[52].vector.x = 0.007295;
+    this->boh_taxels[52].vector.y = -0.027252;
+    this->boh_taxels[52].vector.z = -0.0098;
     this->boh_taxels[52].header.frame_id = "boh_bracket";
-    this->boh_taxels[53].vector.x = 0.013;
-    this->boh_taxels[53].vector.y = -0.019;
-    this->boh_taxels[53].vector.z = -0.037;
+    this->boh_taxels[53].vector.x = 0.015804;
+    this->boh_taxels[53].vector.y = -0.027252;
+    this->boh_taxels[53].vector.z = -0.0098;
     this->boh_taxels[53].header.frame_id = "boh_bracket";
-    this->boh_taxels[54].vector.x = 0.004;
-    this->boh_taxels[54].vector.y = -0.019;
-    this->boh_taxels[54].vector.z = -0.037;
+    this->boh_taxels[54].vector.x = 0.024313;
+    this->boh_taxels[54].vector.y = -0.027252;
+    this->boh_taxels[54].vector.z = -0.0098;
     this->boh_taxels[54].header.frame_id = "boh_bracket";
-    this->boh_taxels[55].vector.x = -0.005;
-    this->boh_taxels[55].vector.y = -0.019;
-    this->boh_taxels[55].vector.z = -0.037;
+    this->boh_taxels[55].vector.x = 0.032822;
+    this->boh_taxels[55].vector.y = -0.027252;
+    this->boh_taxels[55].vector.z = -0.0098;
     this->boh_taxels[55].header.frame_id = "boh_bracket";
-    this->boh_taxels[56].vector.x = -0.014;
-    this->boh_taxels[56].vector.y = -0.019;
-    this->boh_taxels[56].vector.z = -0.037;
+    this->boh_taxels[56].vector.x = 0.041331;
+    this->boh_taxels[56].vector.y = -0.027252;
+    this->boh_taxels[56].vector.z = -0.0098;
     this->boh_taxels[56].header.frame_id = "boh_bracket";
-    this->boh_taxels[57].vector.x = -0.023;
-    this->boh_taxels[57].vector.y = -0.019;
-    this->boh_taxels[57].vector.z = -0.037;
+    this->boh_taxels[57].vector.x = 0.04984;
+    this->boh_taxels[57].vector.y = -0.027252;
+    this->boh_taxels[57].vector.z = -0.0098;
     this->boh_taxels[57].header.frame_id = "boh_bracket";
-    this->boh_taxels[58].vector.x = -0.032;
-    this->boh_taxels[58].vector.y = -0.019;
-    this->boh_taxels[58].vector.z = -0.037;
+    this->boh_taxels[58].vector.x = 0.058349;
+    this->boh_taxels[58].vector.y = -0.027252;
+    this->boh_taxels[58].vector.z = -0.0098;
     this->boh_taxels[58].header.frame_id = "boh_bracket";
-    this->boh_taxels[59].vector.x = -0.041;
-    this->boh_taxels[59].vector.y = -0.019;
-    this->boh_taxels[59].vector.z = -0.037;
+    this->boh_taxels[59].vector.x = 0.066858;
+    this->boh_taxels[59].vector.y = -0.027252;
+    this->boh_taxels[59].vector.z = -0.0098;
     this->boh_taxels[59].header.frame_id = "boh_bracket";
-    this->boh_taxels[60].vector.x = -0.05;
-    this->boh_taxels[60].vector.y = -0.019;
-    this->boh_taxels[60].vector.z = -0.037;
-    this->boh_taxels[60].header.frame_id = "boh_bracket";
     //Row6
-    this->boh_taxels[61].vector.x = 0.047;
-    this->boh_taxels[61].vector.y = -0.019;
-    this->boh_taxels[61].vector.z = -0.044;
+    this->boh_taxels[60].vector.x = -0.026741;
+    this->boh_taxels[60].vector.y = -0.033954;
+    this->boh_taxels[60].vector.z = -0.0098;
+    this->boh_taxels[60].header.frame_id = "boh_bracket";
+    this->boh_taxels[61].vector.x = -0.018232;
+    this->boh_taxels[61].vector.y = -0.033954;
+    this->boh_taxels[61].vector.z = -0.0098;
     this->boh_taxels[61].header.frame_id = "boh_bracket";
-    this->boh_taxels[62].vector.x = 0.038;
-    this->boh_taxels[62].vector.y = -0.019;
-    this->boh_taxels[62].vector.z = -0.044;
+    this->boh_taxels[62].vector.x = -0.009723;
+    this->boh_taxels[62].vector.y = -0.033954;
+    this->boh_taxels[62].vector.z = -0.0098;
     this->boh_taxels[62].header.frame_id = "boh_bracket";
-    this->boh_taxels[63].vector.x = 0.03;
-    this->boh_taxels[63].vector.y = -0.019;
-    this->boh_taxels[63].vector.z = -0.044;
+    this->boh_taxels[63].vector.x = -0.001214;
+    this->boh_taxels[63].vector.y = -0.033954;
+    this->boh_taxels[63].vector.z = -0.0098;
     this->boh_taxels[63].header.frame_id = "boh_bracket";
-    this->boh_taxels[64].vector.x = 0.021;
-    this->boh_taxels[64].vector.y = -0.019;
-    this->boh_taxels[64].vector.z = -0.044;
+    this->boh_taxels[64].vector.x = 0.007295;
+    this->boh_taxels[64].vector.y = -0.033954;
+    this->boh_taxels[64].vector.z = -0.0098;
     this->boh_taxels[64].header.frame_id = "boh_bracket";
-    this->boh_taxels[65].vector.x = 0.013;
-    this->boh_taxels[65].vector.y = -0.019;
-    this->boh_taxels[65].vector.z = -0.044;
+    this->boh_taxels[65].vector.x = 0.015804;
+    this->boh_taxels[65].vector.y = -0.033954;
+    this->boh_taxels[65].vector.z = -0.0098;
     this->boh_taxels[65].header.frame_id = "boh_bracket";
-    this->boh_taxels[66].vector.x = 0.004;
-    this->boh_taxels[66].vector.y = -0.019;
-    this->boh_taxels[66].vector.z = -0.044;
+    this->boh_taxels[66].vector.x = 0.024313;
+    this->boh_taxels[66].vector.y = -0.033954;
+    this->boh_taxels[66].vector.z = -0.0098;
     this->boh_taxels[66].header.frame_id = "boh_bracket";
-    this->boh_taxels[67].vector.x = -0.005;
-    this->boh_taxels[67].vector.y = -0.019;
-    this->boh_taxels[67].vector.z = -0.044;
+    this->boh_taxels[67].vector.x = 0.032822;
+    this->boh_taxels[67].vector.y = -0.033954;
+    this->boh_taxels[67].vector.z = -0.0098;
     this->boh_taxels[67].header.frame_id = "boh_bracket";
-    this->boh_taxels[68].vector.x = -0.014;
-    this->boh_taxels[68].vector.y = -0.019;
-    this->boh_taxels[68].vector.z = -0.044;
+    this->boh_taxels[68].vector.x = 0.041331;
+    this->boh_taxels[68].vector.y = -0.033954;
+    this->boh_taxels[68].vector.z = -0.0098;
     this->boh_taxels[68].header.frame_id = "boh_bracket";
-    this->boh_taxels[69].vector.x = -0.023;
-    this->boh_taxels[69].vector.y = -0.019;
-    this->boh_taxels[69].vector.z = -0.044;
+    this->boh_taxels[69].vector.x = 0.04984;
+    this->boh_taxels[69].vector.y = -0.033954;
+    this->boh_taxels[69].vector.z = -0.0098;
     this->boh_taxels[69].header.frame_id = "boh_bracket";
-    this->boh_taxels[70].vector.x = -0.032;
-    this->boh_taxels[70].vector.y = -0.019;
-    this->boh_taxels[70].vector.z = -0.044;
+    this->boh_taxels[70].vector.x = 0.058349;
+    this->boh_taxels[70].vector.y = -0.033954;
+    this->boh_taxels[70].vector.z = -0.0098;
     this->boh_taxels[70].header.frame_id = "boh_bracket";
-    this->boh_taxels[71].vector.x = -0.041;
-    this->boh_taxels[71].vector.y = -0.019;
-    this->boh_taxels[71].vector.z = -0.044;
+    this->boh_taxels[71].vector.x = 0.066858;
+    this->boh_taxels[71].vector.y = -0.033954;
+    this->boh_taxels[71].vector.z = -0.0098;
     this->boh_taxels[71].header.frame_id = "boh_bracket";
-    this->boh_taxels[72].vector.x = -0.05;
-    this->boh_taxels[72].vector.y = -0.019;
-    this->boh_taxels[72].vector.z = -0.044;
-    this->boh_taxels[72].header.frame_id = "boh_bracket";
     //Row7
-    this->boh_taxels[73].vector.x = 0.047;
-    this->boh_taxels[73].vector.y = -0.019;
-    this->boh_taxels[73].vector.z = -0.051;
+    this->boh_taxels[72].vector.x = -0.026741;
+    this->boh_taxels[72].vector.y = -0.040611;
+    this->boh_taxels[72].vector.z = -0.0098;
+    this->boh_taxels[72].header.frame_id = "boh_bracket";
+    this->boh_taxels[73].vector.x = -0.018232;
+    this->boh_taxels[73].vector.y = -0.040611;
+    this->boh_taxels[73].vector.z = -0.0098;
     this->boh_taxels[73].header.frame_id = "boh_bracket";
-    this->boh_taxels[74].vector.x = 0.038;
-    this->boh_taxels[74].vector.y = -0.019;
-    this->boh_taxels[74].vector.z = -0.051;
+    this->boh_taxels[74].vector.x = -0.009723;
+    this->boh_taxels[74].vector.y = -0.040611;
+    this->boh_taxels[74].vector.z = -0.0098;
     this->boh_taxels[74].header.frame_id = "boh_bracket";
-    this->boh_taxels[75].vector.x = 0.03;
-    this->boh_taxels[75].vector.y = -0.019;
-    this->boh_taxels[75].vector.z = -0.051;
+    this->boh_taxels[75].vector.x = -0.001214;
+    this->boh_taxels[75].vector.y = -0.040611;
+    this->boh_taxels[75].vector.z = -0.0098;
     this->boh_taxels[75].header.frame_id = "boh_bracket";
-    this->boh_taxels[76].vector.x = 0.021;
-    this->boh_taxels[76].vector.y = -0.019;
-    this->boh_taxels[76].vector.z = -0.051;
+    this->boh_taxels[76].vector.x = 0.007295;
+    this->boh_taxels[76].vector.y = -0.040611;
+    this->boh_taxels[76].vector.z = -0.0098;
     this->boh_taxels[76].header.frame_id = "boh_bracket";
-    this->boh_taxels[77].vector.x = 0.013;
-    this->boh_taxels[77].vector.y = -0.019;
-    this->boh_taxels[77].vector.z = -0.051;
+    this->boh_taxels[77].vector.x = 0.015804;
+    this->boh_taxels[77].vector.y = -0.040611;
+    this->boh_taxels[77].vector.z = -0.0098;
     this->boh_taxels[77].header.frame_id = "boh_bracket";
-    this->boh_taxels[78].vector.x = 0.004;
-    this->boh_taxels[78].vector.y = -0.019;
-    this->boh_taxels[78].vector.z = -0.051;
+    this->boh_taxels[78].vector.x = 0.024313;
+    this->boh_taxels[78].vector.y = -0.040611;
+    this->boh_taxels[78].vector.z = -0.0098;
     this->boh_taxels[78].header.frame_id = "boh_bracket";
-    this->boh_taxels[79].vector.x = -0.005;
-    this->boh_taxels[79].vector.y = -0.019;
-    this->boh_taxels[79].vector.z = -0.051;
+    this->boh_taxels[79].vector.x = 0.032822;
+    this->boh_taxels[79].vector.y = -0.040611;
+    this->boh_taxels[79].vector.z = -0.0098;
     this->boh_taxels[79].header.frame_id = "boh_bracket";
-    this->boh_taxels[80].vector.x = -0.014;
-    this->boh_taxels[80].vector.y = -0.019;
-    this->boh_taxels[80].vector.z = -0.051;
+    this->boh_taxels[80].vector.x = 0.041331;
+    this->boh_taxels[80].vector.y = -0.040611;
+    this->boh_taxels[80].vector.z = -0.0098;
     this->boh_taxels[80].header.frame_id = "boh_bracket";
-    this->boh_taxels[81].vector.x = -0.023;
-    this->boh_taxels[81].vector.y = -0.019;
-    this->boh_taxels[81].vector.z = -0.051;
+    this->boh_taxels[81].vector.x = 0.04984;
+    this->boh_taxels[81].vector.y = -0.040611;
+    this->boh_taxels[81].vector.z = -0.0098;
     this->boh_taxels[81].header.frame_id = "boh_bracket";
-    this->boh_taxels[82].vector.x = -0.032;
-    this->boh_taxels[82].vector.y = -0.019;
-    this->boh_taxels[82].vector.z = -0.051;
+    this->boh_taxels[82].vector.x = 0.058349;
+    this->boh_taxels[82].vector.y = -0.040611;
+    this->boh_taxels[82].vector.z = -0.0098;
     this->boh_taxels[82].header.frame_id = "boh_bracket";
-    this->boh_taxels[83].vector.x = -0.041;
-    this->boh_taxels[83].vector.y = -0.019;
-    this->boh_taxels[83].vector.z = -0.051;
+    this->boh_taxels[83].vector.x = 0.066858;
+    this->boh_taxels[83].vector.y = -0.040611;
+    this->boh_taxels[83].vector.z = -0.0098;
     this->boh_taxels[83].header.frame_id = "boh_bracket";
-    this->boh_taxels[84].vector.x = -0.05;
-    this->boh_taxels[84].vector.y = -0.019;
-    this->boh_taxels[84].vector.z = -0.051;
-    this->boh_taxels[84].header.frame_id = "boh_bracket";
     //Row8
-    this->boh_taxels[85].vector.x = 0.047;
-    this->boh_taxels[85].vector.y = -0.019;
-    this->boh_taxels[85].vector.z = -0.058;
+    this->boh_taxels[84].vector.x = -0.026741;
+    this->boh_taxels[84].vector.y = -0.047356;
+    this->boh_taxels[84].vector.z = -0.0098;
+    this->boh_taxels[84].header.frame_id = "boh_bracket";
+    this->boh_taxels[85].vector.x = -0.018232;
+    this->boh_taxels[85].vector.y = -0.047356;
+    this->boh_taxels[85].vector.z = -0.0098;
     this->boh_taxels[85].header.frame_id = "boh_bracket";
-    this->boh_taxels[86].vector.x = 0.038;
-    this->boh_taxels[86].vector.y = -0.019;
-    this->boh_taxels[86].vector.z = -0.058;
+    this->boh_taxels[86].vector.x = -0.009723;
+    this->boh_taxels[86].vector.y = -0.047356;
+    this->boh_taxels[86].vector.z = -0.0098;
     this->boh_taxels[86].header.frame_id = "boh_bracket";
-    this->boh_taxels[87].vector.x = 0.03;
-    this->boh_taxels[87].vector.y = -0.019;
-    this->boh_taxels[87].vector.z = -0.058;
+    this->boh_taxels[87].vector.x = -0.001214;
+    this->boh_taxels[87].vector.y = -0.047356;
+    this->boh_taxels[87].vector.z = -0.0098;
     this->boh_taxels[87].header.frame_id = "boh_bracket";
-    this->boh_taxels[88].vector.x = 0.021;
-    this->boh_taxels[88].vector.y = -0.019;
-    this->boh_taxels[88].vector.z = -0.058;
+    this->boh_taxels[88].vector.x = 0.007295;
+    this->boh_taxels[88].vector.y = -0.047356;
+    this->boh_taxels[88].vector.z = -0.0098;
     this->boh_taxels[88].header.frame_id = "boh_bracket";
-    this->boh_taxels[89].vector.x = 0.013;
-    this->boh_taxels[89].vector.y = -0.019;
-    this->boh_taxels[89].vector.z = -0.058;
+    this->boh_taxels[89].vector.x = 0.015804;
+    this->boh_taxels[89].vector.y = -0.047356;
+    this->boh_taxels[89].vector.z = -0.0098;
     this->boh_taxels[89].header.frame_id = "boh_bracket";
-    this->boh_taxels[90].vector.x = 0.004;
-    this->boh_taxels[90].vector.y = -0.019;
-    this->boh_taxels[90].vector.z = -0.058;
+    this->boh_taxels[90].vector.x = 0.024313;
+    this->boh_taxels[90].vector.y = -0.047356;
+    this->boh_taxels[90].vector.z = -0.0098;
     this->boh_taxels[90].header.frame_id = "boh_bracket";
-    this->boh_taxels[91].vector.x = -0.005;
-    this->boh_taxels[91].vector.y = -0.019;
-    this->boh_taxels[91].vector.z = -0.058;
+    this->boh_taxels[91].vector.x = 0.032822;
+    this->boh_taxels[91].vector.y = -0.047356;
+    this->boh_taxels[91].vector.z = -0.0098;
     this->boh_taxels[91].header.frame_id = "boh_bracket";
-    this->boh_taxels[92].vector.x = -0.014;
-    this->boh_taxels[92].vector.y = -0.019;
-    this->boh_taxels[92].vector.z = -0.058;
+    this->boh_taxels[92].vector.x = 0.041331;
+    this->boh_taxels[92].vector.y = -0.047356;
+    this->boh_taxels[92].vector.z = -0.0098;
     this->boh_taxels[92].header.frame_id = "boh_bracket";
-    this->boh_taxels[93].vector.x = -0.023;
-    this->boh_taxels[93].vector.y = -0.019;
-    this->boh_taxels[93].vector.z = -0.058;
+    this->boh_taxels[93].vector.x = 0.04984;
+    this->boh_taxels[93].vector.y = -0.047356;
+    this->boh_taxels[93].vector.z = -0.0098;
     this->boh_taxels[93].header.frame_id = "boh_bracket";
-    this->boh_taxels[94].vector.x = -0.032;
-    this->boh_taxels[94].vector.y = -0.019;
-    this->boh_taxels[94].vector.z = -0.058;
+    this->boh_taxels[94].vector.x = 0.058349;
+    this->boh_taxels[94].vector.y = -0.047356;
+    this->boh_taxels[94].vector.z = -0.0098;
     this->boh_taxels[94].header.frame_id = "boh_bracket";
-    this->boh_taxels[95].vector.x = -0.041;
-    this->boh_taxels[95].vector.y = -0.019;
-    this->boh_taxels[95].vector.z = -0.058;
+    this->boh_taxels[95].vector.x = 0.066858;
+    this->boh_taxels[95].vector.y = -0.047356;
+    this->boh_taxels[95].vector.z = -0.0098;
     this->boh_taxels[95].header.frame_id = "boh_bracket";
-    this->boh_taxels[96].vector.x = -0.05;
-    this->boh_taxels[96].vector.y = -0.019;
-    this->boh_taxels[96].vector.z = -0.058;
-    this->boh_taxels[96].header.frame_id = "boh_bracket";
     //Row9
-    this->boh_taxels[97].vector.x = 0.047;
-    this->boh_taxels[97].vector.y = -0.019;
-    this->boh_taxels[97].vector.z = -0.065;
+    this->boh_taxels[96].vector.x = -0.026923;
+    this->boh_taxels[96].vector.y = -0.054057;
+    this->boh_taxels[96].vector.z = -0.0098;
+    this->boh_taxels[96].header.frame_id = "boh_bracket";
+    this->boh_taxels[97].vector.x = -0.018414;
+    this->boh_taxels[97].vector.y = -0.054057;
+    this->boh_taxels[97].vector.z = -0.0098;
     this->boh_taxels[97].header.frame_id = "boh_bracket";
-    this->boh_taxels[98].vector.x = 0.038;
-    this->boh_taxels[98].vector.y = -0.019;
-    this->boh_taxels[98].vector.z = -0.065;
+    this->boh_taxels[98].vector.x = -0.009905;
+    this->boh_taxels[98].vector.y = -0.054057;
+    this->boh_taxels[98].vector.z = -0.0098;
     this->boh_taxels[98].header.frame_id = "boh_bracket";
-    this->boh_taxels[99].vector.x = 0.03;
-    this->boh_taxels[99].vector.y = -0.019;
-    this->boh_taxels[99].vector.z = -0.065;
+    this->boh_taxels[99].vector.x = -0.001396;
+    this->boh_taxels[99].vector.y = -0.054057;
+    this->boh_taxels[99].vector.z = -0.0098;
     this->boh_taxels[99].header.frame_id = "boh_bracket";
-    this->boh_taxels[100].vector.x = 0.021;
-    this->boh_taxels[100].vector.y = -0.019;
-    this->boh_taxels[100].vector.z = -0.065;
+    this->boh_taxels[100].vector.x = 0.007113;
+    this->boh_taxels[100].vector.y = -0.054057;
+    this->boh_taxels[100].vector.z = -0.0098;
     this->boh_taxels[100].header.frame_id = "boh_bracket";
-    this->boh_taxels[101].vector.x = 0.013;
-    this->boh_taxels[101].vector.y = -0.019;
-    this->boh_taxels[101].vector.z = -0.065;
+    this->boh_taxels[101].vector.x = 0.015622;
+    this->boh_taxels[101].vector.y = -0.054057;
+    this->boh_taxels[101].vector.z = -0.0098;
     this->boh_taxels[101].header.frame_id = "boh_bracket";
-    this->boh_taxels[102].vector.x = 0.004;
-    this->boh_taxels[102].vector.y = -0.019;
-    this->boh_taxels[102].vector.z = -0.065;
+    this->boh_taxels[102].vector.x = 0.024131;
+    this->boh_taxels[102].vector.y = -0.054057;
+    this->boh_taxels[102].vector.z = -0.0098;
     this->boh_taxels[102].header.frame_id = "boh_bracket";
-    this->boh_taxels[103].vector.x = -0.005;
-    this->boh_taxels[103].vector.y = -0.019;
-    this->boh_taxels[103].vector.z = -0.065;
+    this->boh_taxels[103].vector.x = 0.03264;
+    this->boh_taxels[103].vector.y = -0.054057;
+    this->boh_taxels[103].vector.z = -0.0098;
     this->boh_taxels[103].header.frame_id = "boh_bracket";
-    this->boh_taxels[104].vector.x = -0.014;
-    this->boh_taxels[104].vector.y = -0.019;
-    this->boh_taxels[104].vector.z = -0.065;
+    this->boh_taxels[104].vector.x = 0.041149;
+    this->boh_taxels[104].vector.y = -0.054057;
+    this->boh_taxels[104].vector.z = -0.0098;
     this->boh_taxels[104].header.frame_id = "boh_bracket";
-    this->boh_taxels[105].vector.x = -0.023;
-    this->boh_taxels[105].vector.y = -0.019;
-    this->boh_taxels[105].vector.z = -0.065;
+    this->boh_taxels[105].vector.x = 0.049658;
+    this->boh_taxels[105].vector.y = -0.054057;
+    this->boh_taxels[105].vector.z = -0.0098;
     this->boh_taxels[105].header.frame_id = "boh_bracket";
-    this->boh_taxels[106].vector.x = -0.032;
-    this->boh_taxels[106].vector.y = -0.019;
-    this->boh_taxels[106].vector.z = -0.065;
+    this->boh_taxels[106].vector.x = 0.058167;
+    this->boh_taxels[106].vector.y = -0.054057;
+    this->boh_taxels[106].vector.z = -0.0098;
     this->boh_taxels[106].header.frame_id = "boh_bracket";
-    this->boh_taxels[107].vector.x = -0.041;
-    this->boh_taxels[107].vector.y = -0.019;
-    this->boh_taxels[107].vector.z = -0.065;
+    this->boh_taxels[107].vector.x = 0.066676;
+    this->boh_taxels[107].vector.y = -0.054057;
+    this->boh_taxels[107].vector.z = -0.0098;
     this->boh_taxels[107].header.frame_id = "boh_bracket";
-    this->boh_taxels[108].vector.x = -0.05;
-    this->boh_taxels[108].vector.y = -0.019;
-    this->boh_taxels[108].vector.z = -0.065;
+    //Row10
+    this->boh_taxels[108].vector.x = -0.026928;
+    this->boh_taxels[108].vector.y = -0.060963;
+    this->boh_taxels[108].vector.z = -0.0098;
     this->boh_taxels[108].header.frame_id = "boh_bracket";
-
+    this->boh_taxels[109].vector.x = -0.018419;
+    this->boh_taxels[109].vector.y = -0.060963;
+    this->boh_taxels[109].vector.z = -0.0098;
+    this->boh_taxels[109].header.frame_id = "boh_bracket";
+    this->boh_taxels[110].vector.x = -0.00991;
+    this->boh_taxels[110].vector.y = -0.060963;
+    this->boh_taxels[110].vector.z = -0.0098;
+    this->boh_taxels[110].header.frame_id = "boh_bracket";
+    this->boh_taxels[111].vector.x = 0.049658;
+    this->boh_taxels[111].vector.y = -0.060899;
+    this->boh_taxels[111].vector.z = -0.0098;
+    this->boh_taxels[111].header.frame_id = "boh_bracket";
+    this->boh_taxels[112].vector.x = 0.058167;
+    this->boh_taxels[112].vector.y = -0.060899;
+    this->boh_taxels[112].vector.z = -0.0098;
+    this->boh_taxels[112].header.frame_id = "boh_bracket";
+    this->boh_taxels[113].vector.x = 0.066731;
+    this->boh_taxels[113].vector.y = -0.060899;
+    this->boh_taxels[113].vector.z = -0.0098;
+    this->boh_taxels[113].header.frame_id = "boh_bracket";
+    //Row11
+    this->boh_taxels[114].vector.x = -0.018419;
+    this->boh_taxels[114].vector.y = -0.068096;
+    this->boh_taxels[114].vector.z = -0.0098;
+    this->boh_taxels[114].header.frame_id = "boh_bracket";
+    this->boh_taxels[115].vector.x = -0.00991;
+    this->boh_taxels[115].vector.y = -0.068096;
+    this->boh_taxels[115].vector.z = -0.0098;
+    this->boh_taxels[115].header.frame_id = "boh_bracket";
+    this->boh_taxels[116].vector.x = 0.049658;
+    this->boh_taxels[116].vector.y = -0.067905;
+    this->boh_taxels[116].vector.z = -0.0098;
+    this->boh_taxels[116].header.frame_id = "boh_bracket";
+    this->boh_taxels[117].vector.x = 0.058167;
+    this->boh_taxels[117].vector.y = -0.067905;
+    this->boh_taxels[117].vector.z = -0.0098;
+    this->boh_taxels[117].header.frame_id = "boh_bracket";
 
     // Filling the taxels_map
     this->taxels_map["boh"] = this->boh_taxels;
@@ -783,13 +825,27 @@ void CoordinatesPlugin::contact_callback(ContactPtr &_msg)
         for (auto const& [key, val] : this->raw_contacts_map) // key is the sensor name: ift, mpb...
                                                               // val is a vector of contact locations for the correspondent sensor
         {
-           //this->filtered_contact_positions_v.push_back(std::vector<float>{0,0,0});
            this->target_sensor = key;
            // Getting the transformation from the brackets to the world frame using tf2
-           // For now, focus only on "boh_bracket"
            if(tfBuffer.canTransform("world",key+"_bracket", ros::Time(0)))
            {
                this->transformStamped = tfBuffer.lookupTransform("world",key+"_bracket", ros::Time(0));
+           /*
+               std::cout<< "Transformation:"<< "\n"
+                        <<"q0: "<< this->transformStamped.transform.rotation.x<<"\n"
+                        <<"q1: "<< this->transformStamped.transform.rotation.y<<"\n"
+                        <<"q2: "<< this->transformStamped.transform.rotation.z<<"\n"
+                        <<"q3: "<< this->transformStamped.transform.rotation.w<<"\n"
+                        <<"dx: "<< this->transformStamped.transform.translation.x<<"\n"
+                        <<"dy: "<< this->transformStamped.transform.translation.y<<"\n"
+                        <<"dz: "<< this->transformStamped.transform.translation.z<< std::endl;
+               std::vector<std::vector<float>> my_homogeneous_matrix = this->homo_matrix(this->transformStamped);
+               std::cout<< "Homogeneous Transformation:"<< "\n"
+                   <<"["<< my_homogeneous_matrix[0][0]<<"   "<<my_homogeneous_matrix[0][1]<<"   "<<my_homogeneous_matrix[0][2]<<"   "<<my_homogeneous_matrix[0][3]<<"\n"
+                        << my_homogeneous_matrix[1][0]<<"   "<<my_homogeneous_matrix[1][1]<<"   "<<my_homogeneous_matrix[1][2]<<"   "<<my_homogeneous_matrix[1][3]<<"\n"
+                        << my_homogeneous_matrix[2][0]<<"   "<<my_homogeneous_matrix[2][1]<<"   "<<my_homogeneous_matrix[2][2]<<"   "<<my_homogeneous_matrix[2][3]<<"\n"
+                        << my_homogeneous_matrix[3][0]<<"   "<<my_homogeneous_matrix[3][1]<<"   "<<my_homogeneous_matrix[3][2]<<"   "<<my_homogeneous_matrix[3][3]<<"]"<<std::endl;
+           */
                for (unsigned int i = 0; i < this->taxels_map[key].size() ; ++i)
                {
 
@@ -813,22 +869,27 @@ void CoordinatesPlugin::contact_callback(ContactPtr &_msg)
                }
            }
            //********************************Testing Area************************************************
+           std::cout<<"Total number of contact points: " << val.size() << std::endl;
            for (unsigned int i = 0; i < val.size() ; ++i)
            {
                //Comparing the location of each contact point of a sensor with the locations of the same sensor's taxels
                for (unsigned int j = 0; j < this->transformed_taxels_map[key].size() ; ++j)
                {
+                   /*
                    std::cout << "Distance: "
                              << this->dist(val[i],this->transformed_taxels_map[key][j])
                              << std::endl;
+                   */
                    if(this->dist(val[i],this->transformed_taxels_map[key][j]) < dist_threshold &&
                            std::find(this->filtered_contact_positions_v.begin(),this->filtered_contact_positions_v.end(),
                            this->transformed_taxels_map[key][j]) == this->filtered_contact_positions_v.end())
                    {
                        //Replace the contact point by the correspondent taxel(s)
-                       std::cout<<"Pushed contact vector: " << transformed_taxels_map[key][j][0]
-                                << transformed_taxels_map[key][j][1] << transformed_taxels_map[key][j][2]
+                       /*
+                       std::cout<<"Pushed contact vector: " << transformed_taxels_map[key][j][0] << "  "
+                                << transformed_taxels_map[key][j][1]<<"  "<< transformed_taxels_map[key][j][2]
                                 << std::endl;
+                      */
                        this->filtered_contact_positions_v.push_back(this->transformed_taxels_map[key][j]);
                    }
                }
@@ -901,12 +962,6 @@ void CoordinatesPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/
           std::cout << "/gazebo/"+topic_name << std::endl;
           this->subscribers_v[index] = this->node->Subscribe("/gazebo/"+topic_name,&CoordinatesPlugin::contact_callback,this);
           }
-          //this->saving_subscriber = this->node->Subscribe("saving_order",&CoordinatesPlugin::saving_callback,this);
-          //Opening the .csv file for contact points registration
-          //std::string full_path = std::filesystem::current_path();
-          //size_t pos = full_path.find("Gazebo_Simulation");
-          //std::string path = full_path.substr(0,pos+17)+"/Pt_Cloud_Scripts/contacts_coordinates.csv";
-          //std::string path_filtered = full_path.substr(0,pos+17)+"/Pt_Cloud_Scripts/filtered_contacts_coordinates.csv";
           std::string path = "contacts_coordinates.csv";
           std::string path_filtered = "filtered_contacts_coordinates.csv";
           this->fp = fopen(path.c_str(), "w");
@@ -950,8 +1005,6 @@ void CoordinatesPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/
 
 
 
-
-//*****************************************************Test******************************************
 
 
 

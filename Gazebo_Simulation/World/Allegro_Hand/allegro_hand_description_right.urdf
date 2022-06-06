@@ -26,6 +26,7 @@
     <mass value="0.404445" />
     <inertia ixx="0.000491371" ixy="-9.01723e-06"  ixz="1.17974e-05" iyy="0.000773265" iyz="-5.50867e-06" izz="0.000547843" />
     </inertial>
+
     </link>
 
     <joint name="world_to_palm_link_joint" type="fixed">
@@ -178,9 +179,24 @@
     <parent link="link_2" />
     <child link="link_3" />
     <axis xyz="0 0 1"/>
-    <limit effort="1" velocity="20" />
-    <joint_properties friction="0.0"/>
+    <limit effort="15" velocity="20" lower="0" upper="1.57" />
+    <dynamics damping="0" friction="0.5" />
+    <gazebo>
+        <implicitSpringDamper> true </implicitSpringDamper>
+    </gazebo>
     </joint>
+
+<!-- *************************************Transmission************************************** -->
+    <transmission name="trans_3_0">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_3_0">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor_3_0">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+<!-- *************************************Transmission************************************** -->
 
     <link name="imf_bracket">
     <visual>
@@ -257,9 +273,24 @@
     <parent link="link_1" />
     <child link="link_2" />
     <axis xyz="0 0 1"/>
-    <limit effort="1" velocity="20" />
-    <joint_properties friction="0.0"/>
+    <limit effort="15" velocity="20" lower="0" upper="1.57" />
+    <dynamics damping="0" friction="0.5" />
+    <gazebo>
+        <implicitSpringDamper> true </implicitSpringDamper>
+    </gazebo>
     </joint>
+    <!-- *************************************Transmission************************************** -->
+    <transmission name="trans_2_0">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_2_0">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor_2_0">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+<!-- *************************************Transmission************************************** -->
+
 
     <link name="ipb_bracket">
     <visual>
@@ -336,18 +367,48 @@
     <parent link="link_0" />
     <child link="link_1" />
     <axis xyz="0 0 1"/>
-    <limit effort="1" velocity="20" />
-    <joint_properties friction="0.0"/>
+    <limit effort="15" velocity="20" lower="0" upper="1.57" />
+    <dynamics damping="0" friction="0.5" />
+    <gazebo>
+        <implicitSpringDamper> true </implicitSpringDamper>
+    </gazebo>
     </joint>
+
+    <!-- *************************************Transmission************************************** -->
+    <transmission name="trans_1_0">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_1_0">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor_1_0">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+<!-- *************************************Transmission************************************** -->
 
     <joint name="joint_0_0" type="revolute">
     <origin xyz="-0.0435377 0.034 -0.00553922" rpy="-0.0872665 -1.66533e-16 1.5708" />
     <parent link="palm_link" />
     <child link="link_0" />
     <axis xyz="0 0 1"/>
-    <limit effort="1" velocity="20" />
-    <joint_properties friction="0.0"/>
+    <limit effort="15" velocity="20" lower="-1.57" upper="1.57" />
+    <dynamics damping="0" friction="0.5" />
+    <gazebo>
+        <implicitSpringDamper> true </implicitSpringDamper>
+    </gazebo>
     </joint>
+    <!-- *************************************Transmission************************************** -->
+    <transmission name="trans_0_0">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_0_0">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor_0_0">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+<!-- *************************************Transmission************************************** -->
+
 
     <link name="link_4">
     <visual>
@@ -493,9 +554,23 @@
     <parent link="link_6" />
     <child link="link_7" />
     <axis xyz="0 0 1"/>
-    <limit effort="1" velocity="20" />
-    <joint_properties friction="0.0"/>
+    <limit effort="15" velocity="20" lower="0" upper="1.57" />
+    <dynamics damping="0" friction="0.5" />
+    <gazebo>
+        <implicitSpringDamper> true </implicitSpringDamper>
+    </gazebo>
     </joint>
+    <!-- *************************************Transmission************************************** -->
+    <transmission name="trans_7_0">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_7_0">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor_7_0">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+<!-- *************************************Transmission************************************** -->
 
     <link name="mmf_bracket">
     <visual>
@@ -572,9 +647,24 @@
     <parent link="link_5" />
     <child link="link_6" />
     <axis xyz="0 0 1"/>
-    <limit effort="1" velocity="20" />
-    <joint_properties friction="0.0"/>
+    <limit effort="15" velocity="20" lower="0" upper="1.57" />
+    <dynamics damping="0" friction="0.5" />
+    <gazebo>
+        <implicitSpringDamper> true </implicitSpringDamper>
+    </gazebo>
     </joint>
+    <!-- *************************************Transmission************************************** -->
+    <transmission name="trans_6_0">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_6_0">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor_6_0">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+<!-- *************************************Transmission************************************** -->
+    
 
     <link name="mpf_bracket">
     <visual>
@@ -651,18 +741,47 @@
     <parent link="link_4" />
     <child link="link_5" />
     <axis xyz="0 0 1"/>
-    <limit effort="1" velocity="20" />
-    <joint_properties friction="0.0"/>
+    <limit effort="15" velocity="20" lower="0" upper="1.57" />
+    <dynamics damping="0" friction="0.5" />
+    <gazebo>
+        <implicitSpringDamper> true </implicitSpringDamper>
+    </gazebo>
     </joint>
+    <!-- *************************************Transmission************************************** -->
+    <transmission name="trans_5_0">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_5_0">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor_5_0">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+<!-- *************************************Transmission************************************** -->
 
     <joint name="joint_4_0" type="revolute">
     <origin xyz="-2.68398e-34 0.034 -0.0033" rpy="0 -0 1.5708" />
     <parent link="palm_link" />
     <child link="link_4" />
     <axis xyz="0 0 1"/>
-    <limit effort="1" velocity="20" />
-    <joint_properties friction="0.0"/>
+    <limit effort="15" velocity="20" lower="-1.57" upper="1.57" />
+    <dynamics damping="0" friction="0.5" />
+    <gazebo>
+        <implicitSpringDamper> true </implicitSpringDamper>
+    </gazebo>
     </joint>
+    <!-- *************************************Transmission************************************** -->
+    <transmission name="trans_4_0">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_4_0">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor_4_0">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+<!-- *************************************Transmission************************************** -->
+
 
     <link name="link_8">
     <visual>
@@ -808,9 +927,24 @@
     <parent link="link_10" />
     <child link="link_11" />
     <axis xyz="0 0 1"/>
-    <limit effort="1" velocity="20" />
-    <joint_properties friction="0.0"/>
+    <limit effort="15" velocity="20" lower="0" upper="1.57" />
+    <dynamics damping="0" friction="0.5" />
+    <gazebo>
+        <implicitSpringDamper> true </implicitSpringDamper>
+    </gazebo>
     </joint>
+    <!-- *************************************Transmission************************************** -->
+    <transmission name="trans_11_0">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_11_0">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor_11_0">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+<!-- *************************************Transmission************************************** -->
+
 
     <link name="pmf_bracket">
     <visual>
@@ -887,9 +1021,23 @@
     <parent link="link_9" />
     <child link="link_10" />
     <axis xyz="0 0 1"/>
-    <limit effort="1" velocity="20" />
-    <joint_properties friction="0.0"/>
+    <limit effort="15" velocity="20" lower="0" upper="1.57" />
+    <dynamics damping="0" friction="0.5" />
+    <gazebo>
+        <implicitSpringDamper> true </implicitSpringDamper>
+    </gazebo>
     </joint>
+    <!-- *************************************Transmission************************************** -->
+    <transmission name="trans_10_0">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_10_0">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor_10_0">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+<!-- *************************************Transmission************************************** -->
 
     <link name="ppb_bracket">
     <visual>
@@ -966,18 +1114,46 @@
     <parent link="link_8" />
     <child link="link_9" />
     <axis xyz="0 0 1"/>
-    <limit effort="1" velocity="20" />
-    <joint_properties friction="0.0"/>
+    <limit effort="15" velocity="20" lower="0" upper="1.57" />
+    <dynamics damping="0" friction="0.5" />
+    <gazebo>
+        <implicitSpringDamper> true </implicitSpringDamper>
+    </gazebo>
     </joint>
+    <!-- *************************************Transmission************************************** -->
+    <transmission name="trans_9_0">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_9_0">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor_9_0">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+<!-- *************************************Transmission************************************** -->
 
     <joint name="joint_8_0" type="revolute">
     <origin xyz="0.0435377 0.034 -0.00553922" rpy="0.0872665 4.16334e-17 1.5708" />
     <parent link="palm_link" />
     <child link="link_8" />
     <axis xyz="0 0 1"/>
-    <limit effort="1" velocity="20" />
-    <joint_properties friction="0.0"/>
+    <limit effort="15" velocity="20" lower="-1.57" upper="1.57" />
+    <dynamics damping="0" friction="0.5" />
+    <gazebo>
+        <implicitSpringDamper> true </implicitSpringDamper>
+    </gazebo>
     </joint>
+    <!-- *************************************Transmission************************************** -->
+    <transmission name="trans_8_0">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_8_0">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor_8_0">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+<!-- *************************************Transmission************************************** -->
 
     <link name="link_12">
     <visual>
@@ -1123,9 +1299,23 @@
     <parent link="link_14" />
     <child link="link_15" />
     <axis xyz="0 0 1"/>
-    <limit effort="1" velocity="20" />
-    <joint_properties friction="0.0"/>
+    <limit effort="15" velocity="20" lower="0" upper="1.57" />
+    <dynamics damping="0" friction="0.5" />
+    <gazebo>
+        <implicitSpringDamper> true </implicitSpringDamper>
+    </gazebo>
     </joint>
+    <!-- *************************************Transmission************************************** -->
+    <transmission name="trans_15_0">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_15_0">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor_15_0">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+<!-- *************************************Transmission************************************** -->
 
     <link name="tmb_bracket">
     <visual>
@@ -1202,33 +1392,76 @@
     <parent link="link_13" />
     <child link="link_14" />
     <axis xyz="0 0 1"/>
-    <limit effort="1" velocity="20" />
-    <joint_properties friction="0.0"/>
+    <limit effort="15" velocity="20" lower="0" upper="1.57" />
+    <dynamics damping="0" friction="0.5" />
+    <gazebo>
+        <implicitSpringDamper> true </implicitSpringDamper>
+    </gazebo>
     </joint>
+    <!-- *************************************Transmission************************************** -->
+    <transmission name="trans_14_0">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_14_0">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor_14_0">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+<!-- *************************************Transmission************************************** -->
+
 
     <joint name="joint_13_0" type="revolute">
     <origin xyz="-0.0375 -0.005 -0.0092" rpy="-1.5708 -3.01469e-15 1.5708" />
     <parent link="link_12" />
     <child link="link_13" />
     <axis xyz="0 0 1"/>
-    <limit effort="1" velocity="20" />
-    <joint_properties friction="0.0"/>
+    <limit effort="15" velocity="20" lower="0" upper="2" />
+    <dynamics damping="0" friction="0.5" />
+    <gazebo>
+        <implicitSpringDamper> true </implicitSpringDamper>
+    </gazebo>
     </joint>
+    <!-- *************************************Transmission************************************** -->
+    <transmission name="trans_13_0">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_13_0">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor_13_0">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+<!-- *************************************Transmission************************************** -->
 
     <joint name="joint_12_0" type="revolute">
     <origin xyz="-0.0161208 0.0158 -0.0848515" rpy="-3.14159 -0.0872665 1.84398e-16" />
     <parent link="palm_link" />
     <child link="link_12" />
     <axis xyz="0 0 1"/>
-    <limit effort="1" velocity="20" />
-    <joint_properties friction="0.0"/>
+    <limit effort="15" velocity="20" lower="0" upper="1.57" />
+    <dynamics damping="0" friction="0.5" />
+    <gazebo>
+        <implicitSpringDamper> true </implicitSpringDamper>
+    </gazebo>
     </joint>
+    <!-- *************************************Transmission************************************** -->
+    <transmission name="trans_12_0">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_12_0">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="motor_12_0">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+<!-- *************************************Transmission************************************** -->
 
     <link name="boh_bracket">
     <visual>
     <origin xyz="0.02 0.007 0.0435" rpy="-1.5708 -1.5708 0" />
     <geometry>
-    <mesh filename="package://allegro_hand_description/meshes/part_4.stl"/>
+    <mesh filename="package://allegro_hand_description/meshes/part_4.dae"/>
     </geometry>
     <material name="part_4_material">
     <color rgba="0.980392 0.713725 0.00392157 1.0"/>
@@ -1237,7 +1470,7 @@
     <collision>
     <origin xyz="0.02 0.007 0.0435" rpy="-1.5708 -1.5708 0" />
     <geometry>
-    <mesh filename="package://allegro_hand_description/meshes/part_4.stl"/>
+    <mesh filename="package://allegro_hand_description/meshes/part_4.dae"/>
     </geometry>
     <material name="part_4_material">
     <color rgba="0.980392 0.713725 0.00392157 1.0"/>
@@ -1263,7 +1496,7 @@
     <visual>
     <origin xyz="-0.000254584 -0.095 0.0113" rpy="1.5708 1.5708 0" />
     <geometry>
-    <mesh filename="package://allegro_hand_description/meshes/palm_bracket.stl"/>
+    <mesh filename="package://allegro_hand_description/meshes/palm_bracket.dae"/>
     </geometry>
     <material name="palm_bracket_material">
     <color rgba="0.231373 0.380392 0.705882 1.0"/>
@@ -1272,7 +1505,7 @@
     <collision>
     <origin xyz="-0.000254584 -0.095 0.0113" rpy="1.5708 1.5708 0" />
     <geometry>
-    <mesh filename="package://allegro_hand_description/meshes/palm_bracket.stl"/>
+    <mesh filename="package://allegro_hand_description/meshes/palm_bracket.dae"/>
     </geometry>
     <material name="palm_bracket_material">
     <color rgba="0.231373 0.380392 0.705882 1.0"/>
@@ -1293,7 +1526,7 @@
     <limit effort="1" velocity="20" />
     <joint_properties friction="0.0"/>
     </joint>
-
+    
 </robot>
 
 
