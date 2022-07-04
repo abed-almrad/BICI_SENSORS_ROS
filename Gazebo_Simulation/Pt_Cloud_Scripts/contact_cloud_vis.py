@@ -15,7 +15,7 @@ pcd_filtered = o3d.geometry.PointCloud()
 pcd_filtered.points = o3d.utility.Vector3dVector(xyz_filtered)
 
 #Point cloud visualization
-o3d.visualization.draw_geometries([pcd,pcd_filtered])
+o3d.visualization.draw_geometries([pcd])
 
 #Creating a point cloud using the stored 3D points
 #o3d.io.write_point_cloud("./data.ply", pcd)

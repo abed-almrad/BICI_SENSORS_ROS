@@ -28,9 +28,11 @@
 #include <tf2_ros/transform_listener.h>
 #include <geometry_msgs/TransformStamped.h>
 #include <geometry_msgs/Vector3Stamped.h>
+#include <eigen3/Eigen/Dense>
 
 #define contact_pts_nb 1300
-#define dist_threshold 0.00212 // threshold distance between the contact point and the taxel in m
+#define dist_threshold 0.212
+//#define dist_threshold 0.00212 // threshold distance between the contact point and the taxel in m
 typedef const boost::shared_ptr< const gazebo::msgs::Contacts> ContactPtr;
 tf2_ros::Buffer tfBuffer;
 tf2_ros::TransformListener *tfListener;
@@ -48,13 +50,16 @@ namespace gazebo
     //Method for extracting the homogeneous matrix from the tf2 transformation
     public: virtual std::vector<std::vector<float>> homo_matrix(geometry_msgs::TransformStamped transformStamped);
     //Method for converting a 3D vector into its homogeneous representation
-    public: virtual std::vector<float> homo_v(geometry_msgs::Vector3Stamped v3Stamped);
+    public: virtual std::vector<float> homo_v(geometry_msgs::Vector3Stamped v3stamped);
     //Method for matrix multiplication
-    public: virtual std::vector<float> homotrans(geometry_msgs::TransformStamped transformStamped,geometry_msgs::Vector3Stamped v3Stamped);
+    public: virtual std::vector<float> homotrans(geometry_msgs::TransformStamped transformStamped,geometry_msgs::Vector3Stamped v3stamped);
     //Method to get the name of the sensor from the correspondent collission name
     public: virtual std::string getName(std::string str);
     //Method to calculate the Eucledian distance between two points in the 3D space
     public: virtual float dist(std::vector<float> P1, std::vector<float> P2);
+    //Method to adjust the positions of the raw contact points
+    public: virtual std::vector<float> rawhomotrans(geometry_msgs::TransformStamped transformStamped_1,
+                                                           geometry_msgs::TransformStamped transformStamped_2,geometry_msgs::Vector3Stamped contact_pt);
 
     /// \brief Load the sensor plugin.
     /// \param[in] _sensor Pointer to the sensor that loaded this plugin.
@@ -164,6 +169,18 @@ namespace gazebo
     private: std::vector<std::vector<float>> trans_pft_taxels;
     // A variable to store the tf transformation messages for each bracket on the allegro hand
     private: geometry_msgs::TransformStamped transformStamped;
+    // A map to store the home position transformation of the allegro hand brackets at the start of the simulation
+    private: std::map <std::string, geometry_msgs::TransformStamped> home_transforms;
+    //Boolean value to extract the home position transformations just at the start of the simulation
+    private: bool start = true;
+    private: int sensor_count;
+    // Variables to monitor the duration needed to extract the transformations of the home position at the start of the simulation
+    private: double begin, end;
+    // PlaceHolders
+    private: geometry_msgs::Vector3Stamped v3s;
+    private: Eigen::Matrix4d input_matrix_1, output_matrix_1, input_matrix_2;
+
+
   };
 
 }

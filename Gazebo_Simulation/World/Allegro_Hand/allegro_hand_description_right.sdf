@@ -36,7 +36,7 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
@@ -55,7 +55,7 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
@@ -66,11 +66,11 @@
           <contact>
             <collision>boh_bracket</collision>
           </contact>
-        <update_rate> 100 </update_rate>
+        <update_rate> 5 </update_rate>
         <visualize> true </visualize>
         </sensor>    
 <!--******************************************* -->
-        <collision name='palm_link_fixed_joint_lump__palm_bracket_collision_2'>
+        <collision name='palm_bracket'>
           <pose>-0 0.034 -0.002 4e-06 -4e-06 1.57079</pose>
           <geometry>
             <mesh>
@@ -84,12 +84,21 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
           <max_contacts>100</max_contacts>
         </collision>
+<!--******************************************* -->
+        <sensor name='palm' type='contact'>
+          <contact>
+            <collision>palm_bracket</collision>
+          </contact>
+        <update_rate> 5 </update_rate>
+        <visualize> true </visualize>
+        </sensor>    
+<!--******************************************* -->
         <visual name='palm_link_visual'>
           <pose>0 0.034 -0.002 3.14159 -0 0</pose>
           <geometry>
@@ -168,7 +177,7 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
@@ -233,7 +242,7 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
@@ -252,18 +261,18 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
           <max_contacts>100</max_contacts>
         </collision>
-        <collision name='link_1_fixed_joint_lump__ipf_bracket_collision_2'>
+        <collision name='ipf_bracket'>
           <pose>0 0 0.0123 -0 0 -0</pose>
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/proximal_front.stl</uri>
+              <uri>model://allegro_hand_description/meshes/proximal_front.dae</uri>
             </mesh>
           </geometry>
           <surface>
@@ -272,12 +281,21 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
           <max_contacts>100</max_contacts>
         </collision>
+<!--******************************************* -->
+        <sensor name='ipf' type='contact'>
+          <contact>
+            <collision>ipf_bracket</collision>
+          </contact>
+        <update_rate> 5 </update_rate>
+        <visualize> true </visualize>
+        </sensor>    
+<!--******************************************* -->        
         <visual name='link_1_visual'>
           <pose>-0.018269 0 -0.031781 0 1.48353 -3.14159</pose>
           <geometry>
@@ -301,7 +319,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/proximal_front.stl</uri>
+              <uri>model://allegro_hand_description/meshes/proximal_front.dae</uri>
             </mesh>
           </geometry>
         </visual>
@@ -356,7 +374,7 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
@@ -375,18 +393,18 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
           <max_contacts>100</max_contacts>
         </collision>
-        <collision name='link_2_fixed_joint_lump__imf_bracket_collision_2'>
+        <collision name='imf_bracket'>
           <pose>0.054 0 0.0119 0 0 -3.14159</pose>
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/medial_front.stl</uri>
+              <uri>model://allegro_hand_description/meshes/medial_front.dae</uri>
             </mesh>
           </geometry>
           <surface>
@@ -395,12 +413,21 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
           <max_contacts>100</max_contacts>
         </collision>
+<!--******************************************* -->
+        <sensor name='imf' type='contact'>
+          <contact>
+            <collision>imf_bracket</collision>
+          </contact>
+        <update_rate> 5 </update_rate>
+        <visualize> true </visualize>
+        </sensor>    
+<!--******************************************* -->
         <visual name='link_2_visual'>
           <pose>0.072269 -0 -0.031781 -0 1.48353 0</pose>
           <geometry>
@@ -424,7 +451,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/medial_front.stl</uri>
+              <uri>model://allegro_hand_description/meshes/medial_front.dae</uri>
             </mesh>
           </geometry>
         </visual>
@@ -479,12 +506,12 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
         </collision>
-        <collision name='link_3_fixed_joint_lump__ift_bracket_collision_1'>
+        <collision name='ift_bracket'>
           <pose>0.1004 0 0.0119 5e-06 -0 -3.14159</pose>
           <geometry>
             <mesh>
@@ -498,12 +525,21 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
           <max_contacts>100</max_contacts>
         </collision>
+<!--******************************************* -->
+        <sensor name='ift' type='contact'>
+          <contact>
+            <collision>ift_bracket</collision>
+          </contact>
+        <update_rate> 5 </update_rate>
+        <visualize> true </visualize>
+        </sensor>    
+<!--******************************************* -->
         <visual name='link_3_visual'>
           <pose>0.1253 -0 0.0118 -3.14159 -0 -1.5708</pose>
           <geometry>
@@ -573,7 +609,7 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
@@ -638,7 +674,7 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
@@ -703,7 +739,7 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
@@ -722,7 +758,7 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
@@ -742,7 +778,7 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
@@ -826,12 +862,12 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
         </collision>
-        <collision name='link_15_fixed_joint_lump__tft_bracket_collision_1'>
+        <collision name='tft_bracket'>
           <pose>0.0848 -0.0003 0.0118 -0 0 -3.14159</pose>
           <geometry>
             <mesh>
@@ -845,12 +881,21 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
           <max_contacts>100</max_contacts>
         </collision>
+<!--******************************************* -->
+        <sensor name='tft' type='contact'>
+          <contact>
+            <collision>tft_bracket</collision>
+          </contact>
+        <update_rate> 5 </update_rate>
+        <visualize> true </visualize>
+        </sensor>    
+<!--******************************************* -->
         <visual name='link_15_visual'>
           <pose>0.13018 -0.071631 0.0252 -1.5708 -0 0.087267</pose>
           <geometry>
@@ -920,7 +965,7 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
@@ -985,7 +1030,7 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
@@ -1004,18 +1049,18 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
           <max_contacts>100</max_contacts>
         </collision>
-        <collision name='link_5_fixed_joint_lump__mpf_bracket_collision_2'>
+        <collision name='mpf_bracket'>
           <pose>0 -0 0.0123 -0 -0 3.14159</pose>
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/proximal_front.stl</uri>
+              <uri>model://allegro_hand_description/meshes/proximal_front.dae</uri>
             </mesh>
           </geometry>
           <surface>
@@ -1024,12 +1069,21 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
           <max_contacts>100</max_contacts>
         </collision>
+<!--******************************************* -->
+        <sensor name='mpf' type='contact'>
+          <contact>
+            <collision>mpf_bracket</collision>
+          </contact>
+        <update_rate> 5 </update_rate>
+        <visualize> true </visualize>
+        </sensor>    
+<!--******************************************* -->  
         <visual name='link_5_visual'>
           <pose>0.018269 0 -0.031781 -0 1.48353 0</pose>
           <geometry>
@@ -1053,7 +1107,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/proximal_front.stl</uri>
+              <uri>model://allegro_hand_description/meshes/proximal_front.dae</uri>
             </mesh>
           </geometry>
         </visual>
@@ -1108,7 +1162,7 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
@@ -1127,18 +1181,18 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
           <max_contacts>100</max_contacts>
         </collision>
-        <collision name='link_6_fixed_joint_lump__mmf_bracket_collision_2'>
+        <collision name='mmf_bracket'>
           <pose>0.054 -0 0.0119 -0 0 3.14159</pose>
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/medial_front.stl</uri>
+              <uri>model://allegro_hand_description/meshes/medial_front.dae</uri>
             </mesh>
           </geometry>
           <surface>
@@ -1147,12 +1201,21 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
           <max_contacts>100</max_contacts>
         </collision>
+<!--******************************************* -->
+        <sensor name='mmf' type='contact'>
+          <contact>
+            <collision>mmf_bracket</collision>
+          </contact>
+        <update_rate> 5 </update_rate>
+        <visualize> true </visualize>
+        </sensor>    
+<!--******************************************* -->
         <visual name='link_6_visual'>
           <pose>0.072269 -0 -0.031781 0 1.48353 -0</pose>
           <geometry>
@@ -1176,7 +1239,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/medial_front.stl</uri>
+              <uri>model://allegro_hand_description/meshes/medial_front.dae</uri>
             </mesh>
           </geometry>
         </visual>
@@ -1231,12 +1294,12 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
         </collision>
-        <collision name='link_7_fixed_joint_lump__mft_bracket_collision_1'>
+        <collision name='mft_bracket'>
           <pose>0.1004 0 0.0119 5e-06 -0 -3.14159</pose>
           <geometry>
             <mesh>
@@ -1250,12 +1313,21 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
           <max_contacts>100</max_contacts>
         </collision>
+<!--******************************************* -->
+        <sensor name='mft' type='contact'>
+          <contact>
+            <collision>mft_bracket</collision>
+          </contact>
+        <update_rate> 5 </update_rate>
+        <visualize> true </visualize>
+        </sensor>    
+<!--******************************************* -->
         <visual name='link_7_visual'>
           <pose>0.1253 -0 0.0118 3.14159 -0 -1.5708</pose>
           <geometry>
@@ -1301,7 +1373,7 @@
         <pose relative_to='joint_8_0'>0 0 0 0 -0 0</pose>
         <inertial>
           <pose>-0.000413 0.000666 0.009606 0 -0 0</pose>
-          <mass>0.00001</mass>
+          <mass>0.0136672</mass>
           <inertia>
             <ixx>2.13441e-06</ixx>
             <ixy>5.86704e-10</ixy>
@@ -1325,7 +1397,7 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
@@ -1368,7 +1440,7 @@
         <pose relative_to='joint_9_0'>0 0 0 0 -0 0</pose>
         <inertial>
           <pose>-0.027033 0.000224 0.012145 0 -0 0</pose>
-          <mass>0.0000001</mass>
+          <mass>0.0541465</mass>
           <inertia>
             <ixx>8.12772e-06</ixx>
             <ixy>-2.30028e-08</ixy>
@@ -1392,7 +1464,7 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
@@ -1411,18 +1483,18 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
           <max_contacts>100</max_contacts>
         </collision>
-        <collision name='link_9_fixed_joint_lump__ppf_bracket_collision_2'>
+        <collision name='ppf_bracket'>
           <pose>0 -0 0.0123 -0 0 3.14159</pose>
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/proximal_front.stl</uri>
+              <uri>model://allegro_hand_description/meshes/proximal_front.dae</uri>
             </mesh>
           </geometry>
           <surface>
@@ -1431,12 +1503,21 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
           <max_contacts>100</max_contacts>
         </collision>
+<!--******************************************* -->
+        <sensor name='ppf' type='contact'>
+          <contact>
+            <collision>ppf_bracket</collision>
+          </contact>
+        <update_rate> 5 </update_rate>
+        <visualize> true </visualize>
+        </sensor>    
+<!--******************************************* -->
         <visual name='link_9_visual'>
           <pose>0.018269 -0 -0.031781 -0 1.48353 0</pose>
           <geometry>
@@ -1460,7 +1541,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/proximal_front.stl</uri>
+              <uri>model://allegro_hand_description/meshes/proximal_front.dae</uri>
             </mesh>
           </geometry>
         </visual>
@@ -1491,7 +1572,7 @@
         <pose relative_to='joint_10_0'>0 0 0 0 -0 0</pose>
         <inertial>
           <pose>-0.028719 0.000277 0.012147 0 -0 0</pose>
-          <mass>0.000001</mass>
+          <mass>0.0418474</mass>
           <inertia>
             <ixx>6.393e-06</ixx>
             <ixy>7.11757e-08</ixy>
@@ -1515,7 +1596,7 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
@@ -1534,18 +1615,18 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
           <max_contacts>100</max_contacts>
         </collision>
-        <collision name='link_10_fixed_joint_lump__pmf_bracket_collision_2'>
+        <collision name='pmf_bracket'>
           <pose>0.054 -0 0.0119 -0 0 3.14159</pose>
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/medial_front.stl</uri>
+              <uri>model://allegro_hand_description/meshes/medial_front.dae</uri>
             </mesh>
           </geometry>
           <surface>
@@ -1554,12 +1635,21 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
           <max_contacts>100</max_contacts>
         </collision>
+<!--******************************************* -->
+        <sensor name='pmf' type='contact'>
+          <contact>
+            <collision>pmf_bracket</collision>
+          </contact>
+        <update_rate> 5 </update_rate>
+        <visualize> true </visualize>
+        </sensor>    
+<!--******************************************* -->
         <visual name='link_10_visual'>
           <pose>0.072269 -0 -0.031781 0 1.48353 -0</pose>
           <geometry>
@@ -1583,7 +1673,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/medial_front.stl</uri>
+              <uri>model://allegro_hand_description/meshes/medial_front.dae</uri>
             </mesh>
           </geometry>
         </visual>
@@ -1614,7 +1704,7 @@
         <pose relative_to='joint_11_0'>0 0 0 0 -0 0</pose>
         <inertial>
           <pose>-0.023107 0.002061 0.012032 0 -0 0</pose>
-          <mass>0.0000001</mass>
+          <mass>0.0243483</mass>
           <inertia>
             <ixx>4.44879e-06</ixx>
             <ixy>6.72221e-07</ixy>
@@ -1638,12 +1728,12 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
         </collision>
-        <collision name='link_11_fixed_joint_lump__pft_bracket_collision_1'>
+        <collision name='pft_bracket'>
           <pose>0.1004 0 0.0119 0 -0 -3.14159</pose>
           <geometry>
             <mesh>
@@ -1657,12 +1747,21 @@
                 <kp>1e15</kp>
                 <kd>1e13</kd>
                 <max_vel>0.01</max_vel>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00</min_depth>
               </ode>
             </contact>
           </surface>
           <max_contacts>100</max_contacts>
         </collision>
+<!--******************************************* -->
+        <sensor name='pft' type='contact'>
+          <contact>
+            <collision>pft_bracket</collision>
+          </contact>
+        <update_rate> 5 </update_rate>
+        <visualize> true </visualize>
+        </sensor>    
+<!--******************************************* -->
         <visual name='link_11_visual'>
           <pose>0.1253 -0 0.0118 3.14159 -0 -1.5708</pose>
           <geometry>
