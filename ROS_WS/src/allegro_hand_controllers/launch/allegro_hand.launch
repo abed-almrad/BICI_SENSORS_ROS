@@ -155,17 +155,21 @@
   <!-- Gazebo support is very experimental at the moment. -->
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+<!--
   <include file="$(find gazebo_ros)/launch/empty_world.launch"
            if="$(arg GAZEBO)">
     <arg name="world_name" value="$(find allegro_hand_description)/worlds/allegro.world"/>
     <arg name="debug" value="false" />
     <arg name="paused" value="true"/>
   </include>
+-->
 
   <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+<!--
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
 	args="-urdf -model rrbot -param robot_description"
         if="$(arg GAZEBO)" /> 
+-->
   <!-- Comment: Node that monitors the taxels positions in space and saves them upon contact -->
   
   <!--
@@ -176,10 +180,12 @@
   -->
   
    <!-- Comment: Node that emulates the taxels -->
+<!--
   <node name="sensor_emulator_node"
         pkg="allegro_hand_taxels"
         type="sensor_emulator">
   </node> 
+-->
 
    <!-- Comment: Node that reads the taxels data -->
    <!--

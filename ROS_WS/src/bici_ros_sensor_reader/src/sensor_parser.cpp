@@ -58,7 +58,7 @@ int main (int argc, char** argv)
 		{
 			bool msg_found = false;
 			int start_index = 0;
-			for (;start_index < unread_bytes && !msg_found; start_index++)
+			for (start_index; start_index < unread_bytes && !msg_found; start_index++)
 			{
 				if (cb[start_index] == 1) //found start
 				{
@@ -175,6 +175,7 @@ void parse_message(boost::circular_buffer<uint8_t> &cb, uint8_t start_index, uin
 #endif
 
 			// push byte into msg.data
+/*
 			if((sensor_num ==23 || sensor_num ==28 || sensor_num ==11 || sensor_num ==16) && (i==message_length-2)) //if we are reafing the Z acceleration
 			{
 				msg.data.push_back(data_entry/256.0);
@@ -187,6 +188,7 @@ void parse_message(boost::circular_buffer<uint8_t> &cb, uint8_t start_index, uin
 				continue;
 
 			}
+*/
 			msg.data.push_back(data_entry);
 		}
 	}

@@ -15,7 +15,7 @@ pcd_filtered = o3d.geometry.PointCloud()
 pcd_filtered.points = o3d.utility.Vector3dVector(xyz_filtered)
 
 #Point cloud visualization
-o3d.visualization.draw_geometries([pcd])
+#o3d.visualization.draw_geometries([pcd])
 
 #Creating a point cloud using the stored 3D points
 #o3d.io.write_point_cloud("./data.ply", pcd)
@@ -24,8 +24,8 @@ o3d.visualization.draw_geometries([pcd])
 #o3d.visualization.draw_geometries([pcd])
 
 # Visualization after voxels downsampling of the point cloud
-#downpcd = pcd.voxel_down_sample(voxel_size=10)
-#o3d.visualization.draw_geometries([downpcd])
+downpcd = pcd.voxel_down_sample(voxel_size=0.05)
+o3d.visualization.draw_geometries([downpcd])
 
 #Visualization after the voxelization of the point cloud
 #voxel_grid = o3d.geometry.VoxelGrid.create_from_point_cloud(downpcd, voxel_size=5)

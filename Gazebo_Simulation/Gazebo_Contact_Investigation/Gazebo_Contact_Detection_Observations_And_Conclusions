@@ -1,0 +1,12 @@
+1- After specifying the "max_contacts" numbers for two entities, when they enter in contact with each other the minimum number between these two will be applied for the contact in between the entities. This number will override the "max_contacts" number specified in physics.
+
+2- It seems that putting more force into the contact between two entities (I tried that by increasing the mass of an object on top of another one) along with a finer mesh and a higher "max_contacts" number, all of these factors increase the number of reported contact points BUT only to a certain extent (i.e. if the number of vertices on a face that is in contact with another face is very high, not all the mesh's vertices get reported as contact points and I noticed that the border vertices are prioritized)
+
+3- Finer mesh improves the stability of the face-to-face contact
+
+5- The reported contact points for face-to-face contact are located at the meshes verticesm but no matter what i do the face-to-face contact is reported as a contour of 'included" face and no or little/abruptly points inside that face are reported as a contact. So a finer mesh is giving a finer contour
+
+New notes:
+
+6- Parallel face-to-face contact is accurately reflected in gazebo since four apart extruded corners on the plam fpcb were detected at the same time upon contact with the cubic object. The problem is that when the number of these extrusions on the palm fpcb increases, gazebo cannot detect all of them at the SAME TIME.
+

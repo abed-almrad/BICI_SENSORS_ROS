@@ -1,3 +1,13 @@
+/*****************************************************
+ * ************************************************
+ * *********************************
+ * 
+//P.S. Run this code from the ROS_WS directory only
+
+******************************************************
+**********************************************************
+*********************************************************
+*/
 #include <ros/ros.h>
 #include <visualization_msgs/MarkerArray.h>
 #include <visualization_msgs/Marker.h>
@@ -29,16 +39,23 @@ using namespace std;
 #define TMB_SIZE 47
 #define TMF_SIZE 31
 
+
 class Tactile_Sensor {
   public:
     uint8_t sensor_num;        // ID of the sensor
     int size;                  // The number of taxels
     string sensor_name;          // The link on which the sensor is installed
-    uint16_t threshold = 1500;  // Capacitance raw count threshold to detect contact.
+    uint16_t threshold = 200;  // Capacitance raw count threshold to detect contact.
                                // This might be later on initialized individually for each
                                //sensor or even taxel, after tuning
     uint32_t timestamp = 0; // This can be assigned to any random number
+    uint32_t prev_timestamp = 0; // This can be assigned to any random number
     std::vector<float> data;
+    std::vector<float> prev_data;
+    std::vector<float> diff_data;
+    std::vector<float> diff_data_rise;
+    //Taxels activation boolean array
+    std::vector<bool> taxels_activations_bools;
     std::vector<geometry_msgs::TransformStamped> transformStamped_taxels;
     std::vector<std::vector<float>> taxels_coordinates;
     Tactile_Sensor(uint8_t sensor_num, int size, string sensor_name){
@@ -47,9 +64,12 @@ class Tactile_Sensor {
         this->size = size;
         this->sensor_name = sensor_name;
         this->data.resize(size);
+        this->prev_data.resize(size);
+        this->diff_data.resize(size);
+        this->diff_data_rise.resize(size);
         this->transformStamped_taxels.resize(size);
         this->taxels_coordinates.resize(size, std::vector<float>(3, 0));//Vector monitoring the sensor's taxels positions
-
+        this->taxels_activations_bools.resize(size,false);
     }
 };
 
@@ -91,20 +111,65 @@ map <string, visualization_msgs::Marker> markers_map; // A dictionary for the ma
 visualization_msgs::MarkerArray markers_array; //Array of markers (e.g. a marker is created for each taxel)
 //One common callback function
 void callback(const bici_ros_sensor_reader::TactileData msg){
+    Sensors_Array[msg.sensor_num-8].prev_timestamp = Sensors_Array[msg.sensor_num-8].timestamp;
+    Sensors_Array[msg.sensor_num-8].prev_data = Sensors_Array[msg.sensor_num-8].data;
     Sensors_Array[msg.sensor_num-8].timestamp = msg.timestamp;
     Sensors_Array[msg.sensor_num-8].data = msg.data;
+    for (size_t i = 0; i < Sensors_Array[msg.sensor_num-8].size; i++)
+    {
+        Sensors_Array[msg.sensor_num-8].diff_data[i] = Sensors_Array[msg.sensor_num-8].data[i]-Sensors_Array[msg.sensor_num-8].prev_data[i];
+
+        if (Sensors_Array[msg.sensor_num-8].prev_data[i] == 0)
+        {
+           Sensors_Array[msg.sensor_num-8].diff_data[i] = 0; 
+        }
+/*
+        else if (Sensors_Array[msg.sensor_num-8].diff_data[i] == Sensors_Array[msg.sensor_num-8].prev_data[i])
+        {
+            Sensors_Array[msg.sensor_num-8].diff_data[i] = 0; 
+        }
+*/        
+/*
+        std::cout << "Previous Data: " << Sensors_Array[msg.sensor_num-8].prev_data[i] << std::endl;
+        std::cout << "Current Data: " << Sensors_Array[msg.sensor_num-8].data[i] << std::endl;
+        std::cout << "Diff Data: " << Sensors_Array[msg.sensor_num-8].diff_data[i] << std::endl;
+*/
+    }
+    
+/*
+    std::cout<<"Differential Data for sensor: " << msg.sensor_num-8 << std::endl;
+    for (size_t i = 0; i < Sensors_Array[msg.sensor_num-8].size; i++)
+    {
+         std::cout << Sensors_Array[msg.sensor_num-8].diff_data[i] <<' '<<',' << ' ';
+    }  
+*/
     //cout<<act_cmd<<endl;
     if (act_cmd == "true") // Activation of a save command through a ros node
     {
         for(int j=0;j<NUM_SENSORS;j++){
             //cout << Sensors_Array[j].taxels_coordinates.size() << endl;
             //cout << Sensors_Array[j].taxels_coordinates[0].size() << endl;
-            for(int taxel=0;taxel<Sensors_Array[j].taxels_coordinates.size();taxel++){
+/*
+***********************************************************
+**********************************************************
+*********************************************************
+The following line of code (i.e. if statement) is temporary because currently we are only interested in the face of the hand
+********************************************************
+*******************************************************
+******************************************************
+*/
+        if (j == 0 || j == 3 || j == 4 || j == 5 || j == 13 || j == 15 || j == 16 || j == 17 || j == 20 || j == 21)
+        {
+            for(int taxel=0;taxel<Sensors_Array[j].taxels_coordinates.size();taxel++)
+            {
                 points_storage.push_back(Sensors_Array[j].taxels_coordinates[taxel]);
                 //cout<< "X_Storage"<< points_storage[taxel][0] << endl;
                 //cout<< "Y_Storage"<< points_storage[taxel][1] << endl;
                 //cout<< "Z_Storage"<< points_storage[taxel][2] << endl;
             }
+        }
+        
+
         }
         //Writing data to a csv file
         for (size_t i = 0; i < points_storage.size(); i++)
@@ -126,7 +191,22 @@ void callback(const bici_ros_sensor_reader::TactileData msg){
     }
      
     for(int taxel=0;taxel<Sensors_Array[msg.sensor_num-8].size;taxel++){
-       if (Sensors_Array[msg.sensor_num-8].data[taxel]<= Sensors_Array[msg.sensor_num-8].threshold)
+//       std::cout << "Diff data before entering the if: " << Sensors_Array[msg.sensor_num-8].diff_data[taxel] << std::endl;
+       if (Sensors_Array[msg.sensor_num-8].diff_data[taxel]>= Sensors_Array[msg.sensor_num-8].threshold)
+        {
+           Sensors_Array[msg.sensor_num-8].taxels_activations_bools[taxel] = true;
+           Sensors_Array[msg.sensor_num-8].diff_data_rise[taxel] = Sensors_Array[msg.sensor_num-8].diff_data[taxel];
+           std::cout << "Taxel activated with differential rise of: " << Sensors_Array[msg.sensor_num-8].diff_data_rise[taxel] << std::endl;
+        }
+
+       if ( (Sensors_Array[msg.sensor_num-8].diff_data[taxel] < -Sensors_Array[msg.sensor_num-8].diff_data_rise[taxel]*0.7) && Sensors_Array[msg.sensor_num-8].taxels_activations_bools[taxel])
+        {
+           Sensors_Array[msg.sensor_num-8].taxels_activations_bools[taxel] = false; 
+           std::cout << "Taxel deactivated with a differential value of: " << Sensors_Array[msg.sensor_num-8].diff_data[taxel] << std::endl;
+        } 
+//        std::cout<< "Taxel Activation Boolean" << Sensors_Array[msg.sensor_num-8].taxels_activations_bools[taxel] << std::endl;
+        
+        if(Sensors_Array[msg.sensor_num-8].taxels_activations_bools[taxel])       
        {
            //cout << "marker color should change" << endl;
             visualization_msgs::Marker marker;
@@ -182,7 +262,7 @@ void callback(const bici_ros_sensor_reader::TactileData msg){
              
         }
     
-       if ((Sensors_Array[msg.sensor_num-8].data[taxel]<= Sensors_Array[msg.sensor_num-8].threshold) && tfBuffer.canTransform("palm_link", Sensors_Array[msg.sensor_num-8].sensor_name+"_sub_taxel_"+std::to_string(taxel), ros::Time(0))) 
+       if (Sensors_Array[msg.sensor_num-8].taxels_activations_bools[taxel] && tfBuffer.canTransform("palm_link", Sensors_Array[msg.sensor_num-8].sensor_name+"_sub_taxel_"+std::to_string(taxel), ros::Time(0))) 
        {
            //cout<< tfBuffer.canTransform(Sensors_Array[msg.sensor_num-8].sensor_name+"_taxel_"+std::to_string(taxel),"palm_link", ros::Time(0))<<endl;
            try{
@@ -217,9 +297,10 @@ int main(int argc, char** argv){
     tfListener = new tf2_ros::TransformListener(tfBuffer);
     std::array<ros::Subscriber, NUM_SENSORS> subscribers;
     string full_path = filesystem::current_path();
+    std::cout << "The full path is: " << full_path << std::endl;
     size_t pos = full_path.find("ROS_WS");
     string path = full_path.substr(0,pos+6)+"/Pt_Cloud_Scripts/points_coordinates.csv";
-    //cout<<"THE PATH IS: " + path<< endl;
+    std::cout<<"THE PATH IS: " + path<< endl;
     myfile.open(path.c_str());
     ros::Subscriber saving_subscriber; //A subscriber to the saving_activation command
     for (size_t i=0; i < subscribers.size(); i++)

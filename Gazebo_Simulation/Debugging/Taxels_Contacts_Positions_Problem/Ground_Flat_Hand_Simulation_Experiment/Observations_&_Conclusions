@@ -1,0 +1,11 @@
+Experimental test setup: The contacts were saved when the hand was laying flat on the ground
+
+Observations:
+
+1- The contact points reported by Gazebo where all at the level of the simulation environment's ground (i.e. Z coordinate = 0)
+2- The nearby taxels locations saved at the same moment when the previously mentioned contact points were reported by Gazebo, were below the ground level (i.e. Z coordinate < 0)
+3- The depth of penetration was reported to be zero for all the sensors that were studied
+
+Conclusion:
+
+The contact points reported by Gazebo are accurate and the source of the problem lies in the taxels positions. 

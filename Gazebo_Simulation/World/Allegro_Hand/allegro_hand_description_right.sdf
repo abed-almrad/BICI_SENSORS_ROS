@@ -1,139 +1,197 @@
-<sdf version='1.7'>  
+<sdf version='1.7'>
   <model name='allegro_hand_right'>
-<!--*************************Experimental***************************************-->
-      
-<!--********************Experimental********************************************-->
-      <joint name='world_to_palm_link_joint' type='fixed'>
-        <pose relative_to='__model__'>0 0 0.095 0 -0 0</pose>
-        <parent>world</parent>
-        <child>palm_link</child>
-      </joint>
-      <link name='palm_link'>
-        <pose relative_to='world_to_palm_link_joint'>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0.000469 0.016221 -0.04159 0 -0 0</pose>
-          <mass>0.479644</mass>
-          <inertia>
-            <ixx>0.000656864</ixx>
-            <ixy>-2.58397e-05</ixy>
-            <ixz>1.7119e-05</ixz>
-            <iyy>0.000842575</iyy>
-            <iyz>7.35565e-06</iyz>
-            <izz>0.000767792</izz>
-          </inertia>
-        </inertial>
-        <collision name='palm_link_collision'>
-          <pose>0 0.034 -0.002 3.14159 -0 0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/g_r2.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-        <collision name='boh_bracket'>
-          <pose>0 0.0341 -0.002 -4e-06 4e-06 1.57079</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/part_4.dae</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-          <max_contacts>100</max_contacts>
-        </collision>
+
+    <joint name='world_to_palm_link_joint' type='fixed'>
+      <pose relative_to='__model__'>0 0 0.097 0 -0 0</pose>
+      <parent>world</parent>
+      <child>palm_link</child>
+    </joint>
+    
+    <link name='palm_link'>
+      <pose relative_to='world_to_palm_link_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.000475 0.015729 -0.041614 0 -0 0</pose>
+        <mass>0.488477</mass>
+        <inertia>
+          <ixx>0.000676398</ixx>
+          <ixy>-2.6391e-05</ixy>
+          <ixz>1.69801e-05</ixz>
+          <iyy>0.000848277</iyy>
+          <iyz>6.35967e-06</iyz>
+          <izz>0.000792771</izz>
+        </inertia>
+      </inertial>
+      <collision name='palm_link_collision'>
+        <pose>0 0.034 -0.002 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/g_r2.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='palm_link_fixed_joint_lump__boh_bracket_collision_1'>
+        <pose>0 0.0341 -0.002 -4e-06 4e-06 1.57079</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/part_4.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='boh_fpcb'>
+        <pose>0 0.0341 -0.002 -4e-06 4e-06 1.57079</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/boh_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
 <!--******************************************* -->
         <sensor name='boh' type='contact'>
           <contact>
-            <collision>boh_bracket</collision>
+            <collision>boh_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
         </sensor>    
-<!--******************************************* -->
-        <collision name='palm_bracket'>
-          <pose>-0 0.034 -0.002 4e-06 -4e-06 1.57079</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/palm_bracket.dae</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-          <max_contacts>100</max_contacts>
-        </collision>
+<!--******************************************* --> 
+      <collision name='palm_link_fixed_joint_lump__palm_bracket_collision_3'>
+        <pose>-0 0.034 -0.002 4e-06 -4e-06 1.57079</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/palm_bracket.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='palm_fpcb'>
+        <pose>-0 0.034 -0.002 4e-06 -4e-06 1.57079</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/palm_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
 <!--******************************************* -->
         <sensor name='palm' type='contact'>
           <contact>
-            <collision>palm_bracket</collision>
+            <collision>palm_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
         </sensor>    
-<!--******************************************* -->
-        <visual name='palm_link_visual'>
-          <pose>0 0.034 -0.002 3.14159 -0 0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/g_r2.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <visual name='palm_link_fixed_joint_lump__boh_bracket_visual_1'>
-          <pose>0 0.0341 -0.002 -4e-06 4e-06 1.57079</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/part_4.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <visual name='palm_link_fixed_joint_lump__palm_bracket_visual_2'>
-          <pose>-0 0.034 -0.002 4e-06 -4e-06 1.57079</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/palm_bracket.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>true</self_collide>
-      </link>
-      <joint name='joint_0_0' type='revolute'>
-        <pose relative_to='palm_link'>-0.043538 0.034 -0.005539 -0.087267 -0 1.5708</pose>
-        <parent>palm_link</parent>
-        <child>link_0</child>
-        <axis>
-          <xyz>0 0 1</xyz>
+<!--******************************************* -->      
+      <visual name='palm_link_visual'>
+        <pose>0 0.034 -0.002 3.14159 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/g_r2.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='palm_link_fixed_joint_lump__boh_bracket_visual_1'>
+        <pose>0 0.0341 -0.002 -4e-06 4e-06 1.57079</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/part_4.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='palm_link_fixed_joint_lump__boh_visual_2'>
+        <pose>0 0.0341 -0.002 -4e-06 4e-06 1.57079</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/boh_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='palm_link_fixed_joint_lump__palm_bracket_visual_3'>
+        <pose>-0 0.034 -0.002 4e-06 -4e-06 1.57079</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/palm_bracket.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='palm_link_fixed_joint_lump__palm_fpcb_visual_4'>
+        <pose>-0 0.034 -0.002 4e-06 -4e-06 1.57079</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/palm_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>true</self_collide>
+    </link>
+    <joint name='joint_0_0' type='revolute'>
+      <pose relative_to='palm_link'>-0.043538 0.034 -0.005539 -0.087267 -0 1.5708</pose>
+      <parent>palm_link</parent>
+      <child>link_0</child>
+      <axis>
+        <xyz>0 0 1</xyz>
           <limit>
             <lower>-1.57</lower>
             <upper>1.57</upper>
@@ -144,64 +202,65 @@
             <friction>0.5</friction>
             <damping>0</damping>
           </dynamics>
-        </axis>
-        <physics>
-          <implicit_spring_damper> true </implicit_spring_damper>
-        </physics> 
-      </joint>
-      <link name='link_0'>
-        <pose relative_to='joint_0_0'>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>-0.000413 0.000666 0.009606 0 -0 0</pose>
-          <mass>0.0136672</mass>
-          <inertia>
-            <ixx>2.13441e-06</ixx>
-            <ixy>5.86704e-10</ixy>
-            <ixz>-7.9563e-08</ixz>
-            <iyy>1.24411e-06</iyy>
-            <iyz>-6.13056e-08</iyz>
-            <izz>1.671e-06</izz>
-          </inertia>
-        </inertial>
-        <collision name='link_0_collision'>
-          <pose>0 0 -0.0152 1.5708 0 -0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/extended_finger_base.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-        <visual name='link_0_visual'>
-          <pose>0 0 -0.0152 1.5708 0 -0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/extended_finger_base.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>true</self_collide>
-      </link>
-      <joint name='joint_1_0' type='revolute'>
-        <pose relative_to='link_0'>0 -0.0119 0.02545 1.57079 -1.57079 3.14159</pose>
-        <parent>link_0</parent>
-        <child>link_1</child>
-        <axis>
-          <xyz>0 0 1</xyz>
+      </axis>
+      <physics>
+        <implicit_spring_damper> true </implicit_spring_damper>
+      </physics> 
+    </joint>
+    <link name='link_0'>
+      <pose relative_to='joint_0_0'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.000413 0.000666 0.009606 0 -0 0</pose>
+        <mass>0.0136672</mass>
+        <inertia>
+          <ixx>2.13441e-06</ixx>
+          <ixy>5.86704e-10</ixy>
+          <ixz>-7.9563e-08</ixz>
+          <iyy>1.24411e-06</iyy>
+          <iyz>-6.13056e-08</iyz>
+          <izz>1.671e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_0_collision'>
+        <pose>0 0 -0.0152 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/extended_finger_base.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <visual name='link_0_visual'>
+        <pose>0 0 -0.0152 1.5708 0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/extended_finger_base.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>true</self_collide>
+    </link>
+    <joint name='joint_1_0' type='revolute'>
+      <pose relative_to='link_0'>0 -0.0119 0.02545 1.57079 -1.57079 3.14159</pose>
+      <parent>link_0</parent>
+      <child>link_1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
           <limit>
             <lower>0</lower>
-            <upper>1.57</upper>
+            <upper>2.5</upper>
             <effort>15</effort>
             <velocity>20</velocity>
           </limit>
@@ -209,128 +268,196 @@
             <friction>0.5</friction>
             <damping>0</damping>
           </dynamics>
-        </axis>
-        <physics>
-          <implicit_spring_damper> true </implicit_spring_damper>
-        </physics> 
-      </joint>
-      <link name='link_1'>
-        <pose relative_to='joint_1_0'>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0.027033 -0.000224 0.012145 0 -0 0</pose>
-          <mass>0.0541465</mass>
-          <inertia>
-            <ixx>7.67977e-06</ixx>
-            <ixy>-6.1897e-08</ixy>
-            <ixz>-1.40235e-08</ixz>
-            <iyy>2.3921e-05</iyy>
-            <iyz>-1.11576e-07</iyz>
-            <izz>2.31978e-05</izz>
-          </inertia>
-        </inertial>
-        <collision name='link_1_collision'>
-          <pose>-0.018269 0 -0.031781 0 1.48353 -3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/p2_r6.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-        <collision name='link_1_fixed_joint_lump__ipb_bracket_collision_1'>
-          <pose>-0 0 0.0113 5e-06 0 0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/proximal_back.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-          <max_contacts>100</max_contacts>
-        </collision>
-        <collision name='ipf_bracket'>
-          <pose>0 0 0.0123 -0 0 -0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/proximal_front.dae</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-          <max_contacts>100</max_contacts>
-        </collision>
+      </axis>
+      <physics>
+        <implicit_spring_damper> true </implicit_spring_damper>
+      </physics> 
+    </joint>
+    <link name='link_1'>
+      <pose relative_to='joint_1_0'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.027039 -0.000297 0.012126 0 -0 0</pose>
+        <mass>0.0561213</mass>
+        <inertia>
+          <ixx>8.35167e-06</ixx>
+          <ixy>-6.64708e-08</ixy>
+          <ixz>-1.70712e-08</ixz>
+          <iyy>2.46927e-05</iyy>
+          <iyz>-1.03911e-07</iyz>
+          <izz>2.41233e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_1_collision'>
+        <pose>-0.018269 0 -0.031781 0 1.48353 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/p2_r6.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='link_1_fixed_joint_lump__index_proximal_back_bracket_collision_1'>
+        <pose>0 0 0.0113 5e-06 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_back.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='ipb_fpcb'>
+        <pose>0 -0 0.0113 -5e-06 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_back_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+<!--******************************************* -->
+        <sensor name='ipb' type='contact'>
+          <contact>
+            <collision>ipb_fpcb</collision>
+          </contact>
+        <update_rate> 5 </update_rate>
+        <visualize> true </visualize>
+        </sensor>    
+<!--******************************************* -->
+      <collision name='link_1_fixed_joint_lump__index_proximal_front_bracket_collision_3'>
+        <pose>-0 -0 0.0123 0 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_front.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='ipf_fpcb'>
+        <pose>-0 0 0.0123 0 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_frontfpcb.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
 <!--******************************************* -->
         <sensor name='ipf' type='contact'>
           <contact>
-            <collision>ipf_bracket</collision>
+            <collision>ipf_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
         </sensor>    
-<!--******************************************* -->        
-        <visual name='link_1_visual'>
-          <pose>-0.018269 0 -0.031781 0 1.48353 -3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/p2_r6.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <visual name='link_1_fixed_joint_lump__ipb_bracket_visual_1'>
-          <pose>-0 0 0.0113 5e-06 0 0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/proximal_back.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <visual name='link_1_fixed_joint_lump__ipf_bracket_visual_2'>
-          <pose>0 0 0.0123 -0 0 -0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/proximal_front.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>true</self_collide>
-      </link>
-      <joint name='joint_2_0' type='revolute'>
-        <pose relative_to='link_1'>0.054 -0 0 0 -0 -3.14159</pose>
-        <parent>link_1</parent>
-        <child>link_2</child>
-        <axis>
-          <xyz>0 0 1</xyz>
+<!--******************************************* -->
+      <visual name='link_1_visual'>
+        <pose>-0.018269 0 -0.031781 0 1.48353 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/p2_r6.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_1_fixed_joint_lump__index_proximal_back_bracket_visual_1'>
+        <pose>0 0 0.0113 5e-06 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_back.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_1_fixed_joint_lump__index_proximal_back_fpcb_visual_2'>
+        <pose>0 -0 0.0113 -5e-06 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_back_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_1_fixed_joint_lump__index_proximal_front_bracket_visual_3'>
+        <pose>-0 -0 0.0123 0 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_front.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_1_fixed_joint_lump__index_proximal_front_fpcb_visual_4'>
+        <pose>-0 0 0.0123 0 -0 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_frontfpcb.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>true</self_collide>
+    </link>
+    <joint name='joint_2_0' type='revolute'>
+      <pose relative_to='link_1'>0.054 0 0 -0 0 -3.14159</pose>
+      <parent>link_1</parent>
+      <child>link_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
           <limit>
             <lower>0</lower>
             <upper>1.57</upper>
@@ -341,131 +468,199 @@
             <friction>0.5</friction>
             <damping>0</damping>
           </dynamics>
-        </axis>
-        <physics>
-          <implicit_spring_damper> true </implicit_spring_damper>
-        </physics> 
-      </joint>
-      <link name='link_2'>
-        <pose relative_to='joint_2_0'>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>-0.028719 0.000277 0.012147 0 -0 0</pose>
-          <mass>0.0418474</mass>
-          <inertia>
-            <ixx>6.393e-06</ixx>
-            <ixy>7.11754e-08</ixy>
-            <ixz>6.49003e-07</ixz>
-            <iyy>1.25642e-05</iyy>
-            <iyz>5.72797e-08</iyz>
-            <izz>1.08408e-05</izz>
-          </inertia>
-        </inertial>
-        <collision name='link_2_collision'>
-          <pose>0.072269 -0 -0.031781 -0 1.48353 0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/extended_fingertop.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-        <collision name='link_2_fixed_joint_lump__imb_bracket_collision_1'>
-          <pose>0.054 -0 0.0119 5e-06 -0 3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/medial_back.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-          <max_contacts>100</max_contacts>
-        </collision>
-        <collision name='imf_bracket'>
-          <pose>0.054 0 0.0119 0 0 -3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/medial_front.dae</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-          <max_contacts>100</max_contacts>
-        </collision>
+      </axis>
+      <physics>
+        <implicit_spring_damper> true </implicit_spring_damper>
+      </physics> 
+    </joint>
+    <link name='link_2'>
+      <pose relative_to='joint_2_0'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.028729 0.000348 0.012141 0 -0 0</pose>
+        <mass>0.0437084</mass>
+        <inertia>
+          <ixx>7.32067e-06</ixx>
+          <ixy>1.9129e-07</ixy>
+          <ixz>6.50558e-07</ixz>
+          <iyy>1.32067e-05</iyy>
+          <iyz>1.79468e-07</iyz>
+          <izz>1.13788e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_2_collision'>
+        <pose>0.072269 -0 -0.031781 -0 1.48353 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/extended_fingertop.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='link_2_fixed_joint_lump__index_medial_back_bracket_collision_1'>
+        <pose>0.054 0 0.0119 0 0 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_back.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='imb_fpcb'>
+        <pose>0.054 1e-06 0.0119 -6e-06 -4e-06 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_back_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+<!--******************************************* -->
+        <sensor name='imb' type='contact'>
+          <contact>
+            <collision>imb_fpcb</collision>
+          </contact>
+        <update_rate> 5 </update_rate>
+        <visualize> true </visualize>
+        </sensor>    
+<!--******************************************* -->
+      <collision name='link_2_fixed_joint_lump__index_medial_front_bracket_collision_3'>
+        <pose>0.054 -0 0.0119 0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_front.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='imf_fpcb'>
+        <pose>0.054 0 0.0119 -4e-06 4e-06 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_front_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
 <!--******************************************* -->
         <sensor name='imf' type='contact'>
           <contact>
-            <collision>imf_bracket</collision>
+            <collision>imf_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
         </sensor>    
 <!--******************************************* -->
-        <visual name='link_2_visual'>
-          <pose>0.072269 -0 -0.031781 -0 1.48353 0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/extended_fingertop.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <visual name='link_2_fixed_joint_lump__imb_bracket_visual_1'>
-          <pose>0.054 -0 0.0119 5e-06 -0 3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/medial_back.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <visual name='link_2_fixed_joint_lump__imf_bracket_visual_2'>
-          <pose>0.054 0 0.0119 0 0 -3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/medial_front.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>true</self_collide>
-      </link>
-      <joint name='joint_3_0' type='revolute'>
-        <pose relative_to='link_2'>-0.04615 0 0.0001 0 -0 -0</pose>
-        <parent>link_2</parent>
-        <child>link_3</child>
-        <axis>
-          <xyz>0 0 1</xyz>
+      <visual name='link_2_visual'>
+        <pose>0.072269 -0 -0.031781 -0 1.48353 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/extended_fingertop.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_2_fixed_joint_lump__index_medial_back_bracket_visual_1'>
+        <pose>0.054 0 0.0119 0 0 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_back.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_2_fixed_joint_lump__index_medial_back_fpcb_visual_2'>
+        <pose>0.054 1e-06 0.0119 -6e-06 -4e-06 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_back_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_2_fixed_joint_lump__index_medial_front_bracket_visual_3'>
+        <pose>0.054 -0 0.0119 0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_front.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_2_fixed_joint_lump__index_medial_front_fpcb_visual_4'>
+        <pose>0.054 0 0.0119 -4e-06 4e-06 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_front_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>true</self_collide>
+    </link>
+    <joint name='joint_3_0' type='revolute'>
+      <pose relative_to='link_2'>-0.04615 0 0.0001 -0 0 -0</pose>
+      <parent>link_2</parent>
+      <child>link_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
           <limit>
             <lower>0</lower>
-            <upper>1.57</upper>
+            <upper>2.5</upper>
             <effort>15</effort>
             <velocity>20</velocity>
           </limit>
@@ -473,99 +668,158 @@
             <friction>0.5</friction>
             <damping>0</damping>
           </dynamics>
-        </axis>
-        <physics>
-          <implicit_spring_damper> true </implicit_spring_damper>
-        </physics> 
-      </joint>
-      <link name='link_3'>
-        <pose relative_to='joint_3_0'>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>-0.023107 0.002061 0.012032 0 -0 0</pose>
-          <mass>0.0243483</mass>
-          <inertia>
-            <ixx>4.44879e-06</ixx>
-            <ixy>6.72221e-07</ixy>
-            <ixz>-6.6688e-08</ixz>
-            <iyy>9.62734e-06</iyy>
-            <iyz>5.15377e-09</iyz>
-            <izz>7.46611e-06</izz>
-          </inertia>
-        </inertial>
-        <collision name='link_3_collision'>
-          <pose>0.1253 -0 0.0118 -3.14159 -0 -1.5708</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/p4_r.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-        <collision name='ift_bracket'>
-          <pose>0.1004 0 0.0119 5e-06 -0 -3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/distal_pcbbase.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-          <max_contacts>100</max_contacts>
-        </collision>
+      </axis>
+      <physics>
+        <implicit_spring_damper> true </implicit_spring_damper>
+      </physics> 
+    </joint>
+    <link name='link_3'>
+      <pose relative_to='joint_3_0'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.024577 0.002729 0.012009 0 -0 0</pose>
+        <mass>0.0270564</mass>
+        <inertia>
+          <ixx>5.23237e-06</ixx>
+          <ixy>9.55197e-07</ixy>
+          <ixz>-7.21036e-08</ixz>
+          <iyy>1.08492e-05</iyy>
+          <iyz>8.1688e-09</iyz>
+          <izz>8.7254e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_3_collision'>
+        <pose>0.1253 -0 0.0118 -3.14159 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/p4_r.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='link_3_fixed_joint_lump__index_fingertip_bracket_collision_1'>
+        <pose>0.1004 -0 0.0119 0 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_pcbbase.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='ift_fpcb'>
+        <pose>0.1004 -0 0.0119 0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_fpcb_1.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
 <!--******************************************* -->
         <sensor name='ift' type='contact'>
           <contact>
-            <collision>ift_bracket</collision>
+            <collision>ift_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
         </sensor>    
 <!--******************************************* -->
-        <visual name='link_3_visual'>
-          <pose>0.1253 -0 0.0118 -3.14159 -0 -1.5708</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/p4_r.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <visual name='link_3_fixed_joint_lump__ift_bracket_visual_1'>
-          <pose>0.1004 0 0.0119 5e-06 -0 -3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/distal_pcbbase.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>true</self_collide>
-      </link>
-      <joint name='joint_12_0' type='revolute'>
-        <pose relative_to='palm_link'>-0.016121 0.0158 -0.084852 -3.14159 -0.087267 0</pose>
-        <parent>palm_link</parent>
-        <child>link_12</child>
-        <axis>
-          <xyz>0 0 1</xyz>
+      <collision name='link_3_fixed_joint_lump__index_fingertip_side_fpcb_collision_3'>
+        <pose>0.1004 -0 0.011899 0 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_fpcb_2.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <visual name='link_3_visual'>
+        <pose>0.1253 -0 0.0118 -3.14159 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/p4_r.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_3_fixed_joint_lump__index_fingertip_bracket_visual_1'>
+        <pose>0.1004 -0 0.0119 0 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_pcbbase.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_3_fixed_joint_lump__index_fingertip_main_fpcb_visual_2'>
+        <pose>0.1004 -0 0.0119 0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_fpcb_1.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_3_fixed_joint_lump__index_fingertip_side_fpcb_visual_3'>
+        <pose>0.1004 -0 0.011899 0 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_fpcb_2.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>true</self_collide>
+    </link>
+    <joint name='joint_12_0' type='revolute'>
+      <pose relative_to='palm_link'>-0.016121 0.0158 -0.084852 -3.14159 -0.087267 0</pose>
+      <parent>palm_link</parent>
+      <child>link_12</child>
+      <axis>
+        <xyz>0 0 1</xyz>
           <limit>
             <lower>0</lower>
             <upper>1.57</upper>
@@ -576,61 +830,62 @@
             <friction>0.5</friction>
             <damping>0</damping>
           </dynamics>
-        </axis>
-        <physics>
-          <implicit_spring_damper> true </implicit_spring_damper>
-        </physics> 
-      </joint>
-      <link name='link_12'>
-        <pose relative_to='joint_12_0'>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>-0.015116 -0.009058 -0.01923 0 -0 0</pose>
-          <mass>0.0660275</mass>
-          <inertia>
-            <ixx>1.44344e-05</ixx>
-            <ixy>1.24597e-06</ixy>
-            <ixz>3.47822e-08</ixz>
-            <iyy>1.76386e-05</iyy>
-            <iyz>6.49531e-07</iyz>
-            <izz>1.41981e-05</izz>
-          </inertia>
-        </inertial>
-        <collision name='link_12_collision'>
-          <pose>0.023281 -0.0182 -0.080831 -0 -0.087267 -0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/f1_r.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-        <visual name='link_12_visual'>
-          <pose>0.023281 -0.0182 -0.080831 -0 -0.087267 -0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/f1_r.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>true</self_collide>
-      </link>
-      <joint name='joint_13_0' type='revolute'>
-        <pose relative_to='link_12'>-0.0375 -0.005 -0.0092 -1.5708 -0 1.5708</pose>
-        <parent>link_12</parent>
-        <child>link_13</child>
-        <axis>
-          <xyz>0 0 1</xyz>
+      </axis>
+      <physics>
+        <implicit_spring_damper> true </implicit_spring_damper>
+      </physics> 
+    </joint>
+    <link name='link_12'>
+      <pose relative_to='joint_12_0'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.015116 -0.009058 -0.01923 0 -0 0</pose>
+        <mass>0.0660275</mass>
+        <inertia>
+          <ixx>1.44344e-05</ixx>
+          <ixy>1.24597e-06</ixy>
+          <ixz>3.47822e-08</ixz>
+          <iyy>1.76386e-05</iyy>
+          <iyz>6.49531e-07</iyz>
+          <izz>1.41981e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_12_collision'>
+        <pose>0.023281 -0.0182 -0.080831 -0 -0.087267 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/f1_r.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <visual name='link_12_visual'>
+        <pose>0.023281 -0.0182 -0.080831 -0 -0.087267 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/f1_r.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>true</self_collide>
+    </link>
+    <joint name='joint_13_0' type='revolute'>
+      <pose relative_to='link_12'>-0.0375 -0.005 -0.0092 -1.5708 -0 1.5708</pose>
+      <parent>link_12</parent>
+      <child>link_13</child>
+      <axis>
+        <xyz>0 0 1</xyz>
           <limit>
             <lower>0</lower>
             <upper>2</upper>
@@ -641,61 +896,62 @@
             <friction>0.5</friction>
             <damping>0</damping>
           </dynamics>
-        </axis>
-        <physics>
-          <implicit_spring_damper> true </implicit_spring_damper>
-        </physics> 
-      </joint>
-      <link name='link_13'>
-        <pose relative_to='joint_13_0'>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>-0.000666 -0.000413 0.009606 0 -0 0</pose>
-          <mass>0.0136672</mass>
-          <inertia>
-            <ixx>1.671e-06</ixx>
-            <ixy>6.13056e-08</ixy>
-            <ixz>7.9563e-08</ixz>
-            <iyy>1.24411e-06</iyy>
-            <iyz>5.86704e-10</iyz>
-            <izz>2.13441e-06</izz>
-          </inertia>
-        </inertial>
-        <collision name='link_13_collision'>
-          <pose>-0 0 -0.0152 1.5708 -0 1.5708</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/extended_finger_base.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-        <visual name='link_13_visual'>
-          <pose>-0 0 -0.0152 1.5708 -0 1.5708</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/extended_finger_base.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>true</self_collide>
-      </link>
-      <joint name='joint_14_0' type='revolute'>
-        <pose relative_to='link_13'>0.0119 0 0.02545 3e-06 1.57079 3.14159</pose>
-        <parent>link_13</parent>
-        <child>link_14</child>
-        <axis>
-          <xyz>0 0 1</xyz>
+      </axis>
+      <physics>
+        <implicit_spring_damper> true </implicit_spring_damper>
+      </physics> 
+    </joint>
+    <link name='link_13'>
+      <pose relative_to='joint_13_0'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.000666 -0.000413 0.009606 0 -0 0</pose>
+        <mass>0.0136672</mass>
+        <inertia>
+          <ixx>1.671e-06</ixx>
+          <ixy>6.13056e-08</ixy>
+          <ixz>7.9563e-08</ixz>
+          <iyy>1.24411e-06</iyy>
+          <iyz>5.86704e-10</iyz>
+          <izz>2.13441e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_13_collision'>
+        <pose>-0 0 -0.0152 1.5708 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/extended_finger_base.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <visual name='link_13_visual'>
+        <pose>-0 0 -0.0152 1.5708 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/extended_finger_base.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>true</self_collide>
+    </link>
+    <joint name='joint_14_0' type='revolute'>
+      <pose relative_to='link_13'>0.0119 -0 0.02545 -3e-06 1.57079 3.14159</pose>
+      <parent>link_13</parent>
+      <child>link_14</child>
+      <axis>
+        <xyz>0 0 1</xyz>
           <limit>
             <lower>0</lower>
             <upper>1.57</upper>
@@ -706,119 +962,196 @@
             <friction>0.5</friction>
             <damping>0</damping>
           </dynamics>
-        </axis>
-        <physics>
-          <implicit_spring_damper> true </implicit_spring_damper>
-        </physics> 
-      </joint>
-      <link name='link_14'>
-        <pose relative_to='joint_14_0'>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>-0.01745 0.000631 0.01221 0 -0 0</pose>
-          <mass>0.0395591</mass>
-          <inertia>
-            <ixx>5.84307e-06</ixx>
-            <ixy>-7.72369e-07</ixy>
-            <ixz>4.78465e-07</ixz>
-            <iyy>1.16403e-05</iyy>
-            <iyz>-5.21989e-07</iyz>
-            <izz>1.05218e-05</izz>
-          </inertia>
-        </inertial>
-        <collision name='link_14_collision'>
-          <pose>0.078781 -0.071631 0.0251 -1.5708 -0 0.087267</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/f3_r.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-        <collision name='link_14_fixed_joint_lump__tmb_bracket_collision_1'>
-          <pose>0.008 -0 0.0118 1.5708 0 -1.5708</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/thumb_medial_back_bracket.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-          <max_contacts>100</max_contacts>
-        </collision>
-        <collision name='link_14_fixed_joint_lump__tmf_bracket_collision_2'>
-          <pose>0.008 -0 0.0118 1.57079 0 -1.5708</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/thumb_medial_front_bracket.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-          <max_contacts>100</max_contacts>
-        </collision>
-        <visual name='link_14_visual'>
-          <pose>0.078781 -0.071631 0.0251 -1.5708 -0 0.087267</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/f3_r.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <visual name='link_14_fixed_joint_lump__tmb_bracket_visual_1'>
-          <pose>0.008 -0 0.0118 1.5708 0 -1.5708</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/thumb_medial_back_bracket.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <visual name='link_14_fixed_joint_lump__tmf_bracket_visual_2'>
-          <pose>0.008 -0 0.0118 1.57079 0 -1.5708</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/thumb_medial_front_bracket.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>true</self_collide>
-      </link>
-      <joint name='joint_15_0' type='revolute'>
-        <pose relative_to='link_14'>-0.0514 -0 -0.0001 0 0 0</pose>
-        <parent>link_14</parent>
-        <child>link_15</child>
-        <axis>
-          <xyz>0 0 1</xyz>
+      </axis>
+      <physics>
+        <implicit_spring_damper> true </implicit_spring_damper>
+      </physics> 
+    </joint>
+    <link name='link_14'>
+      <pose relative_to='joint_14_0'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.017391 0.000674 0.012202 0 -0 0</pose>
+        <mass>0.0406337</mass>
+        <inertia>
+          <ixx>6.1952e-06</ixx>
+          <ixy>-7.73474e-07</ixy>
+          <ixz>4.92157e-07</ixz>
+          <iyy>1.18659e-05</iyy>
+          <iyz>-5.30289e-07</iyz>
+          <izz>1.08348e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_14_collision'>
+        <pose>0.078781 -0.071631 0.0251 -1.5708 -0 0.087267</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/f3_r.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='link_14_fixed_joint_lump__thumb_medial_back_bracket_collision_1'>
+        <pose>0.008 -0 0.0118 1.5708 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/thumb_medial_back_bracket.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='tmb_fpcb'>
+        <pose>0.008 -0 0.0118 1.57079 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/part_5.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+<!--******************************************* -->
+        <sensor name='tmb' type='contact'>
+          <contact>
+            <collision>tmb_fpcb</collision>
+          </contact>
+        <update_rate> 5 </update_rate>
+        <visualize> true </visualize>
+        </sensor>    
+<!--******************************************* -->
+      <collision name='link_14_fixed_joint_lump__thumb_medial_front_bracket_collision_3'>
+        <pose>0.008 -0 0.0118 1.57079 0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/thumb_medial_front_bracket.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='tmf_fpcb'>
+        <pose>0.008 -0 0.0118 1.57079 0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/part_6.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+<!--******************************************* -->
+        <sensor name='tmf' type='contact'>
+          <contact>
+            <collision>tmf_fpcb</collision>
+          </contact>
+        <update_rate> 5 </update_rate>
+        <visualize> true </visualize>
+        </sensor>    
+<!--******************************************* -->
+      <visual name='link_14_visual'>
+        <pose>0.078781 -0.071631 0.0251 -1.5708 -0 0.087267</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/f3_r.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_14_fixed_joint_lump__thumb_medial_back_bracket_visual_1'>
+        <pose>0.008 -0 0.0118 1.5708 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/thumb_medial_back_bracket.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_14_fixed_joint_lump__thumb_medial_back_fpcb_visual_2'>
+        <pose>0.008 -0 0.0118 1.57079 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/part_5.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_14_fixed_joint_lump__thumb_medial_front_bracket_visual_3'>
+        <pose>0.008 -0 0.0118 1.57079 0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/thumb_medial_front_bracket.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_14_fixed_joint_lump__thumb_medial_front_fpcb_visual_4'>
+        <pose>0.008 -0 0.0118 1.57079 0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/part_6.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>true</self_collide>
+    </link>
+    <joint name='joint_15_0' type='revolute'>
+      <pose relative_to='link_14'>-0.0514 -0 -0.0001 -0 0 0</pose>
+      <parent>link_14</parent>
+      <child>link_15</child>
+      <axis>
+        <xyz>0 0 1</xyz>
           <limit>
             <lower>0</lower>
             <upper>1.57</upper>
@@ -829,99 +1162,159 @@
             <friction>0.5</friction>
             <damping>0</damping>
           </dynamics>
-        </axis>
-        <physics>
-          <implicit_spring_damper> true </implicit_spring_damper>
-        </physics> 
-      </joint>
-      <link name='link_15'>
-        <pose relative_to='joint_15_0'>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>-0.024808 0.000899 0.012061 0 -0 0</pose>
-          <mass>0.0482047</mass>
-          <inertia>
-            <ixx>6.2624e-06</ixx>
-            <ixy>1.00066e-06</ixy>
-            <ixz>2.54307e-07</ixz>
-            <iyy>2.26851e-05</iyy>
-            <iyz>6.89474e-08</iyz>
-            <izz>2.03663e-05</izz>
-          </inertia>
-        </inertial>
-        <collision name='link_15_collision'>
-          <pose>0.13018 -0.071631 0.0252 -1.5708 -0 0.087267</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/f4_r.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-        <collision name='tft_bracket'>
-          <pose>0.0848 -0.0003 0.0118 -0 0 -3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/distal_pcbbase.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-          <max_contacts>100</max_contacts>
-        </collision>
+      </axis>
+      <physics>
+        <implicit_spring_damper> true </implicit_spring_damper>
+      </physics> 
+    </joint>
+    <link name='link_15'>
+      <pose relative_to='joint_15_0'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.026328 0.0013 0.012042 0 -0 0</pose>
+        <mass>0.0509128</mass>
+        <inertia>
+          <ixx>7.08319e-06</ixx>
+          <ixy>1.59687e-06</ixy>
+          <ixz>2.31094e-07</ixz>
+          <iyy>2.54765e-05</iyy>
+          <iyz>7.51244e-08</iyz>
+          <izz>2.32319e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_15_collision'>
+        <pose>0.13018 -0.071631 0.0252 -1.5708 -0 0.087267</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/f4_r.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='link_15_fixed_joint_lump__thumb_fingertip_bracket_collision_1'>
+        <pose>0.0848 -0.0003 0.0118 -0 0 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_pcbbase.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='tft_fpcb'>
+        <pose>0.0848 -0.0003 0.0118 0 0 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_fpcb_1.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
 <!--******************************************* -->
         <sensor name='tft' type='contact'>
           <contact>
-            <collision>tft_bracket</collision>
+            <collision>tft_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
         </sensor>    
 <!--******************************************* -->
-        <visual name='link_15_visual'>
-          <pose>0.13018 -0.071631 0.0252 -1.5708 -0 0.087267</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/f4_r.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <visual name='link_15_fixed_joint_lump__tft_bracket_visual_1'>
-          <pose>0.0848 -0.0003 0.0118 -0 0 -3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/distal_pcbbase.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>true</self_collide>
-      </link>
-      <joint name='joint_4_0' type='revolute'>
-        <pose relative_to='palm_link'>-0 0.034 -0.0033 0 -0 1.5708</pose>
-        <parent>palm_link</parent>
-        <child>link_4</child>
-        <axis>
-          <xyz>0 0 1</xyz>
+      <collision name='link_15_fixed_joint_lump__thumb_fingertip_side_fpcb_collision_3'>
+        <pose>0.0848 -0.0003 0.011799 -0 0 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_fpcb_2.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <visual name='link_15_visual'>
+        <pose>0.13018 -0.071631 0.0252 -1.5708 -0 0.087267</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/f4_r.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_15_fixed_joint_lump__thumb_fingertip_bracket_visual_1'>
+        <pose>0.0848 -0.0003 0.0118 -0 0 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_pcbbase.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_15_fixed_joint_lump__thumb_fingertip_main_fpcb_visual_2'>
+        <pose>0.0848 -0.0003 0.0118 0 0 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_fpcb_1.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_15_fixed_joint_lump__thumb_fingertip_side_fpcb_visual_3'>
+        <pose>0.0848 -0.0003 0.011799 -0 0 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_fpcb_2.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>true</self_collide>
+    </link>
+ 
+    <joint name='joint_4_0' type='revolute'>
+      <pose relative_to='palm_link'>-0 0.034 -0.0033 0 -0 1.5708</pose>
+      <parent>palm_link</parent>
+      <child>link_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
           <limit>
             <lower>-1.57</lower>
             <upper>1.57</upper>
@@ -932,64 +1325,65 @@
             <friction>0.5</friction>
             <damping>0</damping>
           </dynamics>
-        </axis>
-        <physics>
-          <implicit_spring_damper> true </implicit_spring_damper>
-        </physics> 
-      </joint>
-      <link name='link_4'>
-        <pose relative_to='joint_4_0'>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>-0.000413 0.000666 0.009606 0 -0 0</pose>
-          <mass>0.0136672</mass>
-          <inertia>
-            <ixx>2.13441e-06</ixx>
-            <ixy>5.86704e-10</ixy>
-            <ixz>-7.9563e-08</ixz>
-            <iyy>1.24411e-06</iyy>
-            <iyz>-6.13056e-08</iyz>
-            <izz>1.671e-06</izz>
-          </inertia>
-        </inertial>
-        <collision name='link_4_collision'>
-          <pose>0 -0 -0.0152 1.5708 -0 0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/extended_finger_base.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-        <visual name='link_4_visual'>
-          <pose>0 -0 -0.0152 1.5708 -0 0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/extended_finger_base.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>true</self_collide>
-      </link>
-      <joint name='joint_5_0' type='revolute'>
-        <pose relative_to='link_4'>0 -0.0119 0.02545 1.57079 1.57079 -3.14159</pose>
-        <parent>link_4</parent>
-        <child>link_5</child>
-        <axis>
-          <xyz>0 0 1</xyz>
+      </axis>
+      <physics>
+        <implicit_spring_damper> true </implicit_spring_damper>
+      </physics> 
+    </joint>
+    <link name='link_4'>
+      <pose relative_to='joint_4_0'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.000413 0.000666 0.009606 0 -0 0</pose>
+        <mass>0.0136672</mass>
+        <inertia>
+          <ixx>2.13441e-06</ixx>
+          <ixy>5.86704e-10</ixy>
+          <ixz>-7.9563e-08</ixz>
+          <iyy>1.24411e-06</iyy>
+          <iyz>-6.13056e-08</iyz>
+          <izz>1.671e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_4_collision'>
+        <pose>0 -0 -0.0152 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/extended_finger_base.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <visual name='link_4_visual'>
+        <pose>0 -0 -0.0152 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/extended_finger_base.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>true</self_collide>
+    </link>
+    <joint name='joint_5_0' type='revolute'>
+      <pose relative_to='link_4'>-0 -0.0119 0.02545 1.57079 1.57079 -3.14159</pose>
+      <parent>link_4</parent>
+      <child>link_5</child>
+      <axis>
+        <xyz>0 0 1</xyz>
           <limit>
             <lower>0</lower>
-            <upper>1.57</upper>
+            <upper>2.5</upper>
             <effort>15</effort>
             <velocity>20</velocity>
           </limit>
@@ -997,128 +1391,196 @@
             <friction>0.5</friction>
             <damping>0</damping>
           </dynamics>
-        </axis>
-        <physics>
-          <implicit_spring_damper> true </implicit_spring_damper>
-        </physics> 
-      </joint>
-      <link name='link_5'>
-        <pose relative_to='joint_5_0'>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>-0.027033 0.000224 0.012145 0 -0 0</pose>
-          <mass>0.0541465</mass>
-          <inertia>
-            <ixx>8.12772e-06</ixx>
-            <ixy>-2.30048e-08</ixy>
-            <ixz>2.5544e-06</ixz>
-            <iyy>2.3921e-05</iyy>
-            <iyz>1.40092e-07</iyz>
-            <izz>2.275e-05</izz>
-          </inertia>
-        </inertial>
-        <collision name='link_5_collision'>
-          <pose>0.018269 0 -0.031781 -0 1.48353 0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/p2_r6.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-        <collision name='link_5_fixed_joint_lump__mpb_bracket_collision_1'>
-          <pose>0 0 0.0113 -5e-06 -0 -3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/proximal_back.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-          <max_contacts>100</max_contacts>
-        </collision>
-        <collision name='mpf_bracket'>
-          <pose>0 -0 0.0123 -0 -0 3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/proximal_front.dae</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-          <max_contacts>100</max_contacts>
-        </collision>
+      </axis>
+      <physics>
+        <implicit_spring_damper> true </implicit_spring_damper>
+      </physics> 
+    </joint>
+    <link name='link_5'>
+      <pose relative_to='joint_5_0'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.027039 0.000297 0.012126 0 -0 0</pose>
+        <mass>0.0561213</mass>
+        <inertia>
+          <ixx>8.79961e-06</ixx>
+          <ixy>-2.75758e-08</ixy>
+          <ixz>2.55745e-06</ixz>
+          <iyy>2.46927e-05</iyy>
+          <iyz>1.32424e-07</iyz>
+          <izz>2.36754e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_5_collision'>
+        <pose>0.018269 0 -0.031781 0 1.48353 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/p2_r6.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='link_5_fixed_joint_lump__middle_proximal_back_bracket_collision_1'>
+        <pose>-0 -0 0.0113 0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_back.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='mpb_fpcb'>
+        <pose>-0 -0 0.0113 -5e-06 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_back_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+<!--******************************************* -->
+        <sensor name='mpb' type='contact'>
+          <contact>
+            <collision>mpb_fpcb</collision>
+          </contact>
+        <update_rate> 5 </update_rate>
+        <visualize> true </visualize>
+        </sensor>    
+<!--******************************************* -->
+      <collision name='link_5_fixed_joint_lump__middle_proximal_front_bracket_collision_3'>
+        <pose>0 -0 0.0123 -0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_front.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='mpf_fpcb'>
+        <pose>0 -0 0.0123 -0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_frontfpcb.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
 <!--******************************************* -->
         <sensor name='mpf' type='contact'>
           <contact>
-            <collision>mpf_bracket</collision>
+            <collision>mpf_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
         </sensor>    
-<!--******************************************* -->  
-        <visual name='link_5_visual'>
-          <pose>0.018269 0 -0.031781 -0 1.48353 0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/p2_r6.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <visual name='link_5_fixed_joint_lump__mpb_bracket_visual_1'>
-          <pose>0 0 0.0113 -5e-06 -0 -3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/proximal_back.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <visual name='link_5_fixed_joint_lump__mpf_bracket_visual_2'>
-          <pose>0 -0 0.0123 -0 -0 3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/proximal_front.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>true</self_collide>
-      </link>
-      <joint name='joint_6_0' type='revolute'>
-        <pose relative_to='link_5'>-0.054 0 -0 0 -0 -0</pose>
-        <parent>link_5</parent>
-        <child>link_6</child>
-        <axis>
-          <xyz>0 0 1</xyz>
+<!--******************************************* -->
+      <visual name='link_5_visual'>
+        <pose>0.018269 0 -0.031781 0 1.48353 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/p2_r6.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_5_fixed_joint_lump__middle_proximal_back_bracket_visual_1'>
+        <pose>-0 -0 0.0113 0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_back.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_5_fixed_joint_lump__middle_proximal_back_fpcb_visual_2'>
+        <pose>-0 -0 0.0113 -5e-06 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_back_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_5_fixed_joint_lump__middle_proximal_front_bracket_visual_3'>
+        <pose>0 -0 0.0123 -0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_front.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_5_fixed_joint_lump__middle_proximal_front_fpcb_visual_4'>
+        <pose>0 -0 0.0123 -0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_frontfpcb.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>true</self_collide>
+    </link>
+    <joint name='joint_6_0' type='revolute'>
+      <pose relative_to='link_5'>-0.054 -0 -0 0 -0 0</pose>
+      <parent>link_5</parent>
+      <child>link_6</child>
+      <axis>
+        <xyz>0 0 1</xyz>
           <limit>
             <lower>0</lower>
             <upper>1.57</upper>
@@ -1129,131 +1591,199 @@
             <friction>0.5</friction>
             <damping>0</damping>
           </dynamics>
-        </axis>
-        <physics>
-          <implicit_spring_damper> true </implicit_spring_damper>
-        </physics> 
-      </joint>
-      <link name='link_6'>
-        <pose relative_to='joint_6_0'>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>-0.028719 0.000277 0.012147 0 -0 0</pose>
-          <mass>0.0418474</mass>
-          <inertia>
-            <ixx>6.39299e-06</ixx>
-            <ixy>7.11783e-08</ixy>
-            <ixz>6.49002e-07</ixz>
-            <iyy>1.25642e-05</iyy>
-            <iyz>5.72804e-08</iyz>
-            <izz>1.08408e-05</izz>
-          </inertia>
-        </inertial>
-        <collision name='link_6_collision'>
-          <pose>0.072269 -0 -0.031781 0 1.48353 -0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/extended_fingertop.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-        <collision name='link_6_fixed_joint_lump__mmb_bracket_collision_1'>
-          <pose>0.054 -0 0.0119 5e-06 -0 3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/medial_back.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-          <max_contacts>100</max_contacts>
-        </collision>
-        <collision name='mmf_bracket'>
-          <pose>0.054 -0 0.0119 -0 0 3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/medial_front.dae</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-          <max_contacts>100</max_contacts>
-        </collision>
+      </axis>
+      <physics>
+        <implicit_spring_damper> true </implicit_spring_damper>
+      </physics> 
+    </joint>
+    <link name='link_6'>
+      <pose relative_to='joint_6_0'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.028729 0.000348 0.012141 0 -0 0</pose>
+        <mass>0.0437084</mass>
+        <inertia>
+          <ixx>7.32067e-06</ixx>
+          <ixy>1.91294e-07</ixy>
+          <ixz>6.50557e-07</ixz>
+          <iyy>1.32067e-05</iyy>
+          <iyz>1.79464e-07</iyz>
+          <izz>1.13788e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_6_collision'>
+        <pose>0.072269 -0 -0.031781 -0 1.48353 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/extended_fingertop.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='link_6_fixed_joint_lump__middle_medial_back_bracket_collision_1'>
+        <pose>0.054 -0 0.0119 0 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_back.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='mmb_fpcb'>
+        <pose>0.054 0 0.0119 -1e-06 -4e-06 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_back_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+<!--******************************************* -->
+        <sensor name='mmb' type='contact'>
+          <contact>
+            <collision>mmb_fpcb</collision>
+          </contact>
+        <update_rate> 5 </update_rate>
+        <visualize> true </visualize>
+        </sensor>    
+<!--******************************************* -->
+      <collision name='link_6_fixed_joint_lump__middle_medial_front_bracket_collision_3'>
+        <pose>0.054 -0 0.0119 -0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_front.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='mmf_fpcb'>
+        <pose>0.054 0 0.0119 -4e-06 4e-06 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_front_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
 <!--******************************************* -->
         <sensor name='mmf' type='contact'>
           <contact>
-            <collision>mmf_bracket</collision>
+            <collision>mmf_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
         </sensor>    
 <!--******************************************* -->
-        <visual name='link_6_visual'>
-          <pose>0.072269 -0 -0.031781 0 1.48353 -0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/extended_fingertop.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <visual name='link_6_fixed_joint_lump__mmb_bracket_visual_1'>
-          <pose>0.054 -0 0.0119 5e-06 -0 3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/medial_back.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <visual name='link_6_fixed_joint_lump__mmf_bracket_visual_2'>
-          <pose>0.054 -0 0.0119 -0 0 3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/medial_front.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>true</self_collide>
-      </link>
-      <joint name='joint_7_0' type='revolute'>
-        <pose relative_to='link_6'>-0.04615 0 0.0001 0 0 -0</pose>
-        <parent>link_6</parent>
-        <child>link_7</child>
-        <axis>
-          <xyz>0 0 1</xyz>
+      <visual name='link_6_visual'>
+        <pose>0.072269 -0 -0.031781 -0 1.48353 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/extended_fingertop.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_6_fixed_joint_lump__middle_medial_back_bracket_visual_1'>
+        <pose>0.054 -0 0.0119 0 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_back.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_6_fixed_joint_lump__middle_medial_back_fpcb_visual_2'>
+        <pose>0.054 0 0.0119 -1e-06 -4e-06 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_back_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_6_fixed_joint_lump__middle_medial_front_bracket_visual_3'>
+        <pose>0.054 -0 0.0119 -0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_front.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_6_fixed_joint_lump__middle_medial_front_fpcb_visual_4'>
+        <pose>0.054 0 0.0119 -4e-06 4e-06 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_front_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>true</self_collide>
+    </link>
+    <joint name='joint_7_0' type='revolute'>
+      <pose relative_to='link_6'>-0.04615 0 0.0001 -0 0 0</pose>
+      <parent>link_6</parent>
+      <child>link_7</child>
+      <axis>
+        <xyz>0 0 1</xyz>
           <limit>
             <lower>0</lower>
-            <upper>1.57</upper>
+            <upper>2.5</upper>
             <effort>15</effort>
             <velocity>20</velocity>
           </limit>
@@ -1261,97 +1791,156 @@
             <friction>0.5</friction>
             <damping>0</damping>
           </dynamics>
-        </axis>
-        <physics>
-          <implicit_spring_damper> true </implicit_spring_damper>
-        </physics> 
-      </joint>
-      <link name='link_7'>
-        <pose relative_to='joint_7_0'>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>-0.023107 0.002061 0.012032 0 -0 0</pose>
-          <mass>0.0243483</mass>
-          <inertia>
-            <ixx>4.44879e-06</ixx>
-            <ixy>6.72221e-07</ixy>
-            <ixz>-6.6688e-08</ixz>
-            <iyy>9.62734e-06</iyy>
-            <iyz>5.15377e-09</iyz>
-            <izz>7.46611e-06</izz>
-          </inertia>
-        </inertial>
-        <collision name='link_7_collision'>
-          <pose>0.1253 -0 0.0118 3.14159 -0 -1.5708</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/p4_r.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-        <collision name='mft_bracket'>
-          <pose>0.1004 0 0.0119 5e-06 -0 -3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/distal_pcbbase.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-          <max_contacts>100</max_contacts>
-        </collision>
+      </axis>
+      <physics>
+        <implicit_spring_damper> true </implicit_spring_damper>
+      </physics> 
+    </joint>
+    <link name='link_7'>
+      <pose relative_to='joint_7_0'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.024577 0.002728 0.012009 0 -0 0</pose>
+        <mass>0.0270564</mass>
+        <inertia>
+          <ixx>5.23236e-06</ixx>
+          <ixy>9.5517e-07</ixy>
+          <ixz>-7.21037e-08</ixz>
+          <iyy>1.08492e-05</iyy>
+          <iyz>8.16974e-09</iyz>
+          <izz>8.7254e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_7_collision'>
+        <pose>0.1253 -0 0.0118 3.14159 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/p4_r.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='link_7_fixed_joint_lump__middle_fingertip_bracket_collision_1'>
+        <pose>0.1004 0 0.0119 0 -0 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_pcbbase.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='mft_fpcb'>
+        <pose>0.1004 0 0.0119 -5e-06 0 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_fpcb_1.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
 <!--******************************************* -->
         <sensor name='mft' type='contact'>
           <contact>
-            <collision>mft_bracket</collision>
+            <collision>mft_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
         </sensor>    
 <!--******************************************* -->
-        <visual name='link_7_visual'>
-          <pose>0.1253 -0 0.0118 3.14159 -0 -1.5708</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/p4_r.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <visual name='link_7_fixed_joint_lump__mft_bracket_visual_1'>
-          <pose>0.1004 0 0.0119 5e-06 -0 -3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/distal_pcbbase.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>true</self_collide>
-      </link>
-      <joint name='joint_8_0' type='revolute'>
-        <pose relative_to='palm_link'>0.043538 0.034 -0.005539 0.087266 0 1.5708</pose>
-        <parent>palm_link</parent>
-        <child>link_8</child>
+      <collision name='link_7_fixed_joint_lump__middle_fingertip_side_fpcb_collision_3'>
+        <pose>0.1004 0 0.011899 -5e-06 -0 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_fpcb_2.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <visual name='link_7_visual'>
+        <pose>0.1253 -0 0.0118 3.14159 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/p4_r.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_7_fixed_joint_lump__middle_fingertip_bracket_visual_1'>
+        <pose>0.1004 0 0.0119 0 -0 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_pcbbase.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_7_fixed_joint_lump__middle_fingertip_main_fpcb_visual_2'>
+        <pose>0.1004 0 0.0119 -5e-06 0 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_fpcb_1.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_7_fixed_joint_lump__middle_fingertip_side_fpcb_visual_3'>
+        <pose>0.1004 0 0.011899 -5e-06 -0 -3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_fpcb_2.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>true</self_collide>
+    </link>
+    <joint name='joint_8_0' type='revolute'>
+      <pose relative_to='palm_link'>0.043538 0.034 -0.005539 0.087266 0 1.5708</pose>
+      <parent>palm_link</parent>
+      <child>link_8</child>
         <axis>
           <xyz>0 0 1</xyz>
           <limit>
@@ -1361,67 +1950,68 @@
             <velocity>20</velocity>
           </limit>
           <dynamics>
-            <damping>0</damping>
             <friction>0.5</friction>
+            <damping>0</damping>
           </dynamics>
-        </axis>
-        <physics>
-          <implicit_spring_damper> true </implicit_spring_damper>
-        </physics>  
-      </joint>
-      <link name='link_8'>
-        <pose relative_to='joint_8_0'>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>-0.000413 0.000666 0.009606 0 -0 0</pose>
-          <mass>0.0136672</mass>
-          <inertia>
-            <ixx>2.13441e-06</ixx>
-            <ixy>5.86704e-10</ixy>
-            <ixz>-7.9563e-08</ixz>
-            <iyy>1.24411e-06</iyy>
-            <iyz>-6.13056e-08</iyz>
-            <izz>1.671e-06</izz>
-          </inertia>
-        </inertial>
-        <collision name='link_8_collision'>
-          <pose>0 -0 -0.0152 1.5708 -0 0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/extended_finger_base.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-        <visual name='link_8_visual'>
-          <pose>0 -0 -0.0152 1.5708 -0 0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/extended_finger_base.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>true</self_collide>
-      </link>
-      <joint name='joint_9_0' type='revolute'>
-        <pose relative_to='link_8'>-0 -0.0119 0.02545 1.57079 1.57079 -3.14159</pose>
-        <parent>link_8</parent>
-        <child>link_9</child>
-        <axis>
-          <xyz>0 0 1</xyz>
+      </axis>
+      <physics>
+        <implicit_spring_damper> true </implicit_spring_damper>
+      </physics> 
+    </joint>
+    <link name='link_8'>
+      <pose relative_to='joint_8_0'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.000413 0.000666 0.009606 0 -0 0</pose>
+        <mass>0.0136672</mass>
+        <inertia>
+          <ixx>2.13441e-06</ixx>
+          <ixy>5.86704e-10</ixy>
+          <ixz>-7.9563e-08</ixz>
+          <iyy>1.24411e-06</iyy>
+          <iyz>-6.13056e-08</iyz>
+          <izz>1.671e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_8_collision'>
+        <pose>0 -0 -0.0152 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/extended_finger_base.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <visual name='link_8_visual'>
+        <pose>0 -0 -0.0152 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/extended_finger_base.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>true</self_collide>
+    </link>
+    <joint name='joint_9_0' type='revolute'>
+      <pose relative_to='link_8'>-0 -0.0119 0.02545 1.57079 1.57079 -3.14159</pose>
+      <parent>link_8</parent>
+      <child>link_9</child>
+      <axis>
+        <xyz>0 0 1</xyz>
           <limit>
             <lower>0</lower>
-            <upper>1.57</upper>
+            <upper>2.5</upper>
             <effort>15</effort>
             <velocity>20</velocity>
           </limit>
@@ -1429,130 +2019,196 @@
             <friction>0.5</friction>
             <damping>0</damping>
           </dynamics>
-        </axis>
-        <physics>
-          <ode>
-            <implicit_spring_damper> true </implicit_spring_damper>
-          </ode>
-        </physics>
-      </joint>
-      <link name='link_9'>
-        <pose relative_to='joint_9_0'>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>-0.027033 0.000224 0.012145 0 -0 0</pose>
-          <mass>0.0541465</mass>
-          <inertia>
-            <ixx>8.12772e-06</ixx>
-            <ixy>-2.30028e-08</ixy>
-            <ixz>2.5544e-06</ixz>
-            <iyy>2.3921e-05</iyy>
-            <iyz>1.40093e-07</iyz>
-            <izz>2.275e-05</izz>
-          </inertia>
-        </inertial>
-        <collision name='link_9_collision'>
-          <pose>0.018269 -0 -0.031781 -0 1.48353 0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/p2_r6.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-        <collision name='link_9_fixed_joint_lump__ppb_bracket_collision_1'>
-          <pose>-0 -0 0.0113 0 0 3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/proximal_back.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-          <max_contacts>100</max_contacts>
-        </collision>
-        <collision name='ppf_bracket'>
-          <pose>0 -0 0.0123 -0 0 3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/proximal_front.dae</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-          <max_contacts>100</max_contacts>
-        </collision>
+      </axis>
+      <physics>
+        <implicit_spring_damper> true </implicit_spring_damper>
+      </physics> 
+    </joint>
+    <link name='link_9'>
+      <pose relative_to='joint_9_0'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.027039 0.000297 0.012126 0 -0 0</pose>
+        <mass>0.0561213</mass>
+        <inertia>
+          <ixx>8.79961e-06</ixx>
+          <ixy>-2.75758e-08</ixy>
+          <ixz>2.55745e-06</ixz>
+          <iyy>2.46927e-05</iyy>
+          <iyz>1.32424e-07</iyz>
+          <izz>2.36754e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_9_collision'>
+        <pose>0.018269 0 -0.031781 0 1.48353 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/p2_r6.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='link_9_fixed_joint_lump__pinky_proximal_back_bracket_collision_1'>
+        <pose>-0 -0 0.0113 5e-06 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_back.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='ppb_fpcb'>
+        <pose>-0 -0 0.0113 -5e-06 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_back_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+<!--******************************************* -->
+        <sensor name='ppb' type='contact'>
+          <contact>
+            <collision>ppb_fpcb</collision>
+          </contact>
+        <update_rate> 5 </update_rate>
+        <visualize> true </visualize>
+        </sensor>    
+<!--******************************************* -->
+      <collision name='link_9_fixed_joint_lump__pinky_proximal_front_bracket_collision_3'>
+        <pose>0 -0 0.0123 -0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_front.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='ppf_fpcb'>
+        <pose>0 -0 0.0123 -0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_frontfpcb.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
 <!--******************************************* -->
         <sensor name='ppf' type='contact'>
           <contact>
-            <collision>ppf_bracket</collision>
+            <collision>ppf_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
         </sensor>    
 <!--******************************************* -->
-        <visual name='link_9_visual'>
-          <pose>0.018269 -0 -0.031781 -0 1.48353 0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/p2_r6.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <visual name='link_9_fixed_joint_lump__ppb_bracket_visual_1'>
-          <pose>-0 -0 0.0113 0 0 3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/proximal_back.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <visual name='link_9_fixed_joint_lump__ppf_bracket_visual_2'>
-          <pose>0 -0 0.0123 -0 0 3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/proximal_front.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>true</self_collide>
-      </link>
-      <joint name='joint_10_0' type='revolute'>
-        <pose relative_to='link_9'>-0.054 0 0 0 -0 -0</pose>
-        <parent>link_9</parent>
-        <child>link_10</child>
-        <axis>
-          <xyz>0 0 1</xyz>
+      <visual name='link_9_visual'>
+        <pose>0.018269 0 -0.031781 0 1.48353 -0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/p2_r6.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_9_fixed_joint_lump__pinky_proximal_back_bracket_visual_1'>
+        <pose>-0 -0 0.0113 5e-06 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_back.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_9_fixed_joint_lump__pinky_proximal_back_fpcb_visual_2'>
+        <pose>-0 -0 0.0113 -5e-06 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_back_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_9_fixed_joint_lump__pinky_proximal_front_bracket_visual_3'>
+        <pose>0 -0 0.0123 -0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_front.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_9_fixed_joint_lump__pinky_proximal_front_fpcb_visual_4'>
+        <pose>0 -0 0.0123 -0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/proximal_frontfpcb.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>true</self_collide>
+    </link>
+    <joint name='joint_10_0' type='revolute'>
+      <pose relative_to='link_9'>-0.054 0 -0 0 -0 -0</pose>
+      <parent>link_9</parent>
+      <child>link_10</child>
+      <axis>
+        <xyz>0 0 1</xyz>
           <limit>
             <lower>0</lower>
             <upper>1.57</upper>
@@ -1563,131 +2219,199 @@
             <friction>0.5</friction>
             <damping>0</damping>
           </dynamics>
-        </axis>
-        <physics>
-          <implicit_spring_damper> true </implicit_spring_damper>
-        </physics> 
-      </joint>
-      <link name='link_10'>
-        <pose relative_to='joint_10_0'>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>-0.028719 0.000277 0.012147 0 -0 0</pose>
-          <mass>0.0418474</mass>
-          <inertia>
-            <ixx>6.393e-06</ixx>
-            <ixy>7.11757e-08</ixy>
-            <ixz>6.49003e-07</ixz>
-            <iyy>1.25642e-05</iyy>
-            <iyz>5.72843e-08</iyz>
-            <izz>1.08408e-05</izz>
-          </inertia>
-        </inertial>
-        <collision name='link_10_collision'>
-          <pose>0.072269 -0 -0.031781 0 1.48353 -0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/extended_fingertop.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-        <collision name='link_10_fixed_joint_lump__pmb_bracket_collision_1'>
-          <pose>0.054 -0 0.0119 0 -0 3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/medial_back.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-          <max_contacts>100</max_contacts>
-        </collision>
-        <collision name='pmf_bracket'>
-          <pose>0.054 -0 0.0119 -0 0 3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/medial_front.dae</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-          <max_contacts>100</max_contacts>
-        </collision>
+      </axis>
+      <physics>
+        <implicit_spring_damper> true </implicit_spring_damper>
+      </physics> 
+    </joint>
+    <link name='link_10'>
+      <pose relative_to='joint_10_0'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.028729 0.000348 0.012141 0 -0 0</pose>
+        <mass>0.0437084</mass>
+        <inertia>
+          <ixx>7.32067e-06</ixx>
+          <ixy>1.91294e-07</ixy>
+          <ixz>6.50557e-07</ixz>
+          <iyy>1.32067e-05</iyy>
+          <iyz>1.79464e-07</iyz>
+          <izz>1.13788e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_10_collision'>
+        <pose>0.072269 -0 -0.031781 -0 1.48353 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/extended_fingertop.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='link_10_fixed_joint_lump__pinky_medial_back_bracket_collision_1'>
+        <pose>0.054 -0 0.0119 5e-06 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_back.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='pmb_fpcb'>
+        <pose>0.054 0 0.0119 -1e-06 -4e-06 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_back_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+<!--******************************************* -->
+        <sensor name='pmb' type='contact'>
+          <contact>
+            <collision>pmb_fpcb</collision>
+          </contact>
+        <update_rate> 5 </update_rate>
+        <visualize> true </visualize>
+        </sensor>    
+<!--******************************************* -->
+      <collision name='link_10_fixed_joint_lump__pinky_medial_front_bracket_collision_3'>
+        <pose>0.054 -0 0.0119 0 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_front.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='pmf_fpcb'>
+        <pose>0.054 0 0.0119 -4e-06 4e-06 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_front_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
 <!--******************************************* -->
         <sensor name='pmf' type='contact'>
           <contact>
-            <collision>pmf_bracket</collision>
+            <collision>pmf_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
         </sensor>    
 <!--******************************************* -->
-        <visual name='link_10_visual'>
-          <pose>0.072269 -0 -0.031781 0 1.48353 -0</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/extended_fingertop.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <visual name='link_10_fixed_joint_lump__pmb_bracket_visual_1'>
-          <pose>0.054 -0 0.0119 0 -0 3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/medial_back.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <visual name='link_10_fixed_joint_lump__pmf_bracket_visual_2'>
-          <pose>0.054 -0 0.0119 -0 0 3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/medial_front.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>true</self_collide>
-      </link>
-      <joint name='joint_11_0' type='revolute'>
-        <pose relative_to='link_10'>-0.04615 0 0.0001 0 0 -0</pose>
-        <parent>link_10</parent>
-        <child>link_11</child>
-        <axis>
-          <xyz>0 0 1</xyz>
+      <visual name='link_10_visual'>
+        <pose>0.072269 -0 -0.031781 -0 1.48353 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/extended_fingertop.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_10_fixed_joint_lump__pinky_medial_back_bracket_visual_1'>
+        <pose>0.054 -0 0.0119 5e-06 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_back.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_10_fixed_joint_lump__pinky_medial_back_fpcb_visual_2'>
+        <pose>0.054 0 0.0119 -1e-06 -4e-06 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_back_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_10_fixed_joint_lump__pinky_medial_front_bracket_visual_3'>
+        <pose>0.054 -0 0.0119 0 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_front.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_10_fixed_joint_lump__pinky_medial_front_fpcb_visual_4'>
+        <pose>0.054 0 0.0119 -4e-06 4e-06 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/medial_front_fpcb.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>true</self_collide>
+    </link>
+    <joint name='joint_11_0' type='revolute'>
+      <pose relative_to='link_10'>-0.04615 0 0.0001 -0 0 -0</pose>
+      <parent>link_10</parent>
+      <child>link_11</child>
+      <axis>
+        <xyz>0 0 1</xyz>
           <limit>
             <lower>0</lower>
-            <upper>1.57</upper>
+            <upper>2.5</upper>
             <effort>15</effort>
             <velocity>20</velocity>
           </limit>
@@ -1695,100 +2419,157 @@
             <friction>0.5</friction>
             <damping>0</damping>
           </dynamics>
-        </axis>
-        <physics>
-          <implicit_spring_damper> true </implicit_spring_damper>
-        </physics> 
-      </joint>
-      <link name='link_11'>
-        <pose relative_to='joint_11_0'>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>-0.023107 0.002061 0.012032 0 -0 0</pose>
-          <mass>0.0243483</mass>
-          <inertia>
-            <ixx>4.44879e-06</ixx>
-            <ixy>6.72221e-07</ixy>
-            <ixz>-6.6688e-08</ixz>
-            <iyy>9.62734e-06</iyy>
-            <iyz>5.15377e-09</iyz>
-            <izz>7.46611e-06</izz>
-          </inertia>
-        </inertial>
-        <collision name='link_11_collision'>
-          <pose>0.1253 -0 0.0118 3.14159 -0 -1.5708</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/p4_r.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-        <collision name='pft_bracket'>
-          <pose>0.1004 0 0.0119 0 -0 -3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/distal_pcbbase.stl</uri>
-            </mesh>
-          </geometry>
-          <surface>
-            <contact>
-              <ode>
-                <kp>1e15</kp>
-                <kd>1e13</kd>
-                <max_vel>0.01</max_vel>
-                <min_depth>0.00</min_depth>
-              </ode>
-            </contact>
-          </surface>
-          <max_contacts>100</max_contacts>
-        </collision>
+      </axis>
+      <physics>
+        <implicit_spring_damper> true </implicit_spring_damper>
+      </physics> 
+    </joint>
+    <link name='link_11'>
+      <pose relative_to='joint_11_0'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.024577 0.002729 0.012009 0 -0 0</pose>
+        <mass>0.0270564</mass>
+        <inertia>
+          <ixx>5.23237e-06</ixx>
+          <ixy>9.55197e-07</ixy>
+          <ixz>-7.21036e-08</ixz>
+          <iyy>1.08492e-05</iyy>
+          <iyz>8.1688e-09</iyz>
+          <izz>8.7254e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='link_11_collision'>
+        <pose>0.1253 -0 0.0118 3.14159 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/p4_r.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='link_11_fixed_joint_lump__pinky_fingertip_bracket_collision_1'>
+        <pose>0.1004 -0 0.0119 -0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_pcbbase.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <collision name='pft_fpcb'>
+        <pose>0.1004 -0 0.0119 -0 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_fpcb_1.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
 <!--******************************************* -->
         <sensor name='pft' type='contact'>
           <contact>
-            <collision>pft_bracket</collision>
+            <collision>pft_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
         </sensor>    
 <!--******************************************* -->
-        <visual name='link_11_visual'>
-          <pose>0.1253 -0 0.0118 3.14159 -0 -1.5708</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/p4_r.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <visual name='link_11_fixed_joint_lump__pft_bracket_visual_1'>
-          <pose>0.1004 0 0.0119 0 -0 -3.14159</pose>
-          <geometry>
-            <mesh>
-              <scale>1 1 1</scale>
-              <uri>model://allegro_hand_description/meshes/distal_pcbbase.stl</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>true</self_collide>
-      </link>
-
-      <plugin name="contact_coordinates_plugin" filename="/home/abed/Documents/BICI_Project/BICI_SENSORS_ROS/Gazebo_Simulation/Contact_Sensor/build/libcoordinates.so"/>
-      <plugin name="gazebo_ros_control" filename="/opt/ros/noetic/lib/libgazebo_ros_control.so">
-        <robotNamespace>/allegro_hand_right</robotNamespace>
-        <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType> 
-        <legacyModeNS>true</legacyModeNS> 
-      </plugin>
-      
+      <collision name='link_11_fixed_joint_lump__pinky_fingertip_side_fpcb_collision_3'>
+        <pose>0.1004 -0 0.011899 -0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_fpcb_2.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <visual name='link_11_visual'>
+        <pose>0.1253 -0 0.0118 3.14159 -0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/p4_r.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_11_fixed_joint_lump__pinky_fingertip_bracket_visual_1'>
+        <pose>0.1004 -0 0.0119 -0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_pcbbase.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_11_fixed_joint_lump__pinky_fingertip_main_fpcb_visual_2'>
+        <pose>0.1004 -0 0.0119 -0 -0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_fpcb_1.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='link_11_fixed_joint_lump__pinky_fingertip_side_fpcb_visual_3'>
+        <pose>0.1004 -0 0.011899 -0 0 3.14159</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://allegro_hand_description/meshes/distal_fpcb_2.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <self_collide>true</self_collide>
+    </link>
+    <plugin name="contact_coordinates_plugin" filename="/home/abed/Documents/BICI_Project/BICI_SENSORS_ROS/Gazebo_Simulation/Contact_Sensor/build/libcoordinates.so"/>
+    <plugin name="gazebo_ros_control" filename="/opt/ros/noetic/lib/libgazebo_ros_control.so">
+      <robotNamespace>/allegro_hand_right</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType> 
+      <legacyModeNS>true</legacyModeNS> 
+    </plugin>
   </model>
 </sdf>

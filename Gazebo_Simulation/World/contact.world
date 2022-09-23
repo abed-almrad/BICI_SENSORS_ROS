@@ -4,23 +4,28 @@ end with _bracket -->
 <sdf version='1.7'>
   <world name="default">
     <physics type="ode"> 
-      <max_contacts> 100 </max_contacts>
+      <max_contacts> 1000 </max_contacts>
     </physics>
+  <!--
     <include>
       <uri>model://ground_plane</uri>
     </include>
-
+  -->
     <include>
       <uri>model://sun</uri>
     </include>
+  <!--
     <include>
       <uri>model://my_cube</uri>
     </include>
+  -->
+
 <!--
     <include>
       <uri>model://my_cube_2</uri>
     </include>
 -->
+
   </world>
 </sdf>
   

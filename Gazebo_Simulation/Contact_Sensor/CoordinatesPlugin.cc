@@ -11,101 +11,7 @@ CoordinatesPlugin::CoordinatesPlugin() : ModelPlugin ()
 CoordinatesPlugin::~CoordinatesPlugin()
 {
 }
-//Method to adjust the positions of the raw contact points
-std::vector<float> CoordinatesPlugin::rawhomotrans(geometry_msgs::TransformStamped transformStamped_1,
-                                                   geometry_msgs::TransformStamped transformStamped_2,
-                                                   geometry_msgs::Vector3Stamped contact_pt)
-{
-    Eigen::Matrix4d resultant_matrix;
-    Eigen::Vector4d resultant_vector;
-    Eigen::Vector4d homogeneous_vector(contact_pt.vector.x,contact_pt.vector.y,contact_pt.vector.z,1.0);
-    std::vector<std::vector<float>> homogeneous_matrix_1,homogeneous_matrix_2;
-    std::vector<float> result;
-    result.resize(3);
 
-    std::cout << "Homogeneous vector: " << homogeneous_vector[0] << " " << homogeneous_vector[1]
-              << " " << homogeneous_vector[2] <<" " << homogeneous_vector[3] << std::endl;
-
-    homogeneous_matrix_1 = this->homo_matrix(transformStamped_1);
-
-    std::cout << "Homogeneous matrix 1:\n"
-              << homogeneous_matrix_1[0][0] << " " << homogeneous_matrix_1[0][1]
-              << " " << homogeneous_matrix_1[0][2] << " " << homogeneous_matrix_1[0][3] << "\n"
-              << homogeneous_matrix_1[1][0] << " " << homogeneous_matrix_1[1][1]<< " "
-              <<homogeneous_matrix_1[1][2] << " " << homogeneous_matrix_1[1][3] << "\n"
-              << homogeneous_matrix_1[2][0] << " " << homogeneous_matrix_1[2][1]<< " "
-              <<homogeneous_matrix_1[2][2] << " " << homogeneous_matrix_1[2][3] << "\n"
-              << homogeneous_matrix_1[3][0] << " " << homogeneous_matrix_1[3][1]<< " "
-              <<homogeneous_matrix_1[3][2] << " " << homogeneous_matrix_1[3][3] << "\n"<<std::endl;
-
-    homogeneous_matrix_2 = this->homo_matrix(transformStamped_2);
-
-    std::cout << "Homogeneous matrix 2:\n"
-              << homogeneous_matrix_2[0][0] << " " << homogeneous_matrix_2[0][1]
-              << " " << homogeneous_matrix_2[0][2] << " " << homogeneous_matrix_2[0][3] << "\n"
-              << homogeneous_matrix_2[1][0] << " " << homogeneous_matrix_2[1][1]<< " "
-              <<homogeneous_matrix_2[1][2] << " " << homogeneous_matrix_2[1][3] << "\n"
-              << homogeneous_matrix_2[2][0] << " " << homogeneous_matrix_2[2][1]<< " "
-              <<homogeneous_matrix_2[2][2] << " " << homogeneous_matrix_2[2][3] << "\n"
-              << homogeneous_matrix_2[3][0] << " " << homogeneous_matrix_2[3][1]<< " "
-              <<homogeneous_matrix_2[3][2] << " " << homogeneous_matrix_2[3][3] << "\n"<<std::endl;
-
-    this->input_matrix_1<< homogeneous_matrix_1[0][0],homogeneous_matrix_1[0][1],
-                         homogeneous_matrix_1[0][2],homogeneous_matrix_1[0][3],
-                         homogeneous_matrix_1[1][0],homogeneous_matrix_1[1][1],
-                         homogeneous_matrix_1[1][2],homogeneous_matrix_1[1][3],
-                         homogeneous_matrix_1[2][0],homogeneous_matrix_1[2][1],
-                         homogeneous_matrix_1[2][2],homogeneous_matrix_1[2][3],
-                         homogeneous_matrix_1[3][0],homogeneous_matrix_1[3][1],
-                         homogeneous_matrix_1[3][2],homogeneous_matrix_1[3][3];
-    std::cout<< "Input matrix 1:\n" << this->input_matrix_1.block(0,0,4,4) << std::endl;
-
-    this->input_matrix_2<< homogeneous_matrix_2[0][0],homogeneous_matrix_2[0][1],
-                         homogeneous_matrix_2[0][2],homogeneous_matrix_2[0][3],
-                         homogeneous_matrix_2[1][0],homogeneous_matrix_2[1][1],
-                         homogeneous_matrix_2[1][2],homogeneous_matrix_2[1][3],
-                         homogeneous_matrix_2[2][0],homogeneous_matrix_2[2][1],
-                         homogeneous_matrix_2[2][2],homogeneous_matrix_2[2][3],
-                         homogeneous_matrix_2[3][0],homogeneous_matrix_2[3][1],
-                         homogeneous_matrix_2[3][2],homogeneous_matrix_2[3][3];
-    std::cout<< "Input matrix 2:\n" << this->input_matrix_2.block(0,0,4,4) << std::endl;
-
-    if(input_matrix_1.determinant()== 0)
-    {
-        try
-        {
-          throw 20;
-        }
-        catch (int exception)
-        {
-          std::cout << "An exception occurred. Cannot calculate the inverse of a singular matrix" << std::endl;
-        }
-    }
-    else
-    {
-        this->output_matrix_1 = this->input_matrix_1.inverse();
-        std::cout<< "Inverse of the home pose matrix:\n" << this->output_matrix_1.block(0,0,4,4) << std::endl;
-    }
-    resultant_matrix = this->input_matrix_2*this->output_matrix_1;
-    std::cout<< "Resultant matrix: \n" << resultant_matrix.block(0,0,4,4) << std::endl;
-    resultant_vector = resultant_matrix*homogeneous_vector;
-    std::cout<< "Resultant homogeneous vector:\n" << resultant_vector[0] <<"  "
-                                                  << resultant_vector[1] <<"  "
-                                                  << resultant_vector[2] <<"  " << std::endl;
-    for (int i=0; i<3;i++)
-    {
-        result[i] = resultant_vector[i];
-    }
-    //************************P.S.************************************
-    //****************************************************************
-    //This last lines of code are making the function temporarely ineffective
-    for (int i=0; i<3;i++)
-    {
-        result[i] = homogeneous_vector[i];
-    }
-    //std::cout<<"Result: "<< result[0] <<"  "<< result[1] <<"  "<< result[2] << std::endl;
-    return result;
-}
 //Method for matrix multiplication
 std::vector<float> CoordinatesPlugin::homotrans(geometry_msgs::TransformStamped transformStamped,geometry_msgs::Vector3Stamped v3stamped)
 {
@@ -135,13 +41,21 @@ std::vector<float> CoordinatesPlugin::homotrans(geometry_msgs::TransformStamped 
             result[row] = result[row] + homogeneous_matrix[row][column]*homogeneous_vector[column];
         }
     }
+
+    //************************************P.S.************************************
+    //***************************************************************************
+    //***************************************************************************
+    //Remove the line of code directly below after placing the hand on the UR5 arm
+
+    result[2] = result[2]+0.01; //This is a temporary line of code to avoid interferance between the hand
+                                // and the simulation environment's ground
     //std::cout<<"Result: "<< result[0] << result[1] << result[2] << std::endl;
     return result;
 }
 //Method for extracting the homogeneous matrix from the tf2 transformation
 std::vector<std::vector<float>> CoordinatesPlugin::homo_matrix(geometry_msgs::TransformStamped transformStamped)
 {
-    float q0,q1,q2,q3,dx,dy,dz,norm;
+    double q0,q1,q2,q3,dx,dy,dz,norm;
     std::vector<std::vector<float>> homo_matrix;
     //Matrix resizing
     homo_matrix.resize(4,std::vector<float>(4,0));
@@ -189,7 +103,7 @@ std::vector<float> CoordinatesPlugin::homo_v(geometry_msgs::Vector3Stamped v3sta
 std::string CoordinatesPlugin::getName(std::string str)
 {
     std::string delim = "::";
-    std::string appendix = "_bracket";
+    std::string appendix = "_fpcb";
     size_t location1 = str.find_last_of(delim);
     size_t location2 = str.find(appendix);
     location1 = location1+1;
@@ -2837,48 +2751,7 @@ void CoordinatesPlugin::taxelsTreeBld()
 // Called by the world update start event
 void CoordinatesPlugin::OnUpdate()
 {
-    int counter = 0;
-    if (this->start == true)
-    {
-
-        // Getting the transformation from the brackets to the world frame at the initial home position of the allegro hand
-        for (auto const& [key, val] : this->taxels_map)
-        {
-            if(tfBuffer.canTransform("world",key+"_bracket", ros::Time(0)))
-            {
-                counter++;
-                this->transformStamped = tfBuffer.lookupTransform("world",key+"_bracket", ros::Time(0));
-                this->home_transforms[key] = this->transformStamped;
-
-                /*
-                std::cout<< key << " CONTACTS: " << std::endl;
-                std::cout<< "Transformation:"<< "\n"
-                         <<"q0: "<< this->transformStamped.transform.rotation.x<<"\n"
-                         <<"q1: "<< this->transformStamped.transform.rotation.y<<"\n"
-                         <<"q2: "<< this->transformStamped.transform.rotation.z<<"\n"
-                         <<"q3: "<< this->transformStamped.transform.rotation.w<<"\n"
-                         <<"dx: "<< this->transformStamped.transform.translation.x<<"\n"
-                         <<"dy: "<< this->transformStamped.transform.translation.y<<"\n"
-                         <<"dz: "<< this->transformStamped.transform.translation.z<< std::endl;
-                std::vector<std::vector<float>> my_homogeneous_matrix = this->homo_matrix(this->transformStamped);
-                std::cout<< "Homogeneous Transformation:"<< "\n"
-                    <<"["<< my_homogeneous_matrix[0][0]<<"   "<<my_homogeneous_matrix[0][1]<<"   "<<my_homogeneous_matrix[0][2]<<"   "<<my_homogeneous_matrix[0][3]<<"\n"
-                         << my_homogeneous_matrix[1][0]<<"   "<<my_homogeneous_matrix[1][1]<<"   "<<my_homogeneous_matrix[1][2]<<"   "<<my_homogeneous_matrix[1][3]<<"\n"
-                         << my_homogeneous_matrix[2][0]<<"   "<<my_homogeneous_matrix[2][1]<<"   "<<my_homogeneous_matrix[2][2]<<"   "<<my_homogeneous_matrix[2][3]<<"\n"
-                         << my_homogeneous_matrix[3][0]<<"   "<<my_homogeneous_matrix[3][1]<<"   "<<my_homogeneous_matrix[3][2]<<"   "<<my_homogeneous_matrix[3][3]<<"]"<<std::endl;
-                */
-            }
-            if(counter == 20) //After placing all the sensors on the hand, this number should be replaced
-            {                 // by this->sensor_count
-                this->start = false;
-                this->end = ros::Time::now().toSec();
-                std::cout << "Time needed to extract the home pose transformations (Sec): " << end-begin << std::endl;
-            }
-        }
-
-    }
 }
-
 
 /// \brief ROS helper function that processes messages
 void CoordinatesPlugin::QueueThread()
@@ -2946,11 +2819,11 @@ void CoordinatesPlugin::contact_callback(ContactPtr &_msg)
                 //***********************************************************
                 //Registering the sensor's name
                 //***********************************************************
-                if(_msg->contact(i).collision1().find("_bracket")!=std::string::npos)
+                if(_msg->contact(i).collision1().find("_fpcb")!=std::string::npos)
                 {
                     sensor_name = this->getName(_msg->contact(i).collision1());
                 }
-                else if(_msg->contact(i).collision2().find("_bracket")!=std::string::npos)
+                else if(_msg->contact(i).collision2().find("_fpcb")!=std::string::npos)
                 {
                     sensor_name = this->getName(_msg->contact(i).collision2());
                 }
@@ -3037,27 +2910,9 @@ void CoordinatesPlugin::contact_callback(ContactPtr &_msg)
                    */
                }
 
-               //Adjusting the positions of the raw contact points
-               for (unsigned int i = 0; i < this->raw_contacts_map[key].size() ; ++i)
-               {
-/*
-                   std::cout<<"Original Contact Locations: " <<raw_contacts_map[key][i][0] <<"  "
-                                                            <<raw_contacts_map[key][i][1] <<"  "
-                                                            <<raw_contacts_map[key][i][2] <<"  "<<std::endl;
-*/
-                   this->v3s.vector.x = raw_contacts_map[key][i][0];
-                   this->v3s.vector.y = raw_contacts_map[key][i][1];
-                   this->v3s.vector.z = raw_contacts_map[key][i][2];
-                   this->raw_contacts_map[key][i] = rawhomotrans(this->home_transforms[key],this->transformStamped,this->v3s);
-/*
-                   std::cout<<"Updated Contact Locations: " <<raw_contacts_map[key][i][0] <<"  "
-                                                            <<raw_contacts_map[key][i][1] <<"  "
-                                                            <<raw_contacts_map[key][i][2] <<"  "<<std::endl;
-*/
-               }
            }
            //********************************Testing Area************************************************
-           std::cout<<"Total number of contact points: " << val.size() << std::endl;
+           std::cout<<"Total number of contact points for sensor " << key <<" : "<< val.size() << std::endl;
            for (unsigned int i = 0; i < this->raw_contacts_map[key].size() ; ++i)
            {
                //Comparing the location of each contact point of a sensor with the locations of the same sensor's taxels
@@ -3129,7 +2984,6 @@ void CoordinatesPlugin::contact_callback(ContactPtr &_msg)
 
 void CoordinatesPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/)
     {
-      this->begin = ros::Time::now().toSec();
       // Store the pointer to the model
       this->model = _parent;
       // Listen to the update event. This event is broadcast every
