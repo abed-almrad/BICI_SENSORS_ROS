@@ -1,13 +1,3 @@
-/*****************************************************
- * ************************************************
- * *********************************
- * 
-//P.S. Run this code from the ROS_WS directory only
-
-******************************************************
-**********************************************************
-*********************************************************
-*/
 #include <ros/ros.h>
 #include <visualization_msgs/MarkerArray.h>
 #include <visualization_msgs/Marker.h>
@@ -15,6 +5,7 @@
 #include <geometry_msgs/TransformStamped.h>
 #include <bici_ros_sensor_reader/TactileData.h>
 #include <vector>
+#include<algorithm>
 #include <map>
 #include <iostream>
 #include <fstream>
@@ -27,6 +18,7 @@
 #define NUM_SENSORS 22
 #define NUM_SENSOR_MIN 8
 std::ofstream myfile;
+std::ofstream myfile_inactive_taxels;
 using namespace std;
 // Sensors sizes
 #define BOH_SIZE 118
@@ -39,37 +31,32 @@ using namespace std;
 #define TMB_SIZE 47
 #define TMF_SIZE 31
 
-
 class Tactile_Sensor {
   public:
     uint8_t sensor_num;        // ID of the sensor
     int size;                  // The number of taxels
     string sensor_name;          // The link on which the sensor is installed
-    uint16_t threshold = 200;  // Capacitance raw count threshold to detect contact.
+    uint16_t threshold = 150;  // Capacitance raw count threshold to detect contact.
                                // This might be later on initialized individually for each
                                //sensor or even taxel, after tuning
     uint32_t timestamp = 0; // This can be assigned to any random number
-    uint32_t prev_timestamp = 0; // This can be assigned to any random number
     std::vector<float> data;
-    std::vector<float> prev_data;
-    std::vector<float> diff_data;
-    std::vector<float> diff_data_rise;
-    //Taxels activation boolean array
-    std::vector<bool> taxels_activations_bools;
+    std::vector<float> avg; // Array of taxels average values for each sensor
+    size_t taxel_values_nb = 0; // A variable to keep track of the number of values used to initially to calculate the average for each taxel
+    bool sensor_averaged = false;
     std::vector<geometry_msgs::TransformStamped> transformStamped_taxels;
     std::vector<std::vector<float>> taxels_coordinates;
+    std::vector<std::vector<float>> inactive_taxels_coordinates;
     Tactile_Sensor(uint8_t sensor_num, int size, string sensor_name){
         //Any other number can be used for initialization
         this->sensor_num = sensor_num;
         this->size = size;
         this->sensor_name = sensor_name;
         this->data.resize(size);
-        this->prev_data.resize(size);
-        this->diff_data.resize(size);
-        this->diff_data_rise.resize(size);
+        this->avg.resize(size);
         this->transformStamped_taxels.resize(size);
-        this->taxels_coordinates.resize(size, std::vector<float>(3, 0));//Vector monitoring the sensor's taxels positions
-        this->taxels_activations_bools.resize(size,false);
+        this->taxels_coordinates.resize(size, std::vector<float>(3, 0));//Vector monitoring the sensor's activated taxels positions
+        this->inactive_taxels_coordinates.resize(size, std::vector<float>(3, 0));//Vector monitoring the sensor's inactive taxels positions
     }
 };
 
@@ -104,110 +91,104 @@ Tactile_Sensor Sensors_Array[NUM_SENSORS]{sensor1, sensor2, sensor3, sensor4, se
 sensor9, sensor10, sensor11, sensor12, sensor13, sensor14, sensor15, sensor16, sensor17, sensor18, sensor19,
 sensor20, sensor21, sensor22};
 vector<vector<float>> points_storage; //Container for the contact points to be stored
+vector<vector<float>> inactive_points_storage; //Container for the inactive taxel points to be stored
 string act_cmd = "false";
 tf2_ros::Buffer tfBuffer;
 tf2_ros::TransformListener *tfListener;
 map <string, visualization_msgs::Marker> markers_map; // A dictionary for the markers placed on the taxels
 visualization_msgs::MarkerArray markers_array; //Array of markers (e.g. a marker is created for each taxel)
+int taxel_values_nb_max = 100; // Number of values used to initially to calculate the average for each taxel
+
 //One common callback function
-void callback(const bici_ros_sensor_reader::TactileData msg){
-    Sensors_Array[msg.sensor_num-8].prev_timestamp = Sensors_Array[msg.sensor_num-8].timestamp;
-    Sensors_Array[msg.sensor_num-8].prev_data = Sensors_Array[msg.sensor_num-8].data;
+void callback(const bici_ros_sensor_reader::TactileData msg)
+{
     Sensors_Array[msg.sensor_num-8].timestamp = msg.timestamp;
     Sensors_Array[msg.sensor_num-8].data = msg.data;
-    for (size_t i = 0; i < Sensors_Array[msg.sensor_num-8].size; i++)
+    if (Sensors_Array[msg.sensor_num-8].taxel_values_nb < taxel_values_nb_max)
     {
-        Sensors_Array[msg.sensor_num-8].diff_data[i] = Sensors_Array[msg.sensor_num-8].data[i]-Sensors_Array[msg.sensor_num-8].prev_data[i];
-
-        if (Sensors_Array[msg.sensor_num-8].prev_data[i] == 0)
+        std::transform(Sensors_Array[msg.sensor_num-8].avg.begin(), 
+                       Sensors_Array[msg.sensor_num-8].avg.end(),
+                       msg.data.begin(), Sensors_Array[msg.sensor_num-8].avg.begin(),
+                       std::plus<float>()); // Running sum for the taxels values
+        Sensors_Array[msg.sensor_num-8].taxel_values_nb += 1;
+        return;
+    }
+    else if ((Sensors_Array[msg.sensor_num-8].taxel_values_nb == taxel_values_nb_max) && !Sensors_Array[msg.sensor_num-8].sensor_averaged)
+    {
+        int k = taxel_values_nb_max;
+        std::transform(Sensors_Array[msg.sensor_num-8].avg.begin(),
+                       Sensors_Array[msg.sensor_num-8].avg.end(),
+                       Sensors_Array[msg.sensor_num-8].avg.begin(), [k](float &c){ return c/k; });
+        std::cout << "\n" << "For sensor number " << msg.sensor_num-0 << ", the baseline values are: "; 
+        for (size_t i = 0; i < Sensors_Array[msg.sensor_num-8].avg.size(); i++)
         {
-           Sensors_Array[msg.sensor_num-8].diff_data[i] = 0; 
+            std::cout << Sensors_Array[msg.sensor_num-8].avg[i] << ", "; 
         }
-/*
-        else if (Sensors_Array[msg.sensor_num-8].diff_data[i] == Sensors_Array[msg.sensor_num-8].prev_data[i])
-        {
-            Sensors_Array[msg.sensor_num-8].diff_data[i] = 0; 
-        }
-*/        
-/*
-        std::cout << "Previous Data: " << Sensors_Array[msg.sensor_num-8].prev_data[i] << std::endl;
-        std::cout << "Current Data: " << Sensors_Array[msg.sensor_num-8].data[i] << std::endl;
-        std::cout << "Diff Data: " << Sensors_Array[msg.sensor_num-8].diff_data[i] << std::endl;
-*/
+        std::cout << "." << std::endl;
+        Sensors_Array[msg.sensor_num-8].sensor_averaged = true;    
     }
     
-/*
-    std::cout<<"Differential Data for sensor: " << msg.sensor_num-8 << std::endl;
-    for (size_t i = 0; i < Sensors_Array[msg.sensor_num-8].size; i++)
-    {
-         std::cout << Sensors_Array[msg.sensor_num-8].diff_data[i] <<' '<<',' << ' ';
-    }  
-*/
+    
+
+    
     //cout<<act_cmd<<endl;
     if (act_cmd == "true") // Activation of a save command through a ros node
     {
         for(int j=0;j<NUM_SENSORS;j++){
             //cout << Sensors_Array[j].taxels_coordinates.size() << endl;
             //cout << Sensors_Array[j].taxels_coordinates[0].size() << endl;
-/*
-***********************************************************
-**********************************************************
-*********************************************************
-The following line of code (i.e. if statement) is temporary because currently we are only interested in the face of the hand
-********************************************************
-*******************************************************
-******************************************************
-*/
-        if (j == 0 || j == 3 || j == 4 || j == 5 || j == 13 || j == 15 || j == 16 || j == 17 || j == 20 || j == 21)
-        {
-            for(int taxel=0;taxel<Sensors_Array[j].taxels_coordinates.size();taxel++)
-            {
+            for(int taxel=0;taxel<Sensors_Array[j].taxels_coordinates.size();taxel++){
                 points_storage.push_back(Sensors_Array[j].taxels_coordinates[taxel]);
                 //cout<< "X_Storage"<< points_storage[taxel][0] << endl;
                 //cout<< "Y_Storage"<< points_storage[taxel][1] << endl;
                 //cout<< "Z_Storage"<< points_storage[taxel][2] << endl;
+                inactive_points_storage.push_back(Sensors_Array[j].inactive_taxels_coordinates[taxel]);
+                //cout<< "X_Storage"<< inactive_points_storage[taxel][0] << endl;
+                //cout<< "Y_Storage"<< inactive_points_storage[taxel][1] << endl;
+                //cout<< "Z_Storage"<< inactive_points_storage[taxel][2] << endl;
             }
         }
-        
-
-        }
-        //Writing data to a csv file
+        //Writing active taxels data to a csv file
         for (size_t i = 0; i < points_storage.size(); i++)
         {
             for (size_t j = 0; j < points_storage[i].size(); j++)
             {
-                cout<< "Coordinates_Storage "<< points_storage[i][j] << endl;
+                cout<< "Active_Contact_Coordinates_Storage "<< points_storage[i][j] << endl;
                 myfile << points_storage[i][j] << ',';
-                //cout << "Recorded coordinate" << points_storage[i][j] << endl;
+                //cout << "Recorded active taxel coordinate" << points_storage[i][j] << endl;
             }
             myfile << '\n';
             
         }
         myfile.close();
-        act_cmd = "false";
         points_storage.clear();
+
+        //Writing inactive taxels data to a csv file
+        for (size_t i = 0; i < inactive_points_storage.size(); i++)
+        {
+            for (size_t j = 0; j < inactive_points_storage[i].size(); j++)
+            {
+                cout<< "Inactive_Contact_Coordinates_Storage "<< inactive_points_storage[i][j] << endl;
+                myfile_inactive_taxels << inactive_points_storage[i][j] << ',';
+                //cout << "Recorded inactive taxel coordinate" << inactive_points_storage[i][j] << endl;
+            }
+            myfile_inactive_taxels << '\n';
+            
+        }
+        myfile_inactive_taxels.close();
+        inactive_points_storage.clear();
+
+        act_cmd = "false";     
         ros::shutdown();
 
     }
-     
-    for(int taxel=0;taxel<Sensors_Array[msg.sensor_num-8].size;taxel++){
-//       std::cout << "Diff data before entering the if: " << Sensors_Array[msg.sensor_num-8].diff_data[taxel] << std::endl;
-       if (Sensors_Array[msg.sensor_num-8].diff_data[taxel]>= Sensors_Array[msg.sensor_num-8].threshold)
-        {
-           Sensors_Array[msg.sensor_num-8].taxels_activations_bools[taxel] = true;
-           Sensors_Array[msg.sensor_num-8].diff_data_rise[taxel] = Sensors_Array[msg.sensor_num-8].diff_data[taxel];
-           std::cout << "Taxel activated with differential rise of: " << Sensors_Array[msg.sensor_num-8].diff_data_rise[taxel] << std::endl;
-        }
-
-       if ( (Sensors_Array[msg.sensor_num-8].diff_data[taxel] < -Sensors_Array[msg.sensor_num-8].diff_data_rise[taxel]*0.7) && Sensors_Array[msg.sensor_num-8].taxels_activations_bools[taxel])
-        {
-           Sensors_Array[msg.sensor_num-8].taxels_activations_bools[taxel] = false; 
-           std::cout << "Taxel deactivated with a differential value of: " << Sensors_Array[msg.sensor_num-8].diff_data[taxel] << std::endl;
-        } 
-//        std::cout<< "Taxel Activation Boolean" << Sensors_Array[msg.sensor_num-8].taxels_activations_bools[taxel] << std::endl;
-        
-        if(Sensors_Array[msg.sensor_num-8].taxels_activations_bools[taxel])       
+//    std::cout << "\n" << "Normalized readings for sensor number (" << msg.sensor_num-0 << "): " << std::endl;
+    for(int taxel=0;taxel<Sensors_Array[msg.sensor_num-8].size;taxel++)
+    {
+//        std::cout << abs(Sensors_Array[msg.sensor_num-8].data[taxel]-Sensors_Array[msg.sensor_num-8].avg[taxel]) << " ";
+       if (abs(Sensors_Array[msg.sensor_num-8].data[taxel]-Sensors_Array[msg.sensor_num-8].avg[taxel])>= Sensors_Array[msg.sensor_num-8].threshold)
        {
+            std::cout << "\n" << "Activation difference for sensor number (" << msg.sensor_num-0 << "), Taxel number (" << taxel <<"): " << abs(Sensors_Array[msg.sensor_num-8].data[taxel]-Sensors_Array[msg.sensor_num-8].avg[taxel]) << std::endl;
            //cout << "marker color should change" << endl;
             visualization_msgs::Marker marker;
             marker.ns = Sensors_Array[msg.sensor_num-8].sensor_name+"_sub_taxel";
@@ -262,24 +243,52 @@ The following line of code (i.e. if statement) is temporary because currently we
              
         }
     
-       if (Sensors_Array[msg.sensor_num-8].taxels_activations_bools[taxel] && tfBuffer.canTransform("palm_link", Sensors_Array[msg.sensor_num-8].sensor_name+"_sub_taxel_"+std::to_string(taxel), ros::Time(0))) 
+       if (tfBuffer.canTransform("palm_link", Sensors_Array[msg.sensor_num-8].sensor_name+"_sub_taxel_"+std::to_string(taxel), ros::Time(0))) 
        {
            //cout<< tfBuffer.canTransform(Sensors_Array[msg.sensor_num-8].sensor_name+"_taxel_"+std::to_string(taxel),"palm_link", ros::Time(0))<<endl;
-           try{
+           try
+           {
                Sensors_Array[msg.sensor_num-8].transformStamped_taxels[taxel] = tfBuffer.lookupTransform("palm_link", Sensors_Array[msg.sensor_num-8].sensor_name+"_sub_taxel_"+std::to_string(taxel), ros::Time(0));                                                                                                                                                    
            }
-           catch (ros::Exception &ex) {
+           catch (ros::Exception &ex) 
+           {
             ROS_WARN("%s",ex.what());
             ros::Duration(1.0).sleep();
             continue;
             }
-            Sensors_Array[msg.sensor_num-8].taxels_coordinates[taxel][0] = Sensors_Array[msg.sensor_num-8].transformStamped_taxels[taxel].transform.translation.x;
-            //cout<< "X Coordinate " << Sensors_Array[msg.sensor_num-8].taxels_coordinates[taxel][0] << endl; 
-            Sensors_Array[msg.sensor_num-8].taxels_coordinates[taxel][1] = Sensors_Array[msg.sensor_num-8].transformStamped_taxels[taxel].transform.translation.y;
-            //cout<< "Y Coordinate " << Sensors_Array[msg.sensor_num-8].taxels_coordinates[taxel][1] << endl;
-            Sensors_Array[msg.sensor_num-8].taxels_coordinates[taxel][2] = Sensors_Array[msg.sensor_num-8].transformStamped_taxels[taxel].transform.translation.z;
-            //cout<< "Z Coordinate " << Sensors_Array[msg.sensor_num-8].taxels_coordinates[taxel][2] << endl;
-       }
+
+            if(abs(Sensors_Array[msg.sensor_num-8].data[taxel]-Sensors_Array[msg.sensor_num-8].avg[taxel])>= Sensors_Array[msg.sensor_num-8].threshold)
+            {
+                Sensors_Array[msg.sensor_num-8].taxels_coordinates[taxel][0] = Sensors_Array[msg.sensor_num-8].transformStamped_taxels[taxel].transform.translation.x;
+                //cout<< "X Coordinate " << Sensors_Array[msg.sensor_num-8].taxels_coordinates[taxel][0] << endl; 
+                Sensors_Array[msg.sensor_num-8].taxels_coordinates[taxel][1] = Sensors_Array[msg.sensor_num-8].transformStamped_taxels[taxel].transform.translation.y;
+                //cout<< "Y Coordinate " << Sensors_Array[msg.sensor_num-8].taxels_coordinates[taxel][1] << endl;
+                Sensors_Array[msg.sensor_num-8].taxels_coordinates[taxel][2] = Sensors_Array[msg.sensor_num-8].transformStamped_taxels[taxel].transform.translation.z;
+                //cout<< "Z Coordinate " << Sensors_Array[msg.sensor_num-8].taxels_coordinates[taxel][2] << endl;
+
+                Sensors_Array[msg.sensor_num-8].inactive_taxels_coordinates[taxel][0] = 0;
+                Sensors_Array[msg.sensor_num-8].inactive_taxels_coordinates[taxel][1] = 0;
+                Sensors_Array[msg.sensor_num-8].inactive_taxels_coordinates[taxel][2] = 0;
+            }
+            else
+            {
+                Sensors_Array[msg.sensor_num-8].inactive_taxels_coordinates[taxel][0] = Sensors_Array[msg.sensor_num-8].transformStamped_taxels[taxel].transform.translation.x;
+                //cout<< "X Coordinate " << Sensors_Array[msg.sensor_num-8].taxels_coordinates[taxel][0] << endl; 
+                Sensors_Array[msg.sensor_num-8].inactive_taxels_coordinates[taxel][1] = Sensors_Array[msg.sensor_num-8].transformStamped_taxels[taxel].transform.translation.y;
+                //cout<< "Y Coordinate " << Sensors_Array[msg.sensor_num-8].taxels_coordinates[taxel][1] << endl;
+                Sensors_Array[msg.sensor_num-8].inactive_taxels_coordinates[taxel][2] = Sensors_Array[msg.sensor_num-8].transformStamped_taxels[taxel].transform.translation.z;
+                //cout<< "Z Coordinate " << Sensors_Array[msg.sensor_num-8].taxels_coordinates[taxel][2] << endl;
+                        
+                Sensors_Array[msg.sensor_num-8].taxels_coordinates[taxel][0] = 0;
+                Sensors_Array[msg.sensor_num-8].taxels_coordinates[taxel][1] = 0;
+                Sensors_Array[msg.sensor_num-8].taxels_coordinates[taxel][2] = 0;
+            }
+            
+        }
+        else
+        {
+            std::cout << "No transformation is available" << std::endl;
+        }
         
     }
 
@@ -297,11 +306,12 @@ int main(int argc, char** argv){
     tfListener = new tf2_ros::TransformListener(tfBuffer);
     std::array<ros::Subscriber, NUM_SENSORS> subscribers;
     string full_path = filesystem::current_path();
-    std::cout << "The full path is: " << full_path << std::endl;
     size_t pos = full_path.find("ROS_WS");
     string path = full_path.substr(0,pos+6)+"/Pt_Cloud_Scripts/points_coordinates.csv";
-    std::cout<<"THE PATH IS: " + path<< endl;
+    string path_inactive_taxels = full_path.substr(0,pos+6)+"/Pt_Cloud_Scripts/inactive_points_coordinates.csv";
+    cout<<"THE PT CLOUD SAVING PATH IS: " + path<< endl;
     myfile.open(path.c_str());
+    myfile_inactive_taxels.open(path_inactive_taxels.c_str());
     ros::Subscriber saving_subscriber; //A subscriber to the saving_activation command
     for (size_t i=0; i < subscribers.size(); i++)
     {

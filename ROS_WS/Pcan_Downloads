@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #Peak linux driver download
-#wget http://www.peak-system.com/fileadmin/media/linux/files/peak-linux-driver-8.14.0.tar.gz
+wget http://www.peak-system.com/fileadmin/media/linux/files/peak-linux-driver-8.15.1.tar.gz
 
 #PCAN Basic download
-#wget https://www.peak-system.com/produktcd/Develop/PC%20interfaces/Linux/PCAN-Basic_API_for_Linux/PCAN-Basic_Linux-4.5.2.tar.gz
+wget https://www.peak-system.com/produktcd/Develop/PC%20interfaces/Linux/PCAN-Basic_API_for_Linux/PCAN-Basic_Linux-4.6.1.tar.gz
 
 # libBHAND library download
 echo "Enter the desired system bits for the libBHAND grasping library (e.g. 32 or 64)"
