@@ -1,14 +1,11 @@
 #Catkin generated directories
 ROS_WS/build/
 ROS_WS/devel/
-ROS_WS/peak-linux-driver-8.14.0
-ROS_WS/libBHand_64
-ROS_WS/PCAN-Basic_Linux-4.5.4
 ROS_WS/Pt_Cloud_Scripts/points_coordinates.csv
+ROS_WS/Pt_Cloud_Scripts/inactive_points_coordinates.csv
 Gazebo_Simulation/Contact_Sensor/build
 Gazebo_Simulation/Pt_Cloud_Scripts/contacts_coordinates.csv
 Gazebo_Simulation/Pt_Cloud_Scripts/filtered_contacts_coordinates.csv
-Gazebo_Simulation/Simulation_Joint_States/build
 .vscode
 *.zip
 
