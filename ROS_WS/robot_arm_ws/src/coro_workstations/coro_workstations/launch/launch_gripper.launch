@@ -1,0 +1,12 @@
+<launch>
+	<arg name="num_grippers" default="1"/>
+	<arg name="comport" default="/tmp/ttyUR"/>
+	<arg name="baudrate" default="115200"/>
+
+    <!-- Robotiq 85 ROS Driver -->
+    <node pkg="robotiq_85_driver" type="robotiq_85_driver" name="robotiq_85_driver" respawn="true" output="screen">
+        <param name="num_grippers" value="$(arg num_grippers)"/>
+        <param name="comport" value="$(arg comport)"/>
+        <param name="baud" value="$(arg baudrate)" />
+    </node>
+</launch>

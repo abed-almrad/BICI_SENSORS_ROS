@@ -62,14 +62,14 @@ class Tactile_Sensor {
 
 //The set of integrated sensors:
 
-Tactile_Sensor sensor1(8, PF_SIZE, "mpf");
-Tactile_Sensor sensor2(9, MB_SIZE, "mmb");
-Tactile_Sensor sensor3(10, PB_SIZE, "mpb");
-Tactile_Sensor sensor4(11, FT_SIZE, "pft");
-Tactile_Sensor sensor5(12, MF_SIZE, "pmf");
-Tactile_Sensor sensor6(13, PF_SIZE, "ppf");
-Tactile_Sensor sensor7(14, MB_SIZE, "pmb");
-Tactile_Sensor sensor8(15, PB_SIZE, "ppb");
+Tactile_Sensor sensor1(8, PF_SIZE, "ipf");
+Tactile_Sensor sensor2(9, MB_SIZE, "pmb");
+Tactile_Sensor sensor3(10, PB_SIZE, "ipb");
+Tactile_Sensor sensor4(11, FT_SIZE, "mft");
+Tactile_Sensor sensor5(12, MF_SIZE, "mmf");
+Tactile_Sensor sensor6(13, PF_SIZE, "mpf");
+Tactile_Sensor sensor7(14, MB_SIZE, "mmb");
+Tactile_Sensor sensor8(15, PB_SIZE, "mpb");
 Tactile_Sensor sensor9(16, FT_SIZE, "tft");
 Tactile_Sensor sensor10(17, TMF_SIZE, "tmf");
 Tactile_Sensor sensor11(18, PF_SIZE, "tpf");
@@ -77,13 +77,13 @@ Tactile_Sensor sensor12(19, TMB_SIZE, "tmb");
 Tactile_Sensor sensor13(20, PB_SIZE, "tpb");
 Tactile_Sensor sensor14(21, PALM_SIZE, "palm");
 Tactile_Sensor sensor15(22, BOH_SIZE, "boh");
-Tactile_Sensor sensor16(23, FT_SIZE, "ift");
-Tactile_Sensor sensor17(24, MF_SIZE, "imf");
-Tactile_Sensor sensor18(25, PF_SIZE, "ipf");
+Tactile_Sensor sensor16(23, FT_SIZE, "pft");
+Tactile_Sensor sensor17(24, MF_SIZE, "pmf");
+Tactile_Sensor sensor18(25, PF_SIZE, "ppf");
 Tactile_Sensor sensor19(26, MB_SIZE, "imb");
-Tactile_Sensor sensor20(27, PB_SIZE, "ipb");
-Tactile_Sensor sensor21(28, FT_SIZE, "mft");
-Tactile_Sensor sensor22(29, MF_SIZE, "mmf");
+Tactile_Sensor sensor20(27, PB_SIZE, "ppb");
+Tactile_Sensor sensor21(28, FT_SIZE, "ift");
+Tactile_Sensor sensor22(29, MF_SIZE, "imf");
 
 
 
@@ -185,6 +185,10 @@ void callback(const bici_ros_sensor_reader::TactileData msg)
 //    std::cout << "\n" << "Normalized readings for sensor number (" << msg.sensor_num-0 << "): " << std::endl;
     for(int taxel=0;taxel<Sensors_Array[msg.sensor_num-8].size;taxel++)
     {
+        if (msg.sensor_num == 24 && taxel>20)
+        {
+            continue;
+        }
 //        std::cout << abs(Sensors_Array[msg.sensor_num-8].data[taxel]-Sensors_Array[msg.sensor_num-8].avg[taxel]) << " ";
        if (abs(Sensors_Array[msg.sensor_num-8].data[taxel]-Sensors_Array[msg.sensor_num-8].avg[taxel])>= Sensors_Array[msg.sensor_num-8].threshold)
        {
@@ -255,6 +259,17 @@ void callback(const bici_ros_sensor_reader::TactileData msg)
             ROS_WARN("%s",ex.what());
             ros::Duration(1.0).sleep();
             continue;
+            }
+            // **********************************
+            // **********************************
+            // The below if statement is only TEMPORARY (i.e. should be removed later) to suppress 
+            // some taxels that are giving me
+            // headache (possibly because of a soldering or sensor/dielectric installation issue on
+            // the allegro hand)
+
+            if (msg.sensor_num == 24 && taxel>20)
+            {
+                continue;
             }
 
             if(abs(Sensors_Array[msg.sensor_num-8].data[taxel]-Sensors_Array[msg.sensor_num-8].avg[taxel])>= Sensors_Array[msg.sensor_num-8].threshold)

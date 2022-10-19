@@ -29,6 +29,30 @@ where each number correspond to a joint as per the instructions provided in the 
 
 **P.S.** The coordinates_listener node should be run separately from the allegro_hand.launch file (should be working toward including it in the launch file) and from the ROW_WS directory.
 
+**Robot Arm Workspace Building Notes**
+
+    **P.S.** Before building any package, run the following two commands:
+
+       - rosdep update
+
+       - rosdep install --rosdistro noetic --ignore-src --from-paths src --os=ubuntu:focal
+
+    **P.S.** To clone a branch, you have to use the following command:
+        git clone -b "branch-name" --single-branch "repo-link"
+
+    1- In case of a PC format, before building robotiq package, run the following command:
+        sudo apt install ros-noetic-soem
+
+    2- When building coro_workstations package, clone the robotiq_85_gripper separately inside the coro_workstations package (this is because  robotiq_85_gripper is used as a submodule inside the coro_workstations repo) 
+
+**UR5-e Teaching Pendant Setup + Extra Notes (for hardware control via Moveit)**
+
+    1- Upper right corner three-dashes button --> settings --> System --> URCaps --> Press the "+" button to add: "External Control", "rs485", "Robotiq_Grippers" and "Robotiq_Wrist_Camera" from usbdisk
+
+    2- Go to the Run tab (in the upper toolbar) and load ROS.urp (by pressing the "Load Program" button, you can find the .urp file directly in the home directory)
+
+    3- In case of a PC format, before running the hardware-related launch file, run the following command: sudo apt install ros-noetic-moveit-resources-prbt-moveit-config
+
 **P.S.** In case of a format, how to setup your PC for ROS development:
 
 1- In VScode: Use ctrl + shift + p to open the command palette and search there for "c_cpp_properties.json" then open the file and add the highlighted line of code as it appears in the "VScode_ROS_Setup" image under ROS_WS directory.
