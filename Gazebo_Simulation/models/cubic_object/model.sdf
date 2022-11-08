@@ -1,34 +1,25 @@
 <sdf version='1.7'>
   <model name='cubic_object'>
 
-    <joint name='world_to_cubic_object_link_joint' type='prismatic'>
-      <axis>
-        <xyz>0 1 0</xyz>
-      </axis>
-      <pose relative_to='__model__'>0.06 0.0534 0 0 -0 3.14</pose>
-      <parent>world</parent>
-      <child>cubic_object_link</child>
-    </joint>
-
     <link name='cubic_object_link'>
-      <pose relative_to='world_to_cubic_object_link_joint'>0 0 0 0 -0 0</pose>
+      <pose>0 0 0 0 -0 0</pose>
       <inertial>
-        <pose>-0.00206539 -0.02 0.0707474 0 -0 0</pose>
-        <mass>0.129</mass>
+        <pose>7.80626e-18 0 -0.1075 0 -0 0</pose>
+        <mass>0.0770781</mass>
         <inertia>
-          <ixx>0.000154366</ixx>
+          <ixx>0.000307188</ixx>
           <ixy>0</ixy>
-          <ixz>-0.000114977</ixz>
-          <iyy>0.000574935</iyy>
+          <ixz>1.98892e-20</ixz>
+          <iyy>0.000307188</iyy>
           <iyz>0</iyz>
-          <izz>0.000454969</izz>
+          <izz>2.05542e-05</izz>
         </inertia>
       </inertial>
       <collision name='cubic_object_collision'>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://cubic_object/meshes/cubic_object_resized.stl</uri>
+            <uri>model://cubic_object/meshes/cubic_object.stl</uri>
           </mesh>
         </geometry>
         <surface>
@@ -47,7 +38,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://cubic_object/meshes/cubic_object_resized.stl</uri>
+            <uri>model://cubic_object/meshes/cubic_object.stl</uri>
           </mesh>
         </geometry>
       </visual>

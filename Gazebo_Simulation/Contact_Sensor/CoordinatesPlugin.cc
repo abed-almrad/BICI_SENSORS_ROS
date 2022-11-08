@@ -2863,54 +2863,58 @@ void CoordinatesPlugin::contact_callback(ContactPtr &_msg)
     }
     if(this->act_cmd == "true")
     {
+        // Registering all the taxels positions at the saving moment to better understand the context at which the contact points were registered
+        for (auto const& [key, val] : this->transformed_taxels_map)
+        {
+            // Getting the transformation from the brackets to the world frame using tf2
+            if(tfBuffer.canTransform("world",key+"_bracket", ros::Time(0)))
+            {
+                this->transformStamped = tfBuffer.lookupTransform("world",key+"_bracket", ros::Time(0));
+            /*
+                std::cout<< "Transformation:"<< "\n"
+                         <<"q0: "<< this->transformStamped.transform.rotation.x<<"\n"
+                         <<"q1: "<< this->transformStamped.transform.rotation.y<<"\n"
+                         <<"q2: "<< this->transformStamped.transform.rotation.z<<"\n"
+                         <<"q3: "<< this->transformStamped.transform.rotation.w<<"\n"
+                         <<"dx: "<< this->transformStamped.transform.translation.x<<"\n"
+                         <<"dy: "<< this->transformStamped.transform.translation.y<<"\n"
+                         <<"dz: "<< this->transformStamped.transform.translation.z<< std::endl;
+                std::vector<std::vector<float>> my_homogeneous_matrix = this->homo_matrix(this->transformStamped);
+                std::cout<< "Homogeneous Transformation:"<< "\n"
+                    <<"["<< my_homogeneous_matrix[0][0]<<"   "<<my_homogeneous_matrix[0][1]<<"   "<<my_homogeneous_matrix[0][2]<<"   "<<my_homogeneous_matrix[0][3]<<"\n"
+                         << my_homogeneous_matrix[1][0]<<"   "<<my_homogeneous_matrix[1][1]<<"   "<<my_homogeneous_matrix[1][2]<<"   "<<my_homogeneous_matrix[1][3]<<"\n"
+                         << my_homogeneous_matrix[2][0]<<"   "<<my_homogeneous_matrix[2][1]<<"   "<<my_homogeneous_matrix[2][2]<<"   "<<my_homogeneous_matrix[2][3]<<"\n"
+                         << my_homogeneous_matrix[3][0]<<"   "<<my_homogeneous_matrix[3][1]<<"   "<<my_homogeneous_matrix[3][2]<<"   "<<my_homogeneous_matrix[3][3]<<"]"<<std::endl;
+            */
+                for (unsigned int i = 0; i < this->taxels_map[key].size() ; ++i)
+                {
 
+                    /*
+                    std::cout<<"Taxel " <<std::to_string(i) << " before trans coordinates: "
+                             <<"X: "<<this->taxels_map[key][i].vector.x
+                             <<" Y: " << this->taxels_map[key][i].vector.y
+                             << " Z: "<< this->taxels_map[key][i].vector.z << std::endl;
+                    */
+
+                    this->transformed_taxels_map[key][i] = this->homotrans(this->transformStamped,taxels_map[key][i]);// Apply the transformations on "taxels_map[key]"
+
+                    /*
+                    std::cout<<"Taxel " <<std::to_string(i) << " after trans coordinates: "
+                             <<"X: "<<this->transformed_taxels_map[key][i][0]
+                             <<" Y: " << this->transformed_taxels_map[key][i][1]
+                             << " Z: "<< this->transformed_taxels_map[key][i][2] << std::endl;
+                    */
+                }
+
+            }
+        }
         //Filtering of the raw_contacts_map
         for (auto const& [key, val] : this->raw_contacts_map) // key is the sensor name: ift, mpb...
                                                               // val is a vector of contact locations for the correspondent sensor
 //        for (auto const& [key, val] : this->taxels_map)
         {
            this->target_sensor = key;
-           // Getting the transformation from the brackets to the world frame using tf2
-           if(tfBuffer.canTransform("world",key+"_bracket", ros::Time(0)))
-           {
-               this->transformStamped = tfBuffer.lookupTransform("world",key+"_bracket", ros::Time(0));
-           /*
-               std::cout<< "Transformation:"<< "\n"
-                        <<"q0: "<< this->transformStamped.transform.rotation.x<<"\n"
-                        <<"q1: "<< this->transformStamped.transform.rotation.y<<"\n"
-                        <<"q2: "<< this->transformStamped.transform.rotation.z<<"\n"
-                        <<"q3: "<< this->transformStamped.transform.rotation.w<<"\n"
-                        <<"dx: "<< this->transformStamped.transform.translation.x<<"\n"
-                        <<"dy: "<< this->transformStamped.transform.translation.y<<"\n"
-                        <<"dz: "<< this->transformStamped.transform.translation.z<< std::endl;
-               std::vector<std::vector<float>> my_homogeneous_matrix = this->homo_matrix(this->transformStamped);
-               std::cout<< "Homogeneous Transformation:"<< "\n"
-                   <<"["<< my_homogeneous_matrix[0][0]<<"   "<<my_homogeneous_matrix[0][1]<<"   "<<my_homogeneous_matrix[0][2]<<"   "<<my_homogeneous_matrix[0][3]<<"\n"
-                        << my_homogeneous_matrix[1][0]<<"   "<<my_homogeneous_matrix[1][1]<<"   "<<my_homogeneous_matrix[1][2]<<"   "<<my_homogeneous_matrix[1][3]<<"\n"
-                        << my_homogeneous_matrix[2][0]<<"   "<<my_homogeneous_matrix[2][1]<<"   "<<my_homogeneous_matrix[2][2]<<"   "<<my_homogeneous_matrix[2][3]<<"\n"
-                        << my_homogeneous_matrix[3][0]<<"   "<<my_homogeneous_matrix[3][1]<<"   "<<my_homogeneous_matrix[3][2]<<"   "<<my_homogeneous_matrix[3][3]<<"]"<<std::endl;
-           */
-               for (unsigned int i = 0; i < this->taxels_map[key].size() ; ++i)
-               {
 
-                   /*
-                   std::cout<<"Taxel " <<std::to_string(i) << " before trans coordinates: "
-                            <<"X: "<<this->taxels_map[key][i].vector.x
-                            <<" Y: " << this->taxels_map[key][i].vector.y
-                            << " Z: "<< this->taxels_map[key][i].vector.z << std::endl;
-                   */
-
-                   this->transformed_taxels_map[key][i] = this->homotrans(this->transformStamped,taxels_map[key][i]);// Apply the transformations on "taxels_map[key]"
-
-                   /*
-                   std::cout<<"Taxel " <<std::to_string(i) << " after trans coordinates: "
-                            <<"X: "<<this->transformed_taxels_map[key][i][0]
-                            <<" Y: " << this->transformed_taxels_map[key][i][1]
-                            << " Z: "<< this->transformed_taxels_map[key][i][2] << std::endl;
-                   */
-               }
-
-           }
            //********************************Testing Area************************************************
            std::cout<<"Total number of contact points for sensor " << key <<" : "<< val.size() << std::endl;
            for (unsigned int i = 0; i < this->raw_contacts_map[key].size() ; ++i)
@@ -2936,11 +2940,18 @@ void CoordinatesPlugin::contact_callback(ContactPtr &_msg)
                                 << std::endl;
 
                        this->filtered_contact_positions_v.push_back(this->transformed_taxels_map[key][j]);
+                       this->active_taxels_indices.push_back(j);
                    }
                }
            }
            this->filtered_contacts_map[key] = this->filtered_contact_positions_v;
            this->filtered_contact_positions_v.clear();
+           for (int var = 0; var < active_taxels_indices.size(); var++)
+           {
+             this->transformed_taxels_map[key][this->active_taxels_indices[var]].clear();
+           }
+           this->active_taxels_indices.clear();
+
         }
         //Flushing the contact locations into a .csv file
         for (auto const& [key, val] : this->raw_contacts_map)
@@ -2973,9 +2984,25 @@ void CoordinatesPlugin::contact_callback(ContactPtr &_msg)
             }
 
         }
+        //Flushing all taxels locations into a .csv file
+        for (auto const& [key, val] : this->transformed_taxels_map)
+        {
+
+            if(this->fp_inactive_taxels == NULL) {
+                printf("file can't be opened\n");
+                exit(1);
+            }
+            fflush(stdin);
+            for (unsigned int i = 0; i < transformed_taxels_map[key].size() ; ++i)
+            {
+            fprintf(this->fp_inactive_taxels, "%f,%f,%f \n", transformed_taxels_map[key][i][0],transformed_taxels_map[key][i][1],transformed_taxels_map[key][i][2]);
+            }
+
+        }
 
     fclose(this->fp);
     fclose(this->fp_filtered);
+    fclose(this->fp_inactive_taxels);
     this->act_cmd = "false";
     ros::shutdown();
     }
@@ -3011,8 +3038,10 @@ void CoordinatesPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/
           }
           std::string path = "contacts_coordinates.csv";
           std::string path_filtered = "filtered_contacts_coordinates.csv";
+          std::string path_inactive_taxels = "inactive_taxels_coordinates.csv";
           this->fp = fopen(path.c_str(), "w");
           this->fp_filtered = fopen(path_filtered.c_str(), "w");
+          this->fp_inactive_taxels = fopen(path_inactive_taxels.c_str(), "w");
           //Building the taxels data structure
           this->taxelsTreeBld();
 

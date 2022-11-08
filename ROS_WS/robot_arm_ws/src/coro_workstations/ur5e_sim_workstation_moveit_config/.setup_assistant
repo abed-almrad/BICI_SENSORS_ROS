@@ -6,6 +6,6 @@ moveit_setup_assistant_config:
   SRDF:
     relative_path: config/ur5e_2f85.srdf
   CONFIG:
-    author_name: Alexandre Bernier
-    author_email: ab.alexandre.bernier@gmail.com
-    generated_timestamp: 1624394510
+    author_name: Abed Al Rahman Al Mrad
+    author_email: abed-al-rahman.al-mrad.1@ens.etsmtl.ca
+    generated_timestamp: 1667858989

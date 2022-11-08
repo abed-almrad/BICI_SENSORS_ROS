@@ -31,9 +31,9 @@
 #include <eigen3/Eigen/Dense>
 
 #define contact_pts_nb 1300
-#define dist_threshold 1
+//#define dist_threshold 100
 //#define dist_threshold 0.00212 // threshold distance between the contact point and the taxel in m
-//#define dist_threshold 0.00512 // threshold distance between the contact point and the taxel in m
+#define dist_threshold 0.00512 // threshold distance between the contact point and the taxel in m
 typedef const boost::shared_ptr< const gazebo::msgs::Contacts> ContactPtr;
 tf2_ros::Buffer tfBuffer;
 tf2_ros::TransformListener *tfListener;
@@ -78,6 +78,7 @@ namespace gazebo
     private: std::map <std::string, std::vector<std::vector<float>>> filtered_contacts_map;
     private: std::vector<std::vector<float>> contact_positions_v;
     private: std::vector<std::vector<float>> filtered_contact_positions_v;
+    private: std::vector<int> active_taxels_indices;
     private: std::string target_sensor;
     private: void QueueThread();
     //Pointer to the model
@@ -97,6 +98,7 @@ namespace gazebo
     private: std::map <std::string, ignition::math::Pose3d> contacts_map;
     private: FILE *fp;
     private: FILE *fp_filtered;
+    private: FILE *fp_inactive_taxels;
     private: std::string act_cmd = "false";
 
     //ROS subscriber

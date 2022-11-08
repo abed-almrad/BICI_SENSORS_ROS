@@ -1,0 +1,2368 @@
+<?xml version="1.0" ?>
+<robot name="allegro_hand_description_right" xmlns:xacro="http://ros.org/wiki/xacro">
+
+        <xacro:macro name="allegro_hand_right" params="prefix parent *origin">
+
+                <joint name="${prefix}gripper_base_joint" type="fixed">
+                <xacro:insert_block name="origin"/>
+                <parent link="${parent}"/>
+                <child link="${prefix}palm_link"/>
+                </joint>
+        
+                <link name="palm_link">
+                <visual>
+                <origin xyz="0 0.034 -0.002" rpy="3.14159 -0 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/g_r2.stl"/>
+                </geometry>
+                <material name="g_r2_material">
+                <color rgba="0.2 0.2 0.2 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0 0.034 -0.002" rpy="3.14159 -0 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/g_r2.stl"/>
+                </geometry>
+                <material name="g_r2_material">
+                <color rgba="0.2 0.2 0.2 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.00043535 0.0160404 -0.0404815" rpy="0 0 0"/>
+                <mass value="0.404445" />
+                <inertia ixx="0.000491371" ixy="-9.01723e-06"  ixz="1.17974e-05" iyy="0.000773265" iyz="-5.50867e-06" izz="0.000547843" />
+                </inertial>
+                </link>
+        
+                
+                <link name="link_0">
+                <visual>
+                <origin xyz="0 6.93889e-18 -0.0152" rpy="1.5708 6.16298e-33 -5.3926e-33" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/extended_finger_base.stl"/>
+                </geometry>
+                <material name="extended_finger_base_material">
+                <color rgba="0.647059 0.647059 0.647059 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0 6.93889e-18 -0.0152" rpy="1.5708 6.16298e-33 -5.3926e-33" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/extended_finger_base.stl"/>
+                </geometry>
+                <material name="extended_finger_base_material">
+                <color rgba="0.647059 0.647059 0.647059 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.00041342 0.000666149 0.00960564" rpy="0 0 0"/>
+                <mass value="0.0136672" />
+                <inertia ixx="2.13441e-06" ixy="5.86704e-10"  ixz="-7.9563e-08" iyy="1.24411e-06" iyz="-6.13056e-08" izz="1.671e-06" />
+                </inertial>
+                </link>
+                
+                <link name="link_1">
+                <visual>
+                <origin xyz="-0.0182688 0 -0.0317805" rpy="4.1618e-29 1.48353 -3.14159" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/p2_r6.stl"/>
+                </geometry>
+                <material name="p2_r6_material">
+                <color rgba="0.129412 0.129412 0.129412 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.0182688 0 -0.0317805" rpy="4.1618e-29 1.48353 -3.14159" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/p2_r6.stl"/>
+                </geometry>
+                <material name="p2_r6_material">
+                <color rgba="0.129412 0.129412 0.129412 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.027 9.54536e-05 0.0124409" rpy="0 0 0"/>
+                <mass value="0.0418346" />
+                <inertia ixx="4.00114e-06" ixy="-1.81985e-08"  ixz="-4.42841e-15" iyy="1.97927e-05" iyz="1.59578e-08" izz="1.88563e-05" />
+                </inertial>
+                </link>
+                
+                <link name="link_2">
+                <visual>
+                <origin xyz="0.0722688 -3.46945e-17 -0.0317805" rpy="-4.37532e-31 1.48353 -2.11032e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/extended_fingertop.stl"/>
+                </geometry>
+                <material name="extended_fingertop_material">
+                <color rgba="0.647059 0.647059 0.647059 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.0722688 -3.46945e-17 -0.0317805" rpy="-4.37532e-31 1.48353 -2.11032e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/extended_fingertop.stl"/>
+                </geometry>
+                <material name="extended_fingertop_material">
+                <color rgba="0.647059 0.647059 0.647059 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.0294592 -0.000104104 0.0123435" rpy="0 0 0"/>
+                <mass value="0.0318021" />
+                <inertia ixx="3.48619e-06" ixy="1.20808e-07"  ixz="6.2918e-07" iyy="8.82437e-06" iyz="5.78644e-09" izz="7.34771e-06" />
+                </inertial>
+                </link>
+                
+                <link name="link_3">
+                <visual>
+                <origin xyz="0.1253 -5.55112e-17 0.0118" rpy="-3.14159 -2.46519e-32 -1.5708" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/p4_r.stl"/>
+                </geometry>
+                <material name="p4_r_material">
+                <color rgba="0.129412 0.129412 0.129412 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.1253 -5.55112e-17 0.0118" rpy="-3.14159 -2.46519e-32 -1.5708" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/p4_r.stl"/>
+                </geometry>
+                <material name="p4_r_material">
+                <color rgba="0.129412 0.129412 0.129412 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.0100051 0.000639363 0.0123057" rpy="0 0 0"/>
+                <mass value="0.0088374" />
+                <inertia ixx="1.08072e-06" ixy="-4.65695e-08"  ixz="-3.42321e-08" iyy="1.11236e-06" iyz="-8.85024e-10" izz="5.61586e-07" />
+                </inertial>
+                </link>
+                
+                <link name="ift_bracket">
+                <visual>
+                <origin xyz="-0.1139 -0.004 0.0135" rpy="-3.14159 -4.59709e-18 -1.08476e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_pcbbase.stl"/>
+                </geometry>
+                <material name="distal_pcbbase_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.1139 -0.004 0.0135" rpy="-3.14159 -4.59709e-18 -1.08476e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_pcbbase.stl"/>
+                </geometry>
+                <material name="distal_pcbbase_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.0170719 -0.00112911 0.0135244" rpy="0 0 0"/>
+                <mass value="0.0155109" />
+                <inertia ixx="3.339e-06" ixy="-4.60426e-07"  ixz="1.73449e-08" iyy="6.13257e-06" iyz="-6.39964e-10" izz="4.49513e-06" />
+                </inertial>
+                </link>
+                
+                <link name="index_fingertip_main_fpcb">
+                <visual>
+                <origin xyz="-0.12166 0.01366 6.93889e-18" rpy="-3.14159 -1.01561e-17 -5.74754e-32" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_fpcb_1.stl"/>
+                </geometry>
+                <material name="distal_fpcb_1_material">
+                <color rgba="0.768627 0.886275 0.952941 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.12166 0.01366 6.93889e-18" rpy="-3.14159 -1.01561e-17 -5.74754e-32" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_fpcb_1.stl"/>
+                </geometry>
+                <material name="distal_fpcb_1_material">
+                <color rgba="0.768627 0.886275 0.952941 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.0183062 0.0208616 2.89858e-05" rpy="0 0 0"/>
+                <mass value="0.00142203" />
+                <inertia ixx="3.14637e-07" ixy="-2.70173e-08"  ixz="2.90739e-11" iyy="3.18951e-07" iyz="-3.25215e-10" izz="4.09623e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_index_fingertip_main_fpcb" type="fixed">
+                <origin xyz="0.00776046 -0.01766 0.0135" rpy="3.95134e-15 -6.07352e-15 -3.889e-30" />
+                <parent link="ift_bracket" />
+                <child link="index_fingertip_main_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <link name="index_fingertip_side_fpcb">
+                <visual>
+                <origin xyz="-0.153816 0.0136001 -0.0162593" rpy="-1.32916e-32 6.97161e-18 -4.03248e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_fpcb_2.stl"/>
+                </geometry>
+                <material name="distal_fpcb_2_material">
+                <color rgba="0.972549 0.529412 0.00392157 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.153816 0.0136001 -0.0162593" rpy="-1.32916e-32 6.97161e-18 -4.03248e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_fpcb_2.stl"/>
+                </geometry>
+                <material name="distal_fpcb_2_material">
+                <color rgba="0.972549 0.529412 0.00392157 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.0175916 0.00317983 -0.0164175" rpy="0 0 0"/>
+                <mass value="0.00128609" />
+                <inertia ixx="3.5341e-07" ixy="2.54188e-08"  ixz="-2.1826e-09" iyy="3.67946e-07" iyz="1.2158e-09" izz="1.99436e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_index_fingertip_side_fpcb" type="fixed">
+                <origin xyz="0.0399163 0.0096 -0.00275858" rpy="-3.14159 1.29682e-17 1.10568e-30" />
+                <parent link="ift_bracket" />
+                <child link="index_fingertip_side_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_index_fingertip_bracket" type="fixed">
+                <origin xyz="-0.0135 0.004 0.0254" rpy="3.14159 -5.14611e-15 3.14159" />
+                <parent link="link_3" />
+                <child link="ift_bracket" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_3_0" type="revolute">
+                <origin xyz="-0.04615 2.77556e-17 0.0001" rpy="-4.33522e-16 1.57792e-15 -7.74196e-17" />
+                <parent link="link_2" />
+                <child link="link_3" />
+                <axis xyz="0 0 1"/>
+                <limit effort="15" velocity="20" lower="0" upper="1.4" />
+                <dynamics damping="1" friction="0.5" />
+                <gazebo>
+                <implicitSpringDamper> true </implicitSpringDamper>
+                </gazebo>
+                </joint>
+                <!-- *************************************Transmission************************************** -->
+                <transmission name="trans_3_0">
+                        <type>transmission_interface/SimpleTransmission</type>
+                        <joint name="joint_3_0">
+                        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                        </joint>
+                        <actuator name="motor_3_0">
+                        <mechanicalReduction>1</mechanicalReduction>
+                        </actuator>
+                </transmission>
+        <!-- *************************************Transmission************************************** -->
+        
+                <link name="imf_bracket">
+                <visual>
+                <origin xyz="-0.0755 -0.004 0.014" rpy="1.02267e-31 1.4662e-17 -1.62518e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_front.stl"/>
+                </geometry>
+                <material name="medial_front_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.0755 -0.004 0.014" rpy="1.02267e-31 1.4662e-17 -1.62518e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_front.stl"/>
+                </geometry>
+                <material name="medial_front_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.00469281 0.00336791 0.0198072" rpy="0 0 0"/>
+                <mass value="0.00473232" />
+                <inertia ixx="8.28869e-07" ixy="-2.96994e-07"  ixz="2.53991e-07" iyy="1.55762e-06" iyz="2.23567e-07" izz="1.28629e-06" />
+                </inertial>
+                </link>
+                
+                <link name="index_medial_front_fpcb">
+                <visual>
+                <origin xyz="-0.0129 0.0096 -0.1092" rpy="-1.5708 -1.5708 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_front_fpcb.stl"/>
+                </geometry>
+                <material name="medial_front_fpcb_material">
+                <color rgba="0.980392 0.713725 0.00392157 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.0129 0.0096 -0.1092" rpy="-1.5708 -1.5708 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_front_fpcb.stl"/>
+                </geometry>
+                <material name="medial_front_fpcb_material">
+                <color rgba="0.980392 0.713725 0.00392157 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.00409182 0.0164946 -0.0268705" rpy="0 0 0"/>
+                <mass value="0.00086951" />
+                <inertia ixx="2.73483e-07" ixy="9.10299e-08"  ixz="5.0825e-08" iyy="1.4757e-07" iyz="-6.87648e-08" izz="3.07195e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_index_medial_front_fpcb" type="fixed">
+                <origin xyz="0.0337 0.0089 0.0044" rpy="1.5708 -4.84955e-31 1.5708" />
+                <parent link="imf_bracket" />
+                <child link="index_medial_front_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_index_medial_front_bracket" type="fixed">
+                <origin xyz="-0.0215 -0.004 -0.0021" rpy="6.04764e-19 8.37023e-19 3.14159" />
+                <parent link="link_2" />
+                <child link="imf_bracket" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <link name="imb_bracket">
+                <visual>
+                <origin xyz="-0.0755 -0.004 0.014" rpy="-3.14159 1.05207e-17 -8.74306e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_back.stl"/>
+                </geometry>
+                <material name="medial_back_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.0755 -0.004 0.014" rpy="-3.14159 1.05207e-17 -8.74306e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_back.stl"/>
+                </geometry>
+                <material name="medial_back_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.0050369 0.00536951 0.0198823" rpy="0 0 0"/>
+                <mass value="0.00531302" />
+                <inertia ixx="1.01036e-06" ixy="-2.70353e-07"  ixz="2.64599e-07" iyy="1.7622e-06" iyz="2.24575e-07" izz="1.4134e-06" />
+                </inertial>
+                </link>
+                
+                <link name="index_medial_back_fpcb">
+                <visual>
+                <origin xyz="0.0145 -0.014 -0.1092" rpy="-1.5708 -1.5708 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_back_fpcb.stl"/>
+                </geometry>
+                <material name="medial_back_fpcb_material">
+                <color rgba="0.498039 0.498039 0.498039 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.0145 -0.014 -0.1092" rpy="-1.5708 -1.5708 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_back_fpcb.stl"/>
+                </geometry>
+                <material name="medial_back_fpcb_material">
+                <color rgba="0.498039 0.498039 0.498039 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.0031423 -0.0198367 -0.0257098" rpy="0 0 0"/>
+                <mass value="0.000991462" />
+                <inertia ixx="2.93113e-07" ixy="-9.38799e-08"  ixz="5.77704e-08" iyy="1.96504e-07" iyz="6.0309e-08" izz="3.52075e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_index_medial_back_fpcb" type="fixed">
+                <origin xyz="0.0337 0.0105 -1.73472e-16" rpy="-1.5708 4.62281e-16 -1.5708" />
+                <parent link="imb_bracket" />
+                <child link="index_medial_back_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_index_medial_back_bracket" type="fixed">
+                <origin xyz="-0.0215 0.004 0.0259" rpy="3.14159 4.76628e-16 -3.14159" />
+                <parent link="link_2" />
+                <child link="imb_bracket" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_2_0" type="revolute">
+                <origin xyz="0.054 2.28983e-16 7.63278e-17" rpy="-1.93545e-14 4.22599e-15 -3.14159" />
+                <parent link="link_1" />
+                <child link="link_2" />
+                <axis xyz="0 0 1"/>
+                <limit effort="15" velocity="20" lower="0" upper="1.5" />
+                <dynamics damping="1" friction="0.5" />
+                <gazebo>
+                <implicitSpringDamper> true </implicitSpringDamper>
+                </gazebo>
+                </joint>
+                <!-- *************************************Transmission************************************** -->
+                <transmission name="trans_2_0">
+                        <type>transmission_interface/SimpleTransmission</type>
+                        <joint name="joint_2_0">
+                        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                        </joint>
+                        <actuator name="motor_2_0">
+                        <mechanicalReduction>1</mechanicalReduction>
+                        </actuator>
+                </transmission>
+        <!-- *************************************Transmission************************************** -->
+        
+                <link name="ipb_bracket">
+                <visual>
+                <origin xyz="-0.0249 -0.0037 0.014" rpy="-3.14159 -1.02743e-17 -5.1406e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_back.stl"/>
+                </geometry>
+                <material name="proximal_back_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.0249 -0.0037 0.014" rpy="-3.14159 -1.02743e-17 -5.1406e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_back.stl"/>
+                </geometry>
+                <material name="proximal_back_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.00190421 0.00603324 0.0192417" rpy="0 0 0"/>
+                <mass value="0.00681742" />
+                <inertia ixx="1.33469e-06" ixy="-1.25087e-08"  ixz="-1.65721e-09" iyy="2.12223e-06" iyz="3.02232e-07" izz="1.86525e-06" />
+                </inertial>
+                </link>
+                
+                <link name="index_proximal_back_fpcb">
+                <visual>
+                <origin xyz="0.0028 -0.0131 -0.0136" rpy="-1.5708 4.10881e-31 -1.43049e-17" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_back_fpcb.stl"/>
+                </geometry>
+                <material name="proximal_back_fpcb_material">
+                <color rgba="0.917647 0.917647 0.917647 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.0028 -0.0131 -0.0136" rpy="-1.5708 4.10881e-31 -1.43049e-17" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_back_fpcb.stl"/>
+                </geometry>
+                <material name="proximal_back_fpcb_material">
+                <color rgba="0.917647 0.917647 0.917647 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.0298338 -0.0157289 -0.000514151" rpy="0 0 0"/>
+                <mass value="0.00110296" />
+                <inertia ixx="2.17583e-07" ixy="-7.11341e-10"  ixz="-5.50926e-10" iyy="3.62763e-07" iyz="-5.1761e-08" izz="4.40838e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_index_proximal_back_fpcb" type="fixed">
+                <origin xyz="-0.0277 0.0099 0.0009" rpy="-1.5708 -1.40936e-17 -4.33377e-16" />
+                <parent link="ipb_bracket" />
+                <child link="index_proximal_back_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_index_proximal_back_bracket" type="fixed">
+                <origin xyz="0.0249 -0.0037 0.0253" rpy="-3.14159 -4.95527e-15 -2.49458e-28" />
+                <parent link="link_1" />
+                <child link="ipb_bracket" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <link name="ipf_bracket">
+                <visual>
+                <origin xyz="-0.0249 -0.0077 0.014" rpy="3.99065e-30 -1.09742e-19 -6.90794e-32" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_front.stl"/>
+                </geometry>
+                <material name="proximal_front_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.0249 -0.0077 0.014" rpy="3.99065e-30 -1.09742e-19 -6.90794e-32" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_front.stl"/>
+                </geometry>
+                <material name="proximal_front_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.00266438 0.00143857 0.0191449" rpy="0 0 0"/>
+                <mass value="0.00549452" />
+                <inertia ixx="8.30997e-07" ixy="-1.44805e-08"  ixz="8.87855e-09" iyy="1.59352e-06" iyz="2.4142e-07" izz="1.37197e-06" />
+                </inertial>
+                </link>
+                
+                <link name="index_proximal_front_fpcb">
+                <visual>
+                <origin xyz="-0.0568 -0.013652 0.0096" rpy="-3.57712e-32 1.64408e-17 1.1487e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_frontfpcb.stl"/>
+                </geometry>
+                <material name="proximal_frontfpcb_material">
+                <color rgba="0.768627 0.886275 0.952941 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.0568 -0.013652 0.0096" rpy="-3.57712e-32 1.64408e-17 1.1487e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_frontfpcb.stl"/>
+                </geometry>
+                <material name="proximal_frontfpcb_material">
+                <color rgba="0.768627 0.886275 0.952941 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.0293893 -0.00228345 0.0126321" rpy="0 0 0"/>
+                <mass value="0.000871809" />
+                <inertia ixx="1.32851e-07" ixy="-1.29621e-09"  ixz="-1.28414e-09" iyy="3.08668e-07" iyz="3.73193e-08" izz="2.63246e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_index_proximal_front_fpcb" type="fixed">
+                <origin xyz="0.0319 0.00595201 0.0044" rpy="1.69568e-14 4.09448e-18 3.98238e-32" />
+                <parent link="ipf_bracket" />
+                <child link="index_proximal_front_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_index_proximal_front_bracket" type="fixed">
+                <origin xyz="0.0249 0.0077 -0.0017" rpy="1.74055e-15 -7.22547e-16 -8.65583e-16" />
+                <parent link="link_1" />
+                <child link="ipf_bracket" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_1_0" type="revolute">
+                <origin xyz="6.93889e-18 -0.0119 0.02545" rpy="-1.5708 -1.5708 0" />
+                <parent link="link_0" />
+                <child link="link_1" />
+                <axis xyz="0 0 1"/>
+                <limit effort="15" velocity="20" lower="0" upper="1.65" />
+                <dynamics damping="1" friction="0.5" />
+                <gazebo>
+                <implicitSpringDamper> true </implicitSpringDamper>
+                </gazebo>
+                </joint>
+                <!-- *************************************Transmission************************************** -->
+                <transmission name="trans_1_0">
+                        <type>transmission_interface/SimpleTransmission</type>
+                        <joint name="joint_1_0">
+                        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                        </joint>
+                        <actuator name="motor_1_0">
+                        <mechanicalReduction>1</mechanicalReduction>
+                        </actuator>
+                </transmission>
+        <!-- *************************************Transmission************************************** -->
+                
+                <joint name="joint_0_0" type="revolute">
+                <origin xyz="-0.0435377 0.034 -0.00553922" rpy="-0.0872665 -1.66533e-16 1.5708" />
+                <parent link="palm_link" />
+                <child link="link_0" />
+                <axis xyz="0 0 1"/>
+                <limit effort="15" velocity="20" lower="-0.45" upper="0.55" />
+                <dynamics damping="1" friction="0.5" />
+                <gazebo>
+                <implicitSpringDamper> true </implicitSpringDamper>
+                </gazebo>
+                </joint>
+                <!-- *************************************Transmission************************************** -->
+                <transmission name="trans_0_0">
+                        <type>transmission_interface/SimpleTransmission</type>
+                        <joint name="joint_0_0">
+                        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                        </joint>
+                        <actuator name="motor_0_0">
+                        <mechanicalReduction>1</mechanicalReduction>
+                        </actuator>
+                </transmission>
+        <!-- *************************************Transmission************************************** -->
+                
+                <link name="link_4">
+                <visual>
+                <origin xyz="0 -2.52778e-34 -0.0152" rpy="1.5708 -0 1.53951e-48" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/extended_finger_base.stl"/>
+                </geometry>
+                <material name="extended_finger_base_material">
+                <color rgba="0.647059 0.647059 0.647059 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0 -2.52778e-34 -0.0152" rpy="1.5708 -0 1.53951e-48" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/extended_finger_base.stl"/>
+                </geometry>
+                <material name="extended_finger_base_material">
+                <color rgba="0.647059 0.647059 0.647059 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.00041342 0.000666149 0.00960564" rpy="0 0 0"/>
+                <mass value="0.0136672" />
+                <inertia ixx="2.13441e-06" ixy="5.86704e-10"  ixz="-7.9563e-08" iyy="1.24411e-06" iyz="-6.13056e-08" izz="1.671e-06" />
+                </inertial>
+                </link>
+                
+                <link name="link_5">
+                <visual>
+                <origin xyz="0.0182688 0 -0.0317805" rpy="5.013e-31 1.48353 -2.03181e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/p2_r6.stl"/>
+                </geometry>
+                <material name="p2_r6_material">
+                <color rgba="0.129412 0.129412 0.129412 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.0182688 0 -0.0317805" rpy="5.013e-31 1.48353 -2.03181e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/p2_r6.stl"/>
+                </geometry>
+                <material name="p2_r6_material">
+                <color rgba="0.129412 0.129412 0.129412 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.027 -9.54536e-05 0.0124409" rpy="0 0 0"/>
+                <mass value="0.0418346" />
+                <inertia ixx="4.44908e-06" ixy="2.0693e-08"  ixz="2.54038e-06" iyy="1.97927e-05" iyz="1.25552e-08" izz="1.84084e-05" />
+                </inertial>
+                </link>
+                
+                <link name="link_6">
+                <visual>
+                <origin xyz="0.0722688 -3.46945e-17 -0.0317805" rpy="-4.01371e-31 1.48353 4.99346e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/extended_fingertop.stl"/>
+                </geometry>
+                <material name="extended_fingertop_material">
+                <color rgba="0.647059 0.647059 0.647059 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.0722688 -3.46945e-17 -0.0317805" rpy="-4.01371e-31 1.48353 4.99346e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/extended_fingertop.stl"/>
+                </geometry>
+                <material name="extended_fingertop_material">
+                <color rgba="0.647059 0.647059 0.647059 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.0294592 -0.000104104 0.0123435" rpy="0 0 0"/>
+                <mass value="0.0318021" />
+                <inertia ixx="3.48619e-06" ixy="1.20808e-07"  ixz="6.2918e-07" iyy="8.82437e-06" iyz="5.78644e-09" izz="7.34771e-06" />
+                </inertial>
+                </link>
+                
+                <link name="link_7">
+                <visual>
+                <origin xyz="0.1253 -6.245e-17 0.0118" rpy="3.14159 1.26544e-33 -1.5708" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/p4_r.stl"/>
+                </geometry>
+                <material name="p4_r_material">
+                <color rgba="0.129412 0.129412 0.129412 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.1253 -6.245e-17 0.0118" rpy="3.14159 1.26544e-33 -1.5708" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/p4_r.stl"/>
+                </geometry>
+                <material name="p4_r_material">
+                <color rgba="0.129412 0.129412 0.129412 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.0100051 0.000639363 0.0123057" rpy="0 0 0"/>
+                <mass value="0.0088374" />
+                <inertia ixx="1.08072e-06" ixy="-4.65695e-08"  ixz="-3.42321e-08" iyy="1.11236e-06" iyz="-8.85024e-10" izz="5.61586e-07" />
+                </inertial>
+                </link>
+                
+                <link name="mft_bracket">
+                <visual>
+                <origin xyz="-0.1139 -0.004 0.0135" rpy="-3.14159 -1.35585e-31 -9.86076e-32" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_pcbbase.stl"/>
+                </geometry>
+                <material name="distal_pcbbase_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.1139 -0.004 0.0135" rpy="-3.14159 -1.35585e-31 -9.86076e-32" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_pcbbase.stl"/>
+                </geometry>
+                <material name="distal_pcbbase_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.0170719 -0.00112911 0.0135244" rpy="0 0 0"/>
+                <mass value="0.0155109" />
+                <inertia ixx="3.339e-06" ixy="-4.60426e-07"  ixz="1.73449e-08" iyy="6.13257e-06" iyz="-6.39964e-10" izz="4.49513e-06" />
+                </inertial>
+                </link>
+                
+                <link name="middle_fingertip_main_fpcb">
+                <visual>
+                <origin xyz="-0.12166 0.01366 8.66006e-18" rpy="3.14159 -1.84889e-32 2.52682e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_fpcb_1.stl"/>
+                </geometry>
+                <material name="distal_fpcb_1_material">
+                <color rgba="0.768627 0.886275 0.952941 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.12166 0.01366 8.66006e-18" rpy="3.14159 -1.84889e-32 2.52682e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_fpcb_1.stl"/>
+                </geometry>
+                <material name="distal_fpcb_1_material">
+                <color rgba="0.768627 0.886275 0.952941 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.0183062 0.0208616 2.89858e-05" rpy="0 0 0"/>
+                <mass value="0.00142203" />
+                <inertia ixx="3.14637e-07" ixy="-2.70173e-08"  ixz="2.90739e-11" iyy="3.18951e-07" iyz="-3.25215e-10" izz="4.09623e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_middle_fingertip_main_fpcb" type="fixed">
+                <origin xyz="0.00776046 -0.01766 0.0135" rpy="-4.82947e-15 -7.14706e-15 2.77556e-17" />
+                <parent link="mft_bracket" />
+                <child link="middle_fingertip_main_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <link name="middle_fingertip_side_fpcb">
+                <visual>
+                <origin xyz="-0.153816 0.0136001 -0.0162593" rpy="3.23556e-32 -3.82105e-31 -6.22461e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_fpcb_2.stl"/>
+                </geometry>
+                <material name="distal_fpcb_2_material">
+                <color rgba="0.972549 0.529412 0.00392157 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.153816 0.0136001 -0.0162593" rpy="3.23556e-32 -3.82105e-31 -6.22461e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_fpcb_2.stl"/>
+                </geometry>
+                <material name="distal_fpcb_2_material">
+                <color rgba="0.972549 0.529412 0.00392157 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.0175916 0.00317983 -0.0164175" rpy="0 0 0"/>
+                <mass value="0.00128609" />
+                <inertia ixx="3.5341e-07" ixy="2.54188e-08"  ixz="-2.1826e-09" iyy="3.67946e-07" iyz="1.2158e-09" izz="1.99436e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_middle_fingertip_side_fpcb" type="fixed">
+                <origin xyz="0.0399163 0.0096 -0.00275858" rpy="3.14159 -1.38778e-17 -2.77556e-17" />
+                <parent link="mft_bracket" />
+                <child link="middle_fingertip_side_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_middle_fingertip_bracket" type="fixed">
+                <origin xyz="-0.0135 0.004 0.0254" rpy="3.14159 -8.32667e-16 -3.14159" />
+                <parent link="link_7" />
+                <child link="mft_bracket" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_7_0" type="revolute">
+                <origin xyz="-0.04615 2.77556e-17 0.0001" rpy="-6.02043e-15 5.70882e-15 9.18658e-14" />
+                <parent link="link_6" />
+                <child link="link_7" />
+                <axis xyz="0 0 1"/>
+                <limit effort="15" velocity="20" lower="0" upper="1.4" />
+                <dynamics damping="1" friction="0.5" />
+                <gazebo>
+                <implicitSpringDamper> true </implicitSpringDamper>
+                </gazebo>
+                </joint>
+                <!-- *************************************Transmission************************************** -->
+                <transmission name="trans_7_0">
+                        <type>transmission_interface/SimpleTransmission</type>
+                        <joint name="joint_7_0">
+                        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                        </joint>
+                        <actuator name="motor_7_0">
+                        <mechanicalReduction>1</mechanicalReduction>
+                        </actuator>
+                </transmission>
+        <!-- *************************************Transmission************************************** -->
+                
+                <link name="mmf_bracket">
+                <visual>
+                <origin xyz="-0.0755 -0.004 0.014" rpy="7.74847e-32 -5.579e-32 3.0743e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_front.stl"/>
+                </geometry>
+                <material name="medial_front_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.0755 -0.004 0.014" rpy="7.74847e-32 -5.579e-32 3.0743e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_front.stl"/>
+                </geometry>
+                <material name="medial_front_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.00469281 0.00336791 0.0198072" rpy="0 0 0"/>
+                <mass value="0.00473232" />
+                <inertia ixx="8.28869e-07" ixy="-2.96994e-07"  ixz="2.53991e-07" iyy="1.55762e-06" iyz="2.23567e-07" izz="1.28629e-06" />
+                </inertial>
+                </link>
+                
+                <link name="middle_medial_front_fpcb">
+                <visual>
+                <origin xyz="-0.0129 0.0096 -0.1092" rpy="-1.5708 -1.5708 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_front_fpcb.stl"/>
+                </geometry>
+                <material name="medial_front_fpcb_material">
+                <color rgba="0.980392 0.713725 0.00392157 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.0129 0.0096 -0.1092" rpy="-1.5708 -1.5708 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_front_fpcb.stl"/>
+                </geometry>
+                <material name="medial_front_fpcb_material">
+                <color rgba="0.980392 0.713725 0.00392157 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.00409182 0.0164946 -0.0268705" rpy="0 0 0"/>
+                <mass value="0.00086951" />
+                <inertia ixx="2.73483e-07" ixy="9.10299e-08"  ixz="5.0825e-08" iyy="1.4757e-07" iyz="-6.87648e-08" izz="3.07195e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_middle_medial_front_fpcb" type="fixed">
+                <origin xyz="0.0337 0.0089 0.0044" rpy="1.5708 1.79259e-30 1.5708" />
+                <parent link="mmf_bracket" />
+                <child link="middle_medial_front_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_middle_medial_front_bracket" type="fixed">
+                <origin xyz="-0.0215 -0.004 -0.0021" rpy="-2.91434e-16 2.19124e-17 3.14159" />
+                <parent link="link_6" />
+                <child link="mmf_bracket" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <link name="mmb_bracket">
+                <visual>
+                <origin xyz="-0.0755 -0.004 0.014" rpy="3.14159 6.80319e-32 5.68486e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_back.stl"/>
+                </geometry>
+                <material name="medial_back_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.0755 -0.004 0.014" rpy="3.14159 6.80319e-32 5.68486e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_back.stl"/>
+                </geometry>
+                <material name="medial_back_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.0050369 0.00536951 0.0198823" rpy="0 0 0"/>
+                <mass value="0.00531302" />
+                <inertia ixx="1.01036e-06" ixy="-2.70353e-07"  ixz="2.64599e-07" iyy="1.7622e-06" iyz="2.24575e-07" izz="1.4134e-06" />
+                </inertial>
+                </link>
+                
+                <link name="middle_medial_back_fpcb">
+                <visual>
+                <origin xyz="0.0145 -0.014 -0.1092" rpy="-1.5708 -1.5708 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_back_fpcb.stl"/>
+                </geometry>
+                <material name="medial_back_fpcb_material">
+                <color rgba="0.498039 0.498039 0.498039 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.0145 -0.014 -0.1092" rpy="-1.5708 -1.5708 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_back_fpcb.stl"/>
+                </geometry>
+                <material name="medial_back_fpcb_material">
+                <color rgba="0.498039 0.498039 0.498039 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.0031423 -0.0198367 -0.0257098" rpy="0 0 0"/>
+                <mass value="0.000991462" />
+                <inertia ixx="2.93113e-07" ixy="-9.38799e-08"  ixz="5.77704e-08" iyy="1.96504e-07" iyz="6.0309e-08" izz="3.52075e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_middle_medial_back_fpcb" type="fixed">
+                <origin xyz="0.0337 0.0105 1.38778e-17" rpy="-1.5708 2.57582e-26 -1.5708" />
+                <parent link="mmb_bracket" />
+                <child link="middle_medial_back_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_middle_medial_back_bracket" type="fixed">
+                <origin xyz="-0.0215 0.004 0.0259" rpy="-3.14159 -1.5933e-17 3.14159" />
+                <parent link="link_6" />
+                <child link="mmb_bracket" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_6_0" type="revolute">
+                <origin xyz="-0.054 -1.66533e-16 -7.30319e-16" rpy="2.4529e-15 -5.42863e-15 3.19463e-15" />
+                <parent link="link_5" />
+                <child link="link_6" />
+                <axis xyz="0 0 1"/>
+                <limit effort="15" velocity="20" lower="0" upper="1.5" />
+                <dynamics damping="1" friction="0.5" />
+                <gazebo>
+                <implicitSpringDamper> true </implicitSpringDamper>
+                </gazebo>
+                </joint>
+                <!-- *************************************Transmission************************************** -->
+                <transmission name="trans_6_0">
+                        <type>transmission_interface/SimpleTransmission</type>
+                        <joint name="joint_6_0">
+                        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                        </joint>
+                        <actuator name="motor_6_0">
+                        <mechanicalReduction>1</mechanicalReduction>
+                        </actuator>
+                </transmission>
+        <!-- *************************************Transmission************************************** -->
+                
+                <link name="mpb_bracket">
+                <visual>
+                <origin xyz="-0.0249 -0.0037 0.014" rpy="3.14159 -4.6691e-34 5.87245e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_back.stl"/>
+                </geometry>
+                <material name="proximal_back_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.0249 -0.0037 0.014" rpy="3.14159 -4.6691e-34 5.87245e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_back.stl"/>
+                </geometry>
+                <material name="proximal_back_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.00190421 0.00603324 0.0192417" rpy="0 0 0"/>
+                <mass value="0.00681742" />
+                <inertia ixx="1.33469e-06" ixy="-1.25087e-08"  ixz="-1.65721e-09" iyy="2.12223e-06" iyz="3.02232e-07" izz="1.86525e-06" />
+                </inertial>
+                </link>
+                
+                <link name="middle_proximal_back_fpcb">
+                <visual>
+                <origin xyz="0.0028 -0.0131 -0.0136" rpy="-1.5708 2.34367e-30 2.18567e-32" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_back_fpcb.stl"/>
+                </geometry>
+                <material name="proximal_back_fpcb_material">
+                <color rgba="0.917647 0.917647 0.917647 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.0028 -0.0131 -0.0136" rpy="-1.5708 2.34367e-30 2.18567e-32" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_back_fpcb.stl"/>
+                </geometry>
+                <material name="proximal_back_fpcb_material">
+                <color rgba="0.917647 0.917647 0.917647 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.0298338 -0.0157289 -0.000514151" rpy="0 0 0"/>
+                <mass value="0.00110296" />
+                <inertia ixx="2.17583e-07" ixy="-7.11341e-10"  ixz="-5.50926e-10" iyy="3.62763e-07" iyz="-5.1761e-08" izz="4.40838e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_middle_proximal_back_fpcb" type="fixed">
+                <origin xyz="-0.0277 0.0099 0.0009" rpy="-1.5708 1.69768e-31 -2.34367e-30" />
+                <parent link="mpb_bracket" />
+                <child link="middle_proximal_back_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_middle_proximal_back_bracket" type="fixed">
+                <origin xyz="-0.0249 0.0037 0.0253" rpy="-3.14159 4.05868e-15 3.14159" />
+                <parent link="link_5" />
+                <child link="mpb_bracket" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <link name="mpf_bracket">
+                <visual>
+                <origin xyz="-0.0249 -0.0077 0.014" rpy="1.4926e-32 -3.38771e-31 -2.46519e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_front.stl"/>
+                </geometry>
+                <material name="proximal_front_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.0249 -0.0077 0.014" rpy="1.4926e-32 -3.38771e-31 -2.46519e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_front.stl"/>
+                </geometry>
+                <material name="proximal_front_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.00266438 0.00143857 0.0191449" rpy="0 0 0"/>
+                <mass value="0.00549452" />
+                <inertia ixx="8.30997e-07" ixy="-1.44805e-08"  ixz="8.87855e-09" iyy="1.59352e-06" iyz="2.4142e-07" izz="1.37197e-06" />
+                </inertial>
+                </link>
+                
+                <link name="middle_proximal_front_fpcb">
+                <visual>
+                <origin xyz="-0.0568 -0.013652 0.0096" rpy="-7.42927e-32 -1.59852e-31 1.64921e-29" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_frontfpcb.stl"/>
+                </geometry>
+                <material name="proximal_frontfpcb_material">
+                <color rgba="0.768627 0.886275 0.952941 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.0568 -0.013652 0.0096" rpy="-7.42927e-32 -1.59852e-31 1.64921e-29" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_frontfpcb.stl"/>
+                </geometry>
+                <material name="proximal_frontfpcb_material">
+                <color rgba="0.768627 0.886275 0.952941 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.0293893 -0.00228345 0.0126321" rpy="0 0 0"/>
+                <mass value="0.000871809" />
+                <inertia ixx="1.32851e-07" ixy="-1.29621e-09"  ixz="-1.28414e-09" iyy="3.08668e-07" iyz="3.73193e-08" izz="2.63246e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_middle_proximal_front_fpcb" type="fixed">
+                <origin xyz="0.0319 0.00595201 0.0044" rpy="-6.26539e-15 -5.20417e-18 5.55112e-17" />
+                <parent link="mpf_bracket" />
+                <child link="middle_proximal_front_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_middle_proximal_front_bracket" type="fixed">
+                <origin xyz="-0.0249 -0.0077 -0.0017" rpy="-1.96804e-15 3.74674e-16 3.14159" />
+                <parent link="link_5" />
+                <child link="mpf_bracket" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_5_0" type="revolute">
+                <origin xyz="-4.16334e-17 -0.0119 0.02545" rpy="-1.5708 1.5708 0" />
+                <parent link="link_4" />
+                <child link="link_5" />
+                <axis xyz="0 0 1"/>
+                <limit effort="15" velocity="20" lower="0" upper="1.65" />
+                <dynamics damping="1" friction="0.5" />
+                <gazebo>
+                <implicitSpringDamper> true </implicitSpringDamper>
+                </gazebo>
+                </joint>
+                <!-- *************************************Transmission************************************** -->
+                <transmission name="trans_5_0">
+                        <type>transmission_interface/SimpleTransmission</type>
+                        <joint name="joint_5_0">
+                        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                        </joint>
+                        <actuator name="motor_5_0">
+                        <mechanicalReduction>1</mechanicalReduction>
+                        </actuator>
+                </transmission>
+        <!-- *************************************Transmission************************************** -->
+                
+                <joint name="joint_4_0" type="revolute">
+                <origin xyz="-2.68398e-34 0.034 -0.0033" rpy="0 -0 1.5708" />
+                <parent link="palm_link" />
+                <child link="link_4" />
+                <axis xyz="0 0 1"/>
+                <limit effort="15" velocity="20" lower="-0.55" upper="0.45" />
+                <dynamics damping="1" friction="0.5" />
+                <gazebo>
+                <implicitSpringDamper> true </implicitSpringDamper>
+                </gazebo>
+                </joint>
+                <!-- *************************************Transmission************************************** -->
+                <transmission name="trans_4_0">
+                        <type>transmission_interface/SimpleTransmission</type>
+                        <joint name="joint_4_0">
+                        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                        </joint>
+                        <actuator name="motor_4_0">
+                        <mechanicalReduction>1</mechanicalReduction>
+                        </actuator>
+                </transmission>
+        <!-- *************************************Transmission************************************** -->
+                
+                <link name="link_8">
+                <visual>
+                <origin xyz="6.93889e-18 -6.93889e-18 -0.0152" rpy="1.5708 -1.84889e-32 4.46816e-32" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/extended_finger_base.stl"/>
+                </geometry>
+                <material name="extended_finger_base_material">
+                <color rgba="0.647059 0.647059 0.647059 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="6.93889e-18 -6.93889e-18 -0.0152" rpy="1.5708 -1.84889e-32 4.46816e-32" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/extended_finger_base.stl"/>
+                </geometry>
+                <material name="extended_finger_base_material">
+                <color rgba="0.647059 0.647059 0.647059 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.00041342 0.000666149 0.00960564" rpy="0 0 0"/>
+                <mass value="0.0136672" />
+                <inertia ixx="2.13441e-06" ixy="5.86704e-10"  ixz="-7.9563e-08" iyy="1.24411e-06" iyz="-6.13056e-08" izz="1.671e-06" />
+                </inertial>
+                </link>
+                
+                <link name="link_9">
+                <visual>
+                <origin xyz="0.0182688 6.93889e-18 -0.0317805" rpy="1.70593e-30 1.48353 -1.17581e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/p2_r6.stl"/>
+                </geometry>
+                <material name="p2_r6_material">
+                <color rgba="0.129412 0.129412 0.129412 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.0182688 6.93889e-18 -0.0317805" rpy="1.70593e-30 1.48353 -1.17581e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/p2_r6.stl"/>
+                </geometry>
+                <material name="p2_r6_material">
+                <color rgba="0.129412 0.129412 0.129412 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.027 -9.54536e-05 0.0124409" rpy="0 0 0"/>
+                <mass value="0.0418346" />
+                <inertia ixx="4.44908e-06" ixy="2.0693e-08"  ixz="2.54038e-06" iyy="1.97927e-05" iyz="1.25552e-08" izz="1.84084e-05" />
+                </inertial>
+                </link>
+                
+                <link name="link_10">
+                <visual>
+                <origin xyz="0.0722688 -4.16334e-17 -0.0317805" rpy="-6.3738e-31 1.48353 2.91843e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/extended_fingertop.stl"/>
+                </geometry>
+                <material name="extended_fingertop_material">
+                <color rgba="0.647059 0.647059 0.647059 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.0722688 -4.16334e-17 -0.0317805" rpy="-6.3738e-31 1.48353 2.91843e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/extended_fingertop.stl"/>
+                </geometry>
+                <material name="extended_fingertop_material">
+                <color rgba="0.647059 0.647059 0.647059 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.0294592 -0.000104104 0.0123435" rpy="0 0 0"/>
+                <mass value="0.0318021" />
+                <inertia ixx="3.48619e-06" ixy="1.20808e-07"  ixz="6.2918e-07" iyy="8.82437e-06" iyz="5.78644e-09" izz="7.34771e-06" />
+                </inertial>
+                </link>
+                
+                <link name="link_11">
+                <visual>
+                <origin xyz="0.1253 -6.245e-17 0.0118" rpy="3.14159 -1.68249e-30 -1.5708" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/p4_r.stl"/>
+                </geometry>
+                <material name="p4_r_material">
+                <color rgba="0.129412 0.129412 0.129412 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.1253 -6.245e-17 0.0118" rpy="3.14159 -1.68249e-30 -1.5708" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/p4_r.stl"/>
+                </geometry>
+                <material name="p4_r_material">
+                <color rgba="0.129412 0.129412 0.129412 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.0100051 0.000639363 0.0123057" rpy="0 0 0"/>
+                <mass value="0.0088374" />
+                <inertia ixx="1.08072e-06" ixy="-4.65695e-08"  ixz="-3.42321e-08" iyy="1.11236e-06" iyz="-8.85024e-10" izz="5.61586e-07" />
+                </inertial>
+                </link>
+                
+                <link name="pft_bracket">
+                <visual>
+                <origin xyz="-0.1139 -0.004 0.0135" rpy="-3.14159 1.28916e-17 -5.47827e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_pcbbase.stl"/>
+                </geometry>
+                <material name="distal_pcbbase_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.1139 -0.004 0.0135" rpy="-3.14159 1.28916e-17 -5.47827e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_pcbbase.stl"/>
+                </geometry>
+                <material name="distal_pcbbase_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.0170719 -0.00112911 0.0135244" rpy="0 0 0"/>
+                <mass value="0.0155109" />
+                <inertia ixx="3.339e-06" ixy="-4.60426e-07"  ixz="1.73449e-08" iyy="6.13257e-06" iyz="-6.39964e-10" izz="4.49513e-06" />
+                </inertial>
+                </link>
+                
+                <link name="pinky_fingertip_main_fpcb">
+                <visual>
+                <origin xyz="-0.12166 0.01366 1.38778e-17" rpy="-3.14159 1.9938e-17 -2.07776e-29" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_fpcb_1.stl"/>
+                </geometry>
+                <material name="distal_fpcb_1_material">
+                <color rgba="0.768627 0.886275 0.952941 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.12166 0.01366 1.38778e-17" rpy="-3.14159 1.9938e-17 -2.07776e-29" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_fpcb_1.stl"/>
+                </geometry>
+                <material name="distal_fpcb_1_material">
+                <color rgba="0.768627 0.886275 0.952941 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.0183062 0.0208616 2.89858e-05" rpy="0 0 0"/>
+                <mass value="0.00142203" />
+                <inertia ixx="3.14637e-07" ixy="-2.70173e-08"  ixz="2.90739e-11" iyy="3.18951e-07" iyz="-3.25215e-10" izz="4.09623e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_pinky_fingertip_main_fpcb" type="fixed">
+                <origin xyz="0.00776046 -0.01766 0.0135" rpy="-4.08652e-17 5.17584e-16 1.66533e-16" />
+                <parent link="pft_bracket" />
+                <child link="pinky_fingertip_main_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <link name="pinky_fingertip_side_fpcb">
+                <visual>
+                <origin xyz="-0.153816 0.0136001 -0.0162593" rpy="-3.60571e-31 -1.028e-17 -3.19673e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_fpcb_2.stl"/>
+                </geometry>
+                <material name="distal_fpcb_2_material">
+                <color rgba="0.972549 0.529412 0.00392157 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.153816 0.0136001 -0.0162593" rpy="-3.60571e-31 -1.028e-17 -3.19673e-30" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_fpcb_2.stl"/>
+                </geometry>
+                <material name="distal_fpcb_2_material">
+                <color rgba="0.972549 0.529412 0.00392157 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.0175916 0.00317983 -0.0164175" rpy="0 0 0"/>
+                <mass value="0.00128609" />
+                <inertia ixx="3.5341e-07" ixy="2.54188e-08"  ixz="-2.1826e-09" iyy="3.67946e-07" iyz="1.2158e-09" izz="1.99436e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_pinky_fingertip_side_fpcb" type="fixed">
+                <origin xyz="0.0399163 0.0096 -0.00275858" rpy="-3.14159 5.15965e-17 5.55112e-17" />
+                <parent link="pft_bracket" />
+                <child link="pinky_fingertip_side_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_pinky_fingertip_bracket" type="fixed">
+                <origin xyz="-0.0135 0.004 0.0254" rpy="3.14159 4.4328e-16 3.14159" />
+                <parent link="link_11" />
+                <child link="pft_bracket" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_11_0" type="revolute">
+                <origin xyz="-0.04615 2.08167e-17 0.0001" rpy="-2.08897e-16 7.34965e-16 -9.23803e-14" />
+                <parent link="link_10" />
+                <child link="link_11" />
+                <axis xyz="0 0 1"/>
+                <limit effort="15" velocity="20" lower="0" upper="1.4" />
+                <dynamics damping="1" friction="0.5" />
+                <gazebo>
+                <implicitSpringDamper> true </implicitSpringDamper>
+                </gazebo>
+                </joint>
+                <!-- *************************************Transmission************************************** -->
+                <transmission name="trans_11_0">
+                        <type>transmission_interface/SimpleTransmission</type>
+                        <joint name="joint_11_0">
+                        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                        </joint>
+                        <actuator name="motor_11_0">
+                        <mechanicalReduction>1</mechanicalReduction>
+                        </actuator>
+                </transmission>
+        <!-- *************************************Transmission************************************** -->
+                
+                <link name="pmf_bracket">
+                <visual>
+                <origin xyz="-0.0755 -0.004 0.014" rpy="5.55513e-32 -1.31932e-17 -4.97361e-33" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_front.stl"/>
+                </geometry>
+                <material name="medial_front_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.0755 -0.004 0.014" rpy="5.55513e-32 -1.31932e-17 -4.97361e-33" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_front.stl"/>
+                </geometry>
+                <material name="medial_front_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.00469281 0.00336791 0.0198072" rpy="0 0 0"/>
+                <mass value="0.00473232" />
+                <inertia ixx="8.28869e-07" ixy="-2.96994e-07"  ixz="2.53991e-07" iyy="1.55762e-06" iyz="2.23567e-07" izz="1.28629e-06" />
+                </inertial>
+                </link>
+                
+                <link name="pinky_medial_front_fpcb">
+                <visual>
+                <origin xyz="-0.0129 0.0096 -0.1092" rpy="-1.5708 -1.5708 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_front_fpcb.stl"/>
+                </geometry>
+                <material name="medial_front_fpcb_material">
+                <color rgba="0.980392 0.713725 0.00392157 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.0129 0.0096 -0.1092" rpy="-1.5708 -1.5708 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_front_fpcb.stl"/>
+                </geometry>
+                <material name="medial_front_fpcb_material">
+                <color rgba="0.980392 0.713725 0.00392157 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.00409182 0.0164946 -0.0268705" rpy="0 0 0"/>
+                <mass value="0.00086951" />
+                <inertia ixx="2.73483e-07" ixy="9.10299e-08"  ixz="5.0825e-08" iyy="1.4757e-07" iyz="-6.87648e-08" izz="3.07195e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_pinky_medial_front_fpcb" type="fixed">
+                <origin xyz="0.0337 0.0089 0.0044" rpy="1.5708 -4.44891e-19 1.5708" />
+                <parent link="pmf_bracket" />
+                <child link="pinky_medial_front_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_pinky_medial_front_bracket" type="fixed">
+                <origin xyz="-0.0215 -0.004 -0.0021" rpy="5.55513e-32 -1.31932e-17 3.14159" />
+                <parent link="link_10" />
+                <child link="pmf_bracket" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <link name="pmb_bracket">
+                <visual>
+                <origin xyz="-0.0755 -0.004 0.014" rpy="-3.14159 1.31932e-17 4.97361e-33" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_back.stl"/>
+                </geometry>
+                <material name="medial_back_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.0755 -0.004 0.014" rpy="-3.14159 1.31932e-17 4.97361e-33" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_back.stl"/>
+                </geometry>
+                <material name="medial_back_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.0050369 0.00536951 0.0198823" rpy="0 0 0"/>
+                <mass value="0.00531302" />
+                <inertia ixx="1.01036e-06" ixy="-2.70353e-07"  ixz="2.64599e-07" iyy="1.7622e-06" iyz="2.24575e-07" izz="1.4134e-06" />
+                </inertial>
+                </link>
+                
+                <link name="pinky_medial_back_fpcb">
+                <visual>
+                <origin xyz="0.0145 -0.014 -0.1092" rpy="-1.5708 -1.5708 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_back_fpcb.stl"/>
+                </geometry>
+                <material name="medial_back_fpcb_material">
+                <color rgba="0.498039 0.498039 0.498039 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.0145 -0.014 -0.1092" rpy="-1.5708 -1.5708 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/medial_back_fpcb.stl"/>
+                </geometry>
+                <material name="medial_back_fpcb_material">
+                <color rgba="0.498039 0.498039 0.498039 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.0031423 -0.0198367 -0.0257098" rpy="0 0 0"/>
+                <mass value="0.000991462" />
+                <inertia ixx="2.93113e-07" ixy="-9.38799e-08"  ixz="5.77704e-08" iyy="1.96504e-07" iyz="6.0309e-08" izz="3.52075e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_pinky_medial_back_fpcb" type="fixed">
+                <origin xyz="0.0337 0.0105 -4.51028e-17" rpy="-1.5708 4.44891e-19 -1.5708" />
+                <parent link="pmb_bracket" />
+                <child link="pinky_medial_back_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_pinky_medial_back_bracket" type="fixed">
+                <origin xyz="-0.0215 0.004 0.0259" rpy="-3.14159 -1.31932e-17 3.14159" />
+                <parent link="link_10" />
+                <child link="pmb_bracket" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_10_0" type="revolute">
+                <origin xyz="-0.054 1.38778e-17 -1.249e-16" rpy="7.38677e-17 -5.80172e-16 -7.55426e-16" />
+                <parent link="link_9" />
+                <child link="link_10" />
+                <axis xyz="0 0 1"/>
+                <limit effort="15" velocity="20" lower="0" upper="1.5" />
+                <dynamics damping="1" friction="0.5" />
+                <gazebo>
+                <implicitSpringDamper> true </implicitSpringDamper>
+                </gazebo>
+                </joint>
+                <!-- *************************************Transmission************************************** -->
+                <transmission name="trans_10_0">
+                        <type>transmission_interface/SimpleTransmission</type>
+                        <joint name="joint_10_0">
+                        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                        </joint>
+                        <actuator name="motor_10_0">
+                        <mechanicalReduction>1</mechanicalReduction>
+                        </actuator>
+                </transmission>
+        <!-- *************************************Transmission************************************** -->
+                
+                <link name="ppb_bracket">
+                <visual>
+                <origin xyz="-0.0249 -0.0037 0.014" rpy="-3.14159 -1.11271e-19 2.71125e-32" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_back.stl"/>
+                </geometry>
+                <material name="proximal_back_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.0249 -0.0037 0.014" rpy="-3.14159 -1.11271e-19 2.71125e-32" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_back.stl"/>
+                </geometry>
+                <material name="proximal_back_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.00190421 0.00603324 0.0192417" rpy="0 0 0"/>
+                <mass value="0.00681742" />
+                <inertia ixx="1.33469e-06" ixy="-1.25087e-08"  ixz="-1.65721e-09" iyy="2.12223e-06" iyz="3.02232e-07" izz="1.86525e-06" />
+                </inertial>
+                </link>
+                
+                <link name="pinky_proximal_back_fpcb">
+                <visual>
+                <origin xyz="0.0028 -0.0131 -0.0136" rpy="-1.5708 2.2395e-32 5.32313e-18" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_back_fpcb.stl"/>
+                </geometry>
+                <material name="proximal_back_fpcb_material">
+                <color rgba="0.917647 0.917647 0.917647 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.0028 -0.0131 -0.0136" rpy="-1.5708 2.2395e-32 5.32313e-18" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_back_fpcb.stl"/>
+                </geometry>
+                <material name="proximal_back_fpcb_material">
+                <color rgba="0.917647 0.917647 0.917647 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.0298338 -0.0157289 -0.000514151" rpy="0 0 0"/>
+                <mass value="0.00110296" />
+                <inertia ixx="2.17583e-07" ixy="-7.11341e-10"  ixz="-5.50926e-10" iyy="3.62763e-07" iyz="-5.1761e-08" izz="4.40838e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_pinky_proximal_back_fpcb" type="fixed">
+                <origin xyz="-0.0277 0.0099 0.0009" rpy="-1.5708 -8.3852e-18 -7.27119e-30" />
+                <parent link="ppb_bracket" />
+                <child link="pinky_proximal_back_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_pinky_proximal_back_bracket" type="fixed">
+                <origin xyz="-0.0249 0.0037 0.0253" rpy="-3.14159 5.61195e-15 3.14159" />
+                <parent link="link_9" />
+                <child link="ppb_bracket" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <link name="ppf_bracket">
+                <visual>
+                <origin xyz="-0.0249 -0.0077 0.014" rpy="-4.46045e-31 1.1948e-18 7.49935e-32" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_front.stl"/>
+                </geometry>
+                <material name="proximal_front_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.0249 -0.0077 0.014" rpy="-4.46045e-31 1.1948e-18 7.49935e-32" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_front.stl"/>
+                </geometry>
+                <material name="proximal_front_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.00266438 0.00143857 0.0191449" rpy="0 0 0"/>
+                <mass value="0.00549452" />
+                <inertia ixx="8.30997e-07" ixy="-1.44805e-08"  ixz="8.87855e-09" iyy="1.59352e-06" iyz="2.4142e-07" izz="1.37197e-06" />
+                </inertial>
+                </link>
+                
+                <link name="pinky_proximal_front_fpcb">
+                <visual>
+                <origin xyz="-0.0568 -0.013652 0.0096" rpy="1.31965e-30 -3.67426e-19 -1.38914e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_frontfpcb.stl"/>
+                </geometry>
+                <material name="proximal_frontfpcb_material">
+                <color rgba="0.768627 0.886275 0.952941 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.0568 -0.013652 0.0096" rpy="1.31965e-30 -3.67426e-19 -1.38914e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/proximal_frontfpcb.stl"/>
+                </geometry>
+                <material name="proximal_frontfpcb_material">
+                <color rgba="0.768627 0.886275 0.952941 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.0293893 -0.00228345 0.0126321" rpy="0 0 0"/>
+                <mass value="0.000871809" />
+                <inertia ixx="1.32851e-07" ixy="-1.29621e-09"  ixz="-1.28414e-09" iyy="3.08668e-07" iyz="3.73193e-08" izz="2.63246e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_pinky_proximal_front_fpcb" type="fixed">
+                <origin xyz="0.0319 0.00595201 0.0044" rpy="-5.00673e-15 6.88757e-19 -5.55112e-17" />
+                <parent link="ppf_bracket" />
+                <child link="pinky_proximal_front_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_pinky_proximal_front_bracket" type="fixed">
+                <origin xyz="-0.0249 -0.0077 -0.0017" rpy="-1.96935e-15 3.88558e-16 3.14159" />
+                <parent link="link_9" />
+                <child link="ppf_bracket" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_9_0" type="revolute">
+                <origin xyz="-1.38778e-17 -0.0119 0.02545" rpy="-1.5708 1.5708 0" />
+                <parent link="link_8" />
+                <child link="link_9" />
+                <axis xyz="0 0 1"/>
+                <limit effort="15" velocity="20" lower="0" upper="1.65" />
+                <dynamics damping="1" friction="0.5" />
+                <gazebo>
+                <implicitSpringDamper> true </implicitSpringDamper>
+                </gazebo>
+                </joint>
+                <!-- *************************************Transmission************************************** -->
+                <transmission name="trans_9_0">
+                        <type>transmission_interface/SimpleTransmission</type>
+                        <joint name="joint_9_0">
+                        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                        </joint>
+                        <actuator name="motor_9_0">
+                        <mechanicalReduction>1</mechanicalReduction>
+                        </actuator>
+                </transmission>
+        <!-- *************************************Transmission************************************** -->
+                
+                <joint name="joint_8_0" type="revolute">
+                <origin xyz="0.0435377 0.034 -0.00553922" rpy="0.0872665 4.16334e-17 1.5708" />
+                <parent link="palm_link" />
+                <child link="link_8" />
+                <axis xyz="0 0 1"/>
+                <limit effort="15" velocity="20" lower="-0.45" upper="0.55" />
+                <dynamics damping="1" friction="0.5" />
+                <gazebo>
+                <implicitSpringDamper> true </implicitSpringDamper>
+                </gazebo>
+                </joint>
+                <!-- *************************************Transmission************************************** -->
+                <transmission name="trans_8_0">
+                        <type>transmission_interface/SimpleTransmission</type>
+                        <joint name="joint_8_0">
+                        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                        </joint>
+                        <actuator name="motor_8_0">
+                        <mechanicalReduction>1</mechanicalReduction>
+                        </actuator>
+                </transmission>
+        <!-- *************************************Transmission************************************** -->
+                
+                <link name="link_12">
+                <visual>
+                <origin xyz="0.0232805 -0.0182 -0.0808312" rpy="-2.48535e-33 -0.0872665 -2.25407e-32" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/f1_r.stl"/>
+                </geometry>
+                <material name="f1_r_material">
+                <color rgba="0.129412 0.129412 0.129412 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.0232805 -0.0182 -0.0808312" rpy="-2.48535e-33 -0.0872665 -2.25407e-32" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/f1_r.stl"/>
+                </geometry>
+                <material name="f1_r_material">
+                <color rgba="0.129412 0.129412 0.129412 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.0151161 -0.00905831 -0.0192298" rpy="0 0 0"/>
+                <mass value="0.0660275" />
+                <inertia ixx="1.44344e-05" ixy="1.24597e-06"  ixz="3.47822e-08" iyy="1.76386e-05" iyz="6.49531e-07" izz="1.41981e-05" />
+                </inertial>
+                </link>
+                
+                <link name="link_13">
+                <visual>
+                <origin xyz="-3.46945e-18 0 -0.0152" rpy="1.5708 2.06898e-17 1.5708" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/extended_finger_base.stl"/>
+                </geometry>
+                <material name="extended_finger_base_material">
+                <color rgba="0.647059 0.647059 0.647059 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-3.46945e-18 0 -0.0152" rpy="1.5708 2.06898e-17 1.5708" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/extended_finger_base.stl"/>
+                </geometry>
+                <material name="extended_finger_base_material">
+                <color rgba="0.647059 0.647059 0.647059 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.000666149 -0.00041342 0.00960564" rpy="0 0 0"/>
+                <mass value="0.0136672" />
+                <inertia ixx="1.671e-06" ixy="6.13056e-08"  ixz="7.9563e-08" iyy="1.24411e-06" iyz="5.86704e-10" izz="2.13441e-06" />
+                </inertial>
+                </link>
+                
+                <link name="link_14">
+                <visual>
+                <origin xyz="0.0787805 -0.0716312 0.0251" rpy="-1.5708 -6.24879e-32 0.0872665" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/f3_r.stl"/>
+                </geometry>
+                <material name="f3_r_material">
+                <color rgba="0.129412 0.129412 0.129412 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.0787805 -0.0716312 0.0251" rpy="-1.5708 -6.24879e-32 0.0872665" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/f3_r.stl"/>
+                </geometry>
+                <material name="f3_r_material">
+                <color rgba="0.129412 0.129412 0.129412 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.0169218 0.00050045 0.012098" rpy="0 0 0"/>
+                <mass value="0.0307701" />
+                <inertia ixx="3.26297e-06" ixy="-7.80105e-07"  ixz="4.19183e-07" iyy="9.45316e-06" iyz="7.40454e-08" izz="8.27249e-06" />
+                </inertial>
+                </link>
+                
+                <link name="link_15">
+                <visual>
+                <origin xyz="0.13018 -0.0716312 0.0252" rpy="-1.5708 -4.16204e-32 0.0872665" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/f4_r.stl"/>
+                </geometry>
+                <material name="f4_r_material">
+                <color rgba="0.2 0.2 0.2 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.13018 -0.0716312 0.0252" rpy="-1.5708 -4.16204e-32 0.0872665" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/f4_r.stl"/>
+                </geometry>
+                <material name="f4_r_material">
+                <color rgba="0.2 0.2 0.2 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.0146717 0.000106021 0.012196" rpy="0 0 0"/>
+                <mass value="0.0326938" />
+                <inertia ixx="2.85763e-06" ixy="-2.76566e-07"  ixz="3.76274e-07" iyy="6.11217e-06" iyz="5.74019e-08" izz="5.36876e-06" />
+                </inertial>
+                </link>
+                
+                <link name="tft_bracket">
+                <visual>
+                <origin xyz="-0.1139 -0.004 0.0135" rpy="-3.14159 -8.50715e-32 5.33917e-18" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_pcbbase.stl"/>
+                </geometry>
+                <material name="distal_pcbbase_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.1139 -0.004 0.0135" rpy="-3.14159 -8.50715e-32 5.33917e-18" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_pcbbase.stl"/>
+                </geometry>
+                <material name="distal_pcbbase_material">
+                <color rgba="1 0.756863 0.054902 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.0170719 -0.00112911 0.0135244" rpy="0 0 0"/>
+                <mass value="0.0155109" />
+                <inertia ixx="3.339e-06" ixy="-4.60426e-07"  ixz="1.73449e-08" iyy="6.13257e-06" iyz="-6.39964e-10" izz="4.49513e-06" />
+                </inertial>
+                </link>
+                
+                <link name="thumb_fingertip_main_fpcb">
+                <visual>
+                <origin xyz="-0.12166 0.01366 6.93889e-18" rpy="-3.14159 1.09657e-31 8.05637e-18" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_fpcb_1.stl"/>
+                </geometry>
+                <material name="distal_fpcb_1_material">
+                <color rgba="0.768627 0.886275 0.952941 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.12166 0.01366 6.93889e-18" rpy="-3.14159 1.09657e-31 8.05637e-18" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_fpcb_1.stl"/>
+                </geometry>
+                <material name="distal_fpcb_1_material">
+                <color rgba="0.768627 0.886275 0.952941 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.0183062 0.0208616 2.89858e-05" rpy="0 0 0"/>
+                <mass value="0.00142203" />
+                <inertia ixx="3.14637e-07" ixy="-2.70173e-08"  ixz="2.90739e-11" iyy="3.18951e-07" iyz="-3.25215e-10" izz="4.09623e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_thumb_fingertip_main_fpcb" type="fixed">
+                <origin xyz="0.00776046 -0.01766 0.0135" rpy="8.63584e-16 -5.01319e-16 5.12794e-18" />
+                <parent link="tft_bracket" />
+                <child link="thumb_fingertip_main_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <link name="thumb_fingertip_side_fpcb">
+                <visual>
+                <origin xyz="-0.153816 0.0136001 -0.0162593" rpy="4.39229e-31 9.58935e-32 3.22237e-18" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_fpcb_2.stl"/>
+                </geometry>
+                <material name="distal_fpcb_2_material">
+                <color rgba="0.972549 0.529412 0.00392157 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.153816 0.0136001 -0.0162593" rpy="4.39229e-31 9.58935e-32 3.22237e-18" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/distal_fpcb_2.stl"/>
+                </geometry>
+                <material name="distal_fpcb_2_material">
+                <color rgba="0.972549 0.529412 0.00392157 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.0175916 0.00317983 -0.0164175" rpy="0 0 0"/>
+                <mass value="0.00128609" />
+                <inertia ixx="3.5341e-07" ixy="2.54188e-08"  ixz="-2.1826e-09" iyy="3.67946e-07" iyz="1.2158e-09" izz="1.99436e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_thumb_fingertip_side_fpcb" type="fixed">
+                <origin xyz="0.0399163 0.0096 -0.00275858" rpy="-3.14159 -9.5307e-16 5.18075e-18" />
+                <parent link="tft_bracket" />
+                <child link="thumb_fingertip_side_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_thumb_fingertip_bracket" type="fixed">
+                <origin xyz="-0.0291 0.0037 0.0253" rpy="3.14159 5.80134e-16 -3.14159" />
+                <parent link="link_15" />
+                <child link="tft_bracket" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_15_0" type="revolute">
+                <origin xyz="-0.0514 -9.00668e-15 -0.0001" rpy="-4.53557e-16 3.39461e-16 2.07948e-13" />
+                <parent link="link_14" />
+                <child link="link_15" />
+                <axis xyz="0 0 1"/>
+                <limit effort="15" velocity="20" lower="0" upper="1.7" />
+                <dynamics damping="1" friction="0.5" />
+                <gazebo>
+                <implicitSpringDamper> true </implicitSpringDamper>
+                </gazebo>
+                </joint>
+                <!-- *************************************Transmission************************************** -->
+                <transmission name="trans_15_0">
+                        <type>transmission_interface/SimpleTransmission</type>
+                        <joint name="joint_15_0">
+                        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                        </joint>
+                        <actuator name="motor_15_0">
+                        <mechanicalReduction>1</mechanicalReduction>
+                        </actuator>
+                </transmission>
+        <!-- *************************************Transmission************************************** -->
+        
+                <link name="tmb_bracket">
+                <visual>
+                <origin xyz="0.004 0.0329 0.014" rpy="1.5708 2.25088e-31 -7.6622e-21" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/thumb_medial_back_bracket.stl"/>
+                </geometry>
+                <material name="thumb_medial_back_bracket_material">
+                <color rgba="0.917647 0.917647 0.917647 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.004 0.0329 0.014" rpy="1.5708 2.25088e-31 -7.6622e-21" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/thumb_medial_back_bracket.stl"/>
+                </geometry>
+                <material name="thumb_medial_back_bracket_material">
+                <color rgba="0.917647 0.917647 0.917647 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.00600734 0.00588203 0.0181482" rpy="0 0 0"/>
+                <mass value="0.00473763" />
+                <inertia ixx="1.11799e-06" ixy="-2.9649e-08"  ixz="1.65587e-07" iyy="9.60308e-07" iyz="-6.32913e-08" izz="7.92445e-07" />
+                </inertial>
+                </link>
+                
+                <link name="thumb_medial_back_fpcb">
+                <visual>
+                <origin xyz="0.0148 -0.014 0.0052" rpy="3.14159 -5.47552e-15 -1.15148e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/part_5.stl"/>
+                </geometry>
+                <material name="part_5_material">
+                <color rgba="0.498039 0.498039 0.498039 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.0148 -0.014 0.0052" rpy="3.14159 -5.47552e-15 -1.15148e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/part_5.stl"/>
+                </geometry>
+                <material name="part_5_material">
+                <color rgba="0.498039 0.498039 0.498039 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.00190074 -0.0175205 -0.0182577" rpy="0 0 0"/>
+                <mass value="0.000612423" />
+                <inertia ixx="1.31741e-07" ixy="2.80463e-08"  ixz="-2.97582e-10" iyy="9.0628e-08" iyz="-2.06208e-08" izz="1.18557e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_thumb_medial_back_fpcb" type="fixed">
+                <origin xyz="-0.0108 0.0277 -2.68882e-17" rpy="-1.5708 7.27098e-31 -7.93211e-15" />
+                <parent link="tmb_bracket" />
+                <child link="thumb_medial_back_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_thumb_medial_back_bracket" type="fixed">
+                <origin xyz="-0.0249 0.004 -0.0022" rpy="-6.46681e-16 -1.5186e-15 -1.5708" />
+                <parent link="link_14" />
+                <child link="tmb_bracket" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <link name="tmf_bracket">
+                <visual>
+                <origin xyz="-0.004 -0.0329 0.014" rpy="-1.5708 -2.03975e-31 -2.00332e-19" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/thumb_medial_front_bracket.stl"/>
+                </geometry>
+                <material name="thumb_medial_front_bracket_material">
+                <color rgba="0.917647 0.917647 0.917647 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.004 -0.0329 0.014" rpy="-1.5708 -2.03975e-31 -2.00332e-19" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/thumb_medial_front_bracket.stl"/>
+                </geometry>
+                <material name="thumb_medial_front_bracket_material">
+                <color rgba="0.917647 0.917647 0.917647 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.00534582 -0.00527635 0.0171061" rpy="0 0 0"/>
+                <mass value="0.0040514" />
+                <inertia ixx="9.13083e-07" ixy="-5.82508e-09"  ixz="-1.21819e-07" iyy="6.82814e-07" iyz="1.23951e-07" izz="5.97236e-07" />
+                </inertial>
+                </link>
+                
+                <link name="thumb_medial_front_fpcb">
+                <visual>
+                <origin xyz="-0.0140023 -0.007 -0.0052" rpy="7.38033e-33 1.42291e-18 -4.44322e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/part_6.stl"/>
+                </geometry>
+                <material name="part_6_material">
+                <color rgba="0.980392 0.713725 0.00392157 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.0140023 -0.007 -0.0052" rpy="7.38033e-33 1.42291e-18 -4.44322e-31" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/part_6.stl"/>
+                </geometry>
+                <material name="part_6_material">
+                <color rgba="0.980392 0.713725 0.00392157 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.00221105 -0.0114519 0.0177349" rpy="0 0 0"/>
+                <mass value="0.000462123" />
+                <inertia ixx="7.18561e-08" ixy="-1.49488e-08"  ixz="-9.74587e-10" iyy="5.37528e-08" iyz="8.76508e-09" izz="5.33116e-08" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_thumb_medial_front_fpcb" type="fixed">
+                <origin xyz="0.0100023 -0.0277 0.007" rpy="-1.5708 -5.1393e-32 5.59764e-15" />
+                <parent link="tmf_bracket" />
+                <child link="thumb_medial_front_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_thumb_medial_front_bracket" type="fixed">
+                <origin xyz="-0.0249 -0.004 0.0258" rpy="3.14159 -7.73741e-17 -1.5708" />
+                <parent link="link_14" />
+                <child link="tmf_bracket" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_14_0" type="revolute">
+                <origin xyz="0.0119 -1.38778e-17 0.02545" rpy="3.14159 1.5708 0" />
+                <parent link="link_13" />
+                <child link="link_14" />
+                <axis xyz="0 0 1"/>
+                <limit effort="15" velocity="20" lower="0" upper="1.45" />
+                <dynamics damping="1" friction="0.5" />
+                <gazebo>
+                <implicitSpringDamper> true </implicitSpringDamper>
+                </gazebo>
+                </joint>
+                <!-- *************************************Transmission************************************** -->
+                <transmission name="trans_14_0">
+                        <type>transmission_interface/SimpleTransmission</type>
+                        <joint name="joint_14_0">
+                        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                        </joint>
+                        <actuator name="motor_14_0">
+                        <mechanicalReduction>1</mechanicalReduction>
+                        </actuator>
+                </transmission>
+        <!-- *************************************Transmission************************************** -->
+                
+                <joint name="joint_13_0" type="revolute">
+                <origin xyz="-0.0375 -0.005 -0.0092" rpy="-1.5708 -3.01469e-15 1.5708" />
+                <parent link="link_12" />
+                <child link="link_13" />
+                <axis xyz="0 0 1"/>
+                <limit effort="15" velocity="20" lower="-1.3" upper="1.15" />
+                <dynamics damping="1" friction="0.5" />
+                <gazebo>
+                <implicitSpringDamper> true </implicitSpringDamper>
+                </gazebo>
+                </joint>
+                <!-- *************************************Transmission************************************** -->
+                <transmission name="trans_13_0">
+                        <type>transmission_interface/SimpleTransmission</type>
+                        <joint name="joint_13_0">
+                        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                        </joint>
+                        <actuator name="motor_13_0">
+                        <mechanicalReduction>1</mechanicalReduction>
+                        </actuator>
+                </transmission>
+        <!-- *************************************Transmission************************************** -->
+                
+                <joint name="joint_12_0" type="revolute">
+                <origin xyz="-0.0161208 0.0158 -0.0848515" rpy="-3.14159 -0.0872665 1.84398e-16" />
+                <parent link="palm_link" />
+                <child link="link_12" />
+                <axis xyz="0 0 1"/>
+                <limit effort="15" velocity="20" lower="0.35" upper="1.57" />
+                <dynamics damping="1" friction="0.5" />
+                <gazebo>
+                <implicitSpringDamper> true </implicitSpringDamper>
+                </gazebo>
+                </joint>
+                <!-- *************************************Transmission************************************** -->
+                <transmission name="trans_12_0">
+                        <type>transmission_interface/SimpleTransmission</type>
+                        <joint name="joint_12_0">
+                        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                        </joint>
+                        <actuator name="motor_12_0">
+                        <mechanicalReduction>1</mechanicalReduction>
+                        </actuator>
+                </transmission>
+        <!-- *************************************Transmission************************************** -->
+                
+                <link name="boh_bracket">
+                <visual>
+                <origin xyz="0.02 0.007 0.0435" rpy="-1.5708 -1.5708 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/part_4.stl"/>
+                </geometry>
+                <material name="part_4_material">
+                <color rgba="0.980392 0.713725 0.00392157 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.02 0.007 0.0435" rpy="-1.5708 -1.5708 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/part_4.stl"/>
+                </geometry>
+                <material name="part_4_material">
+                <color rgba="0.980392 0.713725 0.00392157 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.0205425 -0.0333769 -0.00325" rpy="0 0 0"/>
+                <mass value="0.0385521" />
+                <inertia ixx="5.89511e-05" ixy="3.11147e-09"  ixz="-3.78027e-07" iyy="9.09733e-05" iyz="4.84151e-09" izz="3.60656e-05" />
+                </inertial>
+                </link>
+                
+                <link name="boh">
+                <visual>
+                <origin xyz="3.94708e-06 0.038896 0.0528" rpy="-1.5708 -1.5708 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/boh_fpcb.stl"/>
+                </geometry>
+                <material name="boh_fpcb_material">
+                <color rgba="0.615686 0.811765 0.929412 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="3.94708e-06 0.038896 0.0528" rpy="-1.5708 -1.5708 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/boh_fpcb.stl"/>
+                </geometry>
+                <material name="boh_fpcb_material">
+                <color rgba="0.615686 0.811765 0.929412 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="3.00678e-07 -0.00328019 -3.42586e-05" rpy="0 0 0"/>
+                <mass value="0.00784811" />
+                <inertia ixx="7.95811e-06" ixy="6.60039e-08"  ixz="1.42447e-09" iyy="1.30113e-05" iyz="-6.22082e-12" izz="5.06377e-06" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_boh" type="fixed">
+                <origin xyz="0.019996 -0.0318962 -0.0093" rpy="0 -0 0" />
+                <parent link="boh_bracket" />
+                <child link="boh" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_boh_bracket" type="fixed">
+                <origin xyz="0.02 -0.0094 -0.009" rpy="1.5708 -0 3.14159" />
+                <parent link="palm_link" />
+                <child link="boh_bracket" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <link name="palm_bracket">
+                <visual>
+                <origin xyz="-0.000254584 -0.095 0.0113" rpy="1.5708 1.5708 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/palm_bracket.stl"/>
+                </geometry>
+                <material name="palm_bracket_material">
+                <color rgba="0.231373 0.380392 0.705882 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="-0.000254584 -0.095 0.0113" rpy="1.5708 1.5708 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/palm_bracket.stl"/>
+                </geometry>
+                <material name="palm_bracket_material">
+                <color rgba="0.231373 0.380392 0.705882 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="-0.0117692 -0.0440058 -0.00328358" rpy="0 0 0"/>
+                <mass value="0.0366468" />
+                <inertia ixx="3.0726e-05" ixy="3.33674e-07"  ixz="-2.90867e-06" iyy="5.36054e-05" iyz="1.29147e-07" izz="2.31158e-05" />
+                </inertial>
+                </link>
+                
+                <link name="palm_fpcb">
+                <visual>
+                <origin xyz="0.02 -0.007 0.0173" rpy="1.5708 1.5708 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/palm_fpcb.stl"/>
+                </geometry>
+                <material name="palm_fpcb_material">
+                <color rgba="0.972549 0.529412 0.00392157 1.0"/>
+                </material>
+                </visual>
+                <collision>
+                <origin xyz="0.02 -0.007 0.0173" rpy="1.5708 1.5708 0" />
+                <geometry>
+                <mesh filename="package://allegro_hand_description/meshes/palm_fpcb.stl"/>
+                </geometry>
+                <material name="palm_fpcb_material">
+                <color rgba="0.972549 0.529412 0.00392157 1.0"/>
+                </material>
+                </collision>
+                <inertial>
+                <origin xyz="0.0127906 0.0241481 0.000227194" rpy="0 0 0"/>
+                <mass value="0.00098458" />
+                <inertia ixx="7.85784e-07" ixy="-7.28774e-09"  ixz="-1.89434e-07" iyy="1.25428e-06" iyz="-2.66202e-09" izz="4.70119e-07" />
+                </inertial>
+                </link>
+                
+                <joint name="joint_palm_fpcb" type="fixed">
+                <origin xyz="-0.0202546 -0.088 -0.006" rpy="0 -0 0" />
+                <parent link="palm_bracket" />
+                <child link="palm_fpcb" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+                
+                <joint name="joint_palm_bracket" type="fixed">
+                <origin xyz="-0.000254584 0.0453 -0.097" rpy="-1.5708 -0 3.14159" />
+                <parent link="palm_link" />
+                <child link="palm_bracket" />
+                <axis xyz="0 0 1"/>
+                <limit effort="1" velocity="20" />
+                <joint_properties friction="0.0"/>
+                </joint>
+
+        </xacro:macro>    
+</robot>
+
+
+
+        

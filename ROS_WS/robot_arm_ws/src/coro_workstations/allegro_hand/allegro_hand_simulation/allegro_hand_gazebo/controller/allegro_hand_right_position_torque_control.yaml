@@ -1,0 +1,76 @@
+allegro_hand_right:
+
+  # Position Controllers ---------------------------------------
+  joint_0_0_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_0_0
+    pid: {p: 10.0, i: 0.00, d: 0.0}
+
+  joint_1_0_torque_controller:
+    type: effort_controllers/JointEffortController
+    joint: joint_1_0
+
+  joint_2_0_torque_controller:
+    type: effort_controllers/JointEffortController
+    joint: joint_2_0
+
+  joint_3_0_torque_controller:
+    type: effort_controllers/JointEffortController
+    joint: joint_3_0
+
+  joint_4_0_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_4_0
+    pid: {p: 10.0, i: 0.00, d: 0.0}
+
+  joint_5_0_torque_controller:
+    type: effort_controllers/JointEffortController
+    joint: joint_5_0
+
+  joint_6_0_torque_controller:
+    type: effort_controllers/JointEffortController
+    joint: joint_6_0
+
+  joint_7_0_torque_controller:
+    type: effort_controllers/JointEffortController
+    joint: joint_7_0
+
+  joint_8_0_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_8_0
+    pid: {p: 10.0, i: 0.00, d: 0.0}
+
+  joint_9_0_torque_controller:
+    type: effort_controllers/JointEffortController
+    joint: joint_9_0
+
+
+  joint_10_0_torque_controller:
+    type: effort_controllers/JointEffortController
+    joint: joint_10_0
+
+
+  joint_11_0_torque_controller:
+    type: effort_controllers/JointEffortController
+    joint: joint_11_0
+
+
+  joint_12_0_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_12_0
+    pid: {p: 10.0, i: 0.00, d: 0.0}
+
+  joint_13_0_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint_13_0
+    pid: {p: 10.0, i: 0.00, d: 0.0}
+    
+  joint_14_0_torque_controller:
+    type: effort_controllers/JointEffortController
+    joint: joint_14_0
+
+
+  joint_15_0_torque_controller:
+    type: effort_controllers/JointEffortController
+    joint: joint_15_0
+

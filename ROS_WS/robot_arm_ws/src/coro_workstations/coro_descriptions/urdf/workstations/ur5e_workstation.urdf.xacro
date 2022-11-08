@@ -26,14 +26,15 @@
 	<!-- GRIPPER COUPLING -->
 	<xacro:include filename="$(find coro_descriptions)/urdf/common/2f_coupling.urdf.xacro"/>
 	<xacro:coupling_robotiq_2f prefix="" parent="tool0">
-		<origin xyz="0 0 0.0045" rpy="0 0 1.5708"/>
+		<origin xyz="0 0 0.01" rpy="0 0 0"/>
 	</xacro:coupling_robotiq_2f>
    	
 	<!-- GRIPPER -->
-	<xacro:include filename="$(find robotiq_85_description)/urdf/robotiq_85_gripper.urdf.xacro"/>
-	<xacro:robotiq_85_gripper prefix="" parent="coupling_gripper_fix">
-		<origin xyz="0 0 0.0108" rpy="0 -1.5708 0"/>
-	</xacro:robotiq_85_gripper>
+
+	<xacro:include filename="$(find allegro_hand_gazebo)/allegro_hand_description/urdf/allegro_hand_description_right.urdf.xacro"/>
+	<xacro:allegro_hand_right prefix="" parent="coupling_gripper_fix">
+		<origin xyz="0 -0.041 0.105" rpy="0 0 0"/>
+	</xacro:allegro_hand_right>
     	
 	<link name="tcp"/>
 	<joint name="tcp_to_gripper" type="fixed">
@@ -41,6 +42,40 @@
 		<child link="tcp"/>
 		<origin xyz="0 0 0.165" rpy="0 0 0"/>
 	</joint>
+
+	<!-- OBJECT TO GRASP -->
+    <link name="cubic_object_link">
+		<visual>
+		<origin xyz="0 0 0" rpy="0 -0 1.5708" />
+		<geometry>
+		<mesh filename="package://coro_descriptions/meshes/cubic_object.stl"/>
+		</geometry>
+		<material name="link_testing_cube_material">
+		<color rgba="0.615686 0.811765 0.929412 1.0"/>
+		</material>
+		</visual>
+		<collision>
+		<origin xyz="0 0 0" rpy="0 -0 1.5708" />
+		<geometry>
+		<mesh filename="package://coro_descriptions/meshes/cubic_object.stl"/>
+		</geometry>
+		<material name="link_testing_cube_material">
+		<color rgba="0.615686 0.811765 0.929412 1.0"/>
+		</material>
+		</collision>
+		<inertial>
+		<origin xyz="-1.02566e-17 9.23364e-19 0.1075" rpy="0 0 0"/>
+		<mass value="0.0770781" />
+		<inertia ixx="0.000307188" ixy="0"  ixz="0" iyy="0.000307188" iyz="0" izz="2.05542e-05" />
+		</inertial>
+    </link>
+
+	<joint name='object_to_table' type='fixed'>
+		<origin xyz="0.004217 -0.201201 0.951750" rpy="0 0 0"/>
+    	<parent link="table_base"/>
+    	<child link="cubic_object_link"/>
+    </joint>
+
 
 	<!-- GAZEBO -->
 	<gazebo>

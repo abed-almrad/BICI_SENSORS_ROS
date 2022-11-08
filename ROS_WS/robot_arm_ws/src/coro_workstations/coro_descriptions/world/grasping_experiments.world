@@ -1,0 +1,42 @@
+<sdf version='1.7'>
+  <world name="default">
+
+    <physics type="ode"> 
+      <max_contacts> 1000 </max_contacts>
+      <ode>
+
+        <constraints>
+          <contact_surface_layer>0.001</contact_surface_layer>
+          <contact_max_correcting_vel>0.1</contact_max_correcting_vel>
+        </constraints>
+
+
+        <solver>
+          <iters>500</iters>
+<!--
+          <thread_position_correction>true</thread_position_correction>
+-->
+        </solver>
+
+      </ode>
+    </physics>
+
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <include>
+      <uri>model://cubic_object</uri>
+    </include>
+<!--  
+    <include>
+      <uri>model://cylindrical_object</uri>
+    </include>
+-->
+
+  </world>
+</sdf>

@@ -1,0 +1,25 @@
+<package>
+
+  <name>allegro_hand_gazebo</name>
+  <version>1.0.0</version>
+  <description>All what is related to the allegro hand in the gazebo simulation environment</description>
+  <author email="abed-al-rahman.al-mrad.1@ens.etsmtl.ca">Abed Al Rahman Al Mrad</author>
+  <maintainer email="abed-al-rahman.al-mrad.1@ens.etsmtl.ca">Abed Al Rahman Al Mrad</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>urdf</run_depend>
+  <run_depend>xacro</run_depend>
+  <run_depend>gazebo_ros_pkgs</run_depend>
+  <run_depend>gazebo_ros</run_depend>
+  <run_depend>gazebo_ros_control</run_depend>
+  <run_depend>ros_controllers</run_depend>
+  <run_depend>joint_state_controller</run_depend>
+  <run_depend>joint_trajectory_controller</run_depend>
+  <run_depend>effort_controllers</run_depend>
+  <run_depend>robot_state_publisher</run_depend>
+  <export> </export>
+
+  
+</package>

@@ -1,0 +1,57 @@
+<sdf version='1.7'>
+  <model name='cubic_object'>
+<!--
+    <joint name='world_to_cubic_object_link_joint' type='prismatic'>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+      <pose relative_to='__model__'>0.06 0.0534 0 0 -0 3.14</pose>
+      <parent>world</parent>
+      <child>cubic_object_link</child>
+    </joint>
+-->
+
+    <link name='cylindrical_object_link'>
+      <pose>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>1.73472e-18 0 -0.1005 0 0 0</pose>
+        <mass>0.0566041</mass>
+        <inertia>
+          <ixx>0.000196232</ixx>
+          <ixy>0</ixy>
+          <ixz>6.4154e-21</ixz>
+          <iyy>0.000196232</iyy>
+          <iyz>0</iyz>
+          <izz>1.13208e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='cylindrical_object_collision'>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://cylindrical_object/meshes/cylindrical_object.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.00</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <visual name='cylindrical_object_visual'>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://cylindrical_object/meshes/cylindrical_object.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>
