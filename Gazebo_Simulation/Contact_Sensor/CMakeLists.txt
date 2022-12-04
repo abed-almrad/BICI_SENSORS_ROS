@@ -5,6 +5,7 @@ find_package(gazebo REQUIRED)
 find_package(roscpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(tf2_ros REQUIRED)
+find_package(allegro_hand_taxels REQUIRED)
 
 include_directories(${GAZEBO_INCLUDE_DIRS})
 include_directories(${roscpp_INCLUDE_DIRS})

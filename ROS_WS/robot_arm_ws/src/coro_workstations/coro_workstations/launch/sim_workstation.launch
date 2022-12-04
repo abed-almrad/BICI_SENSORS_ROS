@@ -36,7 +36,7 @@ Email:	alexandre.bernier.3@ens.etsmtl.ca
 	
 	<!-- Gazebo specific options -->
 	<arg name="gazebo_gui" default="true"/>
-	<arg name="paused" default="false"/>
+	<arg name="paused" default="true"/>
 	
 	<!-- ************************** -->
 	<!-- Load robot and controllers -->
@@ -50,10 +50,11 @@ Email:	alexandre.bernier.3@ens.etsmtl.ca
 		<arg name="world_name" value="/home/abed/Documents/BICI_Project/BICI_SENSORS_ROS/ROS_WS/robot_arm_ws/src/coro_workstations/coro_descriptions/world/grasping_experiments.world"/>
 		<arg name="paused" value="$(arg paused)"/>
 		<arg name="gui" value="$(arg gazebo_gui)"/>
+		<arg name="verbose" value= "true"/>
   	</include>
 
   	<!-- Push robot_description to factory and spawn robot in gazebo -->
-  	<node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-sdf -param robot_description_sdf -model $(arg robot)_workstation " respawn="false" output="screen"/>
+  	<node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-sdf -param robot_description_sdf -model $(arg robot)_workstation_0 -robot_namespace /gazebo/" respawn="false" output="screen"/>
 
   	<!-- Push controllers to the parameters server -->
   	<rosparam file="$(find ur_gazebo)/config/$(arg robot)_controllers.yaml" command="load"/>
@@ -88,9 +89,11 @@ Email:	alexandre.bernier.3@ens.etsmtl.ca
   	<!-- And Rviz -->
   	<!-- ******** -->
   	<!-- Run Rviz and load the default config to see the state of the move_group node -->
+<!--
   	<include file="$(arg dollar)$(arg moveit_config_path)/launch/moveit_rviz.launch">
   		<arg name="rviz_config" default="$(arg dollar)$(arg moveit_config_path)/launch/moveit.rviz"/>
 		<arg name="debug" value="$(arg debug)"/>
 	</include>
+-->
 
 </launch>

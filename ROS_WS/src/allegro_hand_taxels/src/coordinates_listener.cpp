@@ -10,7 +10,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
-#include <std_msgs/String.h>
+#include "allegro_hand_taxels/coordinates_saving.h"
 #include <string>
 #include <filesystem>
 #include <unistd.h>
@@ -93,11 +93,27 @@ sensor20, sensor21, sensor22};
 vector<vector<float>> points_storage; //Container for the contact points to be stored
 vector<vector<float>> inactive_points_storage; //Container for the inactive taxel points to be stored
 string act_cmd = "false";
+int reg_iter_count;
 tf2_ros::Buffer tfBuffer;
 tf2_ros::TransformListener *tfListener;
 map <string, visualization_msgs::Marker> markers_map; // A dictionary for the markers placed on the taxels
 visualization_msgs::MarkerArray markers_array; //Array of markers (e.g. a marker is created for each taxel)
 int taxel_values_nb_max = 100; // Number of values used to initially to calculate the average for each taxel
+
+//Method for the coordinates saving activation
+
+bool saving_activation_function(allegro_hand_taxels::coordinates_saving::Request &req,
+                                       allegro_hand_taxels::coordinates_saving::Response &res)
+{
+    res.saving_activation_response = req.saving_activation;
+    std::cout << "Requested saving activation boolean string: " << req.saving_activation << std::endl;
+    act_cmd = res.saving_activation_response;
+    reg_iter_count = req.iteration_nb;
+    std::cout<<"sending back response: "<< act_cmd << std::endl;
+    return true;
+
+
+}
 
 //One common callback function
 void callback(const bici_ros_sensor_reader::TactileData msg)
@@ -134,6 +150,13 @@ void callback(const bici_ros_sensor_reader::TactileData msg)
     //cout<<act_cmd<<endl;
     if (act_cmd == "true") // Activation of a save command through a ros node
     {
+        string full_path = filesystem::current_path();
+        size_t pos = full_path.find("ROS_WS");
+        string path = full_path.substr(0,pos+6)+"/Pt_Cloud_Scripts/points_coordinates_"+to_string(reg_iter_count)+".csv";
+        string path_inactive_taxels = full_path.substr(0,pos+6)+"/Pt_Cloud_Scripts/inactive_points_coordinates_"+to_string(reg_iter_count)+".csv";
+        cout<<"THE SAVING PATH FOR THE ACTIVE PT CLOUD IS: " + path << endl;
+        myfile.open(path.c_str());
+        myfile_inactive_taxels.open(path_inactive_taxels.c_str());
         for(int j=0;j<NUM_SENSORS;j++){
             //cout << Sensors_Array[j].taxels_coordinates.size() << endl;
             //cout << Sensors_Array[j].taxels_coordinates[0].size() << endl;
@@ -179,7 +202,6 @@ void callback(const bici_ros_sensor_reader::TactileData msg)
         inactive_points_storage.clear();
 
         act_cmd = "false";     
-        ros::shutdown();
 
     }
 //    std::cout << "\n" << "Normalized readings for sensor number (" << msg.sensor_num-0 << "): " << std::endl;
@@ -309,9 +331,6 @@ void callback(const bici_ros_sensor_reader::TactileData msg)
 
 }
 
-void saving_callback(const std_msgs::String msg){
-    act_cmd = msg.data;
-}
 
 
 int main(int argc, char** argv){
@@ -320,21 +339,14 @@ int main(int argc, char** argv){
     ros::Rate rate(1.0);
     tfListener = new tf2_ros::TransformListener(tfBuffer);
     std::array<ros::Subscriber, NUM_SENSORS> subscribers;
-    string full_path = filesystem::current_path();
-    size_t pos = full_path.find("ROS_WS");
-    string path = full_path.substr(0,pos+6)+"/Pt_Cloud_Scripts/points_coordinates.csv";
-    string path_inactive_taxels = full_path.substr(0,pos+6)+"/Pt_Cloud_Scripts/inactive_points_coordinates.csv";
-    cout<<"THE PT CLOUD SAVING PATH IS: " + path<< endl;
-    myfile.open(path.c_str());
-    myfile_inactive_taxels.open(path_inactive_taxels.c_str());
-    ros::Subscriber saving_subscriber; //A subscriber to the saving_activation command
     for (size_t i=0; i < subscribers.size(); i++)
     {
         subscribers[i] = node.subscribe<bici_ros_sensor_reader::TactileData>("sensor_" + std::to_string(i+NUM_SENSOR_MIN)+"_readings", 5, callback);
     }
-    saving_subscriber = node.subscribe<std_msgs::String>("saving_command", 5, saving_callback);
     // Publisher for the rviz markers
     ros::Publisher markers_pub = node.advertise<visualization_msgs::MarkerArray>("visualization_markers", 1000);
+    //Server for the coordinates saving activation
+    ros::ServiceServer service = node.advertiseService("saving_command",saving_activation_function);
 
     while(ros::ok()){
 

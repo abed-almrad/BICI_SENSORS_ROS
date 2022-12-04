@@ -15,9 +15,10 @@ find_package(catkin REQUIRED COMPONENTS
   visualization_msgs
 )
 
-add_message_files(
+add_service_files(
   FILES
-  coordinates_saving.msg
+  coordinates_saving.srv
+  model_deletion.srv
 )
 
 generate_messages(
@@ -47,9 +48,11 @@ include_directories(
 ## Declare executables
 add_executable(coordinates_listener src/coordinates_listener.cpp)
 add_executable(saving_node src/saving_node.cpp)
+add_executable(deletion_node src/deletion_node.cpp)
 add_executable(sensor_emulator src/sensor_emulator.cpp)
 target_link_libraries(coordinates_listener ${catkin_LIBRARIES})
 target_link_libraries(saving_node ${catkin_LIBRARIES})
+target_link_libraries(deletion_node ${catkin_LIBRARIES})
 target_link_libraries(sensor_emulator ${catkin_LIBRARIES})
 #############
 ## Install ##

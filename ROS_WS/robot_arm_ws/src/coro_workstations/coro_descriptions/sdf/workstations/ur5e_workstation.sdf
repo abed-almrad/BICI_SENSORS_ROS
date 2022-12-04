@@ -1,5 +1,5 @@
 <sdf version='1.7'>
-  <model name='ur5e_2f85'>
+  <model name='ur5e_workstation_0'>
     <joint name='table_to_world' type='fixed'>
       <pose relative_to='__model__'>0 0 0 0 -0 0</pose>
       <parent>world</parent>
@@ -66,7 +66,7 @@
         <limit>
           <lower>-6.28319</lower>
           <upper>6.28319</upper>
-          <effort>150</effort>
+          <effort>2</effort>
           <velocity>3.14159</velocity>
         </limit>
         <dynamics>
@@ -120,7 +120,7 @@
         <limit>
           <lower>-6.28319</lower>
           <upper>6.28319</upper>
-          <effort>150</effort>
+          <effort>2</effort>
           <velocity>3.14159</velocity>
         </limit>
         <dynamics>
@@ -174,7 +174,7 @@
         <limit>
           <lower>-3.14159</lower>
           <upper>3.14159</upper>
-          <effort>150</effort>
+          <effort>2</effort>
           <velocity>3.14159</velocity>
         </limit>
         <dynamics>
@@ -228,7 +228,7 @@
         <limit>
           <lower>-6.28319</lower>
           <upper>6.28319</upper>
-          <effort>28</effort>
+          <effort>2</effort>
           <velocity>3.14159</velocity>
         </limit>
         <dynamics>
@@ -282,7 +282,7 @@
         <limit>
           <lower>-6.28319</lower>
           <upper>6.28319</upper>
-          <effort>28</effort>
+          <effort>2</effort>
           <velocity>3.14159</velocity>
         </limit>
         <dynamics>
@@ -336,7 +336,7 @@
         <limit>
           <lower>-6.28319</lower>
           <upper>6.28319</upper>
-          <effort>28</effort>
+          <effort>2</effort>
           <velocity>3.14159</velocity>
         </limit>
         <dynamics>
@@ -494,7 +494,7 @@
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
-        </sensor>    
+        </sensor>         
 <!--******************************************* --> 
       <visual name='wrist_3_link_visual'>
         <pose>0 0 -0.0989 1.5708 -0 0</pose>
@@ -532,6 +532,9 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
       <visual name='wrist_3_link_fixed_joint_lump__boh_visual_4'>
         <pose>0 -0.0069 0.113 -4e-06 4e-06 1.57079</pose>
         <geometry>
@@ -541,6 +544,9 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
       <visual name='wrist_3_link_fixed_joint_lump__palm_bracket_visual_5'>
         <pose>-0 -0.007 0.113 4e-06 -4e-06 1.57079</pose>
         <geometry>
@@ -570,7 +576,7 @@
         <limit>
           <lower>-0.45</lower>
           <upper>0.55</upper>
-          <effort>15</effort>
+          <effort>2</effort>
           <velocity>20</velocity>
         </limit>
         <dynamics>
@@ -636,7 +642,7 @@
         <limit>
           <lower>0</lower>
           <upper>1.65</upper>
-          <effort>15</effort>
+          <effort>2</effort>
           <velocity>20</velocity>
         </limit>
         <dynamics>
@@ -700,6 +706,9 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
       <collision name='ipb_fpcb'>
         <pose>0 -0 0.0113 -5e-06 -0 0</pose>
         <geometry>
@@ -718,7 +727,13 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
 <!--******************************************* -->
+
+
+
         <sensor name='ipb' type='contact'>
           <contact>
             <collision>ipb_fpcb</collision>
@@ -726,7 +741,14 @@
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
         </sensor>    
+
+
+
 <!--******************************************* -->
+
+
+
+
       <collision name='link_1_fixed_joint_lump__ipf_bracket_collision_3'>
         <pose>-0 -0 0.0123 0 -0 -0</pose>
         <geometry>
@@ -745,6 +767,10 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
+
       <collision name='ipf_fpcb'>
         <pose>-0 0 0.0123 0 -0 -0</pose>
         <geometry>
@@ -763,14 +789,24 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
 <!--******************************************* -->
+
+
+
+
         <sensor name='ipf' type='contact'>
           <contact>
             <collision>ipf_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
-        </sensor>    
+        </sensor> 
+
+      
+
 <!--******************************************* -->
       <visual name='link_1_visual'>
         <pose>-0.018269 0 -0.031781 0 1.48353 -3.14159</pose>
@@ -790,6 +826,9 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
       <visual name='link_1_fixed_joint_lump__index_proximal_back_fpcb_visual_2'>
         <pose>0 -0 0.0113 -5e-06 -0 0</pose>
         <geometry>
@@ -799,6 +838,9 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
       <visual name='link_1_fixed_joint_lump__ipf_bracket_visual_3'>
         <pose>-0 -0 0.0123 0 -0 -0</pose>
         <geometry>
@@ -808,6 +850,9 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
       <visual name='link_1_fixed_joint_lump__index_proximal_front_fpcb_visual_4'>
         <pose>-0 0 0.0123 0 -0 -0</pose>
         <geometry>
@@ -817,6 +862,9 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
       <self_collide>true</self_collide>
     </link>
     <joint name='joint_2_0' type='revolute'>
@@ -828,7 +876,7 @@
         <limit>
           <lower>0</lower>
           <upper>1.5</upper>
-          <effort>15</effort>
+          <effort>2</effort>
           <velocity>20</velocity>
         </limit>
         <dynamics>
@@ -937,6 +985,10 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
+
       <collision name='imf_fpcb'>
         <pose>0.054 0 0.0119 -4e-06 4e-06 3.14159</pose>
         <geometry>
@@ -955,14 +1007,24 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
 <!--******************************************* -->
+
+
+
         <sensor name='imf' type='contact'>
           <contact>
             <collision>imf_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
-        </sensor>    
+        </sensor> 
+
+
+      
+
 <!--******************************************* -->
       <visual name='link_2_visual'>
         <pose>0.072269 -0 -0.031781 -0 1.48353 -0</pose>
@@ -1000,6 +1062,9 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
       <visual name='link_2_fixed_joint_lump__index_medial_front_fpcb_visual_4'>
         <pose>0.054 0 0.0119 -4e-06 4e-06 3.14159</pose>
         <geometry>
@@ -1009,6 +1074,9 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
       <self_collide>true</self_collide>
     </link>
     <joint name='joint_3_0' type='revolute'>
@@ -1020,7 +1088,7 @@
         <limit>
           <lower>0</lower>
           <upper>2.5</upper>
-          <effort>15</effort>
+          <effort>2</effort>
           <velocity>20</velocity>
         </limit>
         <dynamics>
@@ -1084,6 +1152,9 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
       <collision name='ift_fpcb'>
         <pose>0.1004 -0 0.0119 0 0 3.14159</pose>
         <geometry>
@@ -1102,15 +1173,28 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
+
 <!--******************************************* -->
+
+
+
         <sensor name='ift' type='contact'>
           <contact>
             <collision>ift_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
-        </sensor>    
+        </sensor>   
+
+        
+
 <!--******************************************* -->
+
+
+
       <collision name='link_3_fixed_joint_lump__index_fingertip_side_fpcb_collision_3'>
         <pose>0.1004 -0 0.011899 0 -0 3.14159</pose>
         <geometry>
@@ -1129,6 +1213,9 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
       <visual name='link_3_visual'>
         <pose>0.1253 -0 0.0118 -3.14159 -0 -1.5708</pose>
         <geometry>
@@ -1147,6 +1234,9 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
       <visual name='link_3_fixed_joint_lump__index_fingertip_main_fpcb_visual_2'>
         <pose>0.1004 -0 0.0119 0 0 3.14159</pose>
         <geometry>
@@ -1165,6 +1255,9 @@
           </mesh>
         </geometry>
       </visual>
+
+-->
+
       <self_collide>true</self_collide>
     </link>
     <joint name='joint_12_0' type='revolute'>
@@ -1176,7 +1269,7 @@
         <limit>
           <lower>0.35</lower>
           <upper>1.57</upper>
-          <effort>15</effort>
+          <effort>2</effort>
           <velocity>20</velocity>
         </limit>
         <dynamics>
@@ -1242,7 +1335,7 @@
         <limit>
           <lower>-1.3</lower>
           <upper>1.15</upper>
-          <effort>15</effort>
+          <effort>2</effort>
           <velocity>20</velocity>
         </limit>
         <dynamics>
@@ -1308,7 +1401,7 @@
         <limit>
           <lower>0</lower>
           <upper>1.45</upper>
-          <effort>15</effort>
+          <effort>2</effort>
           <velocity>20</velocity>
         </limit>
         <dynamics>
@@ -1500,7 +1593,7 @@
         <limit>
           <lower>0</lower>
           <upper>1.7</upper>
-          <effort>15</effort>
+          <effort>2</effort>
           <velocity>20</velocity>
         </limit>
         <dynamics>
@@ -1656,7 +1749,7 @@
         <limit>
           <lower>-0.55</lower>
           <upper>0.45</upper>
-          <effort>15</effort>
+          <effort>2</effort>
           <velocity>20</velocity>
         </limit>
         <dynamics>
@@ -1722,7 +1815,7 @@
         <limit>
           <lower>0</lower>
           <upper>1.65</upper>
-          <effort>15</effort>
+          <effort>2</effort>
           <velocity>20</velocity>
         </limit>
         <dynamics>
@@ -1831,6 +1924,9 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
       <collision name='mpf_fpcb'>
         <pose>0 -0 0.0123 -0 0 3.14159</pose>
         <geometry>
@@ -1849,14 +1945,26 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
+
+
 <!--******************************************* -->
+
+
+
         <sensor name='mpf' type='contact'>
           <contact>
             <collision>mpf_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
-        </sensor>    
+        </sensor>
+
+
+       
+
 <!--******************************************* -->
       <visual name='link_5_visual'>
         <pose>0.018269 0 -0.031781 0 1.48353 -0</pose>
@@ -1894,6 +2002,11 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
+
+
       <visual name='link_5_fixed_joint_lump__middle_proximal_front_fpcb_visual_4'>
         <pose>0 -0 0.0123 -0 0 3.14159</pose>
         <geometry>
@@ -1903,6 +2016,10 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
+
       <self_collide>true</self_collide>
     </link>
     <joint name='joint_6_0' type='revolute'>
@@ -1914,7 +2031,7 @@
         <limit>
           <lower>0</lower>
           <upper>1.5</upper>
-          <effort>15</effort>
+          <effort>2</effort>
           <velocity>20</velocity>
         </limit>
         <dynamics>
@@ -2023,6 +2140,11 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
+
+
       <collision name='mmf_fpcb'>
         <pose>0.054 0 0.0119 -4e-06 4e-06 3.14159</pose>
         <geometry>
@@ -2041,14 +2163,27 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
+
 <!--******************************************* -->
+
+
+
+
         <sensor name='mmf' type='contact'>
           <contact>
             <collision>mmf_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
-        </sensor>    
+        </sensor>
+
+
+      
+
+
 <!--******************************************* -->
       <visual name='link_6_visual'>
         <pose>0.072269 -0 -0.031781 -0 1.48353 0</pose>
@@ -2086,6 +2221,11 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
+
+
       <visual name='link_6_fixed_joint_lump__middle_medial_front_fpcb_visual_4'>
         <pose>0.054 0 0.0119 -4e-06 4e-06 3.14159</pose>
         <geometry>
@@ -2095,6 +2235,11 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
+
+
       <self_collide>true</self_collide>
     </link>
     <joint name='joint_7_0' type='revolute'>
@@ -2106,7 +2251,7 @@
         <limit>
           <lower>0</lower>
           <upper>2.5</upper>
-          <effort>15</effort>
+          <effort>2</effort>
           <velocity>20</velocity>
         </limit>
         <dynamics>
@@ -2170,6 +2315,11 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
+
+
       <collision name='mft_fpcb'>
         <pose>0.1004 0 0.0119 -5e-06 0 -3.14159</pose>
         <geometry>
@@ -2188,14 +2338,29 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
+
+
 <!--******************************************* -->
+
+
+
+
+
         <sensor name='mft' type='contact'>
           <contact>
             <collision>mft_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
-        </sensor>    
+        </sensor>   
+
+
+
+
+
 <!--******************************************* -->
       <collision name='link_7_fixed_joint_lump__middle_fingertip_side_fpcb_collision_3'>
         <pose>0.1004 0 0.011899 -5e-06 -0 -3.14159</pose>
@@ -2233,6 +2398,11 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
+
+
       <visual name='link_7_fixed_joint_lump__middle_fingertip_main_fpcb_visual_2'>
         <pose>0.1004 0 0.0119 -5e-06 0 -3.14159</pose>
         <geometry>
@@ -2242,6 +2412,11 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
+
+
       <visual name='link_7_fixed_joint_lump__middle_fingertip_side_fpcb_visual_3'>
         <pose>0.1004 0 0.011899 -5e-06 -0 -3.14159</pose>
         <geometry>
@@ -2262,7 +2437,7 @@
         <limit>
           <lower>-0.45</lower>
           <upper>0.55</upper>
-          <effort>15</effort>
+          <effort>2</effort>
           <velocity>20</velocity>
         </limit>
         <dynamics>
@@ -2328,7 +2503,7 @@
         <limit>
           <lower>0</lower>
           <upper>1.65</upper>
-          <effort>15</effort>
+          <effort>2</effort>
           <velocity>20</velocity>
         </limit>
         <dynamics>
@@ -2437,6 +2612,11 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
+
+
       <collision name='ppf_fpcb'>
         <pose>0 -0 0.0123 -0 0 3.14159</pose>
         <geometry>
@@ -2455,14 +2635,27 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
+
 <!--******************************************* -->
+
+
+
+
         <sensor name='ppf' type='contact'>
           <contact>
             <collision>ppf_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
-        </sensor>    
+        </sensor> 
+
+
+
+
+
 <!--******************************************* -->
       <visual name='link_9_visual'>
         <pose>0.018269 0 -0.031781 0 1.48353 -0</pose>
@@ -2500,6 +2693,11 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
+
+
       <visual name='link_9_fixed_joint_lump__pinky_proximal_front_fpcb_visual_4'>
         <pose>0 -0 0.0123 -0 0 3.14159</pose>
         <geometry>
@@ -2509,6 +2707,10 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
+
       <self_collide>true</self_collide>
     </link>
     <joint name='joint_10_0' type='revolute'>
@@ -2520,7 +2722,7 @@
         <limit>
           <lower>0</lower>
           <upper>1.5</upper>
-          <effort>15</effort>
+          <effort>2</effort>
           <velocity>20</velocity>
         </limit>
         <dynamics>
@@ -2629,6 +2831,11 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
+
+
       <collision name='pmf_fpcb'>
         <pose>0.054 0 0.0119 -4e-06 4e-06 3.14159</pose>
         <geometry>
@@ -2647,14 +2854,29 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
+
+
+
 <!--******************************************* -->
+
+
+
+
+
         <sensor name='pmf' type='contact'>
           <contact>
             <collision>pmf_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
-        </sensor>    
+        </sensor> 
+
+
+
+
 <!--******************************************* -->
       <visual name='link_10_visual'>
         <pose>0.072269 -0 -0.031781 -0 1.48353 0</pose>
@@ -2692,6 +2914,11 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
+
+
       <visual name='link_10_fixed_joint_lump__pinky_medial_front_fpcb_visual_4'>
         <pose>0.054 0 0.0119 -4e-06 4e-06 3.14159</pose>
         <geometry>
@@ -2701,6 +2928,11 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
+
+
       <self_collide>true</self_collide>
     </link>
     <joint name='joint_11_0' type='revolute'>
@@ -2711,8 +2943,11 @@
         <xyz>0 0 1</xyz>
         <limit>
           <lower>0</lower>
+<!--
           <upper>2.5</upper>
-          <effort>15</effort>
+-->
+          <upper>3</upper>
+          <effort>2</effort>
           <velocity>20</velocity>
         </limit>
         <dynamics>
@@ -2776,6 +3011,11 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
+
+
       <collision name='pft_fpcb'>
         <pose>0.1004 -0 0.0119 -0 -0 3.14159</pose>
         <geometry>
@@ -2794,14 +3034,31 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+
+
+
+
+
+
 <!--******************************************* -->
+
+
+
+
         <sensor name='pft' type='contact'>
           <contact>
             <collision>pft_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
-        </sensor>    
+        </sensor>  
+
+
+
+
+
+
+
 <!--******************************************* -->
       <collision name='link_11_fixed_joint_lump__pinky_fingertip_side_fpcb_collision_3'>
         <pose>0.1004 -0 0.011899 -0 0 3.14159</pose>
@@ -2839,6 +3096,10 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
+
       <visual name='link_11_fixed_joint_lump__pinky_fingertip_main_fpcb_visual_2'>
         <pose>0.1004 -0 0.0119 -0 -0 3.14159</pose>
         <geometry>
@@ -2848,6 +3109,11 @@
           </mesh>
         </geometry>
       </visual>
+
+
+
+
+
       <visual name='link_11_fixed_joint_lump__pinky_fingertip_side_fpcb_visual_3'>
         <pose>0.1004 -0 0.011899 -0 0 3.14159</pose>
         <geometry>

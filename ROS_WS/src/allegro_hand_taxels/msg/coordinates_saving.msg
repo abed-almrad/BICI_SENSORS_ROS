@@ -1,1 +1,0 @@
-string saving_activation

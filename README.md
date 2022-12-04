@@ -56,4 +56,19 @@ where each number correspond to a joint as per the instructions provided in the 
 **P.S.** In case of a format, how to setup your PC for ROS development:
 
 1- In VScode: Use ctrl + shift + p to open the command palette and search there for "c_cpp_properties.json" then open the file and add the highlighted line of code as it appears in the "VScode_ROS_Setup" image under ROS_WS directory.
+
 2- Install all the needed gazebo_ros packages (this is particularly needed for building the contact sensor plugin in QtCreator)
+
+# SYNTHETIC DATA GENERATION STEPS
+
+1- Use the following command to run the Gazebo simulation environment along with all the necessary controllers and plugins for both the UR5e arm and the allegro hand: roslaunch coro_workstations ur5e_workstation.launch
+
+2- Use the following command to run the python script that will command both the robotic arm and hand to systematically conduct the experiments and generate the synthetic data
+
+3- The generated synthetic data is stored in the folder:"~/Desktop/Contact_Data" (**P.S.** The folder needs to be created manually)
+
+4- Press the play button to run the Gazebo simulation before launching the python script needed to initiate the synthetic data generation experiments
+
+
+
+

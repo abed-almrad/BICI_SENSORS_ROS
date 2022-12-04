@@ -21,6 +21,7 @@
 #include <ros/callback_queue.h>
 #include <ros/subscribe_options.h>
 #include <std_msgs/String.h>
+#include <allegro_hand_taxels/coordinates_saving.h>
 #include <utility>
 #include <vector>
 #include <algorithm>
@@ -71,8 +72,11 @@ namespace gazebo
     //              std::vector<std::string> &out);
 
     public: virtual void contact_callback(ContactPtr &_msg);
-    public: virtual void saving_callback(const std_msgs::StringConstPtr &_msg);
+    public: virtual bool saving_activation_function(allegro_hand_taxels::coordinates_saving::Request &req,
+                                                    allegro_hand_taxels::coordinates_saving::Response &res);
 
+    // A world variable
+    private: physics::World world;
     //Contact info
     private: std::map <std::string, std::vector<std::vector<float>>> raw_contacts_map;
     private: std::map <std::string, std::vector<std::vector<float>>> filtered_contacts_map;
@@ -90,6 +94,8 @@ namespace gazebo
     private: event::ConnectionPtr updateConnection;
     /// \brief A node used for transport
     private: transport::NodePtr node;
+    // brief a publisher for deleting a model in gazebo simulator
+    private: transport::PublisherPtr model_del_pub;
 
     /// \brief A subscriber to a named topic.
     private: std::vector<transport::SubscriberPtr> subscribers_v;
@@ -100,14 +106,15 @@ namespace gazebo
     private: FILE *fp_filtered;
     private: FILE *fp_inactive_taxels;
     private: std::string act_cmd = "false";
+    private: bool thread_running = true;
 
     //ROS subscriber
 
     /// \brief A node use for ROS transport
     private: std::unique_ptr<ros::NodeHandle> rosNode;
 
-    /// \brief A ROS subscriber
-    private: ros::Subscriber saving_subscriber;
+    /// \brief A ROS server
+    private: ros::ServiceServer service;
 
     /// \brief A ROS callbackqueue that helps process messages
     private: ros::CallbackQueue rosQueue;
@@ -171,6 +178,8 @@ namespace gazebo
     private: int sensor_count;
     // PlaceHolders
     private: geometry_msgs::Vector3Stamped v3s;
+    // An integer value to keep track of the iteration of the contact points registration
+    private: int reg_iter_count;
 
 
   };

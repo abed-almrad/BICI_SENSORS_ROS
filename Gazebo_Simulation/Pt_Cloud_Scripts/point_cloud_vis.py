@@ -1,7 +1,7 @@
 import numpy as np
 import open3d as o3d
 #Creating the numpy vector of points from a previously saved csv file
-xyz = np.genfromtxt('/home/abed/.ros/inactive_taxels_coordinates.csv',dtype= float, delimiter=',')
+xyz = np.genfromtxt('/home/abed/.ros/inactive_taxels_coordinates1.csv',dtype= float, delimiter=',')
 xyz = xyz[:,0:3]
 inactive_pts = xyz[:,0:3]
 inactive_color = np.full((inactive_pts.shape[0],3), 0.8)
@@ -11,7 +11,7 @@ pcd_inactive.points = o3d.utility.Vector3dVector(inactive_pts)
 pcd_inactive.colors = o3d.utility.Vector3dVector(inactive_color)
 
 #Creating the numpy vector of the active points from a previously saved csv file
-xyz = np.genfromtxt('/home/abed/.ros/filtered_contacts_coordinates.csv',dtype= float, delimiter=',')
+xyz = np.genfromtxt('/home/abed/.ros/filtered_contacts_coordinates1.csv',dtype= float, delimiter=',')
 active_pts = xyz[:,0:3]
 active_color = np.full((active_pts.shape[0],3), 0.1)
 #Creating a point cloud using the stored 3D points with the inactivity faded color

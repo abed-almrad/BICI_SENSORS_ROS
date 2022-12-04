@@ -1,28 +1,46 @@
 #include "ros/ros.h"
-#include "std_msgs/String.h"
+#include "allegro_hand_taxels/coordinates_saving.h"
 
 int main(int argc, char **argv)
 {
 
-  ros::init(argc, argv, "saving_commander");
+  int i;
+  ros::init(argc, argv, "saving_client");
   ros::NodeHandle nh;
-  std_msgs::String msg;
-  //Publisher for hardware setup points saving
-  ros::Publisher pub = nh.advertise<std_msgs::String>("saving_command", 1000);
-  //Publisher for simulation setup points saving
-  ros::Publisher pub_gazebo = nh.advertise<std_msgs::String>("saving_order", 1000);
-  ros::Rate rate(10);
-  while (ros::ok())
+  ros::ServiceClient saving_client = nh.serviceClient<allegro_hand_taxels::coordinates_saving>("saving_command");
+//  ros::ServiceClient deletion_client = nh.serviceClient<allegro_hand_taxels::coordinates_saving>("deletion_command");
+  allegro_hand_taxels::coordinates_saving srv;
+  srv.request.saving_activation = "true";
+  if(nh.getParam("iteration_nb",i))
   {
-    msg.data = "true";
-    ROS_INFO("%s", msg.data.c_str());
-    pub.publish(msg);
-    pub_gazebo.publish(msg);
-    ros::spinOnce();
-    rate.sleep();
+    srv.request.iteration_nb = i;
+
+    if (saving_client.call(srv))
+    {
+      std::cout << "Coordinates Saving Response: " << srv.response.saving_activation_response << std::endl;
+      srv.request.saving_activation.clear();
+      srv.response.saving_activation_response.clear();
+    }
+    else
+    {
+      std::cout << "Failed to call service saving_command" << std::endl;
+      return 1;
+    }
+/*
+    if (deletion_client.call(srv))
+    {
+      std::cout << "Model deletion Response: " << srv.response.saving_activation_response << std::endl;
+      srv.request.saving_activation.clear();
+      srv.response.saving_activation_response.clear();
+    }
+    else
+    {
+      std::cout << "Failed to call service deletion_command" << std::endl;
+      return 1;
+    }
+*/
+    return 0;
   }
 
-
-  return 0;
 }
 // %EndTag(FULLTEXT)%

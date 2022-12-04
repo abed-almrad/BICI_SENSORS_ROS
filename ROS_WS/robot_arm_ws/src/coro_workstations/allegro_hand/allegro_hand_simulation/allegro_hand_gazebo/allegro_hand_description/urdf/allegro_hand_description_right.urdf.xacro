@@ -250,7 +250,7 @@
                 <parent link="link_2" />
                 <child link="link_3" />
                 <axis xyz="0 0 1"/>
-                <limit effort="15" velocity="20" lower="0" upper="1.4" />
+                <limit effort="15" velocity="20" lower="0" upper="1.47" />
                 <dynamics damping="1" friction="0.5" />
                 <gazebo>
                 <implicitSpringDamper> true </implicitSpringDamper>
@@ -831,7 +831,7 @@
                 <parent link="link_6" />
                 <child link="link_7" />
                 <axis xyz="0 0 1"/>
-                <limit effort="15" velocity="20" lower="0" upper="1.4" />
+                <limit effort="15" velocity="20" lower="0" upper="1.47" />
                 <dynamics damping="1" friction="0.5" />
                 <gazebo>
                 <implicitSpringDamper> true </implicitSpringDamper>
@@ -1412,7 +1412,7 @@
                 <parent link="link_10" />
                 <child link="link_11" />
                 <axis xyz="0 0 1"/>
-                <limit effort="15" velocity="20" lower="0" upper="1.4" />
+                <limit effort="15" velocity="20" lower="0" upper="1.47" />
                 <dynamics damping="1" friction="0.5" />
                 <gazebo>
                 <implicitSpringDamper> true </implicitSpringDamper>

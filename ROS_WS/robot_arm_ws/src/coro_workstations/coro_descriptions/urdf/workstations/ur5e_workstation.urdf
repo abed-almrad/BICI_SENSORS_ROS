@@ -359,7 +359,7 @@
   <joint name="wrist_3_joint" type="revolute">
     <parent link="wrist_2_link"/>
     <child link="wrist_3_link"/>
-    <origin rpy="1.570796326589793 3.141592653589793 3.141592653589793" xyz="0 0.0996 -2.042830148012698e-11"/>
+    <origin rpy="1.570796326589793 4.71238898018 3.141592653589793" xyz="0 0.0996 -2.042830148012698e-11"/>
     <axis xyz="0 0 1"/>
     <limit effort="28.0" lower="-6.283185307179586" upper="6.283185307179586" velocity="3.141592653589793"/>
     <dynamics damping="0" friction="0"/>
@@ -669,8 +669,8 @@
     <parent link="link_2"/>
     <child link="link_3"/>
     <axis xyz="0 0 1"/>
-    <limit effort="15" lower="0" upper="2.5" velocity="20"/>
-    <dynamics damping="0" friction="0.5"/>
+    <limit effort="15" lower="0" upper="1.47" velocity="20"/>
+    <dynamics damping="1" friction="0.5"/>
     <gazebo>
       <implicitSpringDamper> true </implicitSpringDamper>
     </gazebo>
@@ -823,8 +823,8 @@
     <parent link="link_1"/>
     <child link="link_2"/>
     <axis xyz="0 0 1"/>
-    <limit effort="15" lower="0" upper="1.57" velocity="20"/>
-    <dynamics damping="0" friction="0.5"/>
+    <limit effort="15" lower="0" upper="1.5" velocity="20"/>
+    <dynamics damping="1" friction="0.5"/>
     <gazebo>
       <implicitSpringDamper> true </implicitSpringDamper>
     </gazebo>
@@ -977,8 +977,8 @@
     <parent link="link_0"/>
     <child link="link_1"/>
     <axis xyz="0 0 1"/>
-    <limit effort="15" lower="0" upper="2.5" velocity="20"/>
-    <dynamics damping="0" friction="0.5"/>
+    <limit effort="15" lower="0" upper="1.65" velocity="20"/>
+    <dynamics damping="1" friction="0.5"/>
     <gazebo>
       <implicitSpringDamper> true </implicitSpringDamper>
     </gazebo>
@@ -999,8 +999,8 @@
     <parent link="palm_link"/>
     <child link="link_0"/>
     <axis xyz="0 0 1"/>
-    <limit effort="15" lower="-1.57" upper="1.57" velocity="20"/>
-    <dynamics damping="0" friction="0.5"/>
+    <limit effort="15" lower="-0.45" upper="0.55" velocity="20"/>
+    <dynamics damping="1" friction="0.5"/>
     <gazebo>
       <implicitSpringDamper> true </implicitSpringDamper>
     </gazebo>
@@ -1220,8 +1220,8 @@
     <parent link="link_6"/>
     <child link="link_7"/>
     <axis xyz="0 0 1"/>
-    <limit effort="15" lower="0" upper="2.5" velocity="20"/>
-    <dynamics damping="0" friction="0.5"/>
+    <limit effort="15" lower="0" upper="1.47" velocity="20"/>
+    <dynamics damping="1" friction="0.5"/>
     <gazebo>
       <implicitSpringDamper> true </implicitSpringDamper>
     </gazebo>
@@ -1374,8 +1374,8 @@
     <parent link="link_5"/>
     <child link="link_6"/>
     <axis xyz="0 0 1"/>
-    <limit effort="15" lower="0" upper="1.57" velocity="20"/>
-    <dynamics damping="0" friction="0.5"/>
+    <limit effort="15" lower="0" upper="1.5" velocity="20"/>
+    <dynamics damping="1" friction="0.5"/>
     <gazebo>
       <implicitSpringDamper> true </implicitSpringDamper>
     </gazebo>
@@ -1528,8 +1528,8 @@
     <parent link="link_4"/>
     <child link="link_5"/>
     <axis xyz="0 0 1"/>
-    <limit effort="15" lower="0" upper="2.5" velocity="20"/>
-    <dynamics damping="0" friction="0.5"/>
+    <limit effort="15" lower="0" upper="1.65" velocity="20"/>
+    <dynamics damping="1" friction="0.5"/>
     <gazebo>
       <implicitSpringDamper> true </implicitSpringDamper>
     </gazebo>
@@ -1550,8 +1550,8 @@
     <parent link="palm_link"/>
     <child link="link_4"/>
     <axis xyz="0 0 1"/>
-    <limit effort="15" lower="-1.57" upper="1.57" velocity="20"/>
-    <dynamics damping="0" friction="0.5"/>
+    <limit effort="15" lower="-0.55" upper="0.45" velocity="20"/>
+    <dynamics damping="1" friction="0.5"/>
     <gazebo>
       <implicitSpringDamper> true </implicitSpringDamper>
     </gazebo>
@@ -1771,8 +1771,8 @@
     <parent link="link_10"/>
     <child link="link_11"/>
     <axis xyz="0 0 1"/>
-    <limit effort="15" lower="0" upper="2.5" velocity="20"/>
-    <dynamics damping="0" friction="0.5"/>
+    <limit effort="15" lower="0" upper="1.47" velocity="20"/>
+    <dynamics damping="1" friction="0.5"/>
     <gazebo>
       <implicitSpringDamper> true </implicitSpringDamper>
     </gazebo>
@@ -1925,8 +1925,8 @@
     <parent link="link_9"/>
     <child link="link_10"/>
     <axis xyz="0 0 1"/>
-    <limit effort="15" lower="0" upper="1.57" velocity="20"/>
-    <dynamics damping="0" friction="0.5"/>
+    <limit effort="15" lower="0" upper="1.5" velocity="20"/>
+    <dynamics damping="1" friction="0.5"/>
     <gazebo>
       <implicitSpringDamper> true </implicitSpringDamper>
     </gazebo>
@@ -2079,8 +2079,8 @@
     <parent link="link_8"/>
     <child link="link_9"/>
     <axis xyz="0 0 1"/>
-    <limit effort="15" lower="0" upper="2.5" velocity="20"/>
-    <dynamics damping="0" friction="0.5"/>
+    <limit effort="15" lower="0" upper="1.65" velocity="20"/>
+    <dynamics damping="1" friction="0.5"/>
     <gazebo>
       <implicitSpringDamper> true </implicitSpringDamper>
     </gazebo>
@@ -2101,8 +2101,8 @@
     <parent link="palm_link"/>
     <child link="link_8"/>
     <axis xyz="0 0 1"/>
-    <limit effort="15" lower="-1.57" upper="1.57" velocity="20"/>
-    <dynamics damping="0" friction="0.5"/>
+    <limit effort="15" lower="-0.45" upper="0.55" velocity="20"/>
+    <dynamics damping="1" friction="0.5"/>
     <gazebo>
       <implicitSpringDamper> true </implicitSpringDamper>
     </gazebo>
@@ -2322,8 +2322,8 @@
     <parent link="link_14"/>
     <child link="link_15"/>
     <axis xyz="0 0 1"/>
-    <limit effort="15" lower="0" upper="1.57" velocity="20"/>
-    <dynamics damping="0" friction="0.5"/>
+    <limit effort="15" lower="0" upper="1.7" velocity="20"/>
+    <dynamics damping="1" friction="0.5"/>
     <gazebo>
       <implicitSpringDamper> true </implicitSpringDamper>
     </gazebo>
@@ -2476,8 +2476,8 @@
     <parent link="link_13"/>
     <child link="link_14"/>
     <axis xyz="0 0 1"/>
-    <limit effort="15" lower="0" upper="1.57" velocity="20"/>
-    <dynamics damping="0" friction="0.5"/>
+    <limit effort="15" lower="0" upper="1.45" velocity="20"/>
+    <dynamics damping="1" friction="0.5"/>
     <gazebo>
       <implicitSpringDamper> true </implicitSpringDamper>
     </gazebo>
@@ -2498,8 +2498,8 @@
     <parent link="link_12"/>
     <child link="link_13"/>
     <axis xyz="0 0 1"/>
-    <limit effort="15" lower="0" upper="2" velocity="20"/>
-    <dynamics damping="0" friction="0.5"/>
+    <limit effort="15" lower="-1.3" upper="1.15" velocity="20"/>
+    <dynamics damping="1" friction="0.5"/>
     <gazebo>
       <implicitSpringDamper> true </implicitSpringDamper>
     </gazebo>
@@ -2520,8 +2520,8 @@
     <parent link="palm_link"/>
     <child link="link_12"/>
     <axis xyz="0 0 1"/>
-    <limit effort="15" lower="0" upper="1.57" velocity="20"/>
-    <dynamics damping="0" friction="0.5"/>
+    <limit effort="15" lower="0.35" upper="1.57" velocity="20"/>
+    <dynamics damping="1" friction="0.5"/>
     <gazebo>
       <implicitSpringDamper> true </implicitSpringDamper>
     </gazebo>
@@ -2674,6 +2674,37 @@
     <parent link="tool0"/>
     <child link="tcp"/>
     <origin rpy="0 0 0" xyz="0 0 0.165"/>
+  </joint>
+  <!-- OBJECT TO GRASP -->
+  <link name="cubic_object_link">
+    <visual>
+      <origin rpy="0 -0 1.5708" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://coro_descriptions/meshes/cubic_object.stl"/>
+      </geometry>
+      <material name="link_testing_cube_material">
+        <color rgba="0.615686 0.811765 0.929412 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 -0 1.5708" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://coro_descriptions/meshes/cubic_object.stl"/>
+      </geometry>
+      <material name="link_testing_cube_material">
+        <color rgba="0.615686 0.811765 0.929412 1.0"/>
+      </material>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="-1.02566e-17 9.23364e-19 0.1075"/>
+      <mass value="0.0770781"/>
+      <inertia ixx="0.000307188" ixy="0" ixz="0" iyy="0.000307188" iyz="0" izz="2.05542e-05"/>
+    </inertial>
+  </link>
+  <joint name="object_to_table" type="fixed">
+    <origin rpy="0 0 0" xyz="0.004217 -0.201201 0.951750"/>
+    <parent link="table_base"/>
+    <child link="cubic_object_link"/>
   </joint>
   <!-- GAZEBO -->
   <gazebo>

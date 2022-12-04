@@ -1,4 +1,4 @@
-#include "CoordinatesPlugin.hh"
+﻿#include "CoordinatesPlugin.hh"
 
 
 using namespace gazebo;
@@ -2751,21 +2751,48 @@ void CoordinatesPlugin::taxelsTreeBld()
 // Called by the world update start event
 void CoordinatesPlugin::OnUpdate()
 {
+
+
+
+    // Steps needed to remove the workstation after performing a grasping iteration
+//        this->world.RemoveModel(this->model);
+
+//        for (int index = 0; index < this->model->GetSensorCount(); index++)
+//        {
+//            this->subscribers_v[index]->Unsubscribe();
+//        }
+//            this->service.shutdown();
+//            gazebo::msgs::Request *msg = gazebo::msgs::CreateRequest("entity_delete","ur5e_workstation_"+std::to_string(this->reg_iter_count));
+//            this->model_del_pub->WaitForConnection();
+ //           this->model_del_pub->Publish(*msg,true);
+//            delete msg;
+//            transport::fini();
+
+//        std::cout << "Model deletion accomplished" << std::endl;
+
 }
 
 /// \brief ROS helper function that processes messages
 void CoordinatesPlugin::QueueThread()
 {
   static const double timeout = 0.01;
-  while (this->rosNode->ok())
+  while (this->thread_running)
   {
     this->rosQueue.callAvailable(ros::WallDuration(timeout));
   }
 }
-// ROS saving subscriber callback function
-void CoordinatesPlugin::saving_callback(const std_msgs::StringConstPtr &_msg) //
+// ROS coordinates saving callback function
+bool CoordinatesPlugin::saving_activation_function(allegro_hand_taxels::coordinates_saving::Request &req,
+                                                   allegro_hand_taxels::coordinates_saving::Response &res)
 {
-    this->act_cmd = _msg->data;
+    res.saving_activation_response = req.saving_activation;
+    std::cout << "Requested saving activation boolean string: " << req.saving_activation << std::endl;
+    this->act_cmd = res.saving_activation_response;
+    this->reg_iter_count = req.iteration_nb;
+    std::cout<<"sending back response: "<<this->act_cmd << std::endl;
+    this->thread_running = false;
+    this->rosQueueThread.join();
+    return true;
 }
 
 // Gazebo contact detection subscriber callback
@@ -2863,6 +2890,12 @@ void CoordinatesPlugin::contact_callback(ContactPtr &_msg)
     }
     if(this->act_cmd == "true")
     {
+        std::string path = "/home/abed/Desktop/Contact_Data/contacts_coordinates_"+std::to_string(this->reg_iter_count)+".csv";
+        std::string path_filtered = "/home/abed/Desktop/Contact_Data/filtered_contacts_coordinates_"+std::to_string(this->reg_iter_count)+".csv";
+        std::string path_inactive_taxels = "/home/abed/Desktop/Contact_Data/inactive_taxels_coordinates_"+std::to_string(this->reg_iter_count)+".csv";
+        this->fp = fopen(path.c_str(), "w");
+        this->fp_filtered = fopen(path_filtered.c_str(), "w");
+        this->fp_inactive_taxels = fopen(path_inactive_taxels.c_str(), "w");
         // Registering all the taxels positions at the saving moment to better understand the context at which the contact points were registered
         for (auto const& [key, val] : this->transformed_taxels_map)
         {
@@ -3003,8 +3036,9 @@ void CoordinatesPlugin::contact_callback(ContactPtr &_msg)
     fclose(this->fp);
     fclose(this->fp_filtered);
     fclose(this->fp_inactive_taxels);
+    this->filtered_contacts_map.clear(); //You should only clear this data container before entering the subsequent registration phases
     this->act_cmd = "false";
-    ros::shutdown();
+
     }
 
 }
@@ -3021,6 +3055,8 @@ void CoordinatesPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/
       this->node = transport::NodePtr(new transport::Node());
       this->node->Init(_parent->GetName());
       this->sensorManager = sensors::SensorManager::Instance();
+      // Publisher for deleting the workstation in gazebo environment
+      this->model_del_pub = this->node->Advertise<gazebo::msgs::Request>("/gazebo/default/request");
       // The total number of attached contact sensors
       this->sensor_count = _parent->GetSensorCount();
       std::cout << "The number of attached sensors is: " + std::to_string(this->sensor_count) << std::endl;
@@ -3036,16 +3072,10 @@ void CoordinatesPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/
           std::cout << "/gazebo/"+topic_name << std::endl;
           this->subscribers_v[index] = this->node->Subscribe("/gazebo/"+topic_name,&CoordinatesPlugin::contact_callback,this);
           }
-          std::string path = "contacts_coordinates.csv";
-          std::string path_filtered = "filtered_contacts_coordinates.csv";
-          std::string path_inactive_taxels = "inactive_taxels_coordinates.csv";
-          this->fp = fopen(path.c_str(), "w");
-          this->fp_filtered = fopen(path_filtered.c_str(), "w");
-          this->fp_inactive_taxels = fopen(path_inactive_taxels.c_str(), "w");
+
           //Building the taxels data structure
           this->taxelsTreeBld();
 
-          //ROS subscriber
           // Initialize ros, if it has not already bee initialized.
           if (!ros::isInitialized())
           {
@@ -3059,22 +3089,14 @@ void CoordinatesPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/
 
           // Create our ROS node. This acts in a similar manner to
           // the Gazebo node
-          this->rosNode.reset(new ros::NodeHandle("gazebo_client"));
+          this->rosNode.reset(new ros::NodeHandle());
 
-          // Create a named topic, and subscribe to it.
-          ros::SubscribeOptions so =
-            ros::SubscribeOptions::create<std_msgs::String>(
-                      "/saving_order",
-                      5,
-                      boost::bind(&CoordinatesPlugin::saving_callback, this, _1),
-                      ros::VoidPtr(),
-                      &this->rosQueue);
-          this->saving_subscriber = this->rosNode->subscribe(so);
+          // Create a ros service server to receive and process the client's request
+          this->service = this->rosNode->advertiseService("saving_command", &CoordinatesPlugin::saving_activation_function,this);
 
           // Spin up the queue helper thread.
           this->rosQueueThread =
             std::thread(std::bind(&CoordinatesPlugin::QueueThread, this));
-          this->rosQueueThread.detach();
 
 
     }
