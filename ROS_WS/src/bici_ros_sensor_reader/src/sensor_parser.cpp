@@ -188,7 +188,7 @@ void parse_message(boost::circular_buffer<uint8_t> &cb, uint8_t start_index, uin
 				continue;
 
 			}
-*/
+*/			
 			msg.data.push_back(data_entry);
 		}
 	}
@@ -197,11 +197,25 @@ void parse_message(boost::circular_buffer<uint8_t> &cb, uint8_t start_index, uin
 	if ((sensor_num >= NUM_SENSOR_MIN) && (sensor_num <= NUM_SENSOR_MAX))
 	{
 		msg.sensor_num = sensor_num;
+
+//**********************************************
+//**********************************************
+		// The below piece of code is to ignore the pinky fingertip since its data stream is currently unstable
+		if (sensor_num == 23 || sensor_num == 11)
+		{
+			msg.data.clear();	
+		}
+//**********************************************
+//**********************************************
+
 #ifdef PRINT
 		//printf("sensor_num= %i, message_length = %i\n", sensor_num, message_length);
 #endif
+		if(sensor_num != 23 && sensor_num != 11)
+		{
 		publishers[sensor_num-NUM_SENSOR_MIN].publish(msg);
 		msg.data.clear();
+		}
 	}
 	else
 	{

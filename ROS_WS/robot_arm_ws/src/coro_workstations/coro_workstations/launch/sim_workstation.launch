@@ -89,11 +89,11 @@ Email:	alexandre.bernier.3@ens.etsmtl.ca
   	<!-- And Rviz -->
   	<!-- ******** -->
   	<!-- Run Rviz and load the default config to see the state of the move_group node -->
-<!--
+
   	<include file="$(arg dollar)$(arg moveit_config_path)/launch/moveit_rviz.launch">
   		<arg name="rviz_config" default="$(arg dollar)$(arg moveit_config_path)/launch/moveit.rviz"/>
 		<arg name="debug" value="$(arg debug)"/>
 	</include>
--->
+
 
 </launch>

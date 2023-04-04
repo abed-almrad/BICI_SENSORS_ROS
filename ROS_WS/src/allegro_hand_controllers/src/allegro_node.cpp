@@ -78,6 +78,7 @@ AllegroNode::~AllegroNode() {
 
 void AllegroNode::desiredStateCallback(const sensor_msgs::JointState &msg) {
   mutex->lock();
+  std::cout << "I set the desired_joint_state variable :)" <<std::endl;
   desired_joint_state = msg;
   mutex->unlock();
 }

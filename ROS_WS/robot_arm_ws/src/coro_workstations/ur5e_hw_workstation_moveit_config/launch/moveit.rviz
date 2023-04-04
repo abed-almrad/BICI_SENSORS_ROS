@@ -5,8 +5,10 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /MotionPlanning1
-      Splitter Ratio: 0.7425600290298462
-    Tree Height: 330
+        - /MotionPlanning1/Planned Path1
+        - /MarkerArray1
+      Splitter Ratio: 0.5
+    Tree Height: 261
   - Class: rviz/Help
     Name: Help
   - Class: rviz/Views
@@ -39,7 +41,7 @@ Visualization Manager:
       Plane Cell Count: 10
       Reference Frame: <Fixed Frame>
       Value: true
-    - Acceleration_Scaling_Factor: 1
+    - Acceleration_Scaling_Factor: 0.1
       Class: moveit_rviz_plugin/MotionPlanning
       Enabled: true
       Move Group Namespace: ""
@@ -51,8 +53,6 @@ Visualization Manager:
       MoveIt_Planning_Time: 5
       MoveIt_Use_Cartesian_Path: false
       MoveIt_Use_Constraint_Aware_IK: false
-      MoveIt_Warehouse_Host: 127.0.0.1
-      MoveIt_Warehouse_Port: 33829
       MoveIt_Workspace:
         Center:
           X: 0
@@ -67,11 +67,6 @@ Visualization Manager:
         Color Enabled: false
         Interrupt Display: false
         Links:
-          2f_coupling:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
           All Links Enabled: true
           Expand Joint Details: false
           Expand Link Details: false
@@ -90,10 +85,25 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          boh:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          boh_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           coupling_gripper_fix:
             Alpha: 1
             Show Axes: false
             Show Trail: false
+          cubic_object_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           flange:
             Alpha: 1
             Show Axes: false
@@ -103,47 +113,262 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          gripper_base_link:
+          ift_bracket:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          gripper_finger1_finger_link:
+          imb_bracket:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          gripper_finger1_finger_tip_link:
+          imf_bracket:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          gripper_finger1_inner_knuckle_link:
+          index_fingertip_main_fpcb:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          gripper_finger1_knuckle_link:
+          index_fingertip_side_fpcb:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          gripper_finger2_finger_link:
+          index_medial_back_fpcb:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          gripper_finger2_finger_tip_link:
+          index_medial_front_fpcb:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          gripper_finger2_inner_knuckle_link:
+          index_proximal_back_fpcb:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          gripper_finger2_knuckle_link:
+          index_proximal_front_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          ipb_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          ipf_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_0:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_10:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_11:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_12:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_13:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_14:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_15:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_2:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_3:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_4:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_5:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_6:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_7:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_8:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_9:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          mft_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          middle_fingertip_main_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          middle_fingertip_side_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          middle_medial_back_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          middle_medial_front_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          middle_proximal_back_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          middle_proximal_front_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          mmb_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          mmf_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          mpb_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          mpf_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          palm_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          palm_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          palm_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          pft_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          pinky_fingertip_main_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          pinky_fingertip_side_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          pinky_medial_back_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          pinky_medial_front_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          pinky_proximal_back_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          pinky_proximal_front_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          pmb_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          pmf_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          ppb_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          ppf_bracket:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -162,15 +387,60 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          table_top:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           tcp:
             Alpha: 1
             Show Axes: false
             Show Trail: false
+          tft_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          thumb_fingertip_main_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          thumb_fingertip_side_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          thumb_medial_back_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          thumb_medial_front_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          tmb_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          tmf_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           tool0:
             Alpha: 1
             Show Axes: false
             Show Trail: false
           upper_arm_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          ur_bracket:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -203,6 +473,7 @@ Visualization Manager:
         State Display Time: 0.05 s
         Trail Step Size: 1
         Trajectory Topic: move_group/display_planned_path
+        Use Sim Time: false
       Planning Metrics:
         Payload: 1
         Show Joint Torques: false
@@ -227,18 +498,13 @@ Visualization Manager:
       Scene Geometry:
         Scene Alpha: 1
         Scene Color: 50; 230; 50
-        Scene Display Time: 0.20000000298023224
+        Scene Display Time: 0.009999999776482582
         Show Scene Geometry: true
         Voxel Coloring: Z-Axis
         Voxel Rendering: Occupied Voxels
       Scene Robot:
         Attached Body Color: 150; 50; 150
         Links:
-          2f_coupling:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
           All Links Enabled: true
           Expand Joint Details: false
           Expand Link Details: false
@@ -257,10 +523,25 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          boh:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          boh_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           coupling_gripper_fix:
             Alpha: 1
             Show Axes: false
             Show Trail: false
+          cubic_object_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           flange:
             Alpha: 1
             Show Axes: false
@@ -270,47 +551,262 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          gripper_base_link:
+          ift_bracket:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          gripper_finger1_finger_link:
+          imb_bracket:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          gripper_finger1_finger_tip_link:
+          imf_bracket:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          gripper_finger1_inner_knuckle_link:
+          index_fingertip_main_fpcb:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          gripper_finger1_knuckle_link:
+          index_fingertip_side_fpcb:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          gripper_finger2_finger_link:
+          index_medial_back_fpcb:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          gripper_finger2_finger_tip_link:
+          index_medial_front_fpcb:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          gripper_finger2_inner_knuckle_link:
+          index_proximal_back_fpcb:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          gripper_finger2_knuckle_link:
+          index_proximal_front_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          ipb_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          ipf_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_0:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_10:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_11:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_12:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_13:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_14:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_15:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_2:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_3:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_4:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_5:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_6:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_7:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_8:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_9:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          mft_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          middle_fingertip_main_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          middle_fingertip_side_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          middle_medial_back_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          middle_medial_front_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          middle_proximal_back_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          middle_proximal_front_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          mmb_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          mmf_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          mpb_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          mpf_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          palm_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          palm_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          palm_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          pft_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          pinky_fingertip_main_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          pinky_fingertip_side_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          pinky_medial_back_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          pinky_medial_front_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          pinky_proximal_back_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          pinky_proximal_front_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          pmb_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          pmf_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          ppb_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          ppf_bracket:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -329,15 +825,60 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          table_top:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           tcp:
             Alpha: 1
             Show Axes: false
             Show Trail: false
+          tft_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          thumb_fingertip_main_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          thumb_fingertip_side_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          thumb_medial_back_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          thumb_medial_front_fpcb:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          tmb_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          tmf_bracket:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           tool0:
             Alpha: 1
             Show Axes: false
             Show Trail: false
           upper_arm_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          ur_bracket:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -365,7 +906,31 @@ Visualization Manager:
         Show Robot Collision: false
         Show Robot Visual: true
       Value: true
-      Velocity_Scaling_Factor: 1
+      Velocity_Scaling_Factor: 0.1
+    - Class: rviz/TF
+      Enabled: false
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+      Marker Alpha: 1
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        {}
+      Update Interval: 0
+      Value: false
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /visualization_markers
+      Name: MarkerArray
+      Namespaces:
+        boh_sub_taxel: true
+        palm_sub_taxel: true
+      Queue Size: 100
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -381,31 +946,31 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Class: rviz/XYOrbit
-      Distance: 2.996500015258789
+      Class: rviz/Orbit
+      Distance: 1.445159912109375
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
-      Field of View: 0.7853981852531433
+      Field of View: 0.75
       Focal Point:
-        X: 0.11356700211763382
-        Y: 0.10592000186443329
-        Z: 2.2351800055275817e-07
+        X: -0.6689179539680481
+        Y: 0.3262753188610077
+        Z: 0.8329927325248718
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.5547969937324524
+      Pitch: 0.5450000762939453
       Target Frame: world
-      Yaw: 4.649945259094238
+      Yaw: 5.749950885772705
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 975
+  Height: 1665
   Help:
     collapsed: false
   Hide Left Dock: false
@@ -414,9 +979,9 @@ Window Geometry:
     collapsed: false
   MotionPlanning - Trajectory Slider:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd00000001000000000000033100000375fc0200000007fb000000100044006900730070006c006100790073010000003d000001db000000c900fffffffb0000000800480065006c00700000000342000000bb0000006e00fffffffb0000000a0056006900650077007300000003b0000000b0000000a400fffffffb0000000c00430061006d00650072006100000002ff000001610000000000000000fb0000001e004d006f00740069006f006e00200050006c0061006e006e0069006e00670100000374000001890000000000000000fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000001600000016fb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e0067010000021e000001940000017d00ffffff000004490000037500000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000001000000000000037a000005ecfc0200000007fb000000100044006900730070006c0061007900730100000066000001bf000000fc00fffffffb0000000800480065006c00700000000342000000bb0000009300fffffffb0000000a00560069006500770073000000010c000000a4000000e900fffffffb0000000c00430061006d00650072006100000002ff000001610000000000000000fb0000001e004d006f00740069006f006e00200050006c0061006e006e0069006e00670100000374000001890000000000000000fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000002400000024fb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e00670100000231000004210000025400ffffff00000876000005ec00000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Views:
     collapsed: false
-  Width: 1920
+  Width: 3068
   X: 0
   Y: 0

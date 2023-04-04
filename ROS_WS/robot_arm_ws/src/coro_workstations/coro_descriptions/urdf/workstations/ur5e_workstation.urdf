@@ -26,6 +26,38 @@
       <inertia ixx="1" ixy="0" ixz="0" iyx="0" iyy="1" iyz="0" izx="0" izy="0" izz="1"/>
     </inertial>
   </link>
+  <!-- Table top -->
+	<link name='table_top'>
+		<inertial>
+			<origin xyz="1.41182e-16 -6.13716e-17 -0.00229716" rpy="0 0 0"/>
+			<mass value="1.88145" />
+			<inertia ixx="0.132708" ixy="0"  ixz="0" iyy="0.0587177" iyz="0" izz="0.191419" />
+		</inertial>
+		<collision>
+			<origin xyz="0 0 -0.0047" rpy="0 0 0" />
+			<geometry>
+				<mesh filename= "package://coro_descriptions/meshes/table_top.stl"/>
+			</geometry>
+		    <material name="table_top_material">
+				<color rgba="0.615686 0.811765 0.929412 1.0"/>
+			</material>
+		</collision>
+		<visual>
+			<geometry>
+				<mesh filename= "package://coro_descriptions/meshes/table_top.stl"/>
+			</geometry>
+		    <material name="table_top_material">
+				<color rgba="0.615686 0.811765 0.929412 1.0"/>
+			</material>>
+		</visual>
+	</link>
+
+	<joint name='table_top_to_table_base' type='fixed'>
+		<origin xyz="0.004217 -0.201201 0.97025" rpy="0 0 1.57"/>
+		<parent link="table_base"/>
+		<child link="table_top"/>
+	</joint>
+
   <!-- Robot mount -->
   <link name="robot_mount"/>
   <joint name="robot_mount" type="fixed">
@@ -285,7 +317,7 @@
   </link>
   <link name="wrist_3_link">
     <visual>
-      <origin rpy="1.5707963267948966 0 0" xyz="0 0 -0.0989"/>
+      <origin rpy="1.5707963267948966 0 1.5707963267948966" xyz="0 0 -0.0989"/>
       <geometry>
         <mesh filename="package://ur_description/meshes/ur5e/visual/wrist3.dae"/>
       </geometry>
@@ -294,7 +326,7 @@
       </material>
     </visual>
     <collision>
-      <origin rpy="1.5707963267948966 0 0" xyz="0 0 -0.0989"/>
+      <origin rpy="1.5707963267948966 0 1.5707963267948966" xyz="0 0 -0.0989"/>
       <geometry>
         <mesh filename="package://ur_description/meshes/ur5e/collision/wrist3.stl"/>
       </geometry>
@@ -423,7 +455,7 @@
   </link>
   <!-- Mount the coupling to the robot side -->
   <joint name="coupling_robot_fix" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0.01"/>
+    <origin rpy="0 0 1.5707963267948966" xyz="0 0 0.01"/>
     <parent link="tool0"/>
     <child link="ur_bracket"/>
   </joint>
@@ -2702,7 +2734,7 @@
     </inertial>
   </link>
   <joint name="object_to_table" type="fixed">
-    <origin rpy="0 0 0" xyz="0.004217 -0.201201 0.951750"/>
+    <origin rpy="0 0 0" xyz="0.004217 -0.201201 1.016225"/>
     <parent link="table_base"/>
     <child link="cubic_object_link"/>
   </joint>

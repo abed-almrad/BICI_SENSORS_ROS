@@ -57,6 +57,58 @@
       </visual>
       <self_collide>true</self_collide>
     </link>
+
+    <joint name='table_top_to_table_base' type='fixed'>
+      <pose relative_to='__model__'>0.004217 -0.201201 0.97495 0 0 1.57</pose>
+      <parent>table_base</parent>
+      <child>table_top</child>
+    </joint>
+
+    <link name='table_top'>
+      <pose relative_to='table_top_to_table_base'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>1.41182e-16 -6.13716e-17 -0.00229716 0 0 0</pose>
+        <mass>1.88145</mass>
+        <inertia>
+          <ixx>0.132708</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0587177</iyy>
+          <iyz>0</iyz>
+          <izz>0.191419</izz>
+        </inertia>
+      </inertial>
+      <collision name='table_top_collision'>
+        <pose> 0 0 -0.0047 0 0 0 </pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://coro_descriptions/meshes/table_top.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>         
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <max_contacts>1000</max_contacts>
+      </collision>
+      <visual name='table_top_visual'>
+        <pose> 0 0 -0.0047 0 0 0 </pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://coro_descriptions/meshes/table_top.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    <self_collide>true</self_collide>
+    </link>
+
+
     <joint name='shoulder_pan_joint' type='revolute'>
       <pose relative_to='table_base'>-0.0093 0.3375 1.15525 0 -0 7e-06</pose>
       <parent>table_base</parent>
@@ -348,7 +400,7 @@
       </axis>
     </joint>
     <link name='wrist_3_link'>
-      <pose relative_to='wrist_3_joint'>0 0 0 0 -0 0</pose>
+      <pose relative_to='wrist_3_joint'>0 0 0 0 -0 1.5708</pose>
       <inertial>
         <pose>0.002293 -0.015608 0.043268 0 -0 0</pose>
         <mass>0.729447</mass>
@@ -3126,85 +3178,6 @@
       <self_collide>true</self_collide>
     </link>
 
-<!-- 
-*********************************************************************
-*********************************************************************
-*********************************************************************
-Object placed on the table and waiting to be grasped by the allegrp hand 
-*********************************************************************
-*********************************************************************
-*********************************************************************
--->
-<!--
-    <joint name='object_to_table' type='prismatic'>
-      <pose relative_to='table_base'>0.004217 -0.201201 0.951750 0 0 0</pose>
-      <parent>table_base</parent>
-      <child>cubic_object_link</child>
-      <axis>
-        <xyz>0 0 1</xyz>
-        <limit>
-          <lower>0</lower>
-          <upper>0</upper>
-        </limit>
-        <dynamics>
-          <damping>1</damping>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>1</spring_stiffness>
-        </dynamics>
-      </axis>
-
-      <physics>
-        <ode>
-          <implicit_spring_damper> true </implicit_spring_damper>
-        </ode>
-      </physics>
-    </joint>
-
-    <link name='cubic_object_link'>
-      <pose relative_to='object_to_table'>0 0 0 0 -0 0</pose>
-      <inertial>
-        <pose>-1.02566e-17 9.23364e-19 0.1075 0 0 0</pose>
-        <mass>0.0770781</mass>
-        <inertia>
-          <ixx>0.000307188</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.000307188</iyy>
-          <iyz>0</iyz>
-          <izz>2.05542e-05</izz>
-        </inertia>
-      </inertial>
-      <collision name='cubic_object_collision'>
-        <pose>0 0 0 0 -0 1.5708</pose>
-        <geometry>
-          <mesh>
-            <scale>1 1 1</scale>
-            <uri>model://cubic_object/meshes/cubic_object.stl</uri>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <ode>         
-              <max_vel>0.1</max_vel>
-              <min_depth>0.001</min_depth>
-            </ode>
-          </contact>
-        </surface>
-        <max_contacts>1000</max_contacts>
-      </collision>
-      <visual name='cubic_object_visual'>
-        <pose>0 0 0 0 -0 1.5708</pose>
-        <geometry>
-          <mesh>
-            <scale>1 1 1</scale>
-            <uri>model://cubic_object/meshes/cubic_object.stl</uri>
-          </mesh>
-        </geometry>
-      </visual>
-    <self_collide>true</self_collide>
-    </link>
-
--->
 
     <static>0</static>
     <plugin name="contact_coordinates_plugin" filename="/home/abed/Documents/BICI_Project/BICI_SENSORS_ROS/Gazebo_Simulation/Contact_Sensor/build/libcoordinates.so"/>

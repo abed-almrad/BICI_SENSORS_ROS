@@ -8,8 +8,25 @@ Note: Taken from ur5_ros_control.launch in ur_modern_driver.
 -->
 <launch>
 	<arg name="dollar" value="$"/>
-	
+
+	<!-- Allegro hand -->
+<!--***************************************************************************-->
+	<arg name="HAND" default="right"/>
+  	<arg name="NUM" default="0"/>	
+	<arg name="POLLING" default="true"/> <!-- true, false for polling the CAN communication -->
+	<!-- ls -l /dev/pcan* to see your open CAN ports. Auto means find it
+    automatically, and ignores the CAN_DEVICE argument. -->
+    <arg name="AUTO_CAN" default="true" />
+    <arg name="CAN_DEVICE" default="/dev/pcanusb1" />
+
+ 	<arg name="PARAMS_DIR" default="$(find allegro_hand_parameters)" />
+	<!--If true, respawn the controller if it dies. -->
+ 	<arg name="RESPAWN" default="false"/>
+	<!-- yaml param files for your hand can be found in parameters/zero_files/ -->
+  	<arg name="ZEROS" default="$(arg PARAMS_DIR)/zero.yaml"/>
+
 	<!-- Robot -->
+<!--*****************************************************************************-->
 	<arg name="robot" default="ur5e" doc="Choose between: ur5, ur10, ur5e"/>
 	<arg if="$(eval robot=='ur5')" name="cb2" value="1"/>
 	<arg if="$(eval robot=='ur10')" name="cb2" value="1"/>
@@ -17,6 +34,7 @@ Note: Taken from ur5_ros_control.launch in ur_modern_driver.
 	<arg name="moveit_config_path" value="(find $(arg robot)_hw_workstation_moveit_config)"/>
 	
 	<!-- GDB functionality -->
+<!--*****************************************************************************-->
 	<arg name="debug" default="false"/>
 	<arg unless="$(arg debug)" name="launch_prefix" value=""/>
 	<arg if="$(arg debug)" name="launch_prefix" value="gdb --ex run --args"/>
@@ -90,7 +108,6 @@ Note: Taken from ur5_ros_control.launch in ur_modern_driver.
 		<param name="headless_mode" value="$(arg headless_mode)"/>
 		<param name="tf_prefix" value="$(arg tf_prefix)"/>
 		<param name="use_tool_communication" value="$(arg use_tool_communication)"/>
-		<!--<param name="reverse_port" type="int" value="$(arg reverse_port)" />-->
 		<param name="tool_voltage" value="$(arg tool_voltage)"/>
 		<param name="tool_parity" value="$(arg tool_parity)"/>
 		<param name="tool_baud_rate" value="$(arg tool_baud_rate)"/>
@@ -101,6 +118,42 @@ Note: Taken from ur5_ros_control.launch in ur_modern_driver.
 		<param name="servoj_lookahead_time" value="$(arg servoj_lookahead_time)"/>
 	</node>
 	
+	<!-- Allegro Hand pd controller/communication node -->
+	<node name="allegroHand_$(arg HAND)_$(arg NUM)"
+			pkg="allegro_hand_controllers"
+			type="allegro_node_pd"
+			output="screen"
+			clear_params="true"
+			respawn="$(arg RESPAWN)"
+			respawn_delay="2"
+			args="$(arg POLLING)" >
+
+		<!-- Remapping of topics into enumerated allegroHand_# namespace -->
+		<remap from="allegroHand/joint_states" to="allegroHand_$(arg NUM)/joint_states"/>
+		<remap from="allegroHand/joint_cmd" to="allegroHand_$(arg NUM)/joint_cmd"/>
+		<remap from="allegroHand/lib_cmd" to="allegroHand_$(arg NUM)/lib_cmd"/>
+		<remap from="allegroHand/torque_cmd" to="allegroHand_$(arg NUM)/torque_cmd"/>
+		<remap from="allegroHand/envelop_torque" to="allegroHand_$(arg NUM)/envelop_torque"/>
+		<remap from="allegroHand/joint_current_states" to="allegroHand_$(arg NUM)/joint_current_states"/>
+		<remap from="allegroHand/joint_desired_states" to="allegroHand_$(arg NUM)/joint_desired_states"/>
+
+		<!--parameters are within the scope of the hand node so that multiple hands can be run at the same time -->
+		<rosparam file="$(arg ZEROS)" command="load" />
+		<rosparam file="$(arg PARAMS_DIR)/gains_pd.yaml" command="load" />
+		<rosparam file="$(arg PARAMS_DIR)/gains_velSat.yaml" command="load" />
+		<rosparam file="$(arg PARAMS_DIR)/initial_position.yaml" command="load" />
+		<!-- Set the CAN channel automatically (using detect_pcan.py) if the
+			AUTO_CAN parameter is true, otherwise use the CAN_DEVICE
+			argument. NOTE: To manually set the can device, you must *also* set
+			AUTO_CAN:=false. -->
+		<param name="/comm/CAN_CH" value="$(arg CAN_DEVICE)"
+			unless="$(arg AUTO_CAN)" />
+		<param name="/comm/CAN_CH"
+			command="$(find allegro_hand_description)/scripts/detect_pcan.py"
+			if="$(arg AUTO_CAN)" />
+
+		<param name="/hand_info/which_hand" value="$(arg HAND)" />		
+	</node>
 	<!-- Load controller settings -->
 	<rosparam if="$(arg cb2)" file="$(find ur_modern_driver)/config/$(arg robot)_controllers.yaml" command="load"/>
 	<rosparam unless="$(arg cb2)" file="$(find ur_robot_driver)/config/$(arg robot)_controllers.yaml" command="load"/>
@@ -137,26 +190,30 @@ Note: Taken from ur5_ros_control.launch in ur_modern_driver.
 	<!-- ******************** -->
 	<!-- Load Robotiq gripper -->
 	<!-- ******************** -->
+<!--
 	<arg if="$(arg cb2)" name="gripper_comport" default="/dev/ttyUSB0"/>
     <arg if="$(arg cb2)" name="baud" default="115200"/>
 	<arg unless="$(arg cb2)" name="gripper_comport" default="$(arg tool_device_name)"/>
     <arg unless="$(arg cb2)" name="baud" default="$(arg tool_baud_rate)"/>
+-->
 	        
     <!-- Robotiq 85 ROS Driver -->
+<!--
     <node if="$(arg cb2)" pkg="robotiq_85_driver" type="robotiq_85_driver" name="robotiq_85_driver" respawn="true" output="screen">
         <param name="num_grippers" value="1"/>
         <param name="comport" value="$(arg gripper_comport)"/>
         <param name="baud" value="$(arg baud)" />
     </node>
-    
+-->   
     <!-- ******************************************* -->
 	<!-- Load Robotiq force-torque sensor (CB2 only) -->
 	<!-- ******************************************* -->
+<!--
 	<arg if="$(arg cb2)" name="ft_comport" default="ttyUSB1"/>
 	<node if="$(arg cb2)" pkg="robotiq_ft_sensor" type="rq_sensor" name="rq_sensor" respawn="true" output="screen">
 		<param name="serial_id" value="$(arg ft_comport)"/>
 	</node>
-
+-->
 	<!-- *************************** -->
 	<!-- Start Robot_State_Publisher -->
 	<!-- *************************** -->
@@ -171,7 +228,9 @@ Note: Taken from ur5_ros_control.launch in ur_modern_driver.
   	<include file="$(arg dollar)$(arg moveit_config_path)/launch/move_group.launch">
   		<arg name="publish_monitored_planning_scene" value="true"/>
 		<arg name="allow_trajectory_execution" value="true"/>
+<!--
 		<arg name="fake_execution" value="false"/>
+-->
 		<arg name="pipeline" value="ompl"/>
 		<arg name="load_robot_description" value="true"/>
 		<arg name="info" value="true"/>
@@ -186,5 +245,16 @@ Note: Taken from ur5_ros_control.launch in ur_modern_driver.
   		<arg name="rviz_config" default="$(arg dollar)$(arg moveit_config_path)/launch/moveit.rviz"/>
 		<arg name="debug" value="$(arg debug)"/>
 	</include>
+
+	<!-- Tactile sensor raw parser node -->
+	<node name="sensor_parser"
+			pkg="bici_ros_sensor_reader"
+			type="sensor_parser"
+			output="screen" />
+	<!-- Tactile sensor contact analyser node -->
+	<node name="contact_analyser"
+			pkg="allegro_hand_taxels"
+			type="coordinates_listener"
+			output="screen" />
 	
 </launch>

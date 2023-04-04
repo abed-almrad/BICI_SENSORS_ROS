@@ -42,13 +42,6 @@ std::vector<float> CoordinatesPlugin::homotrans(geometry_msgs::TransformStamped 
         }
     }
 
-    //************************************P.S.************************************
-    //***************************************************************************
-    //***************************************************************************
-    //Remove the line of code directly below after placing the hand on the UR5 arm
-
-    result[2] = result[2]+0.01; //This is a temporary line of code to avoid interferance between the hand
-                                // and the simulation environment's ground
     //std::cout<<"Result: "<< result[0] << result[1] << result[2] << std::endl;
     return result;
 }
@@ -2751,7 +2744,16 @@ void CoordinatesPlugin::taxelsTreeBld()
 // Called by the world update start event
 void CoordinatesPlugin::OnUpdate()
 {
-
+/*
+    this->wrist_pose = this->model->GetLink("wrist_3_link")->WorldPose();
+    std::cout<< "tool0 link coordinates wrt base frame:"<< "\n"
+             <<"x (mm): "<< (this->wrist_pose.X()+0.00929999)*pow(10,3)<<"\n"
+             <<"y (mm): "<< (this->wrist_pose.Y()-0.3375)*pow(10,3)<<"\n"
+             <<"z (mm): "<< (this->wrist_pose.Z()-0.99275)*pow(10,3)<<"\n"
+             <<"R (rad): "<< this->wrist_pose.Roll()<<"\n"
+             <<"P (rad): "<< this->wrist_pose.Pitch()<<"\n"
+             <<"Y (rad): "<< this->wrist_pose.Yaw()<<std::endl;
+*/
 
 
     // Steps needed to remove the workstation after performing a grasping iteration
@@ -2789,6 +2791,7 @@ bool CoordinatesPlugin::saving_activation_function(allegro_hand_taxels::coordina
     std::cout << "Requested saving activation boolean string: " << req.saving_activation << std::endl;
     this->act_cmd = res.saving_activation_response;
     this->reg_iter_count = req.iteration_nb;
+    this->reg_grasp_attempt = req.grasp_attempt;
     std::cout<<"sending back response: "<<this->act_cmd << std::endl;
     this->thread_running = false;
     this->rosQueueThread.join();
@@ -2803,6 +2806,7 @@ void CoordinatesPlugin::contact_callback(ContactPtr &_msg)
     std::pair<std::string, std::string> contact_pair;
     std::vector<std::pair<std::string, std::string>> contact_pair_v;
     std::vector<float> contact_pt_v;
+    float contact_force;
     //Vector resizing
     contact_pt_v.resize(3);
     if (_msg->contact_size() > 0)
@@ -2813,6 +2817,15 @@ void CoordinatesPlugin::contact_callback(ContactPtr &_msg)
 
         for (unsigned int i = 0; i < _msg->contact_size(); ++i)
         {
+/*
+    //Displaying contact forces
+            for(unsigned int j = 0; j < _msg->contact(i).wrench_size(); ++j)
+            {
+                std::cout << "contact force x component: " << _msg->contact(i).wrench(j).body_1_wrench().force().x() <<std::endl;
+                std::cout << "contact force y component: " << _msg->contact(i).wrench(j).body_1_wrench().force().y() <<std::endl;
+                std::cout << "contact force z component: " << _msg->contact(i).wrench(j).body_1_wrench().force().z() <<std::endl;
+            }
+*/
             std::pair<std::string, std::string> current_contact_pair =
                  std::make_pair( _msg->contact(i).collision1(), _msg->contact(i).collision2());
             //Taking into account the reversed current_contact_pair as well
@@ -2863,11 +2876,26 @@ void CoordinatesPlugin::contact_callback(ContactPtr &_msg)
                     contact_pt_v[0] = _msg->contact(i).position(j).x();
                     contact_pt_v[1] = _msg->contact(i).position(j).y();
                     contact_pt_v[2] = _msg->contact(i).position(j).z();
+                    // Contact force calculation
+                    if(_msg->contact(i).wrench(j).body_1_name().find("_fpcb")!=std::string::npos)
+                    {
+                        contact_force = pow(pow(_msg->contact(i).wrench(j).body_1_wrench().force().x(),2)
+                                       +pow(_msg->contact(i).wrench(j).body_1_wrench().force().y(),2)
+                                       +pow(_msg->contact(i).wrench(j).body_1_wrench().force().z(),2),0.5);
+                    }
+                    else if(_msg->contact(i).wrench(j).body_2_name().find("_fpcb")!=std::string::npos)
+                    {
+                        contact_force = pow(pow(_msg->contact(i).wrench(j).body_2_wrench().force().x(),2)
+                                       +pow(_msg->contact(i).wrench(j).body_2_wrench().force().y(),2)
+                                       +pow(_msg->contact(i).wrench(j).body_2_wrench().force().z(),2),0.5);
+                    }
                     //std::cout << contact_pt_v[0] << " " <<
                     //             contact_pt_v[1] << " " <<
                     //             contact_pt_v[2] << " " << std::endl;
                     //Saving the contact point to the contact_positions vector
                     this->contact_positions_v.push_back(contact_pt_v);
+                    // Saving the contact force to the contact_forces vector
+                    this->contact_forces_v.push_back(contact_force);
 
                 }
             }
@@ -2876,6 +2904,8 @@ void CoordinatesPlugin::contact_callback(ContactPtr &_msg)
 
         //Updating the raw contact map
         this->raw_contacts_map[sensor_name] = this->contact_positions_v;
+        //Updating the contacts force map
+        this->raw_force_map[sensor_name] = this->contact_forces_v;
         //std::cout<< "Sensor in contact: " << sensor_name << std::endl;
         //std::cout << "Number of contact points: " << this->contact_positions_v.size() << std::endl;
         //for(unsigned int j; j < this->contact_positions_v.size(); ++j)
@@ -2887,15 +2917,20 @@ void CoordinatesPlugin::contact_callback(ContactPtr &_msg)
         //
         //Contact positions vector clearance
         this->contact_positions_v.clear();
+        //Contact forces vector clearance
+        this->contact_forces_v.clear();
     }
     if(this->act_cmd == "true")
     {
-        std::string path = "/home/abed/Desktop/Contact_Data/contacts_coordinates_"+std::to_string(this->reg_iter_count)+".csv";
-        std::string path_filtered = "/home/abed/Desktop/Contact_Data/filtered_contacts_coordinates_"+std::to_string(this->reg_iter_count)+".csv";
-        std::string path_inactive_taxels = "/home/abed/Desktop/Contact_Data/inactive_taxels_coordinates_"+std::to_string(this->reg_iter_count)+".csv";
+
+        std::string path = "/home/abed/Desktop/Contact_Data/"+this->reg_grasp_attempt+"_raw_contacts_coordinates_"+std::to_string(this->reg_iter_count)+".csv";
+        std::string path_filtered = "/home/abed/Desktop/Contact_Data/"+this->reg_grasp_attempt+"_active_points_coordinates_"+std::to_string(this->reg_iter_count)+".csv";
+        std::string path_inactive_taxels = "/home/abed/Desktop/Contact_Data/"+this->reg_grasp_attempt+"_inactive_points_coordinates_"+std::to_string(this->reg_iter_count)+".csv";
+        std::string path_joints_pos = "/home/abed/Desktop/Contact_Data/"+this->reg_grasp_attempt+"_joints_pos_"+std::to_string(this->reg_iter_count)+".csv";
         this->fp = fopen(path.c_str(), "w");
         this->fp_filtered = fopen(path_filtered.c_str(), "w");
         this->fp_inactive_taxels = fopen(path_inactive_taxels.c_str(), "w");
+        this->fp_joints_pos = fopen( path_joints_pos.c_str(),"w");
         // Registering all the taxels positions at the saving moment to better understand the context at which the contact points were registered
         for (auto const& [key, val] : this->transformed_taxels_map)
         {
@@ -2986,6 +3021,64 @@ void CoordinatesPlugin::contact_callback(ContactPtr &_msg)
            this->active_taxels_indices.clear();
 
         }
+        //Assigning the contact force for each of the activated taxels (the max contact force among the forces of the close by raw contacts positions is selected)
+        for (auto const& [key, val] : this->filtered_contacts_map) // key is the sensor name: ift, mpb...
+                                                              // val is a vector of activated taxels locations for the correspondent sensor
+        {
+            this->filtered_force_map[key].resize(filtered_contacts_map[key].size());
+            for(unsigned int i = 0; i < this->filtered_contacts_map[key].size() ; ++i)
+            {
+                for (unsigned int j = 0; j < this->raw_contacts_map[key].size() ; ++j)
+                {
+                    if(this->dist(this->filtered_contacts_map[key][i], this->raw_contacts_map[key][j]) < dist_threshold)
+                    {
+                        this->filtered_force_map[key][i] = std::max(this->filtered_force_map[key][i], this->raw_force_map[key][j]);
+                    }
+                }
+            }
+        }
+        //Registering joints data
+        // Reordering the joints as per received from the hardware (just for sim2real homogeneity of work)
+        this->joints_v[0] = this->model->GetJoint("elbow_joint");
+        this->joints_v[1] = this->model->GetJoint("shoulder_lift_joint");
+        this->joints_v[2] = this->model->GetJoint("shoulder_pan_joint");
+        this->joints_v[3] = this->model->GetJoint("wrist_1_joint");
+        this->joints_v[4] = this->model->GetJoint("wrist_2_joint");
+        this->joints_v[5] = this->model->GetJoint("wrist_3_joint");
+        this->joints_v[6] = this->model->GetJoint("joint_0_0");
+        this->joints_v[7] = this->model->GetJoint("joint_1_0");
+        this->joints_v[8] = this->model->GetJoint("joint_2_0");
+        this->joints_v[9] = this->model->GetJoint("joint_3_0");
+        this->joints_v[10] = this->model->GetJoint("joint_4_0");
+        this->joints_v[11] = this->model->GetJoint("joint_5_0");
+        this->joints_v[12] = this->model->GetJoint("joint_6_0");
+        this->joints_v[13] = this->model->GetJoint("joint_7_0");
+        this->joints_v[14] = this->model->GetJoint("joint_8_0");
+        this->joints_v[15] = this->model->GetJoint("joint_9_0");
+        this->joints_v[16] = this->model->GetJoint("joint_10_0");
+        this->joints_v[17] = this->model->GetJoint("joint_11_0");
+        this->joints_v[18] = this->model->GetJoint("joint_12_0");
+        this->joints_v[19] = this->model->GetJoint("joint_13_0");
+        this->joints_v[20] = this->model->GetJoint("joint_14_0");
+        this->joints_v[21] = this->model->GetJoint("joint_15_0");
+
+        for (int i = 0; i < this->joints_v.size(); ++i)
+        {
+                this->joints_names.push_back(this->joints_v[i]->GetName());
+                this->joints_pos.push_back(this->joints_v[i]->Position());
+        }
+        //Flushing the joints positions into a .csv file
+        for (int i = 0; i < JOINTS_COUNT; ++i)
+        {
+
+            if(this->fp_joints_pos == NULL) {
+                printf("file can't be opened\n");
+                exit(1);
+            }
+            fflush(stdin);
+            fprintf(this->fp_joints_pos, "%s,%f \n", this->joints_names[i].c_str(),this->joints_pos[i]);
+
+        }
         //Flushing the contact locations into a .csv file
         for (auto const& [key, val] : this->raw_contacts_map)
         {
@@ -2995,13 +3088,13 @@ void CoordinatesPlugin::contact_callback(ContactPtr &_msg)
                 exit(1);
             }
             fflush(stdin);
-            for (unsigned int i = 0; i < raw_contacts_map[key].size() ; ++i)
+            for (unsigned int i = 0; i < this->raw_contacts_map[key].size() ; ++i)
             {
-            fprintf(this->fp, "%f,%f,%f \n", raw_contacts_map[key][i][0],raw_contacts_map[key][i][1],raw_contacts_map[key][i][2]);
+            fprintf(this->fp, "%f,%f,%f \n", this->raw_contacts_map[key][i][0],this->raw_contacts_map[key][i][1],this->raw_contacts_map[key][i][2]);
             }
 
         }
-        //Flushing the FILTERED contact locations into a .csv file
+        //Flushing the FILTERED contact locations and resultant force into a .csv file
         for (auto const& [key, val] : this->filtered_contacts_map)
  //       for (auto const& [key, val] : this->transformed_taxels_map)
         {
@@ -3013,7 +3106,7 @@ void CoordinatesPlugin::contact_callback(ContactPtr &_msg)
             fflush(stdin);
             for (unsigned int i = 0; i < val.size() ; ++i)
             {
-            fprintf(this->fp_filtered, "%f,%f,%f \n", val[i][0],val[i][1],val[i][2]);
+            fprintf(this->fp_filtered, "%f,%f,%f,%f \n", val[i][0],val[i][1],val[i][2], this->filtered_force_map[key][i]);
             }
 
         }
@@ -3026,9 +3119,9 @@ void CoordinatesPlugin::contact_callback(ContactPtr &_msg)
                 exit(1);
             }
             fflush(stdin);
-            for (unsigned int i = 0; i < transformed_taxels_map[key].size() ; ++i)
+            for (unsigned int i = 0; i < this->transformed_taxels_map[key].size() ; ++i)
             {
-            fprintf(this->fp_inactive_taxels, "%f,%f,%f \n", transformed_taxels_map[key][i][0],transformed_taxels_map[key][i][1],transformed_taxels_map[key][i][2]);
+            fprintf(this->fp_inactive_taxels, "%f,%f,%f \n", this->transformed_taxels_map[key][i][0],this->transformed_taxels_map[key][i][1],this->transformed_taxels_map[key][i][2]);
             }
 
         }
@@ -3036,7 +3129,10 @@ void CoordinatesPlugin::contact_callback(ContactPtr &_msg)
     fclose(this->fp);
     fclose(this->fp_filtered);
     fclose(this->fp_inactive_taxels);
+    fclose(this->fp_joints_pos);
     this->filtered_contacts_map.clear(); //You should only clear this data container before entering the subsequent registration phases
+    this->joints_names.clear();
+    this->joints_pos.clear();
     this->act_cmd = "false";
 
     }
@@ -3057,6 +3153,8 @@ void CoordinatesPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/
       this->sensorManager = sensors::SensorManager::Instance();
       // Publisher for deleting the workstation in gazebo environment
       this->model_del_pub = this->node->Advertise<gazebo::msgs::Request>("/gazebo/default/request");
+      // Resizing the joints vector
+      this->joints_v.resize(this->model->GetJointCount()-2); // We excluded two joints that we don't need
       // The total number of attached contact sensors
       this->sensor_count = _parent->GetSensorCount();
       std::cout << "The number of attached sensors is: " + std::to_string(this->sensor_count) << std::endl;

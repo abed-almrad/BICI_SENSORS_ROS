@@ -1,4 +1,5 @@
 string saving_activation
+string grasp_attempt
 int64 iteration_nb
 ---
 string saving_activation_response

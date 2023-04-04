@@ -293,7 +293,7 @@
                 <inertia ixx="8.28869e-07" ixy="-2.96994e-07"  ixz="2.53991e-07" iyy="1.55762e-06" iyz="2.23567e-07" izz="1.28629e-06" />
                 </inertial>
                 </link>
-                
+               
                 <link name="index_medial_front_fpcb">
                 <visual>
                 <origin xyz="-0.0129 0.0096 -0.1092" rpy="-1.5708 -1.5708 0" />
@@ -398,7 +398,7 @@
                 <limit effort="1" velocity="20" />
                 <joint_properties friction="0.0"/>
                 </joint>
-                
+               
                 <joint name="joint_index_medial_back_bracket" type="fixed">
                 <origin xyz="-0.0215 0.004 0.0259" rpy="3.14159 4.76628e-16 -3.14159" />
                 <parent link="link_2" />
@@ -1653,7 +1653,7 @@
                 <limit effort="1" velocity="20" />
                 <joint_properties friction="0.0"/>
                 </joint>
-                
+               
                 <joint name="joint_pinky_proximal_back_bracket" type="fixed">
                 <origin xyz="-0.0249 0.0037 0.0253" rpy="-3.14159 5.61195e-15 3.14159" />
                 <parent link="link_9" />
@@ -1978,7 +1978,7 @@
                 <limit effort="1" velocity="20" />
                 <joint_properties friction="0.0"/>
                 </joint>
-                
+               
                 <joint name="joint_thumb_fingertip_bracket" type="fixed">
                 <origin xyz="-0.0291 0.0037 0.0253" rpy="3.14159 5.80134e-16 -3.14159" />
                 <parent link="link_15" />
@@ -2280,7 +2280,7 @@
                 <limit effort="1" velocity="20" />
                 <joint_properties friction="0.0"/>
                 </joint>
-                
+               
                 <joint name="joint_boh_bracket" type="fixed">
                 <origin xyz="0.02 -0.0094 -0.009" rpy="1.5708 -0 3.14159" />
                 <parent link="palm_link" />
@@ -2315,7 +2315,7 @@
                 <inertia ixx="3.0726e-05" ixy="3.33674e-07"  ixz="-2.90867e-06" iyy="5.36054e-05" iyz="1.29147e-07" izz="2.31158e-05" />
                 </inertial>
                 </link>
-                
+               
                 <link name="palm_fpcb">
                 <visual>
                 <origin xyz="0.02 -0.007 0.0173" rpy="1.5708 1.5708 0" />

@@ -1,0 +1,8 @@
+
+1- Base coordinates wrt wold frame (found from rostopic: "/tf_static") : x = -9.3 mm
+                                                                        y = 337.5 mm
+                                                                        z= 992.75 mm
+
+P.S.: Add these coordinates directly to the x,y and z of the tool position with respect to the base (as found on the teaching pendant)
+
+2- RX, RY and RZ of the tool position wrt to the base (on the teaching pendant) are the same also wrt to the world frame and these are the components of the axis with angle magnitude or rotation vector. Use your bookmarked rotation representation conversion tool in your chrome to transform these values into a quaternion.

@@ -2,7 +2,7 @@
 #define __ALLEGRO_NODE_PD_H__
 
 #include "allegro_node.h"
-
+#include <list>
 
 // Joint-space PD control of the Allegro hand.
 //
@@ -42,6 +42,13 @@ class AllegroNodePD : public AllegroNode {
   // If this flag is true, the hand will be controlled (either in joint position
   // or joint torques). If false, desired torques will all be zero.
   bool control_hand_ = false;
+
+  // Indices for the joints that should be pd controlled only, for my application
+  int pd_controlled_joints[5] = {0,4,8,12,13};
+  // Indices for the joints that should be torque controlled only, for my application
+  int torque_controlled_joints[11] = {1,2,3,5,6,7,9,10,11,14,15};
+
+
 };
 
 #endif  // __ALLEGRO_NODE_PD_H__

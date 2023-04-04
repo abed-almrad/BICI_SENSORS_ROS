@@ -6,6 +6,7 @@
 #include <gazebo/physics/physics.hh>
 #include <gazebo/common/common.hh>
 #include <ignition/math/Vector3.hh>
+#include <ignition/math/Pose3.hh>
 #include <gazebo/transport/transport.hh>
 #include <gazebo/msgs/msgs.hh>
 #include <gazebo/sensors/sensors.hh>
@@ -31,10 +32,11 @@
 #include <geometry_msgs/Vector3Stamped.h>
 #include <eigen3/Eigen/Dense>
 
+#define JOINTS_COUNT 22
 #define contact_pts_nb 1300
 //#define dist_threshold 100
 //#define dist_threshold 0.00212 // threshold distance between the contact point and the taxel in m
-#define dist_threshold 0.00512 // threshold distance between the contact point and the taxel in m
+#define dist_threshold 0.00234 // threshold distance between the contact point and the taxel in m
 typedef const boost::shared_ptr< const gazebo::msgs::Contacts> ContactPtr;
 tf2_ros::Buffer tfBuffer;
 tf2_ros::TransformListener *tfListener;
@@ -80,7 +82,10 @@ namespace gazebo
     //Contact info
     private: std::map <std::string, std::vector<std::vector<float>>> raw_contacts_map;
     private: std::map <std::string, std::vector<std::vector<float>>> filtered_contacts_map;
+    private: std::map <std::string, std::vector<float>> raw_force_map;
+    private: std::map <std::string, std::vector<float>> filtered_force_map;
     private: std::vector<std::vector<float>> contact_positions_v;
+    private: std::vector<float> contact_forces_v;
     private: std::vector<std::vector<float>> filtered_contact_positions_v;
     private: std::vector<int> active_taxels_indices;
     private: std::string target_sensor;
@@ -105,6 +110,7 @@ namespace gazebo
     private: FILE *fp;
     private: FILE *fp_filtered;
     private: FILE *fp_inactive_taxels;
+    private: FILE *fp_joints_pos;
     private: std::string act_cmd = "false";
     private: bool thread_running = true;
 
@@ -180,7 +186,14 @@ namespace gazebo
     private: geometry_msgs::Vector3Stamped v3s;
     // An integer value to keep track of the iteration of the contact points registration
     private: int reg_iter_count;
-
+    // A string to keep track of the grasp attempt
+    private: std::string reg_grasp_attempt;
+    // A variable to store the pose of the wrist_3_link (which is equivalent to tool0's pose)
+    private: ignition::math::Pose3d wrist_pose;
+    // Vectors to store the model joints entities and their attributes
+    private: std::vector<boost::shared_ptr<physics::Joint>> joints_v;
+    private: std::vector<std::string> joints_names;
+    private: std::vector<double> joints_pos;
 
   };
 

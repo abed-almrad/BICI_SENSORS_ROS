@@ -249,6 +249,13 @@ void AllegroHandDrv::_writeDevices()
         pwm[i] = (short) pwmDouble[i];
     }
 
+//    cout << "I set the PWM values as follows: " << endl;
+    for (int i = 0; i < DOF_JOINTS; i++) 
+    {
+//        cout << "PWM value " << i << " : " << pwmDouble[i] << std::endl;
+    }
+
+
     for (int findex = 0; findex < 4; findex++) {
         CANAPI::command_set_torque(_can_handle, findex, &pwm[findex*4]);
         //ROS_INFO("write torque %d: %d %d %d %d", findex, pwm[findex*4+0], pwm[findex*4+1], pwm[findex*4+2], pwm[findex*4+3]);

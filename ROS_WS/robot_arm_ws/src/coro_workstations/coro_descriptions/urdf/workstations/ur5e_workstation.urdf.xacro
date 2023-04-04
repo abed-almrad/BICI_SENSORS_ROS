@@ -14,6 +14,39 @@
 		<origin xyz="0 0 0" rpy="0 0 0"/>
 	</joint>
 
+	<!-- Table top -->
+
+	<link name='table_top'>
+		<inertial>
+			<origin xyz="1.41182e-16 -6.13716e-17 -0.00229716" rpy="0 0 0"/>
+			<mass value="1.88145" />
+			<inertia ixx="0.132708" ixy="0"  ixz="0" iyy="0.0587177" iyz="0" izz="0.191419" />
+		</inertial>
+		<collision>
+			<origin xyz="0 0 -0.0047" rpy="0 0 0" />
+			<geometry>
+				<mesh filename= "package://coro_descriptions/meshes/table_top.stl"/>
+			</geometry>
+		    <material name="table_top_material">
+				<color rgba="0.615686 0.811765 0.929412 1.0"/>
+			</material>
+		</collision>
+		<visual>
+			<geometry>
+				<mesh filename= "package://coro_descriptions/meshes/table_top.stl"/>
+			</geometry>
+		    <material name="table_top_material">
+				<color rgba="0.615686 0.811765 0.929412 1.0"/>
+			</material>>
+		</visual>
+	</link>
+
+	<joint name='table_top_to_table_base' type='fixed'>
+		<origin xyz="0.004217 -0.201201 0.97025" rpy="0 0 1.57"/>
+		<parent link="table_base"/>
+		<child link="table_top"/>
+	</joint>
+
 	<!-- ROBOT -->
 	<xacro:include filename="$(find ur_description)/urdf/inc/ur5e_macro.xacro"/>
 	<xacro:ur5e_robot prefix="" kinematics_parameters_file="$(arg kinematics_config)"/>
@@ -46,21 +79,21 @@
 	<!-- OBJECT TO GRASP -->
     <link name="cubic_object_link">
 		<visual>
-		<origin xyz="0 0 0" rpy="0 -0 1.5708" />
+		<origin xyz="0 0 0" rpy="0 -0 0" />
 		<geometry>
 		<mesh filename="package://coro_descriptions/meshes/cubic_object.stl"/>
 		</geometry>
 		<material name="link_testing_cube_material">
-		<color rgba="0.615686 0.811765 0.929412 1.0"/>
+			<color rgba="0.615686 0.811765 0.929412 1.0"/>
 		</material>
 		</visual>
 		<collision>
-		<origin xyz="0 0 0" rpy="0 -0 1.5708" />
+		<origin xyz="0 0 0" rpy="0 -0 0" />
 		<geometry>
 		<mesh filename="package://coro_descriptions/meshes/cubic_object.stl"/>
 		</geometry>
 		<material name="link_testing_cube_material">
-		<color rgba="0.615686 0.811765 0.929412 1.0"/>
+			<color rgba="0.615686 0.811765 0.929412 1.0"/>
 		</material>
 		</collision>
 		<inertial>
@@ -71,7 +104,7 @@
     </link>
 
 	<joint name='object_to_table' type='fixed'>
-		<origin xyz="0.004217 -0.201201 0.951750" rpy="0 0 0"/>
+		<origin xyz="-0.0049 -0.2062 1.23145" rpy="0 0 0.0206751"/> <!-- Modified elevation along the Z axis to avoid object's interferance with the table top which causes undesired vibrations in gazebo -->
     	<parent link="table_base"/>
     	<child link="cubic_object_link"/>
     </joint>
