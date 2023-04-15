@@ -251,100 +251,161 @@ class MoveGroupPythonInterfaceTutorial(object):
 
 
 
-def main(i, x, y, z, q0, q1, q2, q3, j_0, j_1, j_2, j_3, j_4, j_5, j_0_0_pos, j_4_0_pos, j_8_0_pos):
+def main(i, desired_grasp_attempt, x, y, z, q0, q1, q2, q3, j_0, j_1, j_2, j_3, j_4, j_5, j_0_0_pos, j_4_0_pos, j_8_0_pos):
 
     try:
 
+        rospy.sleep(1.0)
+        if desired_grasp_attempt == "grasp_3" or desired_grasp_attempt == "grasp_5":
+#            input(
+#                "============ Press `Enter` to set the robot at a favorable initial position ..."
+#            )
+            j_12_0_publisher.publish(data=0)
+            j_13_0_publisher.publish(data=-0.5)
+            j_14_0_publisher.publish(data=0.52)
+            j_15_0_publisher.publish(data=0.52)
+
+            j_3_0_publisher.publish(data=-0.52)
+            j_7_0_publisher.publish(data=-0.52)
+            j_11_0_publisher.publish(data=-0.52)
+
+    #        rospy.sleep(1.0)
+
+            j_2_0_publisher.publish(data=-0.52)
+            j_6_0_publisher.publish(data=-0.52)
+            j_10_0_publisher.publish(data=-0.52)
+
+    #        rospy.sleep(1.0)
+
+            j_1_0_publisher.publish(data=-0.52)
+            j_5_0_publisher.publish(data=-0.52)
+            j_9_0_publisher.publish(data=-0.52)
+
+    #        rospy.sleep(1.0)
+        else:
+#            input(
+#                "============ Press `Enter` to set the robot at a favorable initial position ..."
+#            )
+            j_12_0_publisher.publish(data=0)
+
+            j_3_0_publisher.publish(data=-0.52)
+            j_7_0_publisher.publish(data=-0.52)
+            j_11_0_publisher.publish(data=-0.52)
+
+    #        rospy.sleep(1.0)
+
+            j_2_0_publisher.publish(data=-0.52)
+            j_6_0_publisher.publish(data=-0.52)
+            j_10_0_publisher.publish(data=-0.52)
+
+    #        rospy.sleep(1.0)
+
+            j_1_0_publisher.publish(data=-0.52)
+            j_5_0_publisher.publish(data=-0.52)
+            j_9_0_publisher.publish(data=-0.52)
+
 #        rospy.sleep(1.0)
-        input(
-            "============ Press `Enter` to set the robot at a favorable initial position ..."
-        )
-        j_12_0_publisher.publish(data=0)
-
-        j_3_0_publisher.publish(data=-0.52)
-        j_7_0_publisher.publish(data=-0.52)
-        j_11_0_publisher.publish(data=-0.52)
-
-#        rospy.sleep(1.0)
-
-        j_2_0_publisher.publish(data=-0.52)
-        j_6_0_publisher.publish(data=-0.52)
-        j_10_0_publisher.publish(data=-0.52)
-
-#        rospy.sleep(1.0)
-
-        j_1_0_publisher.publish(data=-0.52)
-        j_5_0_publisher.publish(data=-0.52)
-        j_9_0_publisher.publish(data=-0.52)
-
-#        rospy.sleep(1.0)
+        if desired_grasp_attempt == "grasp_2":
+            tutorial.go_to_joint_state(64.84, -39.99, 61.42, -17.67, -26.27, -93.37)
+        if desired_grasp_attempt == "grasp_3":
+            tutorial.go_to_joint_state(47, -71, 65, 11, -47, -270)
+        if desired_grasp_attempt == "grasp_5":
+            tutorial.go_to_joint_state(76.35, -50.3, 63.37, -12.73, 0, -177.75)
 
         tutorial.go_to_joint_state(j_0, j_1, j_2, j_3, j_4, j_5)
 
+        
+#        print("Press enter to continue")
+#        input()
 
-        input(
-            "============ Press `Enter` to approach the object from the first angle ..."
-        )
+#        input(
+#            "============ Press `Enter` to approach the object from the first angle ..."
+#        )
+        rospy.sleep(1.0)
 
         tutorial.go_to_pose_goal(x, y, z, q0, q1, q2, q3)
+        
+#        print("Press enter to continue")
+#        input()
 
 
 #        print("============ Approach "+str(i)+" is complete!")
 
-        input(
-            "============ Press `Enter` to close the allegro hand fingers against the object..."
-        )
-        j_0_0_publisher.publish(data=j_0_0_pos)
-        j_4_0_publisher.publish(data=j_4_0_pos)
-        j_8_0_publisher.publish(data=j_8_0_pos)
-
         rospy.sleep(1.0)
+#        input(
+#            "============ Press `Enter` to close the allegro hand fingers against the object..."
+#        )
+        if desired_grasp_attempt == "grasp_4":
 
-        j_1_0_publisher.publish(data=0.52)
-        j_5_0_publisher.publish(data=0.52)
-        j_9_0_publisher.publish(data=0.52)
+            j_0_0_publisher.publish(data=j_0_0_pos)
+            j_4_0_publisher.publish(data=j_4_0_pos)
+            j_8_0_publisher.publish(data=j_8_0_pos)
 
-        rospy.sleep(1.0)
+            rospy.sleep(1.0)
 
-        j_2_0_publisher.publish(data=0.52)
-        j_6_0_publisher.publish(data=0.52)
-        j_10_0_publisher.publish(data=0.52)
+            j_1_0_publisher.publish(data=0)
+            j_5_0_publisher.publish(data=0)
+            j_9_0_publisher.publish(data=0.8)
 
-        rospy.sleep(1.0)
+            rospy.sleep(1.0)
 
-        j_3_0_publisher.publish(data=0.52)
-        j_7_0_publisher.publish(data=0.52)
-        j_11_0_publisher.publish(data=0.52)
+            j_2_0_publisher.publish(data=0)
+            j_6_0_publisher.publish(data=0)
+            j_10_0_publisher.publish(data=0.15)
 
-        rospy.sleep(0.5)
+            rospy.sleep(1.0)
 
-        input(
-            "============ Press `Enter` to register the contact point cloud..."
-        )
+            j_3_0_publisher.publish(data=0)
+            j_7_0_publisher.publish(data=0)
+            j_11_0_publisher.publish(data=0.15)
+
+            rospy.sleep(0.5)
+        else:
+            j_0_0_publisher.publish(data=j_0_0_pos)
+            j_4_0_publisher.publish(data=j_4_0_pos)
+            j_8_0_publisher.publish(data=j_8_0_pos)
+
+            rospy.sleep(1.0)
+
+            j_1_0_publisher.publish(data=0.52)
+            j_5_0_publisher.publish(data=0.52)
+            j_9_0_publisher.publish(data=0.52)
+
+            rospy.sleep(1.0)
+
+            j_2_0_publisher.publish(data=0.52)
+            j_6_0_publisher.publish(data=0.52)
+            j_10_0_publisher.publish(data=0.52)
+
+            rospy.sleep(1.0)
+
+            j_3_0_publisher.publish(data=0.52)
+            j_7_0_publisher.publish(data=0.52)
+            j_11_0_publisher.publish(data=0.52)
+
+            rospy.sleep(0.5)
+
+#        input(
+#            "============ Press `Enter` to register the contact point cloud..."
+#        )
         launch.start()
         process = launch.launch(saving_node)
         print("The saving node is activated: ", process.is_alive())
 
-        rospy.sleep(1.0)
+        rospy.sleep(0.5)
 
-        input(
-            "============ Press `Enter` to delete the ur5 workstation..."
-        )
+#        input(
+#            "============ Press `Enter` to delete the ur5 workstation..."
+#        )
         process = launch.launch(deletion_node)
         print("The deletion node is activated: ", process.is_alive())
         rospy.sleep(1.0)
 
-        input(
-            "============ Press `Enter` to spawn a new workstation at initial position..."
-        )
+#        input(
+#            "============ Press `Enter` to spawn a new workstation at initial position..."
+#        )
         spawner("ur5e_workstation_0", open("/home/abed/Documents/BICI_Project/BICI_SENSORS_ROS/ROS_WS/robot_arm_ws/src/coro_workstations/coro_descriptions/sdf/workstations/ur5e_workstation.sdf",'r').read(),"/gazebo/", Pose(position= Point(0,0,0),orientation=Quaternion(0,0,0,1)),"world")
 
-#        input(
-#            "============ Press `Enter` to set the robot_description parameter..."
-#        )   
-#        rospy.set_param(param_name="robot_description", param_value= open("/home/abed/Documents/BICI_Project/BICI_SENSORS_ROS/ROS_WS/robot_arm_ws/src/coro_workstations/coro_descriptions/urdf/workstations/ur5e_workstation.urdf",'r').read())
-
-#        rospy.sleep(1.0)
 
         if(i==0):
             for j in range(1):
@@ -369,20 +430,6 @@ def main(i, x, y, z, q0, q1, q2, q3, j_0, j_1, j_2, j_3, j_4, j_5, j_0_0_pos, j_
                 rospy.sleep(1.0)
 
 
-
-#        input(
-#            "============ Press `Enter` to start another iteration..."
-#        )
-#        input(
-#            "============ Press `Enter` to pause the simulation..."
-#        )
-
-#        sim_pauser()
-
-#        input(
-#            "============ Press `Enter` to unpause the simulation..."
-#        )
-#        sim_starter()
     except rospy.ROSInterruptException:
         return
     except KeyboardInterrupt:
@@ -400,7 +447,9 @@ if __name__ == "__main__":
 
     #Creating a dictionary to store the desired end effector and some joints poses for each grasp
     pos_dict =	{}
-    pos_dict['grasp_0'] = {'x': -0.038420421352635, 'y': -0.10824651294124, 'z': 1.15484120989399,
+
+    # Rectangular prism grasps
+    pos_dict['grasp_0'] = {'x': -0.03605, 'y': -0.11044651294124, 'z': 1.15484120989399,   # x (direction of palm contact) was increased by 2.37 mm to reach contact in simulation, y decreased by 2.2 mm
     'q0': 0.494972210129084, 'q1': 0.517663199844739, 'q2': -0.498560916781039, 'q3': 0.488328101776754,
     'j_0': 40.47, 'j_1': -71.98, 'j_2': 122.41, 'j_3': -48.04, 'j_4': 39.76, 'j_5': -93.75,
     'joints_pos_0':{'j_0_0_pos': -0.110635, 'j_4_0_pos': -0.109172, 'j_8_0_pos': -0.221889},
@@ -412,7 +461,77 @@ if __name__ == "__main__":
     'joints_pos_6':{'j_0_0_pos': -0.0550931, 'j_4_0_pos': -0.0158625, 'j_8_0_pos': -0.0959136},
     'joints_pos_7':{'j_0_0_pos': -0.00790226, 'j_4_0_pos': -0.0492159, 'j_8_0_pos': -0.0837464},
     'joints_pos_8':{'j_0_0_pos': 0.0379571, 'j_4_0_pos': 0.00768438, 'j_8_0_pos': -0.0920475},
-    'joints_pos_9':{'j_0_0_pos': 0.0352053, 'j_4_0_pos': 0.000728325, 'j_8_0_pos': -0.0702119},}
+    'joints_pos_9':{'j_0_0_pos': 0.0352053, 'j_4_0_pos': 0.000728325, 'j_8_0_pos': -0.0702119}}
+
+    pos_dict['grasp_1'] = {'x': -0.113074277885961, 'y': -0.249705374003947, 'z': 1.15041613382691,  # y (direction of palm contact) was increased by 2.62 mm to reach contact in simulation, x was increased by 2.2 mm
+    'q0': -0.006514150104458, 'q1': 0.696756965530051, 'q2': 0.006723710381732, 'q3': 0.717246184062679,
+    'j_0': 64.84, 'j_1': -39.99, 'j_2': 61.42, 'j_3': -17.67, 'j_4': -26.27, 'j_5': -93.37,
+    'joints_pos_0':{'j_0_0_pos': -0.00467288, 'j_4_0_pos': -0.0130909, 'j_8_0_pos': -0.109755},
+    'joints_pos_1':{'j_0_0_pos': -0.0385186, 'j_4_0_pos': -0.0125872, 'j_8_0_pos': -0.120709},
+    'joints_pos_2':{'j_0_0_pos': -0.031863, 'j_4_0_pos': -0.0127607, 'j_8_0_pos': -0.122175},
+    'joints_pos_3':{'j_0_0_pos': -0.0305368, 'j_4_0_pos': -0.0306701, 'j_8_0_pos': -0.124437},
+    'joints_pos_4':{'j_0_0_pos': -0.0317449, 'j_4_0_pos': -0.0465264, 'j_8_0_pos': -0.120008},
+    'joints_pos_5':{'j_0_0_pos': -0.00243614, 'j_4_0_pos': -0.0117839, 'j_8_0_pos': -0.10307},
+    'joints_pos_6':{'j_0_0_pos': 0.00320258, 'j_4_0_pos': -0.00999148, 'j_8_0_pos': -0.12216},
+    'joints_pos_7':{'j_0_0_pos': -0.00823866, 'j_4_0_pos': -0.0329114, 'j_8_0_pos': -0.112105},
+    'joints_pos_8':{'j_0_0_pos': -0.0144164, 'j_4_0_pos': -0.0130031, 'j_8_0_pos': -0.114838},
+    'joints_pos_9':{'j_0_0_pos': -0.0521923, 'j_4_0_pos': -0.0538742, 'j_8_0_pos': -0.125085}}
+
+    pos_dict['grasp_2'] = {'x': 0.025217606216863, 'y': -0.3039670152459, 'z': 1.14570358963128,  # x (direction of palm contact) was increased by 0.2 mm to reach contact in simulation, y was increased by 2.2 mm 
+    'q0': -0.500063293413066, 'q1': 0.500330279415839, 'q2': 0.505434282232975, 'q3': 0.494107782193505, 
+    'j_0': 89.79, 'j_1': -32.2, 'j_2': 52.51, 'j_3': -20.36, 'j_4': -89.73, 'j_5': -90.03,
+    'joints_pos_0':{'j_0_0_pos': -0.0178119, 'j_4_0_pos': -0.0148315, 'j_8_0_pos': -0.108524},
+    'joints_pos_1':{'j_0_0_pos': -0.00577944, 'j_4_0_pos': -0.00585998, 'j_8_0_pos': -0.111741},
+    'joints_pos_2':{'j_0_0_pos': 0.00872298, 'j_4_0_pos': -0.0105092, 'j_8_0_pos': -0.109858},
+    'joints_pos_3':{'j_0_0_pos': -0.00477093, 'j_4_0_pos': 0.00351137, 'j_8_0_pos': -0.0940428},
+    'joints_pos_4':{'j_0_0_pos': -0.0121082, 'j_4_0_pos': -0.010277, 'j_8_0_pos': -0.108829},
+    'joints_pos_5':{'j_0_0_pos': -0.0105329, 'j_4_0_pos': -0.0107394, 'j_8_0_pos': -0.104033},
+    'joints_pos_6':{'j_0_0_pos': -0.00700015, 'j_4_0_pos': -0.00769826, 'j_8_0_pos': -0.120852},
+    'joints_pos_7':{'j_0_0_pos': 0.00852687, 'j_4_0_pos': -0.011645, 'j_8_0_pos': -0.101636},
+    'joints_pos_8':{'j_0_0_pos': -0.0317597, 'j_4_0_pos': -0.0106999, 'j_8_0_pos': -0.114081},
+    'joints_pos_9':{'j_0_0_pos': -0.0175704, 'j_4_0_pos': -0.0128936, 'j_8_0_pos': -0.128437}}
+
+    pos_dict['grasp_3'] = {'x': -0.111739907968175, 'y': -0.164106893588724, 'z': 1.13450002315906, # y (direction of palm contact) was decreased by 1.21 mm to reach contact in simulation, x was increased by 3.6 mm 
+    'q0': -0.690274101261325, 'q1': 0.012381597636009, 'q2': -0.723250940859735, 'q3': 0.016626416130899, 
+    'j_0': 47.35, 'j_1': -61.9, 'j_2': 111.26, 'j_3': -45.42, 'j_4': -43.01, 'j_5': -270.53,
+    'joints_pos_0':{'j_0_0_pos': 0.0929056, 'j_4_0_pos': 0.0948672, 'j_8_0_pos': 0.0160137},
+    'joints_pos_1':{'j_0_0_pos': 0.0954129, 'j_4_0_pos': 0.0958975, 'j_8_0_pos': 0.0131728},
+    'joints_pos_2':{'j_0_0_pos': 0.111093, 'j_4_0_pos': 0.102124, 'j_8_0_pos': 0.0151847},
+    'joints_pos_3':{'j_0_0_pos': 0.0899736, 'j_4_0_pos': 0.110701, 'j_8_0_pos': 0.00288892},
+    'joints_pos_4':{'j_0_0_pos': 0.121819, 'j_4_0_pos': 0.10198, 'j_8_0_pos': -0.000302905},
+    'joints_pos_5':{'j_0_0_pos': 0.0926289, 'j_4_0_pos': 0.0904134, 'j_8_0_pos': -0.00269867},
+    'joints_pos_6':{'j_0_0_pos': 0.0961813, 'j_4_0_pos': 0.109174, 'j_8_0_pos': 0.098408},
+    'joints_pos_7':{'j_0_0_pos': 0.105906, 'j_4_0_pos': 0.112955, 'j_8_0_pos': 0.000615287},
+    'joints_pos_8':{'j_0_0_pos': 0.107484, 'j_4_0_pos': 0.0932942, 'j_8_0_pos': -0.00565381},
+    'joints_pos_9':{'j_0_0_pos': 0.103472, 'j_4_0_pos': 0.0944257, 'j_8_0_pos': -0.0037164}}
+
+    pos_dict['grasp_4'] = {'x': -0.033909036565607, 'y': -0.295, 'z': 1.24855,  # z (direction of palm contact) was increased by 3.75 mm to avoid interference upon palm contact, x was increased by 3 mm, y was increased by 2 mm  
+    'q0': -0.713576347288967, 'q1': 0.029426440969099, 'q2': 0.037498779943657, 'q3': 0.698954020422206, 
+    'j_0': 76.35, 'j_1': -50.3, 'j_2': 63.37, 'j_3': -12.73, 'j_4': -104.34, 'j_5': -177.75,
+    'joints_pos_0':{'j_0_0_pos': 0.00929236, 'j_4_0_pos': -0.0067374, 'j_8_0_pos': -0.00908154},
+    'joints_pos_1':{'j_0_0_pos': 0.00892376, 'j_4_0_pos': -0.00764415, 'j_8_0_pos': -0.00876138},
+    'joints_pos_2':{'j_0_0_pos': 0.00908128, 'j_4_0_pos': -0.0088862, 'j_8_0_pos': -0.00863936},
+    'joints_pos_3':{'j_0_0_pos': 0.0088464, 'j_4_0_pos': -0.00863098, 'j_8_0_pos': -0.00872259},
+    'joints_pos_4':{'j_0_0_pos': 0.00883926, 'j_4_0_pos': -0.00861664, 'j_8_0_pos': -0.00828676},
+    'joints_pos_5':{'j_0_0_pos': 0.00845805, 'j_4_0_pos': -0.00864857, 'j_8_0_pos': -0.00846632},
+    'joints_pos_6':{'j_0_0_pos': 0.00838112, 'j_4_0_pos': -0.00885903, 'j_8_0_pos': -0.00858404},
+    'joints_pos_7':{'j_0_0_pos': 0.00855083, 'j_4_0_pos': -0.00926078, 'j_8_0_pos': -0.00849201},
+    'joints_pos_8':{'j_0_0_pos': 0.00801222, 'j_4_0_pos': -0.0100982, 'j_8_0_pos': -0.00856253},
+    'joints_pos_9':{'j_0_0_pos': 0.00949684, 'j_4_0_pos': -0.00959072, 'j_8_0_pos': 0.00192723}}
+
+    pos_dict['grasp_5'] = {'x': 0.086005941497033, 'y': -0.232600646275497, 'z': 1.12855045443824,
+    'q0': -0.647277547780695, 'q1': 0.263409237823354, 'q2': 0.664170490840841, 'q3': 0.26556526253365,
+    'j_0': 89.13, 'j_1': -40.92, 'j_2': 67.88, 'j_3': -26.62, 'j_4': -91.55, 'j_5': -88.6,
+    'joints_pos_0':{'j_0_0_pos': -0.0190721, 'j_4_0_pos': -0.0230954, 'j_8_0_pos': -0.121232},
+    'joints_pos_1':{'j_0_0_pos': -0.0259286, 'j_4_0_pos': -0.0169023, 'j_8_0_pos': -0.117359},
+    'joints_pos_2':{'j_0_0_pos': -0.0209648, 'j_4_0_pos': -0.0157605, 'j_8_0_pos': -0.114222},
+    'joints_pos_3':{'j_0_0_pos': -0.00578651, 'j_4_0_pos': -0.0243567, 'j_8_0_pos': -0.109911},
+    'joints_pos_4':{'j_0_0_pos': -0.0237798, 'j_4_0_pos': -0.0264846, 'j_8_0_pos': -0.123048},
+    'joints_pos_5':{'j_0_0_pos': -0.00481283, 'j_4_0_pos': -0.00995943, 'j_8_0_pos': -0.112924},
+    'joints_pos_6':{'j_0_0_pos': 0.000835556, 'j_4_0_pos': -0.0122252, 'j_8_0_pos': -0.121253},
+    'joints_pos_7':{'j_0_0_pos': -0.0106834, 'j_4_0_pos': -0.0140801, 'j_8_0_pos': -0.122781},
+    'joints_pos_8':{'j_0_0_pos': -0.00700047, 'j_4_0_pos': -0.0150033, 'j_8_0_pos': -0.122624},
+    'joints_pos_9':{'j_0_0_pos': -0.00483768, 'j_4_0_pos': -0.0252215, 'j_8_0_pos': -0.112384}}
     # Creating a set of callable services
     rospy.wait_for_service("/gazebo/pause_physics")
     sim_pauser = rospy.ServiceProxy("/gazebo/pause_physics", Empty) 
@@ -508,18 +627,23 @@ if __name__ == "__main__":
 
     print("Please enter the desired grasp attempt:(for example: grasp_0)")
     desired_grasp_attempt = input()
-    input(
-    "============ Press `Enter` to start grasping iterations for "+desired_grasp_attempt+"..."
-    )
+
     #Setting the grasping attempt parameter
     rospy.set_param(param_name="grasp_attempt", param_value=desired_grasp_attempt)
+    '''
+    for v in range(100):
+        print(
+        "============ Please enter the desired iteration for "+desired_grasp_attempt+" (for example: 0)"
+        )
+        i = int(input())
+    '''
     for i in range(10):
         #Setting the grasping iteration parameter
         rospy.set_param(param_name="iteration_nb", param_value=i)
-        main(i, pos_dict[desired_grasp_attempt]['x'], pos_dict[desired_grasp_attempt]['y'], pos_dict[desired_grasp_attempt]['z'],
-             pos_dict[desired_grasp_attempt]['q0'], pos_dict[desired_grasp_attempt]['q1'], pos_dict[desired_grasp_attempt]['q2'],
-             pos_dict[desired_grasp_attempt]['q3'], pos_dict[desired_grasp_attempt]['j_0'],
-             pos_dict[desired_grasp_attempt]['j_1'], pos_dict[desired_grasp_attempt]['j_2'],
-             pos_dict[desired_grasp_attempt]['j_3'], pos_dict[desired_grasp_attempt]['j_4'],
-             pos_dict[desired_grasp_attempt]['j_5'], pos_dict[desired_grasp_attempt]['joints_pos_'+str(i)]['j_0_0_pos'],
+        main(i, desired_grasp_attempt, pos_dict[desired_grasp_attempt]['x'], pos_dict[desired_grasp_attempt]['y'], pos_dict[desired_grasp_attempt]['z'],
+                pos_dict[desired_grasp_attempt]['q0'], pos_dict[desired_grasp_attempt]['q1'], pos_dict[desired_grasp_attempt]['q2'],
+                pos_dict[desired_grasp_attempt]['q3'], pos_dict[desired_grasp_attempt]['j_0'],
+                pos_dict[desired_grasp_attempt]['j_1'], pos_dict[desired_grasp_attempt]['j_2'],
+                pos_dict[desired_grasp_attempt]['j_3'], pos_dict[desired_grasp_attempt]['j_4'],
+                pos_dict[desired_grasp_attempt]['j_5'], pos_dict[desired_grasp_attempt]['joints_pos_'+str(i)]['j_0_0_pos'],
             pos_dict[desired_grasp_attempt]['joints_pos_'+str(i)]['j_4_0_pos'], pos_dict[desired_grasp_attempt]['joints_pos_'+str(i)]['j_8_0_pos'])

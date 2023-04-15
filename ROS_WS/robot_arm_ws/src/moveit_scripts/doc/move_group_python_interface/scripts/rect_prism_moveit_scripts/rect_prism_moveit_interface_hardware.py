@@ -17,7 +17,6 @@ from math import pi, tau, dist, fabs, cos
 from sensor_msgs.msg import JointState
 from moveit_commander.conversions import pose_to_list
 
-grasps_list = [ "grasp_"+str(count) for count in range(10)]
 
 def all_close(goal, actual, tolerance):
     """
@@ -215,20 +214,59 @@ def main(desired_grasp_attempt, i, x, y, z, q0, q1, q2, q3, j_0, j_1, j_2, j_3, 
 
 
     try:
-        print("This is grasp: grasp_", desired_grasp_attempt)
+        print("This is grasp: ", desired_grasp_attempt)
         print("Iteration: ", i)
 
+        if desired_grasp_attempt == "grasp_3":
+            input(
+            "============ Press `Enter` to cancel any applied torque (except the thumb) ..."
+            )
 
-        input(
-            "============ Press `Enter` to cancel any applied torque ..."
-        )
+            joint_effort_publisher.publish(effort=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0.15 ,0.15])
 
-        joint_effort_publisher.publish(effort=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0])
-
-        input(
+            input(
             "============ Press `Enter` to set the pd controlled joints to initial position ..."
-        )
-        joint_position_publisher.publish(position=[0.05, 0, 0, 0, 0.05, 0, 0, 0, -0.05, 0, 0, 0, 0 ,0 ,0 ,0])
+            )
+            joint_position_publisher.publish(position=[0.05, 0, 0, 0, 0.05, 0, 0, 0, -0.05, 0, 0, 0, 0 ,-1 ,0 ,0])
+            input(
+                "============ Press `Enter` to set the thumb torque controlled joints to initial position ..."
+            )
+            joint_effort_publisher.publish(position=[0.05, 0, 0, 0, 0.05, 0, 0, 0, -0.05, 0, 0, 0, 0 ,-1 ,0 ,0],
+                                    effort=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0.15, 0.15])
+
+        elif desired_grasp_attempt == "grasp_4":
+            input(
+            "============ Press `Enter` to cancel any applied torque ..."
+            )
+            joint_effort_publisher.publish(effort=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0])
+
+            input(
+                "============ Press `Enter` to set the pd controlled joints to initial position ..."
+            )
+            joint_position_publisher.publish(position=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0])
+
+        elif desired_grasp_attempt == "grasp_5":
+            input(
+            "============ Press `Enter` to set the pd controlled joints to initial position ..."
+            )
+            joint_position_publisher.publish(position=[0.05, 0, 0, 0, 0.05, 0, 0, 0, -0.05, 0, 0, 0, 0 ,-0.5 ,0 ,0])
+            input(
+                "============ Press `Enter` to cancel some applied torques and set the thumb torque controlled joints to initial position ..."
+            )
+            joint_effort_publisher.publish(position=[0.05, 0, 0, 0, 0.05, 0, 0, 0, -0.05, 0, 0, 0, 0 ,-0.5 ,0 ,0],
+                                    effort=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0.3, 0.3])
+
+        else:
+            input(
+            "============ Press `Enter` to cancel any applied torque ..."
+            )
+
+            joint_effort_publisher.publish(effort=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0])
+            
+            input(
+                "============ Press `Enter` to set the pd controlled joints to initial position ..."
+            )
+            joint_position_publisher.publish(position=[0.05, 0, 0, 0, 0.05, 0, 0, 0, -0.05, 0, 0, 0, 0 ,0 ,0 ,0])
 
 #        rospy.sleep(1.0)
         '''
@@ -278,14 +316,18 @@ def main(desired_grasp_attempt, i, x, y, z, q0, q1, q2, q3, j_0, j_1, j_2, j_3, 
 #                                       effort=[0, -0.2, -0.2, -0.2, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0])
                                        effort=[0, -0.2, -0.2, -0.2, 0, -0.2, -0.2, -0.2, 0, -0.2, -0.2, -0.2, 0 ,0 ,0 ,0])
         '''
-        '''
+ 
+        input(
+            "============ PLEASE OPEN THE ALLEGRO HAND MANUALLY BEFORE PROCEEDING (IN CASE THE HAND IS NOT OPENED)!!!!!!!!!!!!!!! ..."
+        )
+        
 # Setting the robotic arm to a favorable initial position
         input(
         "============ Press `Enter` to set the arm to a favorable initial position ..."
         )
 
         tutorial.go_to_joint_state(j_0, j_1, j_2, j_3, j_4, j_5)
-        '''
+
 # Activation of the taxels data averaging node
         input(
             "============ Press `Enter` to average the taxels data..."
@@ -293,55 +335,95 @@ def main(desired_grasp_attempt, i, x, y, z, q0, q1, q2, q3, j_0, j_1, j_2, j_3, 
         launch.start()
         process = launch.launch(avg_node)
         print("The averaging node is activated: ", process.is_alive())
-        '''
-# Setting the end effector to the desired position for grasp_0
+
+# Setting the end effector to the desired position
         input(
-        "============ Press `Enter` to set the arm to the desired end effector pose for grasp 0 ..."
+        "============ Press `Enter` to set the arm to the desired end effector pose for "+desired_grasp_attempt+" ..."
         )
         tutorial.go_to_pose_goal(x, y, z, q0, q1, q2, q3)
-        '''
+
 
 #CLOSE THE ALLEGRO HAND MANUALLY AGAINST THE OBJECT!!!!!!!!!!!!!!!!!!!!
-        '''
+
         input(
             "============ PLEASE CLOSE THE ALLEGRO HAND MANUALLY BEFORE PROCEEDING!!!!!!!!!!!!!!! ..."
         )
 # Allegro hand closure
 
-        input(
-            "============ Press `Enter` to close the torque controlled joints base ..."
-        )
+        if desired_grasp_attempt == "grasp_4":
 
-        joint_effort_publisher.publish(position=[0.05, 0, 0, 0, 0.05, 0, 0, 0, -0.05, 0, 0, 0, 0 ,0 ,0 ,0],
-#                                       effort=[0, 0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0])
-                                        effort=[0, 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 ,0 ,0 ,0])
+            input(
+                "============ Press `Enter` to close the torque controlled pinky base ..."
+            )
 
-        rospy.sleep(0.5)
+            joint_effort_publisher.publish(position=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0],
+    #                                       effort=[0, 0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0])
+                                            effort=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0.3, 0, 0, 0 ,0 ,0 ,0])
 
-        joint_effort_publisher.publish(position=[0.05, 0, 0, 0, 0.05, 0, 0, 0, -0.05, 0, 0, 0, 0 ,0 ,0 ,0],
-#                                       effort=[0, 0.15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0])
-                                       effort=[0, 0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0 ,0 ,0 ,0])
+            rospy.sleep(0.5)
 
-        rospy.sleep(1.0)
-        input(
-            "============ Press `Enter` to close the torque controlled joints middle ..."
-        )
+            joint_effort_publisher.publish(position=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0],
+    #                                       effort=[0, 0.15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0])
+                                        effort=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0.52, 0, 0, 0 ,0 ,0 ,0])
 
-        joint_effort_publisher.publish(position=[0.05, 0, 0, 0, 0.05, 0, 0, 0, -0.05, 0, 0, 0, 0 ,0 ,0 ,0],
-#                                       effort=[0, 0.52, 0.52, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0])
-                                       effort=[0, 0.52, 0.52, 0, 0, 0.52, 0.52, 0, 0, 0.52, 0.52, 0, 0 ,0 ,0 ,0])
+            rospy.sleep(1.0)
+            input(
+                "============ Press `Enter` to close the torque controlled joints middle ..."
+            )
 
-        rospy.sleep(1.0)
+            joint_effort_publisher.publish(position=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0],
+    #                                       effort=[0, 0.52, 0.52, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0])
+                                        effort=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0.52, 0.05, 0, 0 ,0 ,0 ,0])
 
-        input(
-            "============ Press `Enter` to close the torque controlled joints periferies ..."
-        )
+            rospy.sleep(1.0)
 
-        joint_effort_publisher.publish(position=[0.05, 0, 0, 0, 0.05, 0, 0, 0, -0.05, 0, 0, 0, 0 ,0 ,0 ,0],
-#                                       effort=[0, 0.52, 0.52, 0.52, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0])
-                                       effort=[0, 0.52, 0.52, 0.52, 0, 0.52, 0.52, 0.52, 0, 0.52, 0.52, 0.52, 0 ,0 ,0 ,0])
+            input(
+                "============ Press `Enter` to close the torque controlled joints periferies ..."
+            )
 
-        rospy.sleep(0.5)
+            joint_effort_publisher.publish(position=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0],
+    #                                       effort=[0, 0.52, 0.52, 0.52, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0])
+                                        effort=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0.52, 0.05, 0.05, 0 ,0 ,0 ,0])
+
+            rospy.sleep(0.5)
+
+        else:
+
+
+            input(
+                "============ Press `Enter` to close the torque controlled joints base ..."
+            )
+
+            joint_effort_publisher.publish(position=[0.05, 0, 0, 0, 0.05, 0, 0, 0, -0.05, 0, 0, 0, 0 ,0 ,0 ,0],
+    #                                       effort=[0, 0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0])
+                                            effort=[0, 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 ,0 ,0 ,0])
+
+            rospy.sleep(0.5)
+
+            joint_effort_publisher.publish(position=[0.05, 0, 0, 0, 0.05, 0, 0, 0, -0.05, 0, 0, 0, 0 ,0 ,0 ,0],
+    #                                       effort=[0, 0.15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0])
+                                        effort=[0, 0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0 ,0 ,0 ,0])
+
+            rospy.sleep(1.0)
+            input(
+                "============ Press `Enter` to close the torque controlled joints middle ..."
+            )
+
+            joint_effort_publisher.publish(position=[0.05, 0, 0, 0, 0.05, 0, 0, 0, -0.05, 0, 0, 0, 0 ,0 ,0 ,0],
+    #                                       effort=[0, 0.52, 0.52, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0])
+                                        effort=[0, 0.52, 0.52, 0, 0, 0.52, 0.52, 0, 0, 0.52, 0.52, 0, 0 ,0 ,0 ,0])
+
+            rospy.sleep(1.0)
+
+            input(
+                "============ Press `Enter` to close the torque controlled joints periferies ..."
+            )
+
+            joint_effort_publisher.publish(position=[0.05, 0, 0, 0, 0.05, 0, 0, 0, -0.05, 0, 0, 0, 0 ,0 ,0 ,0],
+    #                                       effort=[0, 0.52, 0.52, 0.52, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0 ,0 ,0])
+                                        effort=[0, 0.52, 0.52, 0.52, 0, 0.52, 0.52, 0.52, 0, 0.52, 0.52, 0.52, 0 ,0 ,0 ,0])
+
+            rospy.sleep(0.5)
 
         input(
             "============ Press `Enter` to register the contact point cloud..."
@@ -351,7 +433,7 @@ def main(desired_grasp_attempt, i, x, y, z, q0, q1, q2, q3, j_0, j_1, j_2, j_3, 
         print("The saving node is activated: ", process.is_alive())
         
         rospy.sleep(0.5)
-        '''
+
     except rospy.ROSInterruptException:
         return
     except KeyboardInterrupt:
@@ -368,14 +450,30 @@ if __name__ == "__main__":
 
     #Creating a dictionary to store the desired end effector poses for each grasp
     pos_dict =	{}
+
     pos_dict['grasp_0'] = {'x': -0.038420421352635, 'y': -0.10824651294124, 'z': 1.15484120989399,
     'q0': 0.494972210129084, 'q1': 0.517663199844739, 'q2': -0.498560916781039, 'q3': 0.488328101776754,
     'j_0': 40.47, 'j_1': -71.98, 'j_2': 122.41, 'j_3': -48.04, 'j_4': 39.76, 'j_5': -93.75}
 
-    pos_dict['grasp_1'] = {'x': -0.106274277885961, 'y': -0.252325374003947, 'z': 1.15041613382691,
+    pos_dict['grasp_1'] = {'x': -0.115274277885961, 'y': -0.252325374003947, 'z': 1.15041613382691,
     'q0': -0.006514150104458, 'q1': 0.696756965530051, 'q2': 0.006723710381732, 'q3': 0.717246184062679,
     'j_0': 64.84, 'j_1': -39.99, 'j_2': 61.42, 'j_3': -17.67, 'j_4': -26.27, 'j_5': -93.37}
 
+    pos_dict['grasp_2'] = {'x': 0.025017606216863, 'y': -0.3061670152459, 'z': 1.14570358963128,
+    'q0': -0.500063293413066, 'q1': 0.500330279415839, 'q2': 0.505434282232975, 'q3': 0.494107782193505,
+    'j_0': 89.79, 'j_1': -32.2, 'j_2': 52.51, 'j_3': -20.36, 'j_4': -89.73, 'j_5': -90.03}
+
+    pos_dict['grasp_3'] = {'x': -0.115339907968175, 'y': -0.162896893588724, 'z': 1.13450002315906,
+    'q0': -0.690274101261325, 'q1': 0.012381597636009, 'q2': -0.723250940859735, 'q3': 0.016626416130899,
+    'j_0': 47.35, 'j_1': -61.9, 'j_2': 111.26, 'j_3': -45.42, 'j_4': -43.01, 'j_5': -270.53}
+
+    pos_dict['grasp_4'] = {'x': -0.03690903656560642, 'y': -0.297, 'z': 1.2448,
+    'q0': -0.7135763472889668, 'q1': 0.029426440969098574, 'q2': 0.03749877994365672, 'q3': 0.6989540204222063,
+    'j_0': 76.35, 'j_1': -50.3, 'j_2': 63.37, 'j_3': -12.73, 'j_4': -104.34, 'j_5': -177.75}
+
+    pos_dict['grasp_5'] = {'x': 0.089878449120243, 'y': -0.233104317505747, 'z': 1.12855045443824,
+    'q0': -0.647277547780695, 'q1': 0.263409237823354, 'q2': 0.664170490840841, 'q3': 0.26556526253365,
+    'j_0': 89.13, 'j_1': -40.92, 'j_2': 67.88, 'j_3': -26.62, 'j_4': -91.55, 'j_5': -88.6}
 
     # Introducing the ros saving and averaging nodes that will be needed to register the contact point cloud and average the taxels data respectively
     package = 'allegro_hand_taxels'
@@ -401,20 +499,20 @@ if __name__ == "__main__":
 #        )
     tutorial = MoveGroupPythonInterfaceTutorial()
 
-    print("Please enter the desired grasp attempt:(for example: 0)")
+
+    print("Please enter the desired grasp attempt:(for example: grasp_0)")
     desired_grasp_attempt = input()
-    desired_grasp_attempt = int(desired_grasp_attempt)
     input(
-    "============ Press `Enter` to start grasping iterations for grasp_"+str(desired_grasp_attempt)+"..."
+    "============ Press `Enter` to start grasping iterations for "+desired_grasp_attempt+"..."
     )
     #Setting the grasping attempt parameter
     rospy.set_param(param_name="grasp_attempt", param_value=desired_grasp_attempt)
     for i in range(10):
         #Setting the grasping iteration parameter
         rospy.set_param(param_name="iteration_nb", param_value=i)
-        main(desired_grasp_attempt,i, pos_dict['grasp_'+str(desired_grasp_attempt)]['x'], pos_dict['grasp_'+str(desired_grasp_attempt)]['y'], pos_dict['grasp_'+str(desired_grasp_attempt)]['z'],
-             pos_dict['grasp_'+str(desired_grasp_attempt)]['q0'], pos_dict['grasp_'+str(desired_grasp_attempt)]['q1'], pos_dict['grasp_'+str(desired_grasp_attempt)]['q2'],
-             pos_dict['grasp_'+str(desired_grasp_attempt)]['q3'], pos_dict['grasp_'+str(desired_grasp_attempt)]['j_0'],
-             pos_dict['grasp_'+str(desired_grasp_attempt)]['j_1'], pos_dict['grasp_'+str(desired_grasp_attempt)]['j_2'],
-             pos_dict['grasp_'+str(desired_grasp_attempt)]['j_3'], pos_dict['grasp_'+str(desired_grasp_attempt)]['j_4'],
-             pos_dict['grasp_'+str(desired_grasp_attempt)]['j_5'])
+        main(desired_grasp_attempt,i, pos_dict[desired_grasp_attempt]['x'], pos_dict[desired_grasp_attempt]['y'], pos_dict[desired_grasp_attempt]['z'],
+             pos_dict[desired_grasp_attempt]['q0'], pos_dict[desired_grasp_attempt]['q1'], pos_dict[desired_grasp_attempt]['q2'],
+             pos_dict[desired_grasp_attempt]['q3'], pos_dict[desired_grasp_attempt]['j_0'],
+             pos_dict[desired_grasp_attempt]['j_1'], pos_dict[desired_grasp_attempt]['j_2'],
+             pos_dict[desired_grasp_attempt]['j_3'], pos_dict[desired_grasp_attempt]['j_4'],
+             pos_dict[desired_grasp_attempt]['j_5'])

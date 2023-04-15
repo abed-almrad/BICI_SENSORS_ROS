@@ -32,7 +32,7 @@
     <include>
       <uri>model://cubic_object</uri>
     </include>
-<!--  
+<!--
     <include>
       <uri>model://cylindrical_object</uri>
     </include>

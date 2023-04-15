@@ -33,7 +33,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://ur_description/meshes/ur5e/collision/base.stl</uri>
+            <uri>model://ur_description/meshes/ur5e/visual/base.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -148,7 +148,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://ur_description/meshes/ur5e/collision/shoulder.stl</uri>
+            <uri>model://ur_description/meshes/ur5e/visual/shoulder.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -202,7 +202,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://ur_description/meshes/ur5e/collision/upperarm.stl</uri>
+            <uri>model://ur_description/meshes/ur5e/visual/upperarm.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -256,7 +256,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://ur_description/meshes/ur5e/collision/forearm.stl</uri>
+            <uri>model://ur_description/meshes/ur5e/visual/forearm.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -310,7 +310,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://ur_description/meshes/ur5e/collision/wrist1.stl</uri>
+            <uri>model://ur_description/meshes/ur5e/visual/wrist1.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -364,7 +364,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://ur_description/meshes/ur5e/collision/wrist2.stl</uri>
+            <uri>model://ur_description/meshes/ur5e/visual/wrist2.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -418,7 +418,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://ur_description/meshes/ur5e/collision/wrist3.stl</uri>
+            <uri>model://ur_description/meshes/ur5e/visual/wrist3.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -1691,6 +1691,7 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+<!--
       <collision name='link_15_fixed_joint_lump__tft_bracket_collision_1'>
         <pose>0.0848 -0.0003 0.0118 -0 0 -3.14159</pose>
         <geometry>
@@ -1727,15 +1728,19 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+-->
 <!--******************************************* -->
+<!--
         <sensor name='tft' type='contact'>
           <contact>
             <collision>tft_fpcb</collision>
           </contact>
         <update_rate> 5 </update_rate>
         <visualize> true </visualize>
-        </sensor>    
+        </sensor>  
+-->  
 <!--******************************************* -->
+<!--
       <collision name='link_15_fixed_joint_lump__thumb_fingertip_side_fpcb_collision_3'>
         <pose>0.0848 -0.0003 0.011799 -0 0 -3.14159</pose>
         <geometry>
@@ -1754,6 +1759,7 @@
         </surface>
         <max_contacts>1000</max_contacts>
       </collision>
+-->
       <visual name='link_15_visual'>
         <pose>0.13018 -0.071631 0.0252 -1.5708 -0 0.087267</pose>
         <geometry>
@@ -1763,6 +1769,7 @@
           </mesh>
         </geometry>
       </visual>
+<!--
       <visual name='link_15_fixed_joint_lump__tft_bracket_visual_1'>
         <pose>0.0848 -0.0003 0.0118 -0 0 -3.14159</pose>
         <geometry>
@@ -1791,6 +1798,7 @@
         </geometry>
       </visual>
       <self_collide>true</self_collide>
+-->
     </link>
     <joint name='joint_4_0' type='revolute'>
       <pose relative_to='wrist_3_link'>-0 -0.007 0.1117 -0 0 1.5708</pose>

@@ -1,3 +1,7 @@
+// P.S. All lines code where mft and pft were mentioned, were commented out to purposefully
+//ignore the middle and pinky fingertips
+// sensors since they are currently giving unstable data streams
+
 #ifndef _GAZEBO_COORDINATES_PLUGIN_HH_
 #define _GAZEBO_COORDINATES_PLUGIN_HH_
 
@@ -138,7 +142,7 @@ namespace gazebo
     // Map to store the taxels locations wrt gazebo world frame
     private: std::map <std::string, std::vector<std::vector<float>>> transformed_taxels_map;
     // Taxels positions, grouped per sensor
-    private: std::vector<geometry_msgs::Vector3Stamped> boh_taxels;
+//    private: std::vector<geometry_msgs::Vector3Stamped> boh_taxels;
     private: std::vector<geometry_msgs::Vector3Stamped> palm_taxels;
     private: std::vector<geometry_msgs::Vector3Stamped> ipb_taxels;
     private: std::vector<geometry_msgs::Vector3Stamped> mpb_taxels;
@@ -154,12 +158,12 @@ namespace gazebo
     private: std::vector<geometry_msgs::Vector3Stamped> imf_taxels;
     private: std::vector<geometry_msgs::Vector3Stamped> mmf_taxels;
     private: std::vector<geometry_msgs::Vector3Stamped> pmf_taxels;
-    private: std::vector<geometry_msgs::Vector3Stamped> tft_taxels;
+//    private: std::vector<geometry_msgs::Vector3Stamped> tft_taxels;
     private: std::vector<geometry_msgs::Vector3Stamped> ift_taxels;
-    private: std::vector<geometry_msgs::Vector3Stamped> mft_taxels;
-    private: std::vector<geometry_msgs::Vector3Stamped> pft_taxels;
+//    private: std::vector<geometry_msgs::Vector3Stamped> mft_taxels;
+//    private: std::vector<geometry_msgs::Vector3Stamped> pft_taxels;
     // Transformed taxels positions, grouped per sensor
-    private: std::vector<std::vector<float>> trans_boh_taxels;
+//    private: std::vector<std::vector<float>> trans_boh_taxels;
     private: std::vector<std::vector<float>> trans_palm_taxels;
     private: std::vector<std::vector<float>> trans_ipb_taxels;
     private: std::vector<std::vector<float>> trans_mpb_taxels;
@@ -175,10 +179,10 @@ namespace gazebo
     private: std::vector<std::vector<float>> trans_imf_taxels;
     private: std::vector<std::vector<float>> trans_mmf_taxels;
     private: std::vector<std::vector<float>> trans_pmf_taxels;
-    private: std::vector<std::vector<float>> trans_tft_taxels;
+//    private: std::vector<std::vector<float>> trans_tft_taxels;
     private: std::vector<std::vector<float>> trans_ift_taxels;
-    private: std::vector<std::vector<float>> trans_mft_taxels;
-    private: std::vector<std::vector<float>> trans_pft_taxels;
+//    private: std::vector<std::vector<float>> trans_mft_taxels;
+//    private: std::vector<std::vector<float>> trans_pft_taxels;
     // A variable to store the tf transformation messages for each bracket on the allegro hand
     private: geometry_msgs::TransformStamped transformStamped;
     private: int sensor_count;

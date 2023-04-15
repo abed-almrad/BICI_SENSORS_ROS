@@ -1,5 +1,7 @@
 ﻿#include "CoordinatesPlugin.hh"
-
+// P.S. All lines code where mft and pft were mentioned, were commented out to purposefully
+//ignore the middle and pinky fingertips
+// sensors since they are currently giving unstable data streams
 
 using namespace gazebo;
 // Register this plugin with the simulator
@@ -131,7 +133,7 @@ float CoordinatesPlugin::dist(std::vector<float> P1,std::vector<float> P2)
 void CoordinatesPlugin::taxelsTreeBld()
 {
     // Vectors resizing
-    this->boh_taxels.resize(118);
+//    this->boh_taxels.resize(118);
     this->palm_taxels.resize(121);
     this->ipb_taxels.resize(78);
     this->mpb_taxels.resize(78);
@@ -147,12 +149,12 @@ void CoordinatesPlugin::taxelsTreeBld()
     this->imf_taxels.resize(27);
     this->mmf_taxels.resize(27);
     this->pmf_taxels.resize(27);
-    this->tft_taxels.resize(66);
+//    this->tft_taxels.resize(66);
     this->ift_taxels.resize(66);
-    this->mft_taxels.resize(66);
-    this->pft_taxels.resize(66);
+//    this->mft_taxels.resize(66);
+//    this->pft_taxels.resize(66);
     // Vectors resizing
-    this->trans_boh_taxels.resize(118,std::vector<float>(3,0));
+//    this->trans_boh_taxels.resize(118,std::vector<float>(3,0));
     this->trans_palm_taxels.resize(121,std::vector<float>(3,0));
     this->trans_ipb_taxels.resize(78,std::vector<float>(3,0));
     this->trans_mpb_taxels.resize(78,std::vector<float>(3,0));
@@ -168,14 +170,15 @@ void CoordinatesPlugin::taxelsTreeBld()
     this->trans_imf_taxels.resize(27,std::vector<float>(3,0));
     this->trans_mmf_taxels.resize(27,std::vector<float>(3,0));
     this->trans_pmf_taxels.resize(27,std::vector<float>(3,0));
-    this->trans_tft_taxels.resize(66,std::vector<float>(3,0));
+//    this->trans_tft_taxels.resize(66,std::vector<float>(3,0));
     this->trans_ift_taxels.resize(66,std::vector<float>(3,0));
-    this->trans_mft_taxels.resize(66,std::vector<float>(3,0));
-    this->trans_pft_taxels.resize(66,std::vector<float>(3,0));
+//    this->trans_mft_taxels.resize(66,std::vector<float>(3,0));
+//    this->trans_pft_taxels.resize(66,std::vector<float>(3,0));
     // Specifying the taxels positions w.r.t. to the correspondent brackets frames (i.e. the frames associated with " link_"bracket_name" " in onshape (P.S. Reconsider using push_back instead)
     //*******************************************************************
     //****************************************************************
     //BOH
+/*
     //Row1
     this->boh_taxels[0].vector.x = -0.026741;
     this->boh_taxels[0].vector.y = -0.000447;
@@ -541,7 +544,7 @@ void CoordinatesPlugin::taxelsTreeBld()
     this->boh_taxels[117].vector.x = 0.058167;
     this->boh_taxels[117].vector.y = -0.067905;
     this->boh_taxels[117].vector.z = -0.0098;
-
+*/
     //PALM
 
     //UPPER MATRIX
@@ -1833,7 +1836,7 @@ void CoordinatesPlugin::taxelsTreeBld()
     this->pmf_taxels[26].vector.y = -0.007143;
     this->pmf_taxels[26].vector.z = 0.029423;
     //Thumb Fingertip
-
+/*
     //Straight wrapp up
     //Row1
     this->tft_taxels[0].vector.x = 0.015337;
@@ -2047,7 +2050,7 @@ void CoordinatesPlugin::taxelsTreeBld()
     this->tft_taxels[65].vector.x = 0.013963;
     this->tft_taxels[65].vector.y = -0.017413;
     this->tft_taxels[65].vector.z = 0.021914;
-
+*/
     //Index Fingertip
 
     //Straight wrapp up
@@ -2265,7 +2268,7 @@ void CoordinatesPlugin::taxelsTreeBld()
     this->ift_taxels[65].vector.z = 0.021914;
 
     //Middle Fingertip
-
+/*
     //Straight wrapp up
     //Row1
     this->mft_taxels[0].vector.x = 0.015337;
@@ -2694,9 +2697,9 @@ void CoordinatesPlugin::taxelsTreeBld()
     this->pft_taxels[65].vector.x = 0.013963;
     this->pft_taxels[65].vector.y = -0.017413;
     this->pft_taxels[65].vector.z = 0.021914;
-
+*/
     // Filling the taxels_map
-    this->taxels_map["boh"] = this->boh_taxels;
+//    this->taxels_map["boh"] = this->boh_taxels;
     this->taxels_map["palm"] = this->palm_taxels;
     this->taxels_map["ipb"] = this->ipb_taxels;
     this->taxels_map["mpb"] = this->mpb_taxels;
@@ -2712,13 +2715,13 @@ void CoordinatesPlugin::taxelsTreeBld()
     this->taxels_map["imf"] = this->imf_taxels;
     this->taxels_map["mmf"] = this->mmf_taxels;
     this->taxels_map["pmf"] = this->pmf_taxels;
-    this->taxels_map["tft"] = this->tft_taxels;
+//    this->taxels_map["tft"] = this->tft_taxels;
     this->taxels_map["ift"] = this->ift_taxels;
-    this->taxels_map["mft"] = this->mft_taxels;
-    this->taxels_map["pft"] = this->pft_taxels;
+//    this->taxels_map["mft"] = this->mft_taxels;
+//    this->taxels_map["pft"] = this->pft_taxels;
 //Preparing the filtered taxels_map
     // Filling the transformed taxels_map
-    this->transformed_taxels_map["boh"] = this->trans_boh_taxels;
+//    this->transformed_taxels_map["boh"] = this->trans_boh_taxels;
     this->transformed_taxels_map["palm"] = this->trans_palm_taxels;
     this->transformed_taxels_map["ipb"] = this->trans_ipb_taxels;
     this->transformed_taxels_map["mpb"] = this->trans_mpb_taxels;
@@ -2734,10 +2737,10 @@ void CoordinatesPlugin::taxelsTreeBld()
     this->transformed_taxels_map["imf"] = this->trans_imf_taxels;
     this->transformed_taxels_map["mmf"] = this->trans_mmf_taxels;
     this->transformed_taxels_map["pmf"] = this->trans_pmf_taxels;
-    this->transformed_taxels_map["tft"] = this->trans_tft_taxels;
+//    this->transformed_taxels_map["tft"] = this->trans_tft_taxels;
     this->transformed_taxels_map["ift"] = this->trans_ift_taxels;
-    this->transformed_taxels_map["mft"] = this->trans_mft_taxels;
-    this->transformed_taxels_map["pft"] = this->trans_pft_taxels;
+//    this->transformed_taxels_map["mft"] = this->trans_mft_taxels;
+//    this->transformed_taxels_map["pft"] = this->trans_pft_taxels;
 
 }
 

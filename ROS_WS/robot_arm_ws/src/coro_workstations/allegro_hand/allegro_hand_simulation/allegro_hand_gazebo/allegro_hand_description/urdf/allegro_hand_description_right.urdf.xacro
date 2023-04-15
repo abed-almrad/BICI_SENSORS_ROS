@@ -1882,7 +1882,7 @@
                 <inertia ixx="2.85763e-06" ixy="-2.76566e-07"  ixz="3.76274e-07" iyy="6.11217e-06" iyz="5.74019e-08" izz="5.36876e-06" />
                 </inertial>
                 </link>
-                
+<!--
                 <link name="tft_bracket">
                 <visual>
                 <origin xyz="-0.1139 -0.004 0.0135" rpy="-3.14159 -8.50715e-32 5.33917e-18" />
@@ -1987,7 +1987,7 @@
                 <limit effort="1" velocity="20" />
                 <joint_properties friction="0.0"/>
                 </joint>
-                
+-->                
                 <joint name="joint_15_0" type="revolute">
                 <origin xyz="-0.0514 -9.00668e-15 -0.0001" rpy="-4.53557e-16 3.39461e-16 2.07948e-13" />
                 <parent link="link_14" />
