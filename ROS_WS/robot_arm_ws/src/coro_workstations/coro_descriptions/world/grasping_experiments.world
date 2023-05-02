@@ -29,14 +29,22 @@
       <uri>model://sun</uri>
     </include>
 
+<!--
     <include>
       <uri>model://cubic_object</uri>
     </include>
+-->
+
 <!--
     <include>
       <uri>model://cylindrical_object</uri>
     </include>
 -->
+
+    <include>
+      <uri>model://triangular_object</uri>
+    </include>
+
 
   </world>
 </sdf>

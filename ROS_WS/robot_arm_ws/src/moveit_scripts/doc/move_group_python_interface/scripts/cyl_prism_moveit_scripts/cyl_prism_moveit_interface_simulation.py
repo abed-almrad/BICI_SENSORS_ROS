@@ -252,14 +252,20 @@ class MoveGroupPythonInterfaceTutorial(object):
 
 
 def main(i, desired_grasp_attempt, x, y, z, q0, q1, q2, q3, j_0, j_1, j_2, j_3, j_4, j_5, j_0_0_pos, j_4_0_pos, j_8_0_pos):
-
+    
     try:
 
         rospy.sleep(1.0)
-        if desired_grasp_attempt == "grasp_3" or desired_grasp_attempt == "grasp_5":
-#            input(
-#                "============ Press `Enter` to set the robot at a favorable initial position ..."
-#            )
+
+        if desired_grasp_attempt == "grasp_4":
+
+            j_12_0_publisher.publish(data=0)
+            j_13_0_publisher.publish(data=-0.5)
+            j_14_0_publisher.publish(data=0.52)
+            j_15_0_publisher.publish(data=0.52)
+
+        else:
+
             j_12_0_publisher.publish(data=0)
             j_13_0_publisher.publish(data=-0.5)
             j_14_0_publisher.publish(data=0.52)
@@ -282,38 +288,17 @@ def main(i, desired_grasp_attempt, x, y, z, q0, q1, q2, q3, j_0, j_1, j_2, j_3, 
             j_9_0_publisher.publish(data=-0.52)
 
     #        rospy.sleep(1.0)
-        else:
-#            input(
-#                "============ Press `Enter` to set the robot at a favorable initial position ..."
-#            )
-            j_12_0_publisher.publish(data=0)
-
-            j_3_0_publisher.publish(data=-0.52)
-            j_7_0_publisher.publish(data=-0.52)
-            j_11_0_publisher.publish(data=-0.52)
 
     #        rospy.sleep(1.0)
-
-            j_2_0_publisher.publish(data=-0.52)
-            j_6_0_publisher.publish(data=-0.52)
-            j_10_0_publisher.publish(data=-0.52)
-
-    #        rospy.sleep(1.0)
-
-            j_1_0_publisher.publish(data=-0.52)
-            j_5_0_publisher.publish(data=-0.52)
-            j_9_0_publisher.publish(data=-0.52)
-
-#        rospy.sleep(1.0)
-        if desired_grasp_attempt == "grasp_2":
-            tutorial.go_to_joint_state(64.84, -39.99, 61.42, -17.67, -26.27, -93.37)
         if desired_grasp_attempt == "grasp_3":
-            tutorial.go_to_joint_state(47, -71, 65, 11, -47, -270)
-        if desired_grasp_attempt == "grasp_5":
-            tutorial.go_to_joint_state(76.35, -50.3, 63.37, -12.73, 0, -177.75)
+            tutorial.go_to_joint_state(64.84, -39.99, 61.42, -17.67, -26.27, -93.37)
+
+        if desired_grasp_attempt == "grasp_4":
+            tutorial.go_to_joint_state(62.16, -39.57, 66.44, -24.85, -28.24, -89.46)
+
+            tutorial.go_to_joint_state(62.16, -62.9, 68.44, -24.85, -28.24, -89.46)            
 
         tutorial.go_to_joint_state(j_0, j_1, j_2, j_3, j_4, j_5)
-
         
 #        print("Press enter to continue")
 #        input()
@@ -335,32 +320,16 @@ def main(i, desired_grasp_attempt, x, y, z, q0, q1, q2, q3, j_0, j_1, j_2, j_3, 
 #        input(
 #            "============ Press `Enter` to close the allegro hand fingers against the object..."
 #        )
+
         if desired_grasp_attempt == "grasp_4":
 
             j_0_0_publisher.publish(data=j_0_0_pos)
             j_4_0_publisher.publish(data=j_4_0_pos)
             j_8_0_publisher.publish(data=j_8_0_pos)
 
-            rospy.sleep(1.0)
-
-            j_1_0_publisher.publish(data=0)
-            j_5_0_publisher.publish(data=0)
-            j_9_0_publisher.publish(data=0.8)
-
-            rospy.sleep(1.0)
-
-            j_2_0_publisher.publish(data=0)
-            j_6_0_publisher.publish(data=0)
-            j_10_0_publisher.publish(data=0.15)
-
-            rospy.sleep(1.0)
-
-            j_3_0_publisher.publish(data=0)
-            j_7_0_publisher.publish(data=0)
-            j_11_0_publisher.publish(data=0.15)
-
             rospy.sleep(0.5)
         else:
+
             j_0_0_publisher.publish(data=j_0_0_pos)
             j_4_0_publisher.publish(data=j_4_0_pos)
             j_8_0_publisher.publish(data=j_8_0_pos)
@@ -448,90 +417,75 @@ if __name__ == "__main__":
     #Creating a dictionary to store the desired end effector and some joints poses for each grasp
     pos_dict =	{}
 
-    # Rectangular prism grasps
-    pos_dict['grasp_0'] = {'x': -0.036050421352635, 'y': -0.11044651294124, 'z': 1.15484120989399,   # x (direction of palm contact) was increased by 2.37 mm to reach contact in simulation, y decreased by 2.2 mm
-    'q0': 0.494972210129084, 'q1': 0.517663199844739, 'q2': -0.498560916781039, 'q3': 0.488328101776754,
-    'j_0': 40.47, 'j_1': -71.98, 'j_2': 122.41, 'j_3': -48.04, 'j_4': 39.76, 'j_5': -93.75,
-    'joints_pos_0':{'j_0_0_pos': -0.110635, 'j_4_0_pos': -0.109172, 'j_8_0_pos': -0.221889},
-    'joints_pos_1':{'j_0_0_pos': -0.114924, 'j_4_0_pos': -0.158254, 'j_8_0_pos': -0.189427},
-    'joints_pos_2':{'j_0_0_pos': -0.0531916, 'j_4_0_pos': -0.0884681, 'j_8_0_pos': -0.0932488},
-    'joints_pos_3':{'j_0_0_pos': -0.00633685, 'j_4_0_pos': 0.00501784, 'j_8_0_pos': -0.0947491},
-    'joints_pos_4':{'j_0_0_pos': 0.00783013, 'j_4_0_pos': -0.0807499, 'j_8_0_pos': -0.138711},
-    'joints_pos_5':{'j_0_0_pos': 0.00882769, 'j_4_0_pos': -0.0677357, 'j_8_0_pos': -0.0904451},
-    'joints_pos_6':{'j_0_0_pos': -0.0550931, 'j_4_0_pos': -0.0158625, 'j_8_0_pos': -0.0959136},
-    'joints_pos_7':{'j_0_0_pos': -0.00790226, 'j_4_0_pos': -0.0492159, 'j_8_0_pos': -0.0837464},
-    'joints_pos_8':{'j_0_0_pos': 0.0379571, 'j_4_0_pos': 0.00768438, 'j_8_0_pos': -0.0920475},
-    'joints_pos_9':{'j_0_0_pos': 0.0352053, 'j_4_0_pos': 0.000728325, 'j_8_0_pos': -0.0702119}}
+    pos_dict['grasp_0'] = {'x': -0.03750214465702802, 'y': -0.10263251236903577, 'z': 1.1511266381958,   # x was increased by 6.3 mm to reach contact and y was decreased by 2 mm
+    'q0': 0.5091846113100845, 'q1': 0.5168832012167359, 'q2': -0.4824900672250095, 'q3': 0.4906792464881148,
+    'j_0': 50.57, 'j_1': -76, 'j_2': 127.08, 'j_3': -48.04, 'j_4': 49.7, 'j_5': -90.99,
+    'joints_pos_0':{'j_0_0_pos': -0.00761379, 'j_4_0_pos': -0.028295, 'j_8_0_pos': -0.0994968},
+    'joints_pos_1':{'j_0_0_pos': -0.0214588, 'j_4_0_pos': -0.030919, 'j_8_0_pos': -0.106071},
+    'joints_pos_2':{'j_0_0_pos': -0.0231649, 'j_4_0_pos': -0.0264939, 'j_8_0_pos': -0.103385},
+    'joints_pos_3':{'j_0_0_pos': -0.00470707, 'j_4_0_pos': -0.0112859, 'j_8_0_pos': -0.0987053},
+    'joints_pos_4':{'j_0_0_pos': 0.00784284, 'j_4_0_pos': -0.022653, 'j_8_0_pos': -0.100257},
+    'joints_pos_5':{'j_0_0_pos': 0.0110093, 'j_4_0_pos': -0.0294931, 'j_8_0_pos': -0.103696},
+    'joints_pos_6':{'j_0_0_pos': -0.0103135, 'j_4_0_pos': -0.0102128, 'j_8_0_pos': -0.110373},
+    'joints_pos_7':{'j_0_0_pos': -0.0173443, 'j_4_0_pos': -0.0368234, 'j_8_0_pos': -0.0956433},
+    'joints_pos_8':{'j_0_0_pos': 0.0034963, 'j_4_0_pos': -0.0126846, 'j_8_0_pos': -0.0967949},
+    'joints_pos_9':{'j_0_0_pos': -0.00396311, 'j_4_0_pos': -0.012391, 'j_8_0_pos': -0.108488}}
 
-    pos_dict['grasp_1'] = {'x': -0.113074277885961, 'y': -0.249705374003947, 'z': 1.15041613382691,  # y (direction of palm contact) was increased by 2.62 mm to reach contact in simulation, x was increased by 2.2 mm
-    'q0': -0.006514150104458, 'q1': 0.696756965530051, 'q2': 0.006723710381732, 'q3': 0.717246184062679,
-    'j_0': 64.84, 'j_1': -39.99, 'j_2': 61.42, 'j_3': -17.67, 'j_4': -26.27, 'j_5': -93.37,
-    'joints_pos_0':{'j_0_0_pos': -0.00467288, 'j_4_0_pos': -0.0130909, 'j_8_0_pos': -0.109755},
-    'joints_pos_1':{'j_0_0_pos': -0.0385186, 'j_4_0_pos': -0.0125872, 'j_8_0_pos': -0.120709},
-    'joints_pos_2':{'j_0_0_pos': -0.031863, 'j_4_0_pos': -0.0127607, 'j_8_0_pos': -0.122175},
-    'joints_pos_3':{'j_0_0_pos': -0.0305368, 'j_4_0_pos': -0.0306701, 'j_8_0_pos': -0.124437},
-    'joints_pos_4':{'j_0_0_pos': -0.0317449, 'j_4_0_pos': -0.0465264, 'j_8_0_pos': -0.120008},
-    'joints_pos_5':{'j_0_0_pos': -0.00243614, 'j_4_0_pos': -0.0117839, 'j_8_0_pos': -0.10307},
-    'joints_pos_6':{'j_0_0_pos': 0.00320258, 'j_4_0_pos': -0.00999148, 'j_8_0_pos': -0.12216},
-    'joints_pos_7':{'j_0_0_pos': -0.00823866, 'j_4_0_pos': -0.0329114, 'j_8_0_pos': -0.112105},
-    'joints_pos_8':{'j_0_0_pos': -0.0144164, 'j_4_0_pos': -0.0130031, 'j_8_0_pos': -0.114838},
-    'joints_pos_9':{'j_0_0_pos': -0.0521923, 'j_4_0_pos': -0.0538742, 'j_8_0_pos': -0.125085}}
+    pos_dict['grasp_1'] = {'x': -0.11032590780479959, 'y': -0.23447572859494245, 'z': 1.1511266381958,     # x was increased by 3.5 mm to reach contact and y was increased by 3.5 mm
+    'q0': 0.008640351269418915, 'q1': 0.7015205662192607, 'q2': -0.011668699676670028, 'q3': 0.7125012848754766,
+    'j_0': 62.16, 'j_1': -39.57, 'j_2': 66.44, 'j_3': -24.85, 'j_4': -28.24, 'j_5': -89.46,
+    'joints_pos_0':{'j_0_0_pos': -0.000504862, 'j_4_0_pos': -0.0264862, 'j_8_0_pos': -0.108088},
+    'joints_pos_1':{'j_0_0_pos': 0.00979938, 'j_4_0_pos': -0.0101599, 'j_8_0_pos': -0.0979406},
+    'joints_pos_2':{'j_0_0_pos': -0.00577911, 'j_4_0_pos': -0.030791, 'j_8_0_pos': -0.124544},
+    'joints_pos_3':{'j_0_0_pos': -0.0100536, 'j_4_0_pos': -0.0129102, 'j_8_0_pos': -0.105622},
+    'joints_pos_4':{'j_0_0_pos': -0.00820909, 'j_4_0_pos': -0.0122342, 'j_8_0_pos': -0.122107},
+    'joints_pos_5':{'j_0_0_pos': -0.0057058, 'j_4_0_pos': -0.0247302, 'j_8_0_pos': -0.101658},
+    'joints_pos_6':{'j_0_0_pos': -0.00602423, 'j_4_0_pos': -0.0124588, 'j_8_0_pos': -0.101188},
+    'joints_pos_7':{'j_0_0_pos': -0.0134096, 'j_4_0_pos': -0.0282146, 'j_8_0_pos': -0.0965339},
+    'joints_pos_8':{'j_0_0_pos': -0.00598818, 'j_4_0_pos': -0.01061, 'j_8_0_pos': -0.100572},
+    'joints_pos_9':{'j_0_0_pos': -0.0111075, 'j_4_0_pos': -0.0273371, 'j_8_0_pos': -0.12039}}
 
-    pos_dict['grasp_2'] = {'x': 0.025217606216863, 'y': -0.3039670152459, 'z': 1.14570358963128,  # x (direction of palm contact) was increased by 0.2 mm to reach contact in simulation, y was increased by 2.2 mm 
-    'q0': -0.500063293413066, 'q1': 0.500330279415839, 'q2': 0.505434282232975, 'q3': 0.494107782193505, 
-    'j_0': 89.79, 'j_1': -32.2, 'j_2': 52.51, 'j_3': -20.36, 'j_4': -89.73, 'j_5': -90.03,
-    'joints_pos_0':{'j_0_0_pos': -0.0178119, 'j_4_0_pos': -0.0148315, 'j_8_0_pos': -0.108524},
-    'joints_pos_1':{'j_0_0_pos': -0.00577944, 'j_4_0_pos': -0.00585998, 'j_8_0_pos': -0.111741},
-    'joints_pos_2':{'j_0_0_pos': 0.00872298, 'j_4_0_pos': -0.0105092, 'j_8_0_pos': -0.109858},
-    'joints_pos_3':{'j_0_0_pos': -0.00477093, 'j_4_0_pos': 0.00351137, 'j_8_0_pos': -0.0940428},
-    'joints_pos_4':{'j_0_0_pos': -0.0121082, 'j_4_0_pos': -0.010277, 'j_8_0_pos': -0.108829},
-    'joints_pos_5':{'j_0_0_pos': -0.0105329, 'j_4_0_pos': -0.0107394, 'j_8_0_pos': -0.104033},
-    'joints_pos_6':{'j_0_0_pos': -0.00700015, 'j_4_0_pos': -0.00769826, 'j_8_0_pos': -0.120852},
-    'joints_pos_7':{'j_0_0_pos': 0.00852687, 'j_4_0_pos': -0.011645, 'j_8_0_pos': -0.101636},
-    'joints_pos_8':{'j_0_0_pos': -0.0317597, 'j_4_0_pos': -0.0106999, 'j_8_0_pos': -0.114081},
-    'joints_pos_9':{'j_0_0_pos': -0.0175704, 'j_4_0_pos': -0.0128936, 'j_8_0_pos': -0.128437}}
+    pos_dict['grasp_2'] = {'x': -0.10277238013017, 'y': -0.156779958555367, 'z': 1.1511266381958, # x was increased by 5.425265071939 mm, y was increased by 2.575139664674 mm
+    'q0': 0.2605429, 'q1': 0.6556486, 'q2': -0.261117, 'q3': 0.6588325,
+    'j_0': 53.45, 'j_1': -63.54, 'j_2': 109.82, 'j_3': -45.93, 'j_4': 13.36, 'j_5': -90.55,
+    'joints_pos_0':{'j_0_0_pos': -0.00560981, 'j_4_0_pos': -0.0106044, 'j_8_0_pos': -0.088032},
+    'joints_pos_1':{'j_0_0_pos': -0.00635791, 'j_4_0_pos': -0.0232379, 'j_8_0_pos': -0.102059},
+    'joints_pos_2':{'j_0_0_pos': -0.00633008, 'j_4_0_pos': -0.0120065, 'j_8_0_pos': -0.118659},
+    'joints_pos_3':{'j_0_0_pos': -0.00398488, 'j_4_0_pos': -0.0153128, 'j_8_0_pos': -0.0904356},
+    'joints_pos_4':{'j_0_0_pos': -0.00518941, 'j_4_0_pos': -0.0128398, 'j_8_0_pos': -0.0892918},
+    'joints_pos_5':{'j_0_0_pos': -0.00567146, 'j_4_0_pos': -0.0156297, 'j_8_0_pos': -0.116648},
+    'joints_pos_6':{'j_0_0_pos': -0.00538539, 'j_4_0_pos': -0.019551, 'j_8_0_pos': -0.0870327},
+    'joints_pos_7':{'j_0_0_pos': 0.0131945, 'j_4_0_pos': -0.0125819, 'j_8_0_pos': -0.0798454},
+    'joints_pos_8':{'j_0_0_pos': 0.00945155, 'j_4_0_pos': -0.011036, 'j_8_0_pos': -0.0867611},
+    'joints_pos_9':{'j_0_0_pos': -0.00117931, 'j_4_0_pos': -0.0114178, 'j_8_0_pos': -0.100712}}
 
-    pos_dict['grasp_3'] = {'x': -0.111739907968175, 'y': -0.164106893588724, 'z': 1.13450002315906, # y (direction of palm contact) was decreased by 1.21 mm to reach contact in simulation, x was increased by 3.6 mm 
-    'q0': -0.690274101261325, 'q1': 0.012381597636009, 'q2': -0.723250940859735, 'q3': 0.016626416130899, 
-    'j_0': 47.35, 'j_1': -61.9, 'j_2': 111.26, 'j_3': -45.42, 'j_4': -43.01, 'j_5': -270.53,
-    'joints_pos_0':{'j_0_0_pos': 0.0929056, 'j_4_0_pos': 0.0948672, 'j_8_0_pos': 0.0160137},
-    'joints_pos_1':{'j_0_0_pos': 0.0954129, 'j_4_0_pos': 0.0958975, 'j_8_0_pos': 0.0131728},
-    'joints_pos_2':{'j_0_0_pos': 0.111093, 'j_4_0_pos': 0.102124, 'j_8_0_pos': 0.0151847},
-    'joints_pos_3':{'j_0_0_pos': 0.0899736, 'j_4_0_pos': 0.110701, 'j_8_0_pos': 0.00288892},
-    'joints_pos_4':{'j_0_0_pos': 0.121819, 'j_4_0_pos': 0.10198, 'j_8_0_pos': -0.000302905},
-    'joints_pos_5':{'j_0_0_pos': 0.0926289, 'j_4_0_pos': 0.0904134, 'j_8_0_pos': -0.00269867},
-    'joints_pos_6':{'j_0_0_pos': 0.0961813, 'j_4_0_pos': 0.109174, 'j_8_0_pos': 0.098408},
-    'joints_pos_7':{'j_0_0_pos': 0.105906, 'j_4_0_pos': 0.112955, 'j_8_0_pos': 0.000615287},
-    'joints_pos_8':{'j_0_0_pos': 0.107484, 'j_4_0_pos': 0.0932942, 'j_8_0_pos': -0.00565381},
-    'joints_pos_9':{'j_0_0_pos': 0.103472, 'j_4_0_pos': 0.0944257, 'j_8_0_pos': -0.0037164}}
+    pos_dict['grasp_3'] = {'x': 0.022514723506118, 'y': -0.313087341866535, 'z': 1.1511266381958,       # x was decreased by 1.2 mm to reach contact with the palm, 
+    'q0': -0.487874405059984, 'q1': 0.509695462981059, 'q2': 0.495372407035081, 'q3': 0.506749719538315,
+    'j_0': 82.99, 'j_1': -30.46, 'j_2': 48.05, 'j_3': -17.36, 'j_4': -95.06, 'j_5': -90.47,
+    'joints_pos_0':{'j_0_0_pos': -0.00843889, 'j_4_0_pos': -0.0184853, 'j_8_0_pos': -0.0924897},
+    'joints_pos_1':{'j_0_0_pos': -0.005498, 'j_4_0_pos': -0.0116496, 'j_8_0_pos': -0.0915539},
+    'joints_pos_2':{'j_0_0_pos': -0.0127131, 'j_4_0_pos': -0.0207798, 'j_8_0_pos': -0.0947811},
+    'joints_pos_3':{'j_0_0_pos': -0.0162671, 'j_4_0_pos': -0.0123627, 'j_8_0_pos': -0.118811},
+    'joints_pos_4':{'j_0_0_pos': -0.00647722, 'j_4_0_pos': -0.0261907, 'j_8_0_pos': -0.0867308},
+    'joints_pos_5':{'j_0_0_pos': -0.00631889, 'j_4_0_pos': -0.0109754, 'j_8_0_pos': -0.0908911},
+    'joints_pos_6':{'j_0_0_pos': -0.00310963, 'j_4_0_pos': -0.0183237, 'j_8_0_pos': -0.0904654},
+    'joints_pos_7':{'j_0_0_pos': -0.0102885, 'j_4_0_pos': -0.0122753, 'j_8_0_pos': -0.0918848},
+    'joints_pos_8':{'j_0_0_pos': -0.00945006, 'j_4_0_pos': -0.0118586, 'j_8_0_pos': -0.0911444},
+    'joints_pos_9':{'j_0_0_pos': -0.00861539, 'j_4_0_pos': -0.0111022, 'j_8_0_pos': -0.118447}}
 
-    pos_dict['grasp_4'] = {'x': -0.033909036565607, 'y': -0.295, 'z': 1.242291638823615,  # z (direction of palm contact) was decreased by 2.508361176385 mm to avoid interference upon palm contact, x was increased by 3 mm, y was increased by 2 mm  
-    'q0': -0.7053167700035102, 'q1': -0.004471550672632091, 'q2': 0.007105620647717801, 'q3': 0.7088425561022764, 
-    'j_0': 76.35, 'j_1': -50.3, 'j_2': 63.37, 'j_3': -12.73, 'j_4': -104.34, 'j_5': -177.75,
-    'joints_pos_0':{'j_0_0_pos': 0.00929236, 'j_4_0_pos': -0.0067374, 'j_8_0_pos': -0.00908154},
-    'joints_pos_1':{'j_0_0_pos': 0.00892376, 'j_4_0_pos': -0.00764415, 'j_8_0_pos': -0.00876138},
-    'joints_pos_2':{'j_0_0_pos': 0.00908128, 'j_4_0_pos': -0.0088862, 'j_8_0_pos': -0.00863936},
-    'joints_pos_3':{'j_0_0_pos': 0.0088464, 'j_4_0_pos': -0.00863098, 'j_8_0_pos': -0.00872259},
-    'joints_pos_4':{'j_0_0_pos': 0.00883926, 'j_4_0_pos': -0.00861664, 'j_8_0_pos': -0.00828676},
-    'joints_pos_5':{'j_0_0_pos': 0.00845805, 'j_4_0_pos': -0.00864857, 'j_8_0_pos': -0.00846632},
-    'joints_pos_6':{'j_0_0_pos': 0.00838112, 'j_4_0_pos': -0.00885903, 'j_8_0_pos': -0.00858404},
-    'joints_pos_7':{'j_0_0_pos': 0.00855083, 'j_4_0_pos': -0.00926078, 'j_8_0_pos': -0.00849201},
-    'joints_pos_8':{'j_0_0_pos': 0.00801222, 'j_4_0_pos': -0.0100982, 'j_8_0_pos': -0.00856253},
-    'joints_pos_9':{'j_0_0_pos': 0.00949684, 'j_4_0_pos': -0.00959072, 'j_8_0_pos': 0.00192723}}
-
-    pos_dict['grasp_5'] = {'x': 0.086005941497033, 'y': -0.232600646275497, 'z': 1.12855045443824,
-    'q0': -0.647277547780695, 'q1': 0.263409237823354, 'q2': 0.664170490840841, 'q3': 0.26556526253365,
-    'j_0': 89.13, 'j_1': -40.92, 'j_2': 67.88, 'j_3': -26.62, 'j_4': -91.55, 'j_5': -88.6,
-    'joints_pos_0':{'j_0_0_pos': -0.0190721, 'j_4_0_pos': -0.0230954, 'j_8_0_pos': -0.121232},
-    'joints_pos_1':{'j_0_0_pos': -0.0259286, 'j_4_0_pos': -0.0169023, 'j_8_0_pos': -0.117359},
-    'joints_pos_2':{'j_0_0_pos': -0.0209648, 'j_4_0_pos': -0.0157605, 'j_8_0_pos': -0.114222},
-    'joints_pos_3':{'j_0_0_pos': -0.00578651, 'j_4_0_pos': -0.0243567, 'j_8_0_pos': -0.109911},
-    'joints_pos_4':{'j_0_0_pos': -0.0237798, 'j_4_0_pos': -0.0264846, 'j_8_0_pos': -0.123048},
-    'joints_pos_5':{'j_0_0_pos': -0.00481283, 'j_4_0_pos': -0.00995943, 'j_8_0_pos': -0.112924},
-    'joints_pos_6':{'j_0_0_pos': 0.000835556, 'j_4_0_pos': -0.0122252, 'j_8_0_pos': -0.121253},
-    'joints_pos_7':{'j_0_0_pos': -0.0106834, 'j_4_0_pos': -0.0140801, 'j_8_0_pos': -0.122781},
-    'joints_pos_8':{'j_0_0_pos': -0.00700047, 'j_4_0_pos': -0.0150033, 'j_8_0_pos': -0.122624},
-    'joints_pos_9':{'j_0_0_pos': -0.00483768, 'j_4_0_pos': -0.0252215, 'j_8_0_pos': -0.112384}}
+    pos_dict['grasp_4'] = {'x': -0.028074190223375257, 'y': -0.2903223679917239, 'z': 1.2435346668295724,  # z was decreased by 1.5 mm to avoid interference bet. the palm and the object, x was increased by 3 mm and y was increased by 4 mm
+    'q0': -0.709134222436369, 'q1': 0.000903184888922603, 'q2': 0.01474255404848284, 'q3': 0.7049187867596882,
+    'j_0': 78.21, 'j_1': -39.15, 'j_2': 46.85, 'j_3': -8.14, 'j_4': -104.81, 'j_5': -179.86,
+    'joints_pos_0':{'j_0_0_pos': 0.00467271, 'j_4_0_pos': -0.0120985, 'j_8_0_pos': -0.0509781},
+    'joints_pos_1':{'j_0_0_pos': 0.0045961, 'j_4_0_pos': -0.0121421, 'j_8_0_pos': -0.050826},
+    'joints_pos_2':{'j_0_0_pos': 0.00463211, 'j_4_0_pos': -0.0123147, 'j_8_0_pos': -0.0507529},
+    'joints_pos_3':{'j_0_0_pos': 0.00466091, 'j_4_0_pos': -0.012252, 'j_8_0_pos': -0.0507051},
+    'joints_pos_4':{'j_0_0_pos': 0.00472339, 'j_4_0_pos': -0.0119996, 'j_8_0_pos': -0.0509498},
+    'joints_pos_5':{'j_0_0_pos': 0.00472673, 'j_4_0_pos': -0.0123675, 'j_8_0_pos': -0.0507284},
+    'joints_pos_6':{'j_0_0_pos': 0.00487648, 'j_4_0_pos': -0.00465743, 'j_8_0_pos': -0.0374336},
+    'joints_pos_7':{'j_0_0_pos': 0.00484308, 'j_4_0_pos': -0.00412551, 'j_8_0_pos': -0.0386975},
+    'joints_pos_8':{'j_0_0_pos': 0.00460293, 'j_4_0_pos': -0.012112, 'j_8_0_pos': -0.0510022},
+    'joints_pos_9':{'j_0_0_pos': 0.00470364, 'j_4_0_pos': -0.0121958, 'j_8_0_pos': -0.0506643}}
     # Creating a set of callable services
     rospy.wait_for_service("/gazebo/pause_physics")
     sim_pauser = rospy.ServiceProxy("/gazebo/pause_physics", Empty) 

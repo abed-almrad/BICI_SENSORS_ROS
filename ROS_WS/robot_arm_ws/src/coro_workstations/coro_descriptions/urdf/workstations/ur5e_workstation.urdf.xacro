@@ -77,22 +77,22 @@
 	</joint>
 
 	<!-- OBJECT TO GRASP -->
-    <link name="cubic_object_link">
+    <link name="triangular_object_link">
 		<visual>
 		<origin xyz="0 0 0" rpy="0 -0 0" />
 		<geometry>
-		<mesh filename="package://coro_descriptions/meshes/cubic_object.stl"/>
+		<mesh filename="package://coro_descriptions/meshes/triangular_object.stl"/>
 		</geometry>
-		<material name="link_testing_cube_material">
+		<material name="link_testing_object_material">
 			<color rgba="0.615686 0.811765 0.929412 1.0"/>
 		</material>
 		</visual>
 		<collision>
 		<origin xyz="0 0 0" rpy="0 -0 0" />
 		<geometry>
-		<mesh filename="package://coro_descriptions/meshes/cubic_object.stl"/>
+		<mesh filename="package://coro_descriptions/meshes/triangular_object.stl"/>
 		</geometry>
-		<material name="link_testing_cube_material">
+		<material name="link_testing_object_material">
 			<color rgba="0.615686 0.811765 0.929412 1.0"/>
 		</material>
 		</collision>
@@ -106,7 +106,7 @@
 	<joint name='object_to_table' type='fixed'>
 		<origin xyz="-0.0049 -0.2062 1.23145" rpy="0 0 0.0206751"/> <!-- Modified elevation along the Z axis to avoid object's interferance with the table top which causes undesired vibrations in gazebo -->
     	<parent link="table_base"/>
-    	<child link="cubic_object_link"/>
+    	<child link="triangular_object_link"/>
     </joint>
 
 

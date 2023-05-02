@@ -26,7 +26,6 @@
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
     <disable_collisions link1="base_link_inertia" link2="boh" reason="Always"/>
     <disable_collisions link1="base_link_inertia" link2="boh_bracket" reason="Always"/>
-    <disable_collisions link1="base_link_inertia" link2="cubic_object_link" reason="Never"/>
     <disable_collisions link1="base_link_inertia" link2="forearm_link" reason="Always"/>
     <disable_collisions link1="base_link_inertia" link2="ift_bracket" reason="Always"/>
     <disable_collisions link1="base_link_inertia" link2="index_fingertip_main_fpcb" reason="Always"/>
@@ -43,7 +42,6 @@
     <disable_collisions link1="base_link_inertia" link2="palm_link" reason="Always"/>
     <disable_collisions link1="base_link_inertia" link2="shoulder_link" reason="Adjacent"/>
     <disable_collisions link1="base_link_inertia" link2="table_base" reason="Adjacent"/>
-    <disable_collisions link1="base_link_inertia" link2="tft_bracket" reason="Always"/>
     <disable_collisions link1="base_link_inertia" link2="thumb_medial_back_fpcb" reason="Always"/>
     <disable_collisions link1="base_link_inertia" link2="tmb_bracket" reason="Always"/>
     <disable_collisions link1="base_link_inertia" link2="tmf_bracket" reason="Always"/>
@@ -171,9 +169,6 @@
     <disable_collisions link1="boh_bracket" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="boh_bracket" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="boh_bracket" link2="table_base" reason="Always"/>
-    <disable_collisions link1="boh_bracket" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="boh_bracket" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="boh_bracket" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="boh_bracket" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="boh_bracket" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="boh_bracket" link2="tmb_bracket" reason="Never"/>
@@ -183,32 +178,6 @@
     <disable_collisions link1="boh_bracket" link2="wrist_1_link" reason="Never"/>
     <disable_collisions link1="boh_bracket" link2="wrist_2_link" reason="Never"/>
     <disable_collisions link1="boh_bracket" link2="wrist_3_link" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="forearm_link" reason="Always"/>
-    <disable_collisions link1="cubic_object_link" link2="link_10" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="link_11" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="link_12" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="link_13" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="link_14" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="link_15" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="link_9" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="middle_fingertip_main_fpcb" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="middle_fingertip_side_fpcb" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="middle_proximal_front_fpcb" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="pft_bracket" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="pinky_fingertip_main_fpcb" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="pinky_fingertip_side_fpcb" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="pinky_medial_back_fpcb" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="pinky_medial_front_fpcb" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="pinky_proximal_front_fpcb" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="pmb_bracket" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="pmf_bracket" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="ppf_bracket" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="shoulder_link" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="table_base" reason="Adjacent"/>
-    <disable_collisions link1="cubic_object_link" link2="thumb_medial_back_fpcb" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="thumb_medial_front_fpcb" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="tmb_bracket" reason="Never"/>
-    <disable_collisions link1="cubic_object_link" link2="tmf_bracket" reason="Never"/>
     <disable_collisions link1="forearm_link" link2="ift_bracket" reason="Always"/>
     <disable_collisions link1="forearm_link" link2="imb_bracket" reason="Always"/>
     <disable_collisions link1="forearm_link" link2="imf_bracket" reason="Always"/>
@@ -263,9 +232,6 @@
     <disable_collisions link1="forearm_link" link2="ppf_bracket" reason="Always"/>
     <disable_collisions link1="forearm_link" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="forearm_link" link2="table_base" reason="Always"/>
-    <disable_collisions link1="forearm_link" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="forearm_link" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="forearm_link" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="forearm_link" link2="thumb_medial_back_fpcb" reason="Always"/>
     <disable_collisions link1="forearm_link" link2="thumb_medial_front_fpcb" reason="Always"/>
     <disable_collisions link1="forearm_link" link2="tmb_bracket" reason="Always"/>
@@ -315,9 +281,6 @@
     <disable_collisions link1="ift_bracket" link2="ppb_bracket" reason="Never"/>
     <disable_collisions link1="ift_bracket" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="ift_bracket" link2="table_base" reason="Always"/>
-    <disable_collisions link1="ift_bracket" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="ift_bracket" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="ift_bracket" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="ift_bracket" link2="thumb_medial_back_fpcb" reason="Always"/>
     <disable_collisions link1="ift_bracket" link2="thumb_medial_front_fpcb" reason="Always"/>
     <disable_collisions link1="ift_bracket" link2="tmb_bracket" reason="Always"/>
@@ -371,9 +334,6 @@
     <disable_collisions link1="imb_bracket" link2="ppb_bracket" reason="Never"/>
     <disable_collisions link1="imb_bracket" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="imb_bracket" link2="table_base" reason="Always"/>
-    <disable_collisions link1="imb_bracket" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="imb_bracket" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="imb_bracket" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="imb_bracket" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="imb_bracket" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="imb_bracket" link2="tmb_bracket" reason="Never"/>
@@ -422,9 +382,6 @@
     <disable_collisions link1="imf_bracket" link2="ppb_bracket" reason="Never"/>
     <disable_collisions link1="imf_bracket" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="imf_bracket" link2="table_base" reason="Always"/>
-    <disable_collisions link1="imf_bracket" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="imf_bracket" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="imf_bracket" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="imf_bracket" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="imf_bracket" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="imf_bracket" link2="tmb_bracket" reason="Never"/>
@@ -469,9 +426,6 @@
     <disable_collisions link1="index_fingertip_main_fpcb" link2="ppb_bracket" reason="Never"/>
     <disable_collisions link1="index_fingertip_main_fpcb" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="index_fingertip_main_fpcb" link2="table_base" reason="Always"/>
-    <disable_collisions link1="index_fingertip_main_fpcb" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="index_fingertip_main_fpcb" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="index_fingertip_main_fpcb" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="index_fingertip_main_fpcb" link2="thumb_medial_back_fpcb" reason="Always"/>
     <disable_collisions link1="index_fingertip_main_fpcb" link2="thumb_medial_front_fpcb" reason="Always"/>
     <disable_collisions link1="index_fingertip_main_fpcb" link2="tmb_bracket" reason="Always"/>
@@ -513,9 +467,6 @@
     <disable_collisions link1="index_fingertip_side_fpcb" link2="ppb_bracket" reason="Never"/>
     <disable_collisions link1="index_fingertip_side_fpcb" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="index_fingertip_side_fpcb" link2="table_base" reason="Always"/>
-    <disable_collisions link1="index_fingertip_side_fpcb" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="index_fingertip_side_fpcb" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="index_fingertip_side_fpcb" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="index_fingertip_side_fpcb" link2="thumb_medial_back_fpcb" reason="Always"/>
     <disable_collisions link1="index_fingertip_side_fpcb" link2="thumb_medial_front_fpcb" reason="Always"/>
     <disable_collisions link1="index_fingertip_side_fpcb" link2="tmb_bracket" reason="Always"/>
@@ -563,9 +514,6 @@
     <disable_collisions link1="index_medial_back_fpcb" link2="ppb_bracket" reason="Never"/>
     <disable_collisions link1="index_medial_back_fpcb" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="index_medial_back_fpcb" link2="table_base" reason="Always"/>
-    <disable_collisions link1="index_medial_back_fpcb" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="index_medial_back_fpcb" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="index_medial_back_fpcb" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="index_medial_back_fpcb" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="index_medial_back_fpcb" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="index_medial_back_fpcb" link2="tmb_bracket" reason="Never"/>
@@ -609,9 +557,6 @@
     <disable_collisions link1="index_medial_front_fpcb" link2="ppb_bracket" reason="Never"/>
     <disable_collisions link1="index_medial_front_fpcb" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="index_medial_front_fpcb" link2="table_base" reason="Always"/>
-    <disable_collisions link1="index_medial_front_fpcb" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="index_medial_front_fpcb" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="index_medial_front_fpcb" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="index_medial_front_fpcb" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="index_medial_front_fpcb" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="index_medial_front_fpcb" link2="tmb_bracket" reason="Never"/>
@@ -663,9 +608,6 @@
     <disable_collisions link1="index_proximal_back_fpcb" link2="ppb_bracket" reason="Never"/>
     <disable_collisions link1="index_proximal_back_fpcb" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="index_proximal_back_fpcb" link2="table_base" reason="Always"/>
-    <disable_collisions link1="index_proximal_back_fpcb" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="index_proximal_back_fpcb" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="index_proximal_back_fpcb" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="index_proximal_back_fpcb" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="index_proximal_back_fpcb" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="index_proximal_back_fpcb" link2="tmb_bracket" reason="Never"/>
@@ -712,9 +654,6 @@
     <disable_collisions link1="index_proximal_front_fpcb" link2="ppb_bracket" reason="Never"/>
     <disable_collisions link1="index_proximal_front_fpcb" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="index_proximal_front_fpcb" link2="table_base" reason="Always"/>
-    <disable_collisions link1="index_proximal_front_fpcb" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="index_proximal_front_fpcb" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="index_proximal_front_fpcb" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="index_proximal_front_fpcb" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="index_proximal_front_fpcb" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="index_proximal_front_fpcb" link2="tmb_bracket" reason="Never"/>
@@ -764,9 +703,6 @@
     <disable_collisions link1="ipb_bracket" link2="ppb_bracket" reason="Never"/>
     <disable_collisions link1="ipb_bracket" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="ipb_bracket" link2="table_base" reason="Always"/>
-    <disable_collisions link1="ipb_bracket" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="ipb_bracket" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="ipb_bracket" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="ipb_bracket" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="ipb_bracket" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="ipb_bracket" link2="tmb_bracket" reason="Never"/>
@@ -812,9 +748,6 @@
     <disable_collisions link1="ipf_bracket" link2="ppb_bracket" reason="Never"/>
     <disable_collisions link1="ipf_bracket" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="ipf_bracket" link2="table_base" reason="Always"/>
-    <disable_collisions link1="ipf_bracket" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="ipf_bracket" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="ipf_bracket" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="ipf_bracket" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="ipf_bracket" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="ipf_bracket" link2="tmb_bracket" reason="Never"/>
@@ -866,9 +799,6 @@
     <disable_collisions link1="link_0" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="link_0" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="link_0" link2="table_base" reason="Always"/>
-    <disable_collisions link1="link_0" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="link_0" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="link_0" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="link_0" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="link_0" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="link_0" link2="tmb_bracket" reason="Never"/>
@@ -915,9 +845,6 @@
     <disable_collisions link1="link_1" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="link_1" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="link_1" link2="table_base" reason="Always"/>
-    <disable_collisions link1="link_1" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="link_1" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="link_1" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="link_1" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="link_1" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="link_1" link2="tmb_bracket" reason="Never"/>
@@ -963,9 +890,6 @@
     <disable_collisions link1="link_10" link2="ppb_bracket" reason="Never"/>
     <disable_collisions link1="link_10" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="link_10" link2="table_base" reason="Always"/>
-    <disable_collisions link1="link_10" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="link_10" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="link_10" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="link_10" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="link_10" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="link_10" link2="tmb_bracket" reason="Never"/>
@@ -1007,9 +931,6 @@
     <disable_collisions link1="link_11" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="link_11" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="link_11" link2="table_base" reason="Always"/>
-    <disable_collisions link1="link_11" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="link_11" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="link_11" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="link_11" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="link_11" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="link_11" link2="tmb_bracket" reason="Never"/>
@@ -1054,9 +975,6 @@
     <disable_collisions link1="link_12" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="link_12" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="link_12" link2="table_base" reason="Always"/>
-    <disable_collisions link1="link_12" link2="tft_bracket" reason="Never"/>
-    <disable_collisions link1="link_12" link2="thumb_fingertip_main_fpcb" reason="Never"/>
-    <disable_collisions link1="link_12" link2="thumb_fingertip_side_fpcb" reason="Never"/>
     <disable_collisions link1="link_12" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="link_12" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="link_12" link2="tmb_bracket" reason="Never"/>
@@ -1100,9 +1018,6 @@
     <disable_collisions link1="link_13" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="link_13" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="link_13" link2="table_base" reason="Always"/>
-    <disable_collisions link1="link_13" link2="tft_bracket" reason="Never"/>
-    <disable_collisions link1="link_13" link2="thumb_fingertip_main_fpcb" reason="Never"/>
-    <disable_collisions link1="link_13" link2="thumb_fingertip_side_fpcb" reason="Never"/>
     <disable_collisions link1="link_13" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="link_13" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="link_13" link2="tmb_bracket" reason="Never"/>
@@ -1140,9 +1055,6 @@
     <disable_collisions link1="link_14" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="link_14" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="link_14" link2="table_base" reason="Always"/>
-    <disable_collisions link1="link_14" link2="tft_bracket" reason="Never"/>
-    <disable_collisions link1="link_14" link2="thumb_fingertip_main_fpcb" reason="Never"/>
-    <disable_collisions link1="link_14" link2="thumb_fingertip_side_fpcb" reason="Never"/>
     <disable_collisions link1="link_14" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="link_14" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="link_14" link2="tmb_bracket" reason="Adjacent"/>
@@ -1176,9 +1088,6 @@
     <disable_collisions link1="link_15" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="link_15" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="link_15" link2="table_base" reason="Always"/>
-    <disable_collisions link1="link_15" link2="tft_bracket" reason="Adjacent"/>
-    <disable_collisions link1="link_15" link2="thumb_fingertip_main_fpcb" reason="Never"/>
-    <disable_collisions link1="link_15" link2="thumb_fingertip_side_fpcb" reason="Never"/>
     <disable_collisions link1="link_15" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="link_15" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="link_15" link2="tmb_bracket" reason="Never"/>
@@ -1218,9 +1127,6 @@
     <disable_collisions link1="link_2" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="link_2" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="link_2" link2="table_base" reason="Always"/>
-    <disable_collisions link1="link_2" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="link_2" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="link_2" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="link_2" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="link_2" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="link_2" link2="tmb_bracket" reason="Never"/>
@@ -1257,9 +1163,6 @@
     <disable_collisions link1="link_3" link2="ppb_bracket" reason="Never"/>
     <disable_collisions link1="link_3" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="link_3" link2="table_base" reason="Always"/>
-    <disable_collisions link1="link_3" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="link_3" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="link_3" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="link_3" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="link_3" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="link_3" link2="tmb_bracket" reason="Never"/>
@@ -1300,9 +1203,6 @@
     <disable_collisions link1="link_4" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="link_4" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="link_4" link2="table_base" reason="Always"/>
-    <disable_collisions link1="link_4" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="link_4" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="link_4" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="link_4" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="link_4" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="link_4" link2="tmb_bracket" reason="Never"/>
@@ -1341,9 +1241,6 @@
     <disable_collisions link1="link_5" link2="ppf_bracket" reason="Always"/>
     <disable_collisions link1="link_5" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="link_5" link2="table_base" reason="Always"/>
-    <disable_collisions link1="link_5" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="link_5" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="link_5" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="link_5" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="link_5" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="link_5" link2="tmb_bracket" reason="Never"/>
@@ -1382,9 +1279,6 @@
     <disable_collisions link1="link_6" link2="ppb_bracket" reason="Always"/>
     <disable_collisions link1="link_6" link2="ppf_bracket" reason="Always"/>
     <disable_collisions link1="link_6" link2="table_base" reason="Always"/>
-    <disable_collisions link1="link_6" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="link_6" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="link_6" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="link_6" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="link_6" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="link_6" link2="tmb_bracket" reason="Never"/>
@@ -1419,9 +1313,6 @@
     <disable_collisions link1="link_7" link2="pmf_bracket" reason="Always"/>
     <disable_collisions link1="link_7" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="link_7" link2="table_base" reason="Always"/>
-    <disable_collisions link1="link_7" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="link_7" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="link_7" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="link_7" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="link_7" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="link_7" link2="tmb_bracket" reason="Never"/>
@@ -1492,9 +1383,6 @@
     <disable_collisions link1="link_9" link2="ppb_bracket" reason="Adjacent"/>
     <disable_collisions link1="link_9" link2="ppf_bracket" reason="Adjacent"/>
     <disable_collisions link1="link_9" link2="table_base" reason="Always"/>
-    <disable_collisions link1="link_9" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="link_9" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="link_9" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="link_9" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="link_9" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="link_9" link2="tmb_bracket" reason="Never"/>
@@ -1525,9 +1413,6 @@
     <disable_collisions link1="mft_bracket" link2="ppf_bracket" reason="Always"/>
     <disable_collisions link1="mft_bracket" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="mft_bracket" link2="table_base" reason="Always"/>
-    <disable_collisions link1="mft_bracket" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="mft_bracket" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="mft_bracket" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="mft_bracket" link2="thumb_medial_back_fpcb" reason="Always"/>
     <disable_collisions link1="mft_bracket" link2="thumb_medial_front_fpcb" reason="Always"/>
     <disable_collisions link1="mft_bracket" link2="tmb_bracket" reason="Always"/>
@@ -1559,9 +1444,6 @@
     <disable_collisions link1="middle_fingertip_main_fpcb" link2="ppf_bracket" reason="Always"/>
     <disable_collisions link1="middle_fingertip_main_fpcb" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="middle_fingertip_main_fpcb" link2="table_base" reason="Always"/>
-    <disable_collisions link1="middle_fingertip_main_fpcb" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="middle_fingertip_main_fpcb" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="middle_fingertip_main_fpcb" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="middle_fingertip_main_fpcb" link2="thumb_medial_back_fpcb" reason="Always"/>
     <disable_collisions link1="middle_fingertip_main_fpcb" link2="thumb_medial_front_fpcb" reason="Always"/>
     <disable_collisions link1="middle_fingertip_main_fpcb" link2="tmb_bracket" reason="Always"/>
@@ -1589,9 +1471,6 @@
     <disable_collisions link1="middle_fingertip_side_fpcb" link2="ppb_bracket" reason="Never"/>
     <disable_collisions link1="middle_fingertip_side_fpcb" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="middle_fingertip_side_fpcb" link2="table_base" reason="Always"/>
-    <disable_collisions link1="middle_fingertip_side_fpcb" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="middle_fingertip_side_fpcb" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="middle_fingertip_side_fpcb" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="middle_fingertip_side_fpcb" link2="thumb_medial_back_fpcb" reason="Always"/>
     <disable_collisions link1="middle_fingertip_side_fpcb" link2="thumb_medial_front_fpcb" reason="Always"/>
     <disable_collisions link1="middle_fingertip_side_fpcb" link2="tmb_bracket" reason="Always"/>
@@ -1623,9 +1502,6 @@
     <disable_collisions link1="middle_medial_back_fpcb" link2="ppb_bracket" reason="Always"/>
     <disable_collisions link1="middle_medial_back_fpcb" link2="ppf_bracket" reason="Always"/>
     <disable_collisions link1="middle_medial_back_fpcb" link2="table_base" reason="Always"/>
-    <disable_collisions link1="middle_medial_back_fpcb" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="middle_medial_back_fpcb" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="middle_medial_back_fpcb" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="middle_medial_back_fpcb" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="middle_medial_back_fpcb" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="middle_medial_back_fpcb" link2="tmb_bracket" reason="Never"/>
@@ -1654,9 +1530,6 @@
     <disable_collisions link1="middle_medial_front_fpcb" link2="pmf_bracket" reason="Always"/>
     <disable_collisions link1="middle_medial_front_fpcb" link2="ppf_bracket" reason="Always"/>
     <disable_collisions link1="middle_medial_front_fpcb" link2="table_base" reason="Always"/>
-    <disable_collisions link1="middle_medial_front_fpcb" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="middle_medial_front_fpcb" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="middle_medial_front_fpcb" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="middle_medial_front_fpcb" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="middle_medial_front_fpcb" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="middle_medial_front_fpcb" link2="tmb_bracket" reason="Never"/>
@@ -1710,9 +1583,6 @@
     <disable_collisions link1="middle_proximal_front_fpcb" link2="ppf_bracket" reason="Always"/>
     <disable_collisions link1="middle_proximal_front_fpcb" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="middle_proximal_front_fpcb" link2="table_base" reason="Always"/>
-    <disable_collisions link1="middle_proximal_front_fpcb" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="middle_proximal_front_fpcb" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="middle_proximal_front_fpcb" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="middle_proximal_front_fpcb" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="middle_proximal_front_fpcb" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="middle_proximal_front_fpcb" link2="tmb_bracket" reason="Never"/>
@@ -1740,9 +1610,6 @@
     <disable_collisions link1="mmb_bracket" link2="ppb_bracket" reason="Always"/>
     <disable_collisions link1="mmb_bracket" link2="ppf_bracket" reason="Always"/>
     <disable_collisions link1="mmb_bracket" link2="table_base" reason="Always"/>
-    <disable_collisions link1="mmb_bracket" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="mmb_bracket" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="mmb_bracket" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="mmb_bracket" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="mmb_bracket" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="mmb_bracket" link2="tmb_bracket" reason="Never"/>
@@ -1769,9 +1636,6 @@
     <disable_collisions link1="mmf_bracket" link2="ppb_bracket" reason="Always"/>
     <disable_collisions link1="mmf_bracket" link2="ppf_bracket" reason="Always"/>
     <disable_collisions link1="mmf_bracket" link2="table_base" reason="Always"/>
-    <disable_collisions link1="mmf_bracket" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="mmf_bracket" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="mmf_bracket" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="mmf_bracket" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="mmf_bracket" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="mmf_bracket" link2="tmb_bracket" reason="Never"/>
@@ -1793,9 +1657,6 @@
     <disable_collisions link1="mpb_bracket" link2="ppb_bracket" reason="Always"/>
     <disable_collisions link1="mpb_bracket" link2="ppf_bracket" reason="Always"/>
     <disable_collisions link1="mpb_bracket" link2="table_base" reason="Always"/>
-    <disable_collisions link1="mpb_bracket" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="mpb_bracket" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="mpb_bracket" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="mpb_bracket" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="mpb_bracket" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="mpb_bracket" link2="tmb_bracket" reason="Never"/>
@@ -1819,9 +1680,6 @@
     <disable_collisions link1="mpf_bracket" link2="ppf_bracket" reason="Always"/>
     <disable_collisions link1="mpf_bracket" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="mpf_bracket" link2="table_base" reason="Always"/>
-    <disable_collisions link1="mpf_bracket" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="mpf_bracket" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="mpf_bracket" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="mpf_bracket" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="mpf_bracket" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="mpf_bracket" link2="tmb_bracket" reason="Never"/>
@@ -1843,9 +1701,6 @@
     <disable_collisions link1="palm_bracket" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="palm_bracket" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="palm_bracket" link2="table_base" reason="Always"/>
-    <disable_collisions link1="palm_bracket" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="palm_bracket" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="palm_bracket" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="palm_bracket" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="palm_bracket" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="palm_bracket" link2="tmb_bracket" reason="Never"/>
@@ -1866,9 +1721,6 @@
     <disable_collisions link1="palm_fpcb" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="palm_fpcb" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="palm_fpcb" link2="table_base" reason="Always"/>
-    <disable_collisions link1="palm_fpcb" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="palm_fpcb" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="palm_fpcb" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="palm_fpcb" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="palm_fpcb" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="palm_fpcb" link2="tmb_bracket" reason="Never"/>
@@ -1888,9 +1740,6 @@
     <disable_collisions link1="palm_link" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="palm_link" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="palm_link" link2="table_base" reason="Always"/>
-    <disable_collisions link1="palm_link" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="palm_link" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="palm_link" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="palm_link" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="palm_link" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="palm_link" link2="tmb_bracket" reason="Never"/>
@@ -1912,9 +1761,6 @@
     <disable_collisions link1="pft_bracket" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="pft_bracket" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="pft_bracket" link2="table_base" reason="Always"/>
-    <disable_collisions link1="pft_bracket" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="pft_bracket" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="pft_bracket" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="pft_bracket" link2="upper_arm_link" reason="Always"/>
     <disable_collisions link1="pft_bracket" link2="ur_bracket" reason="Never"/>
     <disable_collisions link1="pft_bracket" link2="wrist_1_link" reason="Never"/>
@@ -1931,9 +1777,6 @@
     <disable_collisions link1="pinky_fingertip_main_fpcb" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="pinky_fingertip_main_fpcb" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="pinky_fingertip_main_fpcb" link2="table_base" reason="Always"/>
-    <disable_collisions link1="pinky_fingertip_main_fpcb" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="pinky_fingertip_main_fpcb" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="pinky_fingertip_main_fpcb" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="pinky_fingertip_main_fpcb" link2="upper_arm_link" reason="Always"/>
     <disable_collisions link1="pinky_fingertip_main_fpcb" link2="ur_bracket" reason="Never"/>
     <disable_collisions link1="pinky_fingertip_main_fpcb" link2="wrist_1_link" reason="Never"/>
@@ -1949,9 +1792,6 @@
     <disable_collisions link1="pinky_fingertip_side_fpcb" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="pinky_fingertip_side_fpcb" link2="shoulder_link" reason="Always"/>
     <disable_collisions link1="pinky_fingertip_side_fpcb" link2="table_base" reason="Always"/>
-    <disable_collisions link1="pinky_fingertip_side_fpcb" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="pinky_fingertip_side_fpcb" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="pinky_fingertip_side_fpcb" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="pinky_fingertip_side_fpcb" link2="upper_arm_link" reason="Always"/>
     <disable_collisions link1="pinky_fingertip_side_fpcb" link2="ur_bracket" reason="Never"/>
     <disable_collisions link1="pinky_fingertip_side_fpcb" link2="wrist_1_link" reason="Never"/>
@@ -1965,9 +1805,6 @@
     <disable_collisions link1="pinky_medial_back_fpcb" link2="ppb_bracket" reason="Never"/>
     <disable_collisions link1="pinky_medial_back_fpcb" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="pinky_medial_back_fpcb" link2="table_base" reason="Always"/>
-    <disable_collisions link1="pinky_medial_back_fpcb" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="pinky_medial_back_fpcb" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="pinky_medial_back_fpcb" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="pinky_medial_back_fpcb" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="pinky_medial_back_fpcb" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="pinky_medial_back_fpcb" link2="tmb_bracket" reason="Never"/>
@@ -1984,9 +1821,6 @@
     <disable_collisions link1="pinky_medial_front_fpcb" link2="ppb_bracket" reason="Never"/>
     <disable_collisions link1="pinky_medial_front_fpcb" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="pinky_medial_front_fpcb" link2="table_base" reason="Always"/>
-    <disable_collisions link1="pinky_medial_front_fpcb" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="pinky_medial_front_fpcb" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="pinky_medial_front_fpcb" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="pinky_medial_front_fpcb" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="pinky_medial_front_fpcb" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="pinky_medial_front_fpcb" link2="tmb_bracket" reason="Never"/>
@@ -2002,8 +1836,6 @@
     <disable_collisions link1="pinky_proximal_back_fpcb" link2="ppb_bracket" reason="Adjacent"/>
     <disable_collisions link1="pinky_proximal_back_fpcb" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="pinky_proximal_back_fpcb" link2="table_base" reason="Always"/>
-    <disable_collisions link1="pinky_proximal_back_fpcb" link2="tft_bracket" reason="Never"/>
-    <disable_collisions link1="pinky_proximal_back_fpcb" link2="thumb_fingertip_main_fpcb" reason="Never"/>
     <disable_collisions link1="pinky_proximal_back_fpcb" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="pinky_proximal_back_fpcb" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="pinky_proximal_back_fpcb" link2="tmb_bracket" reason="Never"/>
@@ -2018,8 +1850,6 @@
     <disable_collisions link1="pinky_proximal_front_fpcb" link2="ppb_bracket" reason="Never"/>
     <disable_collisions link1="pinky_proximal_front_fpcb" link2="ppf_bracket" reason="Adjacent"/>
     <disable_collisions link1="pinky_proximal_front_fpcb" link2="table_base" reason="Always"/>
-    <disable_collisions link1="pinky_proximal_front_fpcb" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="pinky_proximal_front_fpcb" link2="thumb_fingertip_main_fpcb" reason="Always"/>
     <disable_collisions link1="pinky_proximal_front_fpcb" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="pinky_proximal_front_fpcb" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="pinky_proximal_front_fpcb" link2="tmb_bracket" reason="Never"/>
@@ -2033,9 +1863,6 @@
     <disable_collisions link1="pmb_bracket" link2="ppb_bracket" reason="Never"/>
     <disable_collisions link1="pmb_bracket" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="pmb_bracket" link2="table_base" reason="Always"/>
-    <disable_collisions link1="pmb_bracket" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="pmb_bracket" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="pmb_bracket" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="pmb_bracket" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="pmb_bracket" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="pmb_bracket" link2="tmb_bracket" reason="Never"/>
@@ -2048,9 +1875,6 @@
     <disable_collisions link1="pmf_bracket" link2="ppb_bracket" reason="Never"/>
     <disable_collisions link1="pmf_bracket" link2="ppf_bracket" reason="Never"/>
     <disable_collisions link1="pmf_bracket" link2="table_base" reason="Always"/>
-    <disable_collisions link1="pmf_bracket" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="pmf_bracket" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="pmf_bracket" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="pmf_bracket" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="pmf_bracket" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="pmf_bracket" link2="tmb_bracket" reason="Never"/>
@@ -2072,8 +1896,6 @@
     <disable_collisions link1="ppb_bracket" link2="wrist_2_link" reason="Never"/>
     <disable_collisions link1="ppb_bracket" link2="wrist_3_link" reason="Never"/>
     <disable_collisions link1="ppf_bracket" link2="table_base" reason="Always"/>
-    <disable_collisions link1="ppf_bracket" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="ppf_bracket" link2="thumb_fingertip_main_fpcb" reason="Always"/>
     <disable_collisions link1="ppf_bracket" link2="thumb_medial_back_fpcb" reason="Never"/>
     <disable_collisions link1="ppf_bracket" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="ppf_bracket" link2="tmb_bracket" reason="Never"/>
@@ -2084,9 +1906,6 @@
     <disable_collisions link1="ppf_bracket" link2="wrist_2_link" reason="Never"/>
     <disable_collisions link1="ppf_bracket" link2="wrist_3_link" reason="Never"/>
     <disable_collisions link1="shoulder_link" link2="table_base" reason="Never"/>
-    <disable_collisions link1="shoulder_link" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="shoulder_link" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="shoulder_link" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="shoulder_link" link2="thumb_medial_back_fpcb" reason="Always"/>
     <disable_collisions link1="shoulder_link" link2="thumb_medial_front_fpcb" reason="Always"/>
     <disable_collisions link1="shoulder_link" link2="tmb_bracket" reason="Always"/>
@@ -2096,9 +1915,6 @@
     <disable_collisions link1="shoulder_link" link2="wrist_1_link" reason="Always"/>
     <disable_collisions link1="shoulder_link" link2="wrist_2_link" reason="Always"/>
     <disable_collisions link1="shoulder_link" link2="wrist_3_link" reason="Always"/>
-    <disable_collisions link1="table_base" link2="tft_bracket" reason="Always"/>
-    <disable_collisions link1="table_base" link2="thumb_fingertip_main_fpcb" reason="Always"/>
-    <disable_collisions link1="table_base" link2="thumb_fingertip_side_fpcb" reason="Always"/>
     <disable_collisions link1="table_base" link2="thumb_medial_back_fpcb" reason="Always"/>
     <disable_collisions link1="table_base" link2="thumb_medial_front_fpcb" reason="Always"/>
     <disable_collisions link1="table_base" link2="tmb_bracket" reason="Always"/>
@@ -2108,36 +1924,6 @@
     <disable_collisions link1="table_base" link2="wrist_1_link" reason="Always"/>
     <disable_collisions link1="table_base" link2="wrist_2_link" reason="Always"/>
     <disable_collisions link1="table_base" link2="wrist_3_link" reason="Always"/>
-    <disable_collisions link1="tft_bracket" link2="thumb_fingertip_main_fpcb" reason="Adjacent"/>
-    <disable_collisions link1="tft_bracket" link2="thumb_fingertip_side_fpcb" reason="Adjacent"/>
-    <disable_collisions link1="tft_bracket" link2="thumb_medial_back_fpcb" reason="Never"/>
-    <disable_collisions link1="tft_bracket" link2="thumb_medial_front_fpcb" reason="Never"/>
-    <disable_collisions link1="tft_bracket" link2="tmb_bracket" reason="Never"/>
-    <disable_collisions link1="tft_bracket" link2="tmf_bracket" reason="Never"/>
-    <disable_collisions link1="tft_bracket" link2="upper_arm_link" reason="Always"/>
-    <disable_collisions link1="tft_bracket" link2="ur_bracket" reason="Never"/>
-    <disable_collisions link1="tft_bracket" link2="wrist_1_link" reason="Never"/>
-    <disable_collisions link1="tft_bracket" link2="wrist_2_link" reason="Never"/>
-    <disable_collisions link1="tft_bracket" link2="wrist_3_link" reason="Never"/>
-    <disable_collisions link1="thumb_fingertip_main_fpcb" link2="thumb_fingertip_side_fpcb" reason="Default"/>
-    <disable_collisions link1="thumb_fingertip_main_fpcb" link2="thumb_medial_back_fpcb" reason="Never"/>
-    <disable_collisions link1="thumb_fingertip_main_fpcb" link2="thumb_medial_front_fpcb" reason="Never"/>
-    <disable_collisions link1="thumb_fingertip_main_fpcb" link2="tmb_bracket" reason="Never"/>
-    <disable_collisions link1="thumb_fingertip_main_fpcb" link2="tmf_bracket" reason="Never"/>
-    <disable_collisions link1="thumb_fingertip_main_fpcb" link2="upper_arm_link" reason="Always"/>
-    <disable_collisions link1="thumb_fingertip_main_fpcb" link2="ur_bracket" reason="Never"/>
-    <disable_collisions link1="thumb_fingertip_main_fpcb" link2="wrist_1_link" reason="Never"/>
-    <disable_collisions link1="thumb_fingertip_main_fpcb" link2="wrist_2_link" reason="Never"/>
-    <disable_collisions link1="thumb_fingertip_main_fpcb" link2="wrist_3_link" reason="Never"/>
-    <disable_collisions link1="thumb_fingertip_side_fpcb" link2="thumb_medial_back_fpcb" reason="Never"/>
-    <disable_collisions link1="thumb_fingertip_side_fpcb" link2="thumb_medial_front_fpcb" reason="Never"/>
-    <disable_collisions link1="thumb_fingertip_side_fpcb" link2="tmb_bracket" reason="Never"/>
-    <disable_collisions link1="thumb_fingertip_side_fpcb" link2="tmf_bracket" reason="Never"/>
-    <disable_collisions link1="thumb_fingertip_side_fpcb" link2="upper_arm_link" reason="Always"/>
-    <disable_collisions link1="thumb_fingertip_side_fpcb" link2="ur_bracket" reason="Never"/>
-    <disable_collisions link1="thumb_fingertip_side_fpcb" link2="wrist_1_link" reason="Never"/>
-    <disable_collisions link1="thumb_fingertip_side_fpcb" link2="wrist_2_link" reason="Never"/>
-    <disable_collisions link1="thumb_fingertip_side_fpcb" link2="wrist_3_link" reason="Never"/>
     <disable_collisions link1="thumb_medial_back_fpcb" link2="thumb_medial_front_fpcb" reason="Never"/>
     <disable_collisions link1="thumb_medial_back_fpcb" link2="tmb_bracket" reason="Adjacent"/>
     <disable_collisions link1="thumb_medial_back_fpcb" link2="tmf_bracket" reason="Never"/>
@@ -2213,53 +1999,8 @@
     <disable_collisions link1="base_link_inertia" link2="pmf_bracket" reason="User"/>
     <disable_collisions link1="base_link_inertia" link2="ppb_bracket" reason="User"/>
     <disable_collisions link1="base_link_inertia" link2="ppf_bracket" reason="User"/>
-    <disable_collisions link1="base_link_inertia" link2="thumb_fingertip_main_fpcb" reason="User"/>
-    <disable_collisions link1="base_link_inertia" link2="thumb_fingertip_side_fpcb" reason="User"/>
     <disable_collisions link1="base_link_inertia" link2="thumb_medial_front_fpcb" reason="User"/>
     <disable_collisions link1="base_link_inertia" link2="wrist_2_link" reason="User"/>
-    <disable_collisions link1="boh" link2="cubic_object_link" reason="User"/>
-    <disable_collisions link1="boh_bracket" link2="cubic_object_link" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="ift_bracket" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="imb_bracket" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="imf_bracket" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="index_fingertip_main_fpcb" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="index_fingertip_side_fpcb" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="index_medial_back_fpcb" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="index_medial_front_fpcb" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="index_proximal_back_fpcb" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="index_proximal_front_fpcb" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="ipb_bracket" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="ipf_bracket" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="link_0" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="link_1" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="link_2" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="link_3" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="link_4" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="link_5" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="link_6" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="link_7" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="link_8" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="mft_bracket" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="middle_medial_back_fpcb" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="middle_medial_front_fpcb" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="middle_proximal_back_fpcb" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="mmb_bracket" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="mmf_bracket" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="mpb_bracket" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="mpf_bracket" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="palm_fpcb" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="palm_bracket" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="palm_link" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="pinky_proximal_back_fpcb" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="ppb_bracket" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="tft_bracket" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="thumb_fingertip_main_fpcb" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="thumb_fingertip_side_fpcb" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="upper_arm_link" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="ur_bracket" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="wrist_1_link" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="wrist_2_link" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="wrist_3_link" reason="User"/>
     <disable_collisions link1="ift_bracket" link2="link_5" reason="User"/>
     <disable_collisions link1="ift_bracket" link2="middle_proximal_back_fpcb" reason="User"/>
     <disable_collisions link1="ift_bracket" link2="middle_proximal_front_fpcb" reason="User"/>
@@ -2481,21 +2222,6 @@
     <disable_collisions link1="pmf_bracket" link2="shoulder_link" reason="User"/>
     <disable_collisions link1="ppb_bracket" link2="shoulder_link" reason="User"/>
     <disable_collisions link1="ppf_bracket" link2="shoulder_link" reason="User"/>
-    <disable_collisions link1="boh" link2="tft_bracket" reason="User"/>
-    <disable_collisions link1="link_8" link2="tft_bracket" reason="User"/>
-    <disable_collisions link1="middle_proximal_back_fpcb" link2="tft_bracket" reason="User"/>
-    <disable_collisions link1="ppb_bracket" link2="tft_bracket" reason="User"/>
-    <disable_collisions link1="boh" link2="thumb_fingertip_main_fpcb" reason="User"/>
-    <disable_collisions link1="link_8" link2="thumb_fingertip_main_fpcb" reason="User"/>
-    <disable_collisions link1="middle_proximal_back_fpcb" link2="thumb_fingertip_main_fpcb" reason="User"/>
-    <disable_collisions link1="ppb_bracket" link2="thumb_fingertip_main_fpcb" reason="User"/>
-    <disable_collisions link1="boh" link2="thumb_fingertip_side_fpcb" reason="User"/>
-    <disable_collisions link1="link_8" link2="thumb_fingertip_side_fpcb" reason="User"/>
-    <disable_collisions link1="middle_proximal_back_fpcb" link2="thumb_fingertip_side_fpcb" reason="User"/>
-    <disable_collisions link1="pinky_proximal_back_fpcb" link2="thumb_fingertip_side_fpcb" reason="User"/>
-    <disable_collisions link1="pinky_proximal_front_fpcb" link2="thumb_fingertip_side_fpcb" reason="User"/>
-    <disable_collisions link1="ppb_bracket" link2="thumb_fingertip_side_fpcb" reason="User"/>
-    <disable_collisions link1="ppf_bracket" link2="thumb_fingertip_side_fpcb" reason="User"/>
     <disable_collisions link1="pft_bracket" link2="thumb_medial_back_fpcb" reason="User"/>
     <disable_collisions link1="pinky_fingertip_main_fpcb" link2="thumb_medial_back_fpcb" reason="User"/>
     <disable_collisions link1="pinky_fingertip_side_fpcb" link2="thumb_medial_back_fpcb" reason="User"/>
@@ -2512,7 +2238,6 @@
     <disable_collisions link1="base_link_inertia" link2="table_top" reason="User"/>
     <disable_collisions link1="boh" link2="table_top" reason="User"/>
     <disable_collisions link1="boh_bracket" link2="table_top" reason="User"/>
-    <disable_collisions link1="cubic_object_link" link2="table_top" reason="User"/>
     <disable_collisions link1="forearm_link" link2="table_top" reason="User"/>
     <disable_collisions link1="ift_bracket" link2="table_top" reason="User"/>
     <disable_collisions link1="imb_bracket" link2="table_top" reason="User"/>
@@ -2568,9 +2293,6 @@
     <disable_collisions link1="ppf_bracket" link2="table_top" reason="User"/>
     <disable_collisions link1="shoulder_link" link2="table_top" reason="User"/>
     <disable_collisions link1="table_base" link2="table_top" reason="User"/>
-    <disable_collisions link1="table_top" link2="tft_bracket" reason="User"/>
-    <disable_collisions link1="table_top" link2="thumb_fingertip_main_fpcb" reason="User"/>
-    <disable_collisions link1="table_top" link2="thumb_fingertip_side_fpcb" reason="User"/>
     <disable_collisions link1="table_top" link2="thumb_medial_back_fpcb" reason="User"/>
     <disable_collisions link1="table_top" link2="thumb_medial_front_fpcb" reason="User"/>
     <disable_collisions link1="table_top" link2="tmb_bracket" reason="User"/>
@@ -2580,4 +2302,72 @@
     <disable_collisions link1="table_top" link2="wrist_1_link" reason="User"/>
     <disable_collisions link1="table_top" link2="wrist_2_link" reason="User"/>
     <disable_collisions link1="table_top" link2="wrist_3_link" reason="User"/>
+    <disable_collisions link1="table_base" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="base_link_inertia" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="boh" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="boh_bracket" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="ift_bracket" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="forearm_link" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="imb_bracket" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="imf_bracket" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="index_fingertip_main_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="index_fingertip_side_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="index_medial_front_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="index_medial_back_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="index_proximal_back_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="index_proximal_front_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="ipb_bracket" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="ipf_bracket" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="link_0" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="link_1" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="link_10" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="link_11" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="link_12" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="link_13" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="link_14" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="link_15" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="link_2" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="link_3" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="link_4" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="link_5" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="link_6" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="link_7" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="link_8" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="link_9" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="mft_bracket" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="middle_fingertip_main_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="middle_fingertip_side_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="middle_medial_back_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="middle_medial_front_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="middle_proximal_back_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="middle_proximal_front_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="mmb_bracket" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="mmf_bracket" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="mpb_bracket" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="mpf_bracket" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="palm_bracket" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="palm_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="palm_link" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="pft_bracket" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="pinky_fingertip_main_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="pinky_fingertip_side_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="pinky_medial_back_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="pinky_medial_front_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="pinky_proximal_back_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="pinky_proximal_front_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="pmb_bracket" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="pmf_bracket" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="ppb_bracket" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="ppf_bracket" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="shoulder_link" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="table_top" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="thumb_medial_back_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="thumb_medial_front_fpcb" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="tmb_bracket" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="tmf_bracket" link2="triangular_object_link" reason="User"/>
+    <disable_collisions link1="triangular_object_link" link2="upper_arm_link" reason="User"/>
+    <disable_collisions link1="triangular_object_link" link2="ur_bracket" reason="User"/>
+    <disable_collisions link1="triangular_object_link" link2="wrist_1_link" reason="User"/>
+    <disable_collisions link1="triangular_object_link" link2="wrist_2_link" reason="User"/>
+    <disable_collisions link1="triangular_object_link" link2="wrist_3_link" reason="User"/>
 </robot>

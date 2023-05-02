@@ -328,6 +328,8 @@ void callback(const bici_ros_sensor_reader::TactileData msg)
 
     if (act_cmd == "true") // Activation of a save command through a ros node
     {
+
+
         string path = "/home/abed/Documents/BICI_Project/BICI_SENSORS_ROS/ROS_WS/Pt_Cloud_Scripts/"+reg_grasp_attempt+"_active_points_coordinates_"+to_string(reg_iter_count)+".csv";
         string path_inactive_taxels = "/home/abed/Documents/BICI_Project/BICI_SENSORS_ROS/ROS_WS/Pt_Cloud_Scripts/"+reg_grasp_attempt+"_inactive_points_coordinates_"+to_string(reg_iter_count)+".csv";
         string joints_pos_path = "/home/abed/Documents/BICI_Project/BICI_SENSORS_ROS/ROS_WS/Pt_Cloud_Scripts/"+reg_grasp_attempt+"_joints_pos_"+to_string(reg_iter_count)+".csv";
